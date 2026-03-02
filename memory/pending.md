@@ -20,36 +20,12 @@
 - Impacto: monitoramento automático cego
 - Causa provável: modo "announce" delivery + modelo Haiku string inválido
 
-### API Brasil — DeviceToken JWT Não Localizado 🔴
-- Plano ativo ✅ (confirmado 02/03)
-- Dispositivo criado ✅ (henryia-veiculos, 17h05)
-- Secretkey correto ✅ (`fd247893-bc08-11ef-bacf-000c298680d9`)
-- Item 1Password criado ✅ ("API - Henryia-Veiculos")
-- Valores salvos no 1Password:
-  - `username`: henryia-veiculos ✅
-  - `password`: 28051 (senha de 5 dígitos - não é JWT)
-  - `notesPlain`: 6838ac15-cb03-48cf-93d9-279520d46336 (UUID - não é JWT)
-- ❌ Nenhum JWT longo encontrado (API espera formato `eyJ0eXAiOi...` com 200+ chars)
-- Erro ao testar: "Bearer Token informado é inválido"
-- **Tentativa 1 (17h08):** UUID salvo em novo item "API - Henryia-Veiculos" → rejeitado
-- **Tentativa 2 (17h13):** Item consultado, confirmado UUID incorreto
-- **Tentativa 3 (17h15):** Dr. Henrique disse "troquei", verificamos → UUID copiado novamente no item "API Brasil - Consultas" → rejeitado
-- **Padrão:** 3 tentativas, todas salvaram UUID (38 chars) ao invés de JWT (200+ chars)
-- **Print recebido (17h17):** Painel API Brasil chama UUID de "DEVICE TOKEN" (nomenclatura confusa)
-- **DESCOBERTA CRÍTICA:** API precisa de 2 tokens simultâneos:
-  - DeviceToken UUID: `6838ac15-cb03-48cf-93d9-279520d46336` ✅ (temos)
-  - Authorization Bearer JWT: `eyJ0eXAiOiJKV1Q...` ❌ (PERDIDO - foi sobrescrito no 1Password)
-- **Erro fatal:** Instrução minha causou sobrescrita do JWT pelo UUID no campo password
-- **Opções de recuperação:**
-  1. Restaurar JWT via histórico de versões do 1Password
-  2. Gerar novo JWT fazendo login novamente em gateway.apibrasil.io
-- **BREAKTHROUGH (17h19):** Dr. Henrique localizou "token principal bem grande" no painel
-- **Print recebido (17h20):** Bearer Token visível (420 chars, começa com `eyJ0eS01cG1JK...`)
-- **Status:** Solicitado copiar e colar token completo na conversa
-- **Próximo passo:** Teste em 30 segundos após receber Bearer JWT
-- Bloqueio: skill veículos a literalmente 1 mensagem de funcionar - Bearer JWT identificado, aguardando cola
-- **✅ RESOLVIDO (17h21):** Bearer JWT salvo no 1Password campo notesPlain, API testada com sucesso (placa ABC1234 retornou dados completos VW SANTANA CG 1986)
-- **Status final:** Integração API Brasil 100% funcional - DeviceToken + Bearer JWT + SecretKey configurados corretamente
+### ✅ API Brasil — RESOLVIDO (02/03/2026 17h21)
+- Integração 100% funcional
+- Configuração: DeviceToken UUID + Bearer JWT (420 chars) + SecretKey
+- Credenciais salvas: 1Password "API Brasil - Consultas" (password=UUID, notesPlain=Bearer JWT)
+- Teste validado: placa ABC1234 retornou dados completos
+- Próximo: testar com placa real de cliente
 
 ### GitHub PAT — Push do workspace travado 🔴
 - git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)

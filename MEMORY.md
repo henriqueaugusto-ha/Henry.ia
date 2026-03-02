@@ -311,20 +311,36 @@ Headers:
 - Git Backup 2h: "model not allowed: anthropic/claude-haiku-3-5"
 - Causa provável: modo "announce" delivery + modelo Haiku string inválido
 
+## API Brasil — Integração Concluída ✅ (02/03/2026 17h21)
+
+- Item 1Password: "API Brasil - Consultas" (UUID: pxqiqpv6s5qr3t66kzx5vkblme)
+- DeviceToken: `6838ac15-cb03-48cf-93d9-279520d46336` (campo password)
+- Bearer JWT: 420 chars (campo notesPlain)
+- SecretKey: `fd247893-bc08-11ef-bacf-000c298680d9`
+- Endpoint: POST `https://cluster.apigratis.com/api/v2/vehicles/dados`
+- Teste validado: placa ABC1234 → VW SANTANA CG 1986
+- Status: 100% operacional
+
+## Auditoria Contratos Q4 2025 + Q1 2026 ✅ (02/03/2026)
+
+- Total: 103 contratos (Dez 42, Jan 35, Fev 26)
+- Gap crítico: 54 sem ZapSign (52%), 51 sem deadline (84% Jan+Fev)
+- Prazos vencidos: 2 (HUMBERTO ANPP 04/02, HERICKLEPTON 24/02)
+- Causa raiz: WF-CONTRACT quebrado (PDF Master URL vazio)
+
 ## Pendente
 
-- [ ] OAuth Google Ads — vence AMANHÃ 03/03 🔴 CRÍTICO
+- [ ] OAuth Google Ads — VENCE HOJE 03/03 🔴 CRÍTICO
 - [ ] Corrigir 4/6 crons falhando 🔴
-- [ ] Dr. Henrique ativar dispositivo API Brasil 🔴
 - [ ] Investigar WF-CONTRACT workflow (54 contratos sem docs) 🔴
-- [ ] Preencher deadlines manualmente (51 contratos) 🔴
+- [ ] Preencher 51 deadlines faltantes (Jan+Fev) 🔴
 - [ ] Alertar equipe jurídica — 2 prazos vencidos fevereiro
-- [ ] Definir e implementar acesso externo seguro (Cloudflare Tunnel ou Nginx+HTTPS)
-- [ ] Nginx + Certbot → desligar 3 flags críticas controlUi (maior risco atual)
-- [ ] Desligar flags controlUi uma por vez (após acesso externo estável)
-- [x] Instalar 1Password CLI na VPS e configurar OP_SERVICE_ACCOUNT_TOKEN ✅ 2026-02-28
-- [ ] Migrar tokens hardcoded do openclaw.json para variáveis via .env
-- [ ] GitHub PAT — criar e salvar no 1Password para finalizar push
-- [x] N8N API Key atualizada no 1Password ✅ 2026-03-02
-- [ ] Campanha ANPP Google+Meta (aguarda briefing + aprovação)
-- [x] Auditoria contratos Q4 2025 + Q1 2026 ✅ 2026-03-02
+- [ ] Régua cobrança Asaas (497 vencidas ~R$473k → 20% = R$95k)
+- [ ] GitHub PAT — criar e salvar no 1Password
+- [ ] Salvar Nexos apiKey no 1Password (Dr. Henrique)
+- [ ] Campanha ANPP Google+Meta (aguarda briefing)
+- [x] API Brasil integração ✅ 2026-03-02
+- [x] Security hardening 9.0/10 ✅ 2026-03-02
+- [x] Auditoria contratos Q4+Q1 ✅ 2026-03-02
+- [x] N8N API Key ✅ 2026-03-02
+- [x] 1Password CLI ✅ 2026-02-28
