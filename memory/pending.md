@@ -25,13 +25,15 @@
 - Dispositivo criado ✅ (henryia-veiculos, 17h05)
 - Secretkey correto ✅ (`fd247893-bc08-11ef-bacf-000c298680d9`)
 - Item 1Password criado ✅ ("API - Henryia-Veiculos")
-- UUID do dispositivo salvo ✅ (`6838ac15-cb03-48cf-93d9-279520d46336`)
-- ❌ UUID não é o DeviceToken JWT necessário
-- API espera JWT longo formato `eyJ0eXAiOi...` (200+ chars)
-- UUID salvo é apenas ID do dispositivo (36 chars)
+- Valores salvos no 1Password:
+  - `username`: henryia-veiculos ✅
+  - `password`: 28051 (senha de 5 dígitos - não é JWT)
+  - `notesPlain`: 6838ac15-cb03-48cf-93d9-279520d46336 (UUID - não é JWT)
+- ❌ Nenhum JWT longo encontrado (API espera formato `eyJ0eXAiOi...` com 200+ chars)
 - Erro ao testar: "Bearer Token informado é inválido"
-- Ação: Dr. Henrique acessar painel → Dispositivos → henryia-veiculos → copiar TOKEN JWT (não UUID) → salvar
-- Bloqueio: skill veículos aguardando DeviceToken JWT correto
+- **Consulta do item confirmada 17h13:** Dr. Henrique pediu verificação, confirmei que nenhum valor salvo é o JWT necessário
+- Ação: Dr. Henrique acessar painel → Dispositivos → henryia-veiculos → copiar campo "Token"/"Access Token" (string LONGA) → salvar
+- Bloqueio: skill veículos aguardando DeviceToken JWT correto (não UUID, não senha curta)
 
 ### GitHub PAT — Push do workspace travado 🔴
 - git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)
