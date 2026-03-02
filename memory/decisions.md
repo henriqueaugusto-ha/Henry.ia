@@ -61,6 +61,14 @@
 - Contexto: dmPolicy "pairing" bloqueava DMs sem pareamento prévio
 - Resultado: DMs liberados para qualquer usuário do workspace
 
+**Decisão:** 3 flags críticas do controlUi desligadas com sucesso em 02/03/2026
+- allowInsecureAuth: false ✅
+- dangerouslyAllowHostHeaderOriginFallback: false ✅
+- dangerouslyDisableDeviceAuth: false ✅
+- Pré-requisito cumprido: Nginx + HTTPS em henry.henriqueaugusto.adv.br
+- Protocolo: backup → uma flag → restart → 3 checks → só então avançar
+- Score de segurança: 5.5/10 → estimado 7.5/10 pós-Etapa 2
+
 **Decisão:** Roadmap de hardening de segurança — 6 etapas ordenadas (02/03/2026)
 - Documento: Security Hardening - Ordem de Execução (enviado por Dr. Henrique)
 - Score atual: 5.5/10 | Meta: 9/10

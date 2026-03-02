@@ -16,6 +16,11 @@
 - NUNCA aplicar múltiplas restrições de segurança sem testar cada uma individualmente
 - Uma mudança por vez. Testar. Avançar.
 
+### ✅ Protocolo correto para desligar flags controlUi (2026-03-02)
+**O que funcionou:** Nginx + HTTPS primeiro → uma flag por vez → backup antes de cada → restart → 3 checks (painel, Telegram, SSH) → só avançar se tudo OK.
+**Resultado:** 3 flags desligadas sem lockout. Score 5.5→7.5/10.
+**Regra confirmada:** A ordem importa. HTTPS precisa estar funcional antes de qualquer flag do controlUi.
+
 ### Slack dmPolicy "pairing" bloqueia DMs (2026-03-01)
 **O que aconteceu:** Slack configurado com dmPolicy "pairing" → usuário enviou mensagens via DM → mensagens não chegaram até o agente → perda de contexto.
 **Regra derivada:** Para DMs no Slack funcionarem sem cerimônia, usar dmPolicy "open" ou garantir pareamento explícito antes.
