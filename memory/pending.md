@@ -52,6 +52,43 @@
 
 ---
 
+---
+
+## 🔴 SEGURANÇA — 6 ETAPAS ORDENADAS (doc 02/03/2026 — Score 5.5→9/10)
+
+⚠️ Executar NA ORDEM. Não pular. Não agrupar. Uma mudança por vez.
+
+### Etapa 1 — Nginx + Certbot (HTTPS na 443) 🔴 PRIORIDADE MÁXIMA
+- Pré-requisito: domínio/subdomínio apontando para IP 72.60.49.222
+- Desbloqueia: poder desligar as 3 flags críticas com segurança
+- Tempo estimado: 30-45 min
+- Validação obrigatória antes de avançar: painel HTTPS ✅ + Telegram responde ✅ + SSH ✅
+
+### Etapa 2 — Desligar 3 flags críticas do controlUi (uma por vez)
+- Pré-requisito: Etapa 1 concluída e validada
+- Ordem: allowInsecureAuth → dangerouslyAllowHostHeaderOriginFallback → dangerouslyDisableDeviceAuth
+- Rollback disponível: comando no documento
+
+### Etapa 3 — groupPolicy allowlist (Telegram + Slack)
+- Risco que resolve: prompt injection em grupos
+- Tempo: 5 min | Pré-requisito: nenhum (pode fazer antes das outras)
+
+### Etapa 4 — Migrar credenciais hardcoded para 1Password
+- Credenciais a migrar: botToken Telegram, gateway.auth.token, gateway.remote.token, hooks.token, apiKey Nexos
+- ⚠️ Gerar tokens NOVOS para gateway (estão repetidos em 3 lugares)
+- Pré-requisito: Etapas 1-2 OK
+
+### Etapa 5 — Ajustes menores
+- chmod 700 em elevenlabs-tts.sh (atualmente 755)
+- Verificar bind IPv6: `ss -lntp | egrep "62585|:::"`
+- Tempo: 5 min
+
+### Etapa 6 — Verificação manual na VPS (SSH)
+- 3 comandos: `ufw status verbose` + `fail2ban-client status sshd` + `grep "Failed|Accepted" /var/log/auth.log | tail -20`
+- Henry não consegue do container — Dr. Henrique executa e cola resultado
+
+---
+
 ## 🟡 IMPORTANTE
 
 ### Hardening final — Migrar tokens hardcoded do openclaw.json para .env

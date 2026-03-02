@@ -60,3 +60,12 @@
 **Decisão:** Slack dmPolicy alterado para "open"
 - Contexto: dmPolicy "pairing" bloqueava DMs sem pareamento prévio
 - Resultado: DMs liberados para qualquer usuário do workspace
+
+**Decisão:** Roadmap de hardening de segurança — 6 etapas ordenadas (02/03/2026)
+- Documento: Security Hardening - Ordem de Execução (enviado por Dr. Henrique)
+- Score atual: 5.5/10 | Meta: 9/10
+- Regra absoluta: flags controlUi só podem ser desligadas APÓS HTTPS funcional e testado
+- Regra absoluta: nenhuma credencial pode permanecer hardcoded no openclaw.json
+- Regra absoluta: nunca aplicar múltiplas mudanças estruturais no mesmo ciclo
+- Regra absoluta: sempre manter rota administrativa funcional antes de endurecer segurança
+- Ordem de execução: Nginx+HTTPS → flags controlUi (1 por vez) → groupPolicy allowlist → migrar credenciais 1Password → ajustes menores → verificação manual VPS
