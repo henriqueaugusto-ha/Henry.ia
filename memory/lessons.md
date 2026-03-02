@@ -153,6 +153,14 @@ Não assumir que "observações" = `notesPlain` acessível via CLI.
 **Como evitar:** Quando usuário criar dispositivo em painel, pedir explicitamente: "Copie o TOKEN longo (não o ID do dispositivo)". Se receber UUID curto, confirmar: "Este é o ID. Preciso do token JWT (string bem mais longa)".
 **Lição:** APIs que usam dispositivos geralmente têm 2 valores: ID (para humanos) e Token (para autenticação). Sempre confirmar qual foi copiado.
 
+### Usuário pode não distinguir visualmente UUID de JWT em painel web (02/03 17h15)
+**O que aconteceu:** Dr. Henrique tentou 3 vezes salvar o DeviceToken. Todas as 3 vezes salvou o UUID `6838ac15-cb03-48cf-93d9-279520d46336` (38 chars) ao invés do JWT longo (200+ chars). Mesmo após explicar diferença de tamanho e formato.
+**Descoberta:** Interface do painel pode mostrar UUID e JWT em locais próximos ou com labels similares. Usuário pode não perceber diferença visual entre:
+- UUID: `6838ac15-cb03-48cf-93d9-279520d46336` (formato familiar, "parece" um token)
+- JWT: `eyJ0eXAiOiJKV1QiLCJhbGc...` (string longa, menos familiar)
+**Como resolver:** Quando instruções textuais falharem 2+ vezes, pedir **print da tela do painel**. Apontar visualmente qual campo copiar. Painel pode ter UX confusa onde ID está mais destacado que o token real.
+**Regra:** UUID repetido 3x = pedir print imediatamente ao invés de continuar instruções textuais.
+
 ### Crons falhando silenciosamente — monitoramento cego (02/03)
 **O que aconteceu:** 4/6 crons falhando há dias sem alerta visível.
 - Daily Briefing 7h: "cron announce delivery failed"
