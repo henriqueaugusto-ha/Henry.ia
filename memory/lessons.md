@@ -131,6 +131,19 @@
 **Como identificar:** DeviceToken aparece na tela após criar dispositivo, ou pode ser copiado da lista de dispositivos no painel.
 **Lição:** Ao criar dispositivo em API que usa sistema de devices, confirmar explicitamente que o token correto (DeviceToken) foi salvo, não o token de autenticação principal.
 
+### 1Password "observações" podem não ser acessíveis via CLI (02/03 17h10)
+**O que aconteceu:** Dr. Henrique disse ter salvo DeviceToken nas "observações" do item 1Password. Busquei em `notesPlain`, `notes`, verificação completa da estrutura JSON — todos vazios. Token não encontrado.
+**Descoberta:** O campo "observações" na interface web do 1Password pode não ser mapeado para `notesPlain` no CLI, ou pode ter delay de sincronização.
+**Alternativas testadas:**
+- `--fields notesPlain` → vazio
+- `--fields notes` → campo não existe
+- Overview.notes no JSON → vazio
+**Lição:** Quando precisar de credencial salva pelo usuário no 1Password, pedir para ele:
+1. Salvar no campo `password` (padrão, sempre funciona) OU
+2. Me enviar direto na conversa OU
+3. Especificar exatamente em qual campo personalizado salvou
+Não assumir que "observações" = `notesPlain` acessível via CLI.
+
 ### Crons falhando silenciosamente — monitoramento cego (02/03)
 **O que aconteceu:** 4/6 crons falhando há dias sem alerta visível.
 - Daily Briefing 7h: "cron announce delivery failed"
