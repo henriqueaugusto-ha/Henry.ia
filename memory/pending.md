@@ -20,15 +20,18 @@
 - Impacto: monitoramento automático cego
 - Causa provável: modo "announce" delivery + modelo Haiku string inválido
 
-### API Brasil — DeviceToken Não Salvo Corretamente 🔴
+### API Brasil — DeviceToken JWT Não Localizado 🔴
 - Plano ativo ✅ (confirmado 02/03)
 - Dispositivo criado ✅ (henryia-veiculos, 17h05)
 - Secretkey correto ✅ (`fd247893-bc08-11ef-bacf-000c298680d9`)
-- ❌ DeviceToken específico não foi salvo no 1Password
-- Token atual no 1Password: ainda é o Bearer principal (não o device token)
-- Erro ao testar: "Dispositivo não encontrado"
-- Ação: Dr. Henrique voltar ao painel → Dispositivos → copiar DeviceToken do `henryia-veiculos` → atualizar 1Password
-- Bloqueio: skill veículos aguardando DeviceToken correto
+- Item 1Password criado ✅ ("API - Henryia-Veiculos")
+- UUID do dispositivo salvo ✅ (`6838ac15-cb03-48cf-93d9-279520d46336`)
+- ❌ UUID não é o DeviceToken JWT necessário
+- API espera JWT longo formato `eyJ0eXAiOi...` (200+ chars)
+- UUID salvo é apenas ID do dispositivo (36 chars)
+- Erro ao testar: "Bearer Token informado é inválido"
+- Ação: Dr. Henrique acessar painel → Dispositivos → henryia-veiculos → copiar TOKEN JWT (não UUID) → salvar
+- Bloqueio: skill veículos aguardando DeviceToken JWT correto
 
 ### GitHub PAT — Push do workspace travado 🔴
 - git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)

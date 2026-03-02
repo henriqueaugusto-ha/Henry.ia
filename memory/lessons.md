@@ -144,6 +144,15 @@
 3. Especificar exatamente em qual campo personalizado salvou
 Não assumir que "observações" = `notesPlain` acessível via CLI.
 
+### Device UUID ≠ DeviceToken JWT na API Brasil (02/03 17h12)
+**O que aconteceu:** Dr. Henrique salvou `6838ac15-cb03-48cf-93d9-279520d46336` como "DeviceToken" no 1Password. Testei múltiplas combinações — todas falharam com "Bearer Token inválido".
+**Descoberta:** UUID é apenas o **ID do dispositivo**, não o token de autenticação. A API Brasil espera um JWT longo formato `eyJ0eXAiOiJKV1QiLCJhbGciOi...` como DeviceToken.
+**Diferença:**
+- **Device ID/UUID**: identificador curto (36 chars: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`)
+- **DeviceToken JWT**: token de autenticação longo (200+ chars, começa com `eyJ`)
+**Como evitar:** Quando usuário criar dispositivo em painel, pedir explicitamente: "Copie o TOKEN longo (não o ID do dispositivo)". Se receber UUID curto, confirmar: "Este é o ID. Preciso do token JWT (string bem mais longa)".
+**Lição:** APIs que usam dispositivos geralmente têm 2 valores: ID (para humanos) e Token (para autenticação). Sempre confirmar qual foi copiado.
+
 ### Crons falhando silenciosamente — monitoramento cego (02/03)
 **O que aconteceu:** 4/6 crons falhando há dias sem alerta visível.
 - Daily Briefing 7h: "cron announce delivery failed"
