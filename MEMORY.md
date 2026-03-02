@@ -262,15 +262,58 @@ Padrão universal para TODAS as ferramentas = **SOMENTE LEITURA**.
 - Endpoint retorna 403 (Cloudflare bloqueia VPS)
 - Para resolver: documentação oficial ou whitelist do IP 72.60.49.222
 
+## API Brasil — Conectada com Bloqueador (02/03)
+
+- Chave: 1Password "API Brasil - Consultas" (UUID: pxqiqpv6s5qr3t66kzx5vkblme)
+- Endpoint: POST `https://cluster.apigratis.com/api/v2/vehicles/dados`
+- Plano: ✅ Ativo (confirmado 02/03)
+- Token: ✅ Válido até 2027 (exp: 1804013789)
+- Secretkey Placa Dados: `fd247893-bc08-11ef-bacf-000c298680d9`
+- ❌ Bloqueador: dispositivo não encontrado
+- Ação: Dr. Henrique ativar dispositivo no painel gateway.apibrasil.io
+
+## Auditoria Contratos Q4 2025 + Q1 2026 (02/03)
+
+**Total:** 103 contratos (Dez 42, Jan 35, Fev 26)
+- Com ZapSign: 56 (54%)
+- Sem ZapSign: 54 (52%) 🔴 **GAP CRÍTICO**
+- Com deadline: 10 (10%) — apenas Fevereiro
+- Sem deadline Jan+Fev: 51/61 (84%) 🔴 **RISCO OPERACIONAL**
+
+**Causa raiz WF-CONTRACT:**
+- Contratos marcados "assinados" no ClickUp
+- Campo "PDF Master URL" vazio
+- Nenhum documento no ZapSign
+- 9/10 clientes fevereiro nesse padrão
+
+**Prazos vencidos confirmados:**
+- HUMBERTO DE AGUIAR (ANPP) — 04/02/2026
+- HERICKLEPTON (Velocidade) — 24/02/2026
+
+**Arquivos salvos:** `/data/.openclaw/workspace/memory/2026-03-02.md` e `2026-03-02-janeiro.md`
+
+## Crons — 4/6 Falhando (02/03)
+
+- Daily Briefing 7h: "cron announce delivery failed"
+- Heartbeat 10h/14h: 2 erros consecutivos
+- Watchdog 8h: delivery failure
+- Git Backup 2h: "model not allowed: anthropic/claude-haiku-3-5"
+- Causa provável: modo "announce" delivery + modelo Haiku string inválido
+
 ## Pendente
 
+- [ ] OAuth Google Ads — vence AMANHÃ 03/03 🔴 CRÍTICO
+- [ ] Corrigir 4/6 crons falhando 🔴
+- [ ] Dr. Henrique ativar dispositivo API Brasil 🔴
+- [ ] Investigar WF-CONTRACT workflow (54 contratos sem docs) 🔴
+- [ ] Preencher deadlines manualmente (51 contratos) 🔴
+- [ ] Alertar equipe jurídica — 2 prazos vencidos fevereiro
 - [ ] Definir e implementar acesso externo seguro (Cloudflare Tunnel ou Nginx+HTTPS)
 - [ ] Nginx + Certbot → desligar 3 flags críticas controlUi (maior risco atual)
 - [ ] Desligar flags controlUi uma por vez (após acesso externo estável)
 - [x] Instalar 1Password CLI na VPS e configurar OP_SERVICE_ACCOUNT_TOKEN ✅ 2026-02-28
 - [ ] Migrar tokens hardcoded do openclaw.json para variáveis via .env
-- [ ] OAuth Google Ads — vence 03/03 🔴 HOJE
 - [ ] GitHub PAT — criar e salvar no 1Password para finalizar push
-- [ ] N8N API Key atualizada no 1Password (atual retorna 401)
+- [x] N8N API Key atualizada no 1Password ✅ 2026-03-02
 - [ ] Campanha ANPP Google+Meta (aguarda briefing + aprovação)
-- [ ] Auditoria contratos janeiro (clientes sem acompanhamento)
+- [x] Auditoria contratos Q4 2025 + Q1 2026 ✅ 2026-03-02

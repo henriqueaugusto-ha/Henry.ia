@@ -94,3 +94,41 @@
 ### Formatação Slack ≠ Markdown padrão (2026-02-28)
 **O que aconteceu:** Tentativa de usar `**negrito**` no Slack não renderizou.
 **Regra derivada:** Slack usa `*asterisco simples*` para negrito. Markdown duplo `**` não funciona.
+
+---
+
+## Workflows e Processos (2026-03-02)
+
+### 🔴 WF-CONTRACT tem gap crítico — contratos "assinados" sem documentos
+**O que aconteceu:** Auditoria de 103 contratos (Q4 2025 + Q1 2026) revelou 54 contratos (52%) sem documentos no ZapSign. Padrão identificado: 9/10 clientes fevereiro têm campo "Data assinatura" preenchido no ClickUp mas campo "PDF Master URL" vazio e nenhum documento no ZapSign.
+**Causa provável:** Workflow WF-CONTRACT não está enviando PDF final para ZapSign ou falhando silenciosamente sem alerta.
+**Impacto:** 52% dos contratos sem rastreabilidade jurídica de assinatura.
+**Lição:** Workflows silenciosos sem monitoramento = falhas silenciosas. Sempre implementar alertas de falha + verificação de completude.
+
+### 🔴 Deadline tracking falhou em 84% dos contratos Jan+Fev
+**Números:** 51/61 contratos sem deadline (35/35 Jan = 100%, 16/26 Fev = 62%).
+**Consequência:** 2 prazos vencidos confirmados (HUMBERTO DE AGUIAR 04/02, HERICKLEPTON 24/02).
+**Causa raiz:** Não há workflow automático de extração de prazo + preenchimento no campo "Próximo Prazo Crítico".
+**Risco:** Prazos administrativos (15 dias úteis) vencendo sem visibilidade.
+**Lição:** Campo crítico vazio = risco operacional. Se 84% não tem prazo, o processo está quebrado.
+
+### 497 cobranças vencidas no Asaas = alavanca imediata (02/03)
+**Descoberta:** API Asaas retornou 497 cobranças overdue (~R$473k em aberto).
+**Oportunidade:** 20% de recuperação = ~R$95k (59% da meta março R$160k).
+**Lição:** Dados já existem. Ação não executada = oportunidade perdida. Régua de cobrança automatizada pode recuperar meta sem novos contratos.
+
+### API Brasil usa sistema de "dispositivos" (02/03)
+**O que aconteceu:** Plano ativo, token válido, secretkey correto, mas erro "Dispositivo não encontrado".
+**Descoberta:** API Brasil funciona como WhatsApp — usuário precisa criar/ativar "dispositivo" no painel antes de usar.
+**DeviceToken:** é específico por dispositivo, não é o mesmo que Bearer token do login.
+**Lição:** Nem toda API usa só token de autenticação. Algumas exigem pré-registro de "dispositivos" ou "aplicações".
+
+### Crons falhando silenciosamente — monitoramento cego (02/03)
+**O que aconteceu:** 4/6 crons falhando há dias sem alerta visível.
+- Daily Briefing 7h: "cron announce delivery failed"
+- Heartbeat 10h/14h: 2 erros consecutivos
+- Watchdog 8h: delivery failure
+- Git Backup 2h: "model not allowed: anthropic/claude-haiku-3-5"
+**Causa provável:** modo "announce" delivery falhando + modelo Haiku string inválido.
+**Impacto:** Sistema imunológico (watchdog, heartbeat, security audit) desativado sem visibilidade.
+**Lição:** Cron sem alerta de falha = monitoramento quebrado. Precisa de meta-monitoramento (cron que checa crons).

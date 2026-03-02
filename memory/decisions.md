@@ -187,3 +187,41 @@ Registrar em `lessons.md` com análise de causa raiz. Sem exceção.
 - Regra absoluta: nunca aplicar múltiplas mudanças estruturais no mesmo ciclo
 - Regra absoluta: sempre manter rota administrativa funcional antes de endurecer segurança
 - Ordem de execução: Nginx+HTTPS → flags controlUi (1 por vez) → groupPolicy allowlist → migrar credenciais 1Password → ajustes menores → verificação manual VPS
+
+**Decisão:** Security score 9.0/10 aceitável (02/03 sessão continuação)
+- Score atingido: 9.0/10 (antes: 8.8/10)
+- Flags controlUi: todas desativadas ✅
+- Tokens rotacionados: 3 únicos ✅
+- groupPolicy allowlist: ativo ✅
+- Pendente: chmod 600 openclaw.json (requer root) — aceitar sem
+- Pendente: Nexos apiKey no 1Password (Dr. Henrique cria manualmente)
+- Decisão: não forçar chmod 600 nem atualização de versão do gateway
+- Priorizar estabilidade operacional sobre perfeição técnica
+
+**Decisão:** Usar config.patch para TODA mudança no gateway (02/03 sessão continuação)
+- Motivo: edições manuais no openclaw.json são sobrescritas por write periódico do gateway
+- SIGUSR1 sem config.patch = grava memória no disco, revertendo edições manuais
+- Lição do incidente: Flags 2+3 revertidas após SIGUSR1
+- Método permanente: `gateway config.patch` → atualiza memória E disco atomicamente
+
+**Decisão:** Manter versão gateway 2026.2.23 (02/03 sessão continuação)
+- Estabilidade atual aceitável
+- Evitar risco de breaking changes
+- Próxima atualização somente se houver recurso crítico necessário
+
+**Decisão:** BigDataCorp como alternativa preferencial para API de veículos (02/03 sessão continuação)
+- Contexto: API Brasil teve bloqueio no checkout (erro "data truncated" + R$69.90 mínimo)
+- Vantagens BigDataCorp:
+  - Site acessível, cadastro direto
+  - R$0.25–0.35/query (vs R$69.90 mínimo API Brasil)
+  - Inclui dados de processos judiciais além de veículos
+- Status: API Brasil resolvida (plano ativo), dispositivo pendente
+- Decisão mantida como referência para futuras integrações
+
+**Decisão:** Não atuar sobre 54 contratos sem ZapSign nem 51 sem deadline sem autorização explícita (02/03)
+- Contexto: auditoria revelou gaps críticos em Q4 2025 + Q1 2026
+- 54 contratos (52%) sem documentos ZapSign
+- 51 contratos (84% Jan+Fev) sem deadline tracking
+- Decisão: APENAS reportar + aguardar instrução do Dr. Henrique
+- Motivo: operações de correção em massa requerem protocolo Nível 4
+- Bloqueado: investigação WF-CONTRACT e preenchimento manual até ordem direta

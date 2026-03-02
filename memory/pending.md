@@ -7,9 +7,26 @@
 
 ## 🔴 URGENTE
 
-### OAuth Google Ads — Vence 03/03/2026 🔴 HOJE
-- Status: vence HOJE (03/03) — ação imediata
+### OAuth Google Ads — Vence AMANHÃ (03/03/2026) 🔴
+- Status: vence em 24h
 - Impacto: WF-ROAS para de reportar, campanhas ficam cegas
+- Ação: renovar OAuth via console Google Ads
+
+### Crons Falhando — 4/6 Quebrados 🔴
+- Daily Briefing 7h: "cron announce delivery failed"
+- Heartbeat 10h/14h: 2 erros consecutivos
+- Watchdog 8h: delivery failure
+- Git Backup 2h: "model not allowed: anthropic/claude-haiku-3-5"
+- Impacto: monitoramento automático cego
+- Causa provável: modo "announce" delivery + modelo Haiku string inválido
+
+### API Brasil — Dispositivo Não Encontrado 🔴
+- Plano ativo ✅ (confirmado 02/03)
+- Token válido ✅ (exp: 2027)
+- Secretkey correto ✅ (`fd247893-bc08-11ef-bacf-000c298680d9`)
+- ❌ Erro: "Dispositivo não encontrado"
+- Ação: Dr. Henrique acessar gateway.apibrasil.io → criar/ativar dispositivo → copiar DeviceToken → salvar no 1Password
+- Bloqueio: skill veículos aguardando ativação
 
 ### GitHub PAT — Push do workspace travado 🔴
 - git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)
@@ -98,6 +115,28 @@
 ---
 
 ## 🟡 IMPORTANTE
+
+### 54 Contratos Sem Documentos ZapSign (52% do Q4+Q1) 🔴
+- Descoberto: auditoria 02/03/2026
+- Total: 103 contratos (Dez 42, Jan 35, Fev 26)
+- Com docs: 56 (54%)
+- Sem docs: 54 (52%)
+- Causa raiz: WF-CONTRACT workflow quebrado
+  - Contratos marcados com "Data assinatura" no ClickUp
+  - Campo "PDF Master URL" vazio
+  - Nenhum documento no ZapSign
+  - 9/10 clientes fevereiro nesse padrão
+- Ação: investigar workflow OU upload manual
+
+### 51 Contratos Sem Deadline (84% Jan+Fev) 🔴
+- Jan: 35/35 sem prazo (100%)
+- Fev: 16/26 sem prazo (62%)
+- Total: 51/61 sem deadline tracking
+- Risco: prazos administrativos (15 dias úteis) vencendo sem controle
+- 2 prazos vencidos confirmados em fev:
+  - HUMBERTO DE AGUIAR (ANPP) — 04/02/2026
+  - HERICKLEPTON (Velocidade) — 24/02/2026
+- Ação: preencher manualmente OU criar workflow OCR
 
 ### Hardening final — Migrar tokens hardcoded do openclaw.json para .env
 - Arquivo de tarefa: `tasks/hardening-final-2026-02-28.md`
