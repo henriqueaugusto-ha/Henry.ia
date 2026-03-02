@@ -67,6 +67,13 @@
 ### ✅ Etapa 3 — groupPolicy allowlist — CONCLUÍDA 02/03/2026
 - Telegram, Slack e WhatsApp: groupPolicy allowlist
 
+### 🔴 ClickUp — Planos/Metas (868hpad3h) — PRIMEIRA TAREFA PRÓXIMA SESSÃO
+- Tarefa vazia — Dr. Henrique disse ter adicionado "pensamentos e hábitos" mas conteúdo não encontrado
+- Aguardando clarificação: Opção A (construir com base na sessão) ou Opção B (localizar em outro lugar do ClickUp)
+
+### 🔴 ClickUp — Reescrever Sub-tarefa Erros (868hpad1p) com mais detalhe
+- Dr. Henrique achou superficial — quer análise profunda de cada erro
+
 ### 🔴 Re-aplicar Flags 2+3 + Rotação Tokens (SIGUSR1 reverteu) — PRÓXIMA SESSÃO
 - Causa: SIGUSR1 escreveu estado em memória de volta ao disco
 - Flags afetadas: dangerouslyAllowHostHeaderOriginFallback e dangerouslyDisableDeviceAuth (ambas true ainda)
