@@ -1,0 +1,14 @@
+# Sensível
+backups/
+*.env
+.env*
+
+# Sessões e logs (grandes, regeneráveis)
+*.jsonl
+*.log
+
+# Temporários
+*.tmp
+*.bak
+*.swp
+.DS_Store

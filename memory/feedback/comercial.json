@@ -1,0 +1,27 @@
+{
+  "_info": "Feedback sobre sugestões comerciais: scripts SDR, abordagens, estratégias de funil.",
+  "_rules": "Max 30 entradas (FIFO). Consultar antes de sugerir. Consolidar em lessons.md mensalmente.",
+  "entries": [
+    {
+      "date": "2026-03-01",
+      "context": "Priorizei estruturação de skills e ferramentas antes de atacar comercial",
+      "decision": "approve",
+      "reason": "Dr. Henrique quer base sólida primeiro — fase 1 é infraestrutura, fase 2 é operação",
+      "tags": ["prioridade", "fase1", "estrategia"]
+    },
+    {
+      "date": "2026-03-01",
+      "context": "Identifiquei ANPP como produto prioritário de março (R$4-5k/caso)",
+      "decision": "approve",
+      "reason": "Confirmado como maior alavanca de março — campanha Google+Meta aprovada conceitualmente",
+      "tags": ["anpp", "produto", "marco"]
+    },
+    {
+      "date": "2026-03-02",
+      "context": "Propus analisar e agir nas 497 cobranças vencidas do Asaas",
+      "decision": "approve",
+      "reason": "Análise autorizada — ação (escrever/cancelar) proibida. Oportunidade de ~R$95k em recaptação",
+      "tags": ["asaas", "recaptacao", "cobrancas"]
+    }
+  ]
+}

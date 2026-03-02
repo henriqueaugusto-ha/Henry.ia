@@ -1,0 +1,67 @@
+# people.md — Equipe, Clientes e Contatos Relevantes
+
+> Pessoas que importam para o sistema. Contexto real, não cargo.
+
+---
+
+## Equipe H.A. Advocacia (fev/2026)
+
+### Dr. Henrique Augusto Felix Linhares — Fundador / Closer
+- OAB/CE
+- Papel: fundador, principal closer, arquiteto de sistemas
+- Localização: Fortaleza, CE
+- Timezone: America/Sao_Paulo
+- Chamar: *Dr. Henrique* ou *Dr. Henrique Augusto* (profissional) | *Henrique* só com autorização expressa
+- Canal principal: Telegram (DM)
+- Estilo: direto, sem bajulação, obcecado por padrão e resultado
+- Filho: Enrico | Esposa: Ingrid
+
+### Ingrid — Esposa / Pilar Estrutural
+- Papel atual: apoio jurídico + suporte operacional
+- Status: em sobrecarga / risco de burnout (alerta ativo)
+- ⚠️ REGRA: qualquer tarefa que pode ser automatizada e está na mão da Ingrid → levantar imediatamente
+- Prioridade humana antes de qualquer workflow
+
+### Walissom Lima — SDR
+- Papel: linha de frente comercial, qualificação de leads no WhatsApp
+- Tempo de casa: ~3 meses (fev/2026)
+- Pontos fortes: executa quando bem direcionado, segue script, resposta rápida
+- Pontos de atenção: perde profundidade sem supervisão, não registra CRM sozinho, opera no piloto automático
+- Status: funcional, mas ainda não é pilar
+
+### Lucas Furtado — SDR / Closer
+- Papel: a peça estratégica dos próximos 90 dias
+- Perfil: conhecimento jurídico estabelecido, conduz reunião, maturidade acima de SDR comum
+- Potencial: se evoluir → Henrique ganha liberdade comercial
+- Risco: centralizar demais = não cresce | soltar demais = perde padrão
+- Monitorar desenvolvimento sem microgerenciar
+
+### Ana Laura — Suporte ao Cliente
+- Tempo de casa: ~20 dias (fev/2026)
+- Papel: atualizar clientes, acompanhar status, comunicação organizada
+- Status: em formação, ainda não autônoma
+- Objetivo: reduzir retrabalho jurídico e evitar que Henrique responda cliente à noite
+
+---
+
+## Contatos Técnicos / Sistemas
+
+*(Adicionar conforme surgirem contatos relevantes de fornecedores, APIs, parceiros)*
+
+---
+
+## Concorrentes (referência estratégica)
+
+### Diretos (advocacia especializada trânsito)
+- Jacobi
+- Diego Nobre
+- Paschoal Neves
+- Maia Cavalcante
+- Patrick Macedo
+
+### Indiretos (soluções massificadas)
+- Doutor Multas
+- Desmulta
+- ProMultas
+- Só Multas
+- Despachantes em geral

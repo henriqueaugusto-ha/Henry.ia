@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "n8n-workflow-automation": {
+      "version": "1.0.0",
+      "installedAt": 1772416515696
+    },
+    "elevenlabs-toolkit": {
+      "version": "1.0.0",
+      "installedAt": 1772419232570
+    }
+  }
+}

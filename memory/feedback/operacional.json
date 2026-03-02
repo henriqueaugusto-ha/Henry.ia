@@ -1,0 +1,34 @@
+{
+  "_info": "Feedback sobre decisões operacionais: prioridades, formato de relatórios, vocabulário, tom.",
+  "_rules": "Max 30 entradas (FIFO). Consultar antes de recomendar processo ou mudança de padrão. Consolidar em lessons.md mensalmente.",
+  "entries": [
+    {
+      "date": "2026-03-01",
+      "context": "Usei termo Q1 para primeiro trimestre",
+      "decision": "reject",
+      "reason": "Dr. Henrique não usa Q1 — usar sempre T1 ou Trimestre 1",
+      "tags": ["vocabulario", "comunicacao"]
+    },
+    {
+      "date": "2026-03-01",
+      "context": "Defini meta de março como R$100k",
+      "decision": "reject",
+      "reason": "Meta correta é R$160k para fechar T1 em R$300k (jan 80k + fev 60k + mar 160k)",
+      "tags": ["metas", "comercial", "t1"]
+    },
+    {
+      "date": "2026-03-01",
+      "context": "Usei tabela no Telegram para mostrar dados",
+      "decision": "reject",
+      "reason": "Telegram não renderiza tabelas — usar bullets simples sempre",
+      "tags": ["formatacao", "telegram"]
+    },
+    {
+      "date": "2026-03-02",
+      "context": "Configurei Slack dmPolicy como pairing",
+      "decision": "reject",
+      "reason": "Pairing bloqueia DMs silenciosamente — usar open",
+      "tags": ["slack", "config", "comunicacao"]
+    }
+  ]
+}

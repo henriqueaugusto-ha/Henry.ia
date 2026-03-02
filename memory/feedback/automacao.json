@@ -1,0 +1,41 @@
+{
+  "_info": "Feedback sobre sugestões de automação: workflows N8N, crons, integrações propostas.",
+  "_rules": "Max 30 entradas (FIFO). Consultar antes de propor novo fluxo. Consolidar em lessons.md mensalmente.",
+  "entries": [
+    {
+      "date": "2026-03-01",
+      "context": "Configurei Daily Briefing cron às 9h",
+      "decision": "reject",
+      "reason": "Horário errado — Dr. Henrique quer às 7h, antes do modo guerra",
+      "tags": ["cron", "horario", "briefing"]
+    },
+    {
+      "date": "2026-03-01",
+      "context": "Configurei softThresholdTokens em 40k para compactação",
+      "decision": "reject",
+      "reason": "Curso define 160k como threshold correto para janela de 200k",
+      "tags": ["compactacao", "config", "memoria"]
+    },
+    {
+      "date": "2026-03-02",
+      "context": "Tentei editar openclaw.json diretamente para configurar model routing",
+      "decision": "reject",
+      "reason": "Derrubou o gateway 3 vezes — regra permanente: nunca editar diretamente",
+      "tags": ["config", "gateway", "infraestrutura"]
+    },
+    {
+      "date": "2026-03-02",
+      "context": "Propus instalar n8n-monitor do ClawHub para monitorar workflows",
+      "decision": "reject",
+      "reason": "Skill é stub — código vazio, não faz nada. Inspecionar antes de instalar.",
+      "tags": ["skills", "n8n", "clawhub"]
+    },
+    {
+      "date": "2026-03-02",
+      "context": "Arquitetura: Henry executa correções diretamente no N8N",
+      "decision": "reject",
+      "reason": "Henry nunca executa no N8N — só analisa e instrui o agente VSCode",
+      "tags": ["arquitetura", "n8n", "papel"]
+    }
+  ]
+}
