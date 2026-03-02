@@ -20,13 +20,15 @@
 - Impacto: monitoramento automático cego
 - Causa provável: modo "announce" delivery + modelo Haiku string inválido
 
-### API Brasil — Dispositivo Não Encontrado 🔴
+### API Brasil — DeviceToken Não Salvo Corretamente 🔴
 - Plano ativo ✅ (confirmado 02/03)
-- Token válido ✅ (exp: 2027)
+- Dispositivo criado ✅ (henryia-veiculos, 17h05)
 - Secretkey correto ✅ (`fd247893-bc08-11ef-bacf-000c298680d9`)
-- ❌ Erro: "Dispositivo não encontrado"
-- Ação: Dr. Henrique acessar gateway.apibrasil.io → criar/ativar dispositivo → copiar DeviceToken → salvar no 1Password
-- Bloqueio: skill veículos aguardando ativação
+- ❌ DeviceToken específico não foi salvo no 1Password
+- Token atual no 1Password: ainda é o Bearer principal (não o device token)
+- Erro ao testar: "Dispositivo não encontrado"
+- Ação: Dr. Henrique voltar ao painel → Dispositivos → copiar DeviceToken do `henryia-veiculos` → atualizar 1Password
+- Bloqueio: skill veículos aguardando DeviceToken correto
 
 ### GitHub PAT — Push do workspace travado 🔴
 - git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)

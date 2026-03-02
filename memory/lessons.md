@@ -123,6 +123,14 @@
 **DeviceToken:** é específico por dispositivo, não é o mesmo que Bearer token do login.
 **Lição:** Nem toda API usa só token de autenticação. Algumas exigem pré-registro de "dispositivos" ou "aplicações".
 
+### Bearer token ≠ DeviceToken na API Brasil (02/03 17h)
+**O que aconteceu:** Dr. Henrique criou dispositivo `henryia-veiculos` no painel e disse ter salvado no 1Password. Mas teste continuou falhando com "Dispositivo não encontrado". Verificação mostrou que o token no 1Password ainda era o Bearer principal (do login), não o DeviceToken específico do dispositivo.
+**Descoberta:** API Brasil tem 2 tokens diferentes:
+- **Bearer token** (do login OAuth): usado para autenticar na API de gerenciamento
+- **DeviceToken** (específico por dispositivo): usado para autenticar nas APIs de dados (veículos, CPF, etc.)
+**Como identificar:** DeviceToken aparece na tela após criar dispositivo, ou pode ser copiado da lista de dispositivos no painel.
+**Lição:** Ao criar dispositivo em API que usa sistema de devices, confirmar explicitamente que o token correto (DeviceToken) foi salvo, não o token de autenticação principal.
+
 ### Crons falhando silenciosamente — monitoramento cego (02/03)
 **O que aconteceu:** 4/6 crons falhando há dias sem alerta visível.
 - Daily Briefing 7h: "cron announce delivery failed"
