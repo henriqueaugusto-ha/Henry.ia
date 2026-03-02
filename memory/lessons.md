@@ -161,6 +161,38 @@ Não assumir que "observações" = `notesPlain` acessível via CLI.
 **Como resolver:** Quando instruções textuais falharem 2+ vezes, pedir **print da tela do painel**. Apontar visualmente qual campo copiar. Painel pode ter UX confusa onde ID está mais destacado que o token real.
 **Regra:** UUID repetido 3x = pedir print imediatamente ao invés de continuar instruções textuais.
 
+### API Brasil requer DOIS tokens simultaneamente (02/03 17h17) — ARQUITETURA DEFINITIVA
+**Descoberta após print:** O painel API Brasil chama o UUID de "DEVICE TOKEN", mas a API precisa de 2 tokens diferentes:
+1. **DeviceToken** (header): UUID do dispositivo (36 chars: `6838ac15-cb03-48cf-93d9-279520d46336`)
+2. **Authorization Bearer** (header): JWT de autenticação (200+ chars: `eyJ0eXAiOiJKV1Q...`)
+
+**Como funciona:**
+- **Bearer JWT**: token de login OAuth (gerado ao autenticar no gateway.apibrasil.io)
+- **DeviceToken UUID**: identificador do dispositivo criado (gerado ao criar dispositivo no painel)
+- **SecretKey**: específico por API (ex: Placa Dados = `fd247893-bc08-11ef-bacf-000c298680d9`)
+
+**Erro crítico cometido:**
+- Instrui Dr. Henrique a "atualizar campo password com DeviceToken"
+- Ele substituiu o Bearer JWT pelo UUID
+- JWT foi perdido (sobrescrito no 1Password)
+- API agora rejeita porque falta Bearer JWT
+
+**Formato correto de chamada:**
+```bash
+curl -X POST https://cluster.apigratis.com/api/v2/vehicles/dados \
+  -H "DeviceToken: 6838ac15-cb03-48cf-93d9-279520d46336" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGc..." \
+  -H "SecretKey: fd247893-bc08-11ef-bacf-000c298680d9"
+```
+
+**Como evitar:**
+- APIs com "dispositivos" podem ter múltiplos tokens
+- Antes de sobrescrever token existente: confirmar se novo token é adicional ou substituto
+- Salvar tokens em campos separados (password = JWT, custom field = UUID)
+- Nunca substituir token JWT sem backup
+
+**Lição:** "DeviceToken" no painel ≠ único token necessário. Verificar documentação da API ou testar antes de sobrescrever credenciais existentes.
+
 ### Crons falhando silenciosamente — monitoramento cego (02/03)
 **O que aconteceu:** 4/6 crons falhando há dias sem alerta visível.
 - Daily Briefing 7h: "cron announce delivery failed"

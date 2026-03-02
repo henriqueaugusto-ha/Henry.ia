@@ -35,8 +35,15 @@
 - **Tentativa 2 (17h13):** Item consultado, confirmado UUID incorreto
 - **Tentativa 3 (17h15):** Dr. Henrique disse "troquei", verificamos → UUID copiado novamente no item "API Brasil - Consultas" → rejeitado
 - **Padrão:** 3 tentativas, todas salvaram UUID (38 chars) ao invés de JWT (200+ chars)
-- Ação: Solicitar **print da tela do dispositivo** para identificar visualmente campo correto (instruções textuais falharam 3x)
-- Bloqueio: skill veículos aguardando DeviceToken JWT correto + possível UX confusa no painel API Brasil
+- **Print recebido (17h17):** Painel API Brasil chama UUID de "DEVICE TOKEN" (nomenclatura confusa)
+- **DESCOBERTA CRÍTICA:** API precisa de 2 tokens simultâneos:
+  - DeviceToken UUID: `6838ac15-cb03-48cf-93d9-279520d46336` ✅ (temos)
+  - Authorization Bearer JWT: `eyJ0eXAiOiJKV1Q...` ❌ (PERDIDO - foi sobrescrito no 1Password)
+- **Erro fatal:** Instrução minha causou sobrescrita do JWT pelo UUID no campo password
+- **Opções de recuperação:**
+  1. Restaurar JWT via histórico de versões do 1Password
+  2. Gerar novo JWT fazendo login novamente em gateway.apibrasil.io
+- Bloqueio: skill veículos aguardando recuperação do Bearer JWT
 
 ### GitHub PAT — Push do workspace travado 🔴
 - git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)
