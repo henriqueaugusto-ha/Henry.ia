@@ -27,6 +27,13 @@
 **Regra derivada:** NUNCA usar SIGUSR1 para mudanças que precisam persistir no JSON. SEMPRE usar `docker restart` após mudanças no arquivo. SIGUSR1 = reload que pode sobrescrever arquivo com estado em memória.
 **Impacto:** Flags 2+3 revertidas para true. Tokens revertidos para valor original. Score real: 8.0 (não 8.8).
 
+### 🔴 Flags revertidas por write periódico + shutdown do gateway (2026-03-02 — sessão manhã)
+**O que aconteceu:** Editamos `openclaw.json` manualmente com o gateway rodando. `docker restart` foi executado pelo Dr. Henrique. As flags voltaram para `true` imediatamente.
+**Causa raiz:** O gateway serializa o estado em memória para disco tanto no shutdown quanto periodicamente (~1–1,5h). Edição manual no arquivo é sobrescrita pelo próximo write do processo.
+**Diagnóstico:** `docker stop` NÃO é suficiente — o shutdown do gateway também gera write de memória para disco, revertendo edições.
+**Método correto:** `gateway config.patch` — atualiza a memória do processo E o disco atomicamente. SIGUSR1 reinicia a partir do estado correto. Flags persistem nos writes subsequentes.
+**Resultado:** `config.patch` aplicado com sucesso em 04:41 de 02/03. 3 flags = false. Audit: 0 críticos, 0 warnings.
+
 ### ✅ Protocolo correto para desligar flags controlUi (2026-03-02)
 **O que funcionou:** Nginx + HTTPS primeiro → uma flag por vez → backup antes de cada → restart → 3 checks (painel, Telegram, SSH) → só avançar se tudo OK.
 **Resultado:** 3 flags desligadas sem lockout. Score 5.5→7.5/10.
