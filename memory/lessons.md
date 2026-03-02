@@ -193,6 +193,24 @@ curl -X POST https://cluster.apigratis.com/api/v2/vehicles/dados \
 
 **Lição:** "DeviceToken" no painel ≠ único token necessário. Verificar documentação da API ou testar antes de sobrescrever credenciais existentes.
 
+### Nomenclatura confusa no painel API Brasil (02/03 17h19)
+**Problema:** Painel API Brasil usa termos que não correspondem aos headers da API:
+- Painel exibe: "Token Principal" (grande) e "Device Token" (UUID)
+- Headers da API: `Authorization: Bearer [JWT]` e `DeviceToken: [UUID]`
+
+**Confusão gerada:**
+- Usuário focou em "Device Token" (mais destacado visualmente)
+- "Token Principal" não tem label explícito como "Bearer JWT"
+- Levou 1h+ e 4 tentativas para identificar que precisava dos 2
+
+**Como evitar em futuras integrações:**
+- Quando API usar "dispositivos", assumir que precisa de múltiplos tokens
+- Pedir ao usuário: "Copie TODOS os tokens que você vê na tela do dispositivo"
+- Testar incrementalmente (primeiro só UUID, depois adicionar outros)
+- Não assumir que "Device Token" é suficiente só porque está no nome
+
+**Lição:** UX de painéis pode usar nomenclatura diferente dos headers da API. Sempre pedir "todos os tokens visíveis" ao invés de um específico.
+
 ### Crons falhando silenciosamente — monitoramento cego (02/03)
 **O que aconteceu:** 4/6 crons falhando há dias sem alerta visível.
 - Daily Briefing 7h: "cron announce delivery failed"
