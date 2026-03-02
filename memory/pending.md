@@ -44,11 +44,10 @@
   1. Restaurar JWT via histórico de versões do 1Password
   2. Gerar novo JWT fazendo login novamente em gateway.apibrasil.io
 - **BREAKTHROUGH (17h19):** Dr. Henrique localizou "token principal bem grande" no painel
-- **Status:** Aguardando Dr. Henrique enviar Bearer JWT ou salvar em 1Password campo novo
-- **Opções oferecidas:**
-  - Enviar token na conversa (teste imediato)
-  - Salvar em campo novo do 1Password (não substituir UUID)
-- Bloqueio: skill veículos a 1 passo de funcionar - falta apenas receber o Bearer JWT
+- **Print recebido (17h20):** Bearer Token visível (420 chars, começa com `eyJ0eS01cG1JK...`)
+- **Status:** Solicitado copiar e colar token completo na conversa
+- **Próximo passo:** Teste em 30 segundos após receber Bearer JWT
+- Bloqueio: skill veículos a literalmente 1 mensagem de funcionar - Bearer JWT identificado, aguardando cola
 
 ### GitHub PAT — Push do workspace travado 🔴
 - git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)
