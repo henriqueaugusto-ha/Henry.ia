@@ -262,25 +262,26 @@ Padrão universal para TODAS as ferramentas = **SOMENTE LEITURA**.
 - Endpoint retorna 403 (Cloudflare bloqueia VPS)
 - Para resolver: documentação oficial ou whitelist do IP 72.60.49.222
 
-## API Brasil — Arquitetura Descoberta, JWT Perdido (02/03 17h17)
+## API Brasil — ✅ INTEGRAÇÃO CONCLUÍDA (02/03 17h21)
 
-**Arquitetura real da API:**
-- Requer 3 headers simultâneos:
-  - `DeviceToken`: UUID do dispositivo ✅ `6838ac15-cb03-48cf-93d9-279520d46336`
-  - `Authorization`: Bearer JWT (200+ chars) ❌ PERDIDO
-  - `SecretKey`: específico por API ✅ `fd247893-bc08-11ef-bacf-000c298680d9`
+**Status:** 100% funcional, teste com placa ABC1234 bem-sucedido
 
-**O que aconteceu:**
-- JWT estava no 1Password "API Brasil - Consultas" campo password
-- Instrução minha causou sobrescrita do JWT pelo UUID
-- JWT perdido, precisa recuperar via histórico 1Password OU novo login
+**Configuração final:**
+```
+POST https://cluster.apigratis.com/api/v2/vehicles/dados
+Headers:
+  DeviceToken: 6838ac15-cb03-48cf-93d9-279520d46336
+  Authorization: Bearer eyJ0eXAiOiJKV1Q... (420 chars)
+  SecretKey: fd247893-bc08-11ef-bacf-000c298680d9
+```
 
-**Status atual:**
-- Plano: ✅ Ativo
-- Dispositivo: ✅ Criado (henryia-veiculos)
-- DeviceToken UUID: ✅ Salvo
-- Bearer JWT: ❌ Perdido por sobrescrita
-- Endpoint: POST `https://cluster.apigratis.com/api/v2/vehicles/dados`
+**Credenciais 1Password "API Brasil - Consultas":**
+- `password`: DeviceToken UUID (36 chars)
+- `notesPlain`: Bearer JWT (420 chars)
+
+**Teste realizado:** Placa ABC1234 → VW SANTANA CG 1986, Vermelha, Álcool, PR
+**Tempo de integração:** 1h15min (4 tentativas até sucesso)
+**Próximos passos:** Script workspace ou integração N8N
 
 ## Auditoria Contratos Q4 2025 + Q1 2026 (02/03)
 

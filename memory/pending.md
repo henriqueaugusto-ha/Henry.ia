@@ -48,6 +48,8 @@
 - **Status:** Solicitado copiar e colar token completo na conversa
 - **Próximo passo:** Teste em 30 segundos após receber Bearer JWT
 - Bloqueio: skill veículos a literalmente 1 mensagem de funcionar - Bearer JWT identificado, aguardando cola
+- **✅ RESOLVIDO (17h21):** Bearer JWT salvo no 1Password campo notesPlain, API testada com sucesso (placa ABC1234 retornou dados completos VW SANTANA CG 1986)
+- **Status final:** Integração API Brasil 100% funcional - DeviceToken + Bearer JWT + SecretKey configurados corretamente
 
 ### GitHub PAT — Push do workspace travado 🔴
 - git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)

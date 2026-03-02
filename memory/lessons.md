@@ -211,6 +211,52 @@ curl -X POST https://cluster.apigratis.com/api/v2/vehicles/dados \
 
 **Lição:** UX de painéis pode usar nomenclatura diferente dos headers da API. Sempre pedir "todos os tokens visíveis" ao invés de um específico.
 
+### API Brasil integração bem-sucedida após 1h15min (02/03 17h21) — LIÇÃO COMPLETA
+**Contexto:** Integração da API Brasil de veículos levou 1h15min e 4 tentativas até funcionar.
+
+**Arquitetura final descoberta:**
+```
+POST https://cluster.apigratis.com/api/v2/vehicles/dados
+Headers:
+  DeviceToken: 6838ac15-cb03-48cf-93d9-279520d46336 (UUID 36 chars)
+  Authorization: Bearer eyJ0eXAiOiJKV1Q... (JWT 420 chars)
+  SecretKey: fd247893-bc08-11ef-bacf-000c298680d9 (UUID específico por API)
+```
+
+**Nomenclatura do painel vs Headers da API:**
+| Painel API Brasil | Header da API | Tipo |
+|---|---|---|
+| "Token Principal" | Authorization: Bearer | JWT 420 chars |
+| "Device Token" | DeviceToken | UUID 36 chars |
+| (não mostrado) | SecretKey | UUID por API |
+
+**Erros cometidos durante troubleshooting:**
+1. Assumi que "DeviceToken" no painel era suficiente (faltava Bearer JWT)
+2. Instruí substituir campo password (causou perda do JWT original)
+3. Não pedi "todos os tokens visíveis" desde o início
+4. Tentei inferir arquitetura pela documentação ao invés de pedir print completo
+
+**O que funcionou:**
+1. Print da tela do dispositivo (revelou "Token Principal" separado)
+2. Salvar ambos tokens em campos diferentes (password=UUID, notesPlain=JWT)
+3. Testar combinações até encontrar a correta
+
+**Como fazer certo desde o início:**
+1. Ao criar dispositivo, pedir: "Tire print da tela completa do dispositivo criado"
+2. Solicitar: "Copie TODOS os tokens que aparecem (não só um)"
+3. Antes de sobrescrever qualquer credencial: fazer backup ou criar campo novo
+4. Testar incrementalmente: UUID sozinho → UUID+JWT antigo → UUID+JWT novo
+5. Documentar arquitetura de headers no 1Password (notes) para referência futura
+
+**Métricas finais:**
+- Tempo: 1h15min (16h05-17h21)
+- Tentativas: 4
+- Tokens necessários: 3 (DeviceToken, Bearer JWT, SecretKey)
+- Campos 1Password usados: 2 (password=UUID, notesPlain=JWT)
+- Resultado: ✅ API 100% funcional, teste com placa ABC1234 retornou dados completos
+
+**Lição principal:** APIs com "dispositivos" frequentemente precisam de múltiplos tokens. Sempre pedir "todos os tokens visíveis" e salvar em campos separados antes de testar.
+
 ### Crons falhando silenciosamente — monitoramento cego (02/03)
 **O que aconteceu:** 4/6 crons falhando há dias sem alerta visível.
 - Daily Briefing 7h: "cron announce delivery failed"

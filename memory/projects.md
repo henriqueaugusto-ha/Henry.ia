@@ -78,14 +78,20 @@
 
 ## Projetos Ativos — Março 2026
 
-### 🔴 API Brasil — Integração Veículos (02/03)
-- **Objetivo:** Consulta automática de placa → RENAVAM, marca, modelo, ano
-- **Status:** Plano ativo ✅ | Token válido ✅ | Secretkey ✅ | Dispositivo ❌
-- **Bloqueador:** Dispositivo não ativo no gateway.apibrasil.io
-- **Próximo passo:** Dr. Henrique ativar dispositivo → copiar DeviceToken → salvar no 1Password
+### ✅ API Brasil — Integração Veículos CONCLUÍDA (02/03 17h21)
+- **Objetivo:** Consulta automática de placa → RENAVAM, marca, modelo, ano ✅
+- **Status:** 100% FUNCIONAL
+- **Configuração:**
+  - DeviceToken: `6838ac15-cb03-48cf-93d9-279520d46336`
+  - Bearer JWT: 420 chars (salvo em 1Password notesPlain)
+  - SecretKey: `fd247893-bc08-11ef-bacf-000c298680d9`
 - **Endpoint:** POST `https://cluster.apigratis.com/api/v2/vehicles/dados`
-- **Secretkey Placa Dados:** `fd247893-bc08-11ef-bacf-000c298680d9`
-- **Após desbloqueio:** Criar skill workspace (consulta por placa → retorna JSON completo)
+- **Teste realizado:** Placa ABC1234 → VW SANTANA CG 1986 (dados completos)
+- **Tempo de integração:** 1h15min (16h05-17h21)
+- **Próximos passos sugeridos:**
+  1. Testar com placa real de cliente
+  2. Criar script workspace `consulta-placa`
+  3. Integrar com N8N (workflow automático)
 
 ### 🔴 Auditoria Contratos Q4 2025 + Q1 2026 (02/03)
 - **Objetivo:** Cross-reference contratos ClickUp com ZapSign + extração de prazos
