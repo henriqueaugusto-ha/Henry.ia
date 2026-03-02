@@ -8,8 +8,17 @@
 ## 🔴 URGENTE
 
 ### OAuth Google Ads — Vence 03/03/2026 🔴 HOJE
-- Status: vence AMANHÃ (03/03) — ação imediata
+- Status: vence HOJE (03/03) — ação imediata
 - Impacto: WF-ROAS para de reportar, campanhas ficam cegas
+
+### GitHub PAT — Push do workspace travado 🔴
+- git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)
+- Repo: `henriqueaugusto-ha/Henry.ia` (privado)
+- Ação: github.com → Settings → Developer settings → Personal access tokens (classic) → permissão `repo` → salvar no 1Password item "GitHub Henry.IA" campo `token`
+
+### Haiku model string — Validar às 10h
+- Heartbeat configurado com `anthropic/claude-haiku-3-5`
+- Se falhar: ajustar para modelo disponível (ex: Gemini Flash)
 
 ### ⚠️ 497 Cobranças Vencidas no Asaas (~R$473k)
 - Encontrado em 02/03 via API

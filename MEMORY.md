@@ -196,15 +196,44 @@
 - Protocolo: propor em texto → aguardar aprovação → ele aplica na VPS
 - Motivo: 3 crashes do gateway em 01/03 por edições diretas
 
+## Sistema Imunológico — Ativo (02/03/2026)
+
+- Watchdog de crons: 8h diário (ID: 20dd0668) — Haiku
+- Heartbeat: 10h/14h/18h diário — Haiku
+- Revisão Semanal: sexta 18h — Sonnet
+- Security Audit: domingo 6h (ID: ea726fe8) — Sonnet
+- Feedback loops: memory/feedback/ (comercial, automacao, operacional)
+- ROLLBACK.md + scripts/backup.sh ativos
+- Primeiro audit rodou 02/03: 3 críticos (flags controlUi), 4 atenções
+
+## GitHub Backup
+
+- Repo: `henriqueaugusto-ha/Henry.ia` (privado)
+- Git init + commit inicial: ✅ (584c714, 38 arquivos)
+- Push: ❌ aguardando PAT em 1Password item "GitHub Henry.IA" campo `token`
+
+## Crons Ativos (5 total)
+
+1. Daily Briefing 7h — ID: b220a99c (Sonnet)
+2. Watchdog 8h — ID: 20dd0668 (Haiku)
+3. Heartbeat 10h/14h/18h — (Haiku) — validar 03/03 10h
+4. Revisão Semanal sexta 18h — (Sonnet)
+5. Security Audit domingo 6h — ID: ea726fe8 (Sonnet)
+
+## Advbox API — Bloqueada
+
+- Endpoint retorna 403 (Cloudflare bloqueia VPS)
+- Para resolver: documentação oficial ou whitelist do IP 72.60.49.222
+
 ## Pendente
 
 - [ ] Definir e implementar acesso externo seguro (Cloudflare Tunnel ou Nginx+HTTPS)
+- [ ] Nginx + Certbot → desligar 3 flags críticas controlUi (maior risco atual)
 - [ ] Desligar flags controlUi uma por vez (após acesso externo estável)
 - [x] Instalar 1Password CLI na VPS e configurar OP_SERVICE_ACCOUNT_TOKEN ✅ 2026-02-28
-- [ ] Migrar tokens hardcoded do openclaw.json para variáveis via .env (tarefa 28/02)
-- [ ] Substituir credenciais hardcoded (botToken, hooks.token, etc.) por referências ao cofre 1Password
-- [ ] OAuth Google Ads — vence ~03/03 🔴 URGENTE
-- [ ] Criar: memory/projects.md, decisions.md, lessons.md, people.md, pending.md
-- [ ] Deletar BOOTSTRAP.md (obsoleto)
+- [ ] Migrar tokens hardcoded do openclaw.json para variáveis via .env
+- [ ] OAuth Google Ads — vence 03/03 🔴 HOJE
+- [ ] GitHub PAT — criar e salvar no 1Password para finalizar push
+- [ ] N8N API Key atualizada no 1Password (atual retorna 401)
 - [ ] Campanha ANPP Google+Meta (aguarda briefing + aprovação)
-- [ ] Auditoria contratos janeiro (clientes sem acompanhamento pós-saída equipe)
+- [ ] Auditoria contratos janeiro (clientes sem acompanhamento)
