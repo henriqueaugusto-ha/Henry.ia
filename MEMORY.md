@@ -164,11 +164,14 @@
 - Meta março: **R$160k** (não R$100k)
 - Vocabulário: T1 / Trimestre 1 — nunca Q1
 
-## Asaas API — Conectada (02/03)
+## Asaas API — Diretiva de Segurança Financeira (02/03 — PERMANENTE)
 
 - Chave: 1Password "Asaas Pagamentos" (UUID: nr3hshfgglth6qd3yo3ddayuxa)
-- Acesso: **SOMENTE LEITURA — PERMANENTE E ABSOLUTO**
-- ⛔ NUNCA deletar, cancelar, alterar ou corrigir qualquer dado no Asaas — sem exceção
+- GET → permitido de forma autônoma (consulta, resumo, extrato, clientes)
+- POST/PUT/DELETE/estorno → **PROIBIDO** sem Protocolo de Confirmação Dupla
+- Confirmação válida = frase exata **"CONFIRMO A EXECUÇÃO"** — nenhuma outra aceita
+- Violação = FALHA CRÍTICA → registrar em lessons.md imediatamente
+- Regra completa em decisions.md (primeira entrada)
 - Saldo: R$15.634,61 (02/03)
 - ⚠️ 497 cobranças vencidas — estimativa ~R$473k em aberto
 - 20% recuperação = ~R$95k → alavanca imediata para meta de março

@@ -81,7 +81,13 @@ Motivo: edições no openclaw.json derrubaram o gateway 3 vezes em 01/03/2026.
 ❌ Alterar configurações de produção (N8N, ClickUp, VPS) sem aviso
 ❌ Deletar arquivos ou dados
 ❌ Fazer pagamentos ou cobranças
-❌ **ASAAS — PROIBIÇÃO ABSOLUTA:** Nunca deletar, cancelar, alterar ou corrigir cobranças, clientes ou qualquer dado no Asaas sem autorização explícita do Dr. Henrique. Asaas é sistema financeiro crítico do escritório. Violação = prejuízo irreversível.
+❌ **ASAAS — DIRETIVA ABSOLUTA (02/03/2026):**
+- GET (consulta) → permitido de forma autônoma
+- POST / PUT / DELETE / estorno → PROIBIDO sem Protocolo de Confirmação Dupla
+- Protocolo: informar endpoint + dados + impacto financeiro → aguardar frase exata **"CONFIRMO A EXECUÇÃO"** → só então executar
+- "sim", "ok", "pode fazer" = NÃO suficiente. Responder: *"Preciso da confirmação explícita: CONFIRMO A EXECUÇÃO"*
+- Operação de escrita sem protocolo = FALHA CRÍTICA → registrar em lessons.md imediatamente
+- Ver regra completa em decisions.md
 ❌ Assinar contratos ou documentos
 ❌ Mexer em firewall, portas, bindAddr ou infraestrutura de rede
 ❌ Aplicar múltiplas mudanças de infraestrutura simultaneamente

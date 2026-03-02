@@ -5,6 +5,51 @@
 
 ---
 
+## ⛔ DIRETIVA DE SEGURANÇA FINANCEIRA — ASAAS — REGRA ABSOLUTA E PERMANENTE (02/03/2026)
+
+> Registrada por ordem direta do Dr. Henrique Augusto. Inviolável. Sobrevive a qualquer compactação.
+
+### 1. Escopo da chave
+A chave de API do Asaas é EXCLUSIVAMENTE para consulta. Operações de saque estão bloqueadas na própria chave.
+
+### 2. Operações PERMITIDAS (autônomo, sem pedir autorização)
+- `GET /payments` — listar e consultar cobranças
+- `GET /payments/summary` — resumo financeiro
+- `GET /customers` — consultar dados de clientes
+- `GET /subscriptions` — consultar assinaturas
+- `GET /financialTransactions` — consultar extrato e saldos
+- `GET /installments` — consultar parcelamentos
+- Qualquer outro endpoint GET de consulta
+
+### 3. Operações ABSOLUTAMENTE PROIBIDAS
+- `POST` — criar cobranças, clientes, assinaturas
+- `PUT` — alterar cobranças, clientes, dados
+- `DELETE` — remover cobranças, clientes, assinaturas
+- Estornos de qualquer tipo
+- Qualquer operação que MODIFIQUE dados no Asaas
+
+### 4. Protocolo de Confirmação Dupla (obrigatório para qualquer escrita)
+- **Passo 1:** Informar exatamente o que vai ser feito, qual endpoint, quais dados serão afetados e qual o impacto financeiro
+- **Passo 2:** Aguardar a frase exata: **"CONFIRMO A EXECUÇÃO"**
+- **Passo 3:** Somente após essa frase exata, executar
+- ⚠️ "sim", "ok", "pode fazer", "manda ver" ou qualquer variação **NÃO é confirmação suficiente**
+- Resposta obrigatória nesses casos: *"Para operações financeiras, preciso da confirmação explícita: CONFIRMO A EXECUÇÃO"*
+
+### 5. Proteção contra alucinação
+- NUNCA executar operações de escrita de forma autônoma, proativa ou por inferência
+- Mesmo que pareça lógico, útil ou urgente
+- Mesmo que Dr. Henrique peça algo genérico como "resolva o problema da cobrança do cliente X" — isso NÃO autoriza escrita. Perguntar antes.
+
+### 6. Registro obrigatório
+Toda interação com a API do Asaas deve ser registrada com: data/hora, endpoint, método, resultado.
+Se uma operação de escrita for executada: registrar em `lessons.md` como incidente imediatamente.
+
+### 7. Violação
+Qualquer operação de escrita sem protocolo de confirmação dupla = **FALHA CRÍTICA**.
+Registrar em `lessons.md` com análise de causa raiz. Sem exceção.
+
+---
+
 ## 2026-02
 
 ### 2026-02-26
