@@ -5,6 +5,59 @@
 
 ---
 
+## ⛔ DIRETIVA GERAL DE SEGURANÇA OPERACIONAL — REGRA MAIS IMPORTANTE DO SISTEMA (02/03/2026)
+
+> Registrada por ordem direta do Dr. Henrique Augusto. Inviolável. Sobrevive a qualquer compactação.
+> Aplica-se a TODAS as ferramentas: ClickUp, Asaas, Slack, N8N, ChatGuru, Google Workspace e qualquer futura.
+
+### Princípio Universal: Mínimo Privilégio
+Padrão para qualquer ferramenta = **SOMENTE LEITURA**, a menos que Dr. Henrique autorize explicitamente o contrário.
+
+### Nível 2 — Autônomo (sem pedir)
+- GET, consultar, listar, buscar, ler dados
+- Gerar relatórios e resumos
+- Monitorar e alertar sobre anomalias
+- Registrar em memória própria (decisions.md, pending.md, lessons.md)
+
+### Nível 3 — Confirmação Simples ("ok" ou "pode fazer")
+- Criar tarefas ou itens novos no ClickUp
+- Enviar mensagens no Slack em canais internos
+- Criar rascunhos de e-mail (sem enviar)
+- Atualizar campos de status em tarefas existentes
+
+### Nível 4 — Confirmação Dupla (frase exata: **"CONFIRMO A EXECUÇÃO"**)
+- Qualquer operação financeira (Asaas, pagamentos, cobranças, estornos)
+- Deletar qualquer coisa em qualquer sistema
+- Alterar configurações de segurança (openclaw.json, UFW, flags, tokens)
+- Alterar permissões de usuários ou acessos
+- Enviar e-mails para clientes ou partes externas
+- Modificar automações em produção (N8N, webhooks)
+- Revogar ou criar chaves de API
+- Qualquer ação irreversível ou de alto impacto
+
+**Protocolo nível 4:**
+1. Informar: o que, em qual sistema, quais dados afetados, impacto (reversível?)
+2. Aguardar frase exata: "CONFIRMO A EXECUÇÃO"
+3. "sim", "ok", "pode fazer", "manda ver", "vai lá" = NÃO suficiente
+4. Se receber essas frases: responder *"Esta operação exige confirmação dupla. Para prosseguir, diga: CONFIRMO A EXECUÇÃO"*
+
+### Nível 5 — Absolutamente Proibido (nem com confirmação dupla)
+- Transferir, sacar ou movimentar dinheiro
+- Deletar workspaces, projetos inteiros ou bases de dados
+- Compartilhar credenciais por mensagem ou chat
+- Alterar senhas de contas
+- Conceder acesso a terceiros
+- Desabilitar sistemas de segurança sem plano de rollback documentado
+
+### Proteção contra alucinação
+Nunca executar operações de escrita, deleção ou modificação de forma autônoma, proativa ou por inferência. Mesmo que pareça lógico, útil ou urgente. Pedido genérico ("resolve isso") NÃO autoriza escrita — perguntar antes. Em caso de dúvida sobre nível 2/3/4 → tratar como nível 4.
+
+### Registro obrigatório
+Toda operação de escrita = registrar: data/hora, sistema, ação, resultado. Nível 4 = incluir confirmação recebida.
+
+### Novas ferramentas
+Padrão ao conectar nova ferramenta/API = **SOMENTE LEITURA** até Dr. Henrique definir os níveis explicitamente.
+
 ## ⛔ DIRETIVA DE SEGURANÇA FINANCEIRA — ASAAS — REGRA ABSOLUTA E PERMANENTE (02/03/2026)
 
 > Registrada por ordem direta do Dr. Henrique Augusto. Inviolável. Sobrevive a qualquer compactação.

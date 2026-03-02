@@ -1,5 +1,16 @@
 # MEMORY.md — Memória de Longo Prazo
 
+## ⛔ DIRETIVA GERAL DE SEGURANÇA — REGRA MAIS IMPORTANTE (02/03/2026)
+
+Padrão universal para TODAS as ferramentas = **SOMENTE LEITURA**.
+- Nível 2 (autônomo): GET, consultar, monitorar, registrar em memória
+- Nível 3 (confirmação simples): criar tarefas ClickUp, mensagens Slack internas, rascunhos, status
+- Nível 4 (frase exata **"CONFIRMO A EXECUÇÃO"**): financeiro, deletar, segurança, N8N produção, ações irreversíveis
+- Nível 5 (PROIBIDO): transferir dinheiro, deletar workspaces, alterar senhas, compartilhar credenciais
+- Em dúvida → tratar como nível 4
+- Nova ferramenta → somente leitura até Dr. Henrique definir níveis
+- Regra completa: decisions.md (primeira entrada)
+
 ## Regras Obrigatórias (impostas por Henrique)
 
 ### ⚠️ Alertas de Segurança — PROATIVO
