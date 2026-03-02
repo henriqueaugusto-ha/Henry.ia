@@ -16,6 +16,11 @@
 - NUNCA aplicar múltiplas restrições de segurança sem testar cada uma individualmente
 - Uma mudança por vez. Testar. Avançar.
 
+### 🔴 SIGUSR1 reverte mudanças em disco (2026-03-02)
+**O que aconteceu:** Enviei SIGUSR1 via gateway tool para aplicar rotação de tokens. O gateway escreveu seu estado em memória de volta ao disco, revertendo as Flags 2 e 3 que haviam sido aplicadas via docker exec + docker restart anteriormente.
+**Regra derivada:** NUNCA usar SIGUSR1 para mudanças que precisam persistir no JSON. SEMPRE usar `docker restart` após mudanças no arquivo. SIGUSR1 = reload que pode sobrescrever arquivo com estado em memória.
+**Impacto:** Flags 2+3 revertidas para true. Tokens revertidos para valor original. Score real: 8.0 (não 8.8).
+
 ### ✅ Protocolo correto para desligar flags controlUi (2026-03-02)
 **O que funcionou:** Nginx + HTTPS primeiro → uma flag por vez → backup antes de cada → restart → 3 checks (painel, Telegram, SSH) → só avançar se tudo OK.
 **Resultado:** 3 flags desligadas sem lockout. Score 5.5→7.5/10.

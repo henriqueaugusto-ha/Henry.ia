@@ -230,6 +230,19 @@ Padrão universal para TODAS as ferramentas = **SOMENTE LEITURA**.
 - ROLLBACK.md + scripts/backup.sh ativos
 - Primeiro audit rodou 02/03: 3 críticos (flags controlUi), 4 atenções
 
+## ClickUp API — Conectada (02/03 03h50)
+
+- Token: 1Password "ClickUp API Token" (ID: mth7e2mb6nkrsk2bbty3e4iuli) → campo `password`
+- Workspace: 9011774778 | User: adv.henriqueaugusto@gmail.com
+- Execuções Mensais: pasta 90117567885 | Março: lista 901113249320
+- SEMANA 01 Dia 01/03 Gestão: task 868hpabn8 | Configurações OpenClaw: 868hpabpv
+- Acesso: nível 3 (ok simples para criar) — mínimo privilégio — não acessar fora do autorizado
+
+## Hardening — Score Real: 8.0/10
+
+- Flags 2+3 revertidas por SIGUSR1 — re-aplicar via docker restart (sem SIGUSR1)
+- Comando de correção em memory/2026-03-02.md seção "SESSÃO FINAL"
+
 ## GitHub Backup
 
 - Repo: `henriqueaugusto-ha/Henry.ia` (privado)

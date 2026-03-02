@@ -67,6 +67,14 @@
 ### ✅ Etapa 3 — groupPolicy allowlist — CONCLUÍDA 02/03/2026
 - Telegram, Slack e WhatsApp: groupPolicy allowlist
 
+### 🔴 Re-aplicar Flags 2+3 + Rotação Tokens (SIGUSR1 reverteu) — PRÓXIMA SESSÃO
+- Causa: SIGUSR1 escreveu estado em memória de volta ao disco
+- Flags afetadas: dangerouslyAllowHostHeaderOriginFallback e dangerouslyDisableDeviceAuth (ambas true ainda)
+- Tokens: todos iguais (rotação não persistiu)
+- Comando completo salvo em memory/2026-03-02.md seção "SESSÃO FINAL"
+- Usar: docker exec → python3 muda JSON → docker restart (SEM SIGUSR1)
+- Score atual real: 8.0/10 (não 8.8)
+
 ### ✅ Etapa 4 — Tokens rotacionados — CONCLUÍDA 02/03/2026
 - gateway.auth.token, gateway.remote.token, hooks.token → 3 valores únicos
 - Telegram/Slack botTokens → já no 1Password
