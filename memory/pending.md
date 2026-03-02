@@ -67,20 +67,18 @@
 ### ✅ Etapa 3 — groupPolicy allowlist — CONCLUÍDA 02/03/2026
 - Telegram, Slack e WhatsApp: groupPolicy allowlist
 
-### Etapa 4 — Migrar credenciais hardcoded para 1Password 🟡 PRÓXIMA SESSÃO
-- Credenciais a migrar: botToken Telegram, gateway.auth.token, gateway.remote.token, hooks.token, apiKey Nexos
-- ⚠️ Gerar tokens NOVOS para gateway (repetidos em 3 lugares — risco de reuso)
-- Pré-requisito: nenhum | Tempo estimado: 30 min
+### ✅ Etapa 4 — Tokens rotacionados — CONCLUÍDA 02/03/2026
+- gateway.auth.token, gateway.remote.token, hooks.token → 3 valores únicos
+- Telegram/Slack botTokens → já no 1Password
+- ⚠️ PENDENTE: Nexos apiKey → Dr. Henrique salva manualmente no 1Password "Nexos API Key"
 
-### Etapa 5 — Ajustes menores 🟡 PRÓXIMA SESSÃO
-- chmod 700 em elevenlabs-tts.sh ✅ (já feito 02/03)
-- Verificar bind IPv6 na VPS: `ss -lntp | egrep "62585|:::"`
+### ✅ Etapa 5 — CONCLUÍDA 02/03/2026
+- chmod 700 elevenlabs-tts.sh ✅ | IPv6: sem bind detectado ✅
 
-### Etapa 6 — Verificação manual na VPS 🟡 PRÓXIMA SESSÃO
-- `sudo ufw status verbose`
-- `sudo fail2ban-client status sshd`
-- `sudo grep "Failed\|Accepted" /var/log/auth.log | tail -20`
-- Colar resultado para análise
+### ✅ Etapa 6 — CONCLUÍDA 02/03/2026
+- UFW: deny incoming, 22/80/443 abertas ✅
+- Fail2ban: 127 bans totais, 6 ativos agora, 0 falhas ✅
+- auth.log: apenas brute force externo banido, zero acessos não autorizados ✅
 
 ---
 

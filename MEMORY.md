@@ -196,6 +196,16 @@
 - Protocolo: propor em texto → aguardar aprovação → ele aplica na VPS
 - Motivo: 3 crashes do gateway em 01/03 por edições diretas
 
+## Hardening Completo — Score 8.8/10 (02/03/2026)
+
+- Etapa 1 ✅ Nginx + HTTPS — henry.henriqueaugusto.adv.br
+- Etapa 2 ✅ 3 flags controlUi → false (uma por vez)
+- Etapa 3 ✅ groupPolicy allowlist — Telegram, Slack, WhatsApp
+- Etapa 4 ✅ Tokens gateway rotacionados (3 únicos) | Pendente: Nexos apiKey no 1Password (Dr. Henrique)
+- Etapa 5 ✅ chmod 700 elevenlabs-tts.sh | IPv6: sem bind detectado
+- Etapa 6 ✅ UFW ok | Fail2ban: 127 bans, 6 ativos, 0 falhas | auth.log: zero acessos não autorizados
+- Score → 9.0/10 após Nexos apiKey salvo no 1Password
+
 ## Sistema Imunológico — Ativo (02/03/2026)
 
 - Watchdog de crons: 8h diário (ID: 20dd0668) — Haiku
