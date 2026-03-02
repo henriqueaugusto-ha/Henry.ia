@@ -262,15 +262,25 @@ Padrão universal para TODAS as ferramentas = **SOMENTE LEITURA**.
 - Endpoint retorna 403 (Cloudflare bloqueia VPS)
 - Para resolver: documentação oficial ou whitelist do IP 72.60.49.222
 
-## API Brasil — Conectada com Bloqueador (02/03)
+## API Brasil — Arquitetura Descoberta, JWT Perdido (02/03 17h17)
 
-- Chave: 1Password "API Brasil - Consultas" (UUID: pxqiqpv6s5qr3t66kzx5vkblme)
+**Arquitetura real da API:**
+- Requer 3 headers simultâneos:
+  - `DeviceToken`: UUID do dispositivo ✅ `6838ac15-cb03-48cf-93d9-279520d46336`
+  - `Authorization`: Bearer JWT (200+ chars) ❌ PERDIDO
+  - `SecretKey`: específico por API ✅ `fd247893-bc08-11ef-bacf-000c298680d9`
+
+**O que aconteceu:**
+- JWT estava no 1Password "API Brasil - Consultas" campo password
+- Instrução minha causou sobrescrita do JWT pelo UUID
+- JWT perdido, precisa recuperar via histórico 1Password OU novo login
+
+**Status atual:**
+- Plano: ✅ Ativo
+- Dispositivo: ✅ Criado (henryia-veiculos)
+- DeviceToken UUID: ✅ Salvo
+- Bearer JWT: ❌ Perdido por sobrescrita
 - Endpoint: POST `https://cluster.apigratis.com/api/v2/vehicles/dados`
-- Plano: ✅ Ativo (confirmado 02/03)
-- Token: ✅ Válido até 2027 (exp: 1804013789)
-- Secretkey Placa Dados: `fd247893-bc08-11ef-bacf-000c298680d9`
-- ❌ Bloqueador: dispositivo não encontrado
-- Ação: Dr. Henrique ativar dispositivo no painel gateway.apibrasil.io
 
 ## Auditoria Contratos Q4 2025 + Q1 2026 (02/03)
 
