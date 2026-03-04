@@ -4,22 +4,27 @@ Skills define _how_ tools work. This file is for _your_ specifics — the stuff 
 
 ## ElevenLabs TTS
 
-### Estratégia de Vozes (definida 04/03/2026)
+### Estratégia de Vozes — ESQUEMA HÍBRIDO (definido 04/03/2026)
 
-- **Voz padrão (conversas, briefings, tarefas)**: Voz do Dr. Henrique (clonada)
-  - ID: `Z2KjMO9X85ad9ZpRy8ZM`
-  - Uso: dia a dia, respostas operacionais, relatórios de tarefas
+Objetivo: economizar créditos ElevenLabs usando cada voz no contexto certo.
 
-- **Voz racional (análises, estratégia, conteúdo sério)**:  Voz 1
-  - ID: `EkK5I93UQWFDigLMpZcX`
-  - Uso: análises estratégicas, conteúdo formal, momentos que pedem tom mais neutro/racional
+| Prioridade | Voz | ID | Quando usar |
+|---|---|---|---|
+| 1ª (maioria) | OpenAI onyx (pt-BR) | — | Respostas rápidas, confirmações, dia a dia |
+| 2ª (especial) | Henrique Augusto (clonada) | `Z2KjMO9X85ad9ZpRy8ZM` | Briefings, alertas importantes, momentos que pedem sua voz |
+| 3ª (estratégico) | Voz Racional | `EkK5I93UQWFDigLMpZcX` | Análises críticas, decisões estratégicas, tom formal |
 
-- **Fallback**: OpenAI TTS onyx (pt-BR) — quando créditos ElevenLabs esgotados
-- **Vozes descartadas**: `aU2vcrnwi348Gnc2Y1si` | George `JBFqnCBsd6RMkjVDRZzb`
-- **Model**: `eleven_multilingual_v2`
-- **Settings padrão**: stability 0.5, similarity_boost 0.91, speaker_boost true
-- **API Key**: item `vbtga64hlqwkjktptrxabr757q` no vault 1Password IA-OPERACIONAL
-- **Nota**: chave atual sem permissão `user_read` — só TTS funciona
+**Regra de decisão:**
+- Resposta rotineira → OpenAI onyx
+- Briefing matinal, alerta crítico, reunião importante → Voz Henrique
+- Análise estratégica, relatório de alto impacto → Voz Racional
+
+**Detalhes técnicos ElevenLabs:**
+- Model: `eleven_multilingual_v2`
+- Settings padrão: stability 0.5, similarity_boost 0.91, speaker_boost true
+- API Key: item `vbtga64hlqwkjktptrxabr757q` no vault 1Password IA-OPERACIONAL
+- Nota: chave sem permissão `user_read` — apenas TTS funciona
+- Vozes descartadas: `aU2vcrnwi348Gnc2Y1si` | George `JBFqnCBsd6RMkjVDRZzb`
 
 ## What Goes Here
 
