@@ -26,6 +26,18 @@ Objetivo: economizar créditos ElevenLabs usando cada voz no contexto certo.
 - Nota: chave sem permissão `user_read` — apenas TTS funciona
 - Vozes descartadas: `aU2vcrnwi348Gnc2Y1si` | George `JBFqnCBsd6RMkjVDRZzb`
 
+## Câmeras — Escritório
+
+Sistema: **Intelbras**
+
+| Nome | Localização |
+|---|---|
+| Jurídico 01 | Área jurídica |
+| Jurídico 02 | Área jurídica |
+| Comercial 01 | Área comercial |
+| Comercial 02 | Área comercial |
+| Entrada Escritório | Recepção / entrada |
+
 ## What Goes Here
 
 Things like:
