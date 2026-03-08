@@ -1,0 +1,14 @@
+# Documentos sigilosos de clientes — não versionar
+*.pdf
+*.mp3
+*.mp4
+*.wav
+
+# Credenciais e segredos
+.env
+*.key
+*.pem
+
+# Temporários
+*.tmp
+*.log
