@@ -88,7 +88,7 @@ PDF contrato → F1 (ADVbox cliente) → F2 (ADVbox processo)
 | Campo | Valor |
 |---|---|
 | Team | `9011774778` |
-| API Token env | `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL` |
+| API Token env | `→ op://IA-OPERACIONAL/ClickUp-HA-Advocacia/credential` |
 | Central do Cliente — Janeiro 2026 | `901113203395` |
 | Central do Cliente — Fevereiro 2026 | `901113203396` |
 | Central do Cliente — Março 2026 | `901113203399` |
@@ -219,3 +219,20 @@ PDF contrato → F1 (ADVbox cliente) → F2 (ADVbox processo)
 8. **Email @hotmail.com.br** pode ser inválido no ADVbox — cadastrar sem email se necessário
 9. **googleSheetsOAuth2Api** credencial funciona para Drive API também
 10. **ADVbox nome duplicado**: retorna "The given data was invalid" (não menciona duplicate) — detectar tentando sem CPF primeiro
+
+---
+
+## 🔐 Credenciais — Vault 1Password IA-OPERACIONAL
+
+> Todos os tokens/chaves devem existir neste vault. Referências: `op://IA-OPERACIONAL/ITEM/credential`
+
+| Serviço | Item 1Password | Observação |
+|---|---|---|
+| ClickUp | `ClickUp-HA-Advocacia` | Token API admin |
+| ZapSign | `ZapSign-HA-Advocacia` | Bearer token API |
+| Asaas | `Asaas-HA-Advocacia` | Token produção |
+| OpenAI | `OpenAI-HA-Advocacia` | chave de API |
+| ElevenLabs | `vbtga64hlqwkjktptrxabr757q` | ID item existente |
+| N8N | `N8N-HA-Advocacia` | JWT API key |
+
+> ⚠️ Nunca escrever tokens brutos nos arquivos de memória/workspace — sempre referenciar por `op://`
