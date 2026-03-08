@@ -236,3 +236,34 @@ PDF contrato → F1 (ADVbox cliente) → F2 (ADVbox processo)
 | N8N | `N8N-HA-Advocacia` | JWT API key |
 
 > ⚠️ Nunca escrever tokens brutos nos arquivos de memória/workspace — sempre referenciar por `op://`
+
+---
+
+## WF PONTE — Ponte MF03 → F1→F2→F4 (criado 08/03/2026)
+
+| Campo | Valor |
+|---|---|
+| ID N8N | `yOCjYLU981R6ioWg` |
+| Webhook | `wf-ponte-mf03-to-f1f5` |
+| Status | INATIVO — aguarda ativação manual + automação ClickUp |
+
+**Para ativar:**
+1. N8N: https://n8n.srv1380728.hstgr.cloud/workflow/yOCjYLU981R6ioWg → toggle ON
+2. ClickUp automação: MF03 muda para "Validado" → POST `wf-ponte-mf03-to-f1f5` com `{"task_id": "{{task.id}}"}`
+
+**Fluxo:** Webhook → GET task CU → Parse MF02 → Anti-double → F1 → F2 → F4 → Comment resultado
+**Fix aplicado:** celular strip DDI 55 (ex: 5585999... → 85999...)
+**F3 e F5:** não incluídos no WF PONTE (Drive e campos CU podem ser feitos manualmente ou em etapa futura)
+
+---
+
+## Pendências em aberto — atualizado 08/03/2026
+
+1. **WF PONTE**: ativar no N8N + criar automação ClickUp (MF03 = Validado → webhook)
+2. **MF01–MF06** (`OwXrNkgiCqRykq7O`): ainda INATIVO — faltam: webhook ZapSign UI + 3 automações ClickUp
+3. **Daniel Pessoa Pereira**: campo "Valor do Contrato" CU está 3297, deveria ser 2299
+4. **Danyllo Lucas**: sem cobrança Asaas (MF05 não rodou para ele)
+5. **Sistema de câmeras**: aguardando SSH Hostinger + senha dispositivos câmeras
+6. **Opção ClickUp "CNH Vencida"**: a criar (Pablo, AIT 0000270408)
+7. **Luiz Roberto**: atualizar numero_processo após protocolo judicial
+8. **REC01**: adicionar manual trigger (POST /execute não funciona para schedule triggers)
