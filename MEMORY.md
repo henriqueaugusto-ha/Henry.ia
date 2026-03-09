@@ -257,6 +257,31 @@ PDF contrato → F1 (ADVbox cliente) → F2 (ADVbox processo)
 
 ---
 
+## Formato de Prompt para Outra IA (Claude Navegador, etc.)
+
+Quando Henrique pedir um "comando para outra IA", usar obrigatoriamente este formato:
+
+**Blocos obrigatórios (nessa ordem):**
+1. Título do Prompt
+2. Função da IA
+3. Objetivo Principal
+4. Contexto Operacional
+5. Acesso / Localização
+6. Escopo Exato
+7. Regras Críticas
+8. Lista Exata do que Fazer
+9. Passo a Passo Obrigatório
+10. Critérios de Segurança
+11. Formato de Resposta Obrigatório
+12. Resultado Esperado
+13. Trava Final
+
+**Estilo:** cirúrgico, literal, organizado. Proibições explícitas (❌). Baixa margem para interpretação livre. Sem ambiguidade.
+
+**Quando usar:** qualquer prompt destinado a outra IA (Claude Navegador, agente web, subagente visual, etc.) para executar ação em sistema externo (ClickUp, ADVbox, N8N, Drive, etc.)
+
+---
+
 ## Pendências em aberto — atualizado 08/03/2026
 
 1. **WF PONTE**: ativar no N8N + criar automação ClickUp (MF03 = Validado → webhook)

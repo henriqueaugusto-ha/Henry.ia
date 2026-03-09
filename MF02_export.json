@@ -1,0 +1,540 @@
+{
+  "name": "WF-COM | CONTRACT | MF02 | Gerar Minuta em Word Padrão",
+  "nodes": [
+    {
+      "id": "wh1",
+      "name": "Webhook MF02",
+      "position": [
+        240,
+        300
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "parameters": {
+        "path": "wf-com-contract-mf02",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "responseCode": 200
+      }
+    },
+    {
+      "id": "code1",
+      "name": "Extrair TaskId",
+      "position": [
+        460,
+        300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst body = $input.first().json.body || $input.first().json;\nconst taskId = body.taskId || body.task_id || body.task?.id || '';\nreturn [{ json: { taskId, prosseguir: taskId !== '' } }];\n"
+      }
+    },
+    {
+      "id": "if1",
+      "name": "Tem TaskId?",
+      "position": [
+        680,
+        300
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.prosseguir }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}?custom_fields=true",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "GET Task Completa",
+      "id": "http1",
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "id": "code2",
+      "name": "Montar Placeholders",
+      "position": [
+        1120,
+        200
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst task = $input.first().json;\nconst cf = task.custom_fields || [];\nconst cfMap = {};\nfor (const f of cf) cfMap[f.id] = f;\n\nconst getVal = (id) => {\n  const f = cfMap[id];\n  if (!f) return '';\n  if (f.type_config?.options) {\n    const opt = f.type_config.options.find(o => o.orderindex === f.value || o.id === f.value);\n    return opt?.name || String(f.value || '');\n  }\n  if (f.type === 'date') return f.value ? new Date(parseInt(f.value)).toLocaleDateString('pt-BR') : '';\n  if (f.type === 'currency') {\n    const v = f.value ? parseFloat(f.value)/100 : 0;\n    return 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});\n  }\n  return f.value != null ? String(f.value).trim() : '';\n};\nconst getNum = (id) => {\n  const f = cfMap[id];\n  if (!f || !f.value) return 0;\n  if (f.type === 'currency') return parseFloat(f.value)/100;\n  return parseFloat(f.value)||0;\n};\n\nconst UF_NOME = {AC:'Acre',AL:'Alagoas',AM:'Amazonas',AP:'Amapá',BA:'Bahia',CE:'Ceará',DF:'Distrito Federal',\n  ES:'Espírito Santo',GO:'Goiás',MA:'Maranhão',MG:'Minas Gerais',MS:'Mato Grosso do Sul',MT:'Mato Grosso',\n  PA:'Pará',PB:'Paraíba',PE:'Pernambuco',PI:'Piauí',PR:'Paraná',RJ:'Rio de Janeiro',RN:'Rio Grande do Norte',\n  RO:'Rondônia',RR:'Roraima',RS:'Rio Grande do Sul',SC:'Santa Catarina',SE:'Sergipe',SP:'São Paulo',TO:'Tocantins'};\nconst COMARCA_MAP = {CE:'Fortaleza',PI:'Teresina',MA:'São Luís',BA:'Salvador',PE:'Recife',PB:'João Pessoa',\n  RN:'Natal',AL:'Maceió',SE:'Aracaju',PA:'Belém',AM:'Manaus',RJ:'Rio de Janeiro',SP:'São Paulo',\n  MG:'Belo Horizonte',PR:'Curitiba',SC:'Florianópolis',RS:'Porto Alegre',GO:'Goiânia',DF:'Brasília',\n  MT:'Cuiabá',MS:'Campo Grande',RO:'Porto Velho',AC:'Rio Branco',AP:'Macapá',RR:'Boa Vista',TO:'Palmas',ES:'Vitória'};\n\nconst uf = getVal('20fe659f-9eef-4aa4-b170-a7e00cd687e8');\nconst estadoNome = UF_NOME[uf] || uf;\nconst orgaoAut = getVal('6b771374-ef1b-42dd-af5a-ffb231e29112');\nconst orgaoPrefix = orgaoAut.split('/')[0] || 'DETRAN';\n\nlet orgaoCab = '';\nif (orgaoPrefix === 'DETRAN') orgaoCab = 'DIRETOR/SUPERINTENDENTE DO DEPARTAMENTO ESTADUAL DE TRÂNSITO DO ' + estadoNome.toUpperCase() + ' – DETRAN/' + uf;\nelse if (orgaoPrefix === 'DNIT') orgaoCab = 'SUPERINTENDENTE DO DEPARTAMENTO NACIONAL DE INFRAESTRUTURA DE TRANSPORTES – DNIT';\nelse if (orgaoPrefix === 'PRF') orgaoCab = 'SUPERINTENDENTE DA POLÍCIA RODOVIÁRIA FEDERAL – PRF';\nelse orgaoCab = 'AUTORIDADE COMPETENTE – ' + orgaoAut;\n\nlet orgaoExtenso = '';\nif (orgaoPrefix === 'DETRAN') orgaoExtenso = 'Departamento Estadual de Trânsito do ' + estadoNome + ' (DETRAN/' + uf + ')';\nelse if (orgaoPrefix === 'DNIT') orgaoExtenso = 'Departamento Nacional de Infraestrutura de Transportes (DNIT)';\nelse if (orgaoPrefix === 'PRF') orgaoExtenso = 'Polícia Rodoviária Federal (PRF)';\nelse orgaoExtenso = orgaoAut;\n\nconst MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];\nconst now = new Date();\nconst brt = new Date(now.getTime() - 3*3600000);\nconst dataExtenso = brt.getUTCDate() + ' de ' + MESES[brt.getUTCMonth()] + ' de ' + brt.getUTCFullYear();\nconst dtBRT = brt.toLocaleString('pt-BR',{timeZone:'UTC'});\n\nconst valorTotal = getNum('b8647ffd-7a76-4790-90cf-8e6314e5e469');\nconst valorTotalFmt = 'R$ ' + valorTotal.toLocaleString('pt-BR',{minimumFractionDigits:2});\nconst parcelas = getNum('1abdab74-70ed-41c4-96af-7a791c8b9e23');\nconst valorParcela = getNum('f1b84911-ea3d-4e78-a03a-03cc866c6b83');\nconst valorParcelaFmt = 'R$ ' + valorParcela.toLocaleString('pt-BR',{minimumFractionDigits:2});\nconst op1 = getVal('4b52ce26-707e-480c-8bb5-471d38a5fc9a');\nconst op2 = getVal('7bcf3b5b-1403-40e3-a77d-28f08b0c6208');\nconst dataVenc = getVal('2232c1e7-4087-4245-8405-ca5e4735c594');\nconst fp = getVal('be4fac1c-4178-4a0c-8315-69747e2af05f');\n\nlet opcaoPag = '';\nif (op1 && op2) { opcaoPag = op1 + '\\n' + op2; }\nelse if (op1) { opcaoPag = op1; }\nelse if (fp.includes('PIX')) { opcaoPag = 'Pagamento à vista – valor total de ' + valorTotalFmt + ', via PIX, até ' + dataVenc + '.'; }\nelse if (fp.includes('Cartão')) { opcaoPag = 'Cartão de Crédito – ' + valorTotalFmt + ' em ' + parcelas + 'x de ' + valorParcelaFmt + ', 1ª parcela até ' + dataVenc + '.'; }\nelse if (fp.includes('Boleto')) { opcaoPag = 'Boleto Bancário – ' + valorTotalFmt + ' em ' + parcelas + 'x de ' + valorParcelaFmt + ', vencimento em ' + dataVenc + '.'; }\nelse { opcaoPag = fp + ' – Total: ' + valorTotalFmt; }\n\nconst placeholders = {\n  '{{NOME_COMPLETO}}': task.name.toUpperCase(),\n  '{{NACIONALIDADE}}': getVal('8fc07513-38ca-4ba8-861d-3cc22d52e91f') || 'brasileiro(a)',\n  '{{CPF}}': getVal('26b4ecd6-6963-4160-a554-30cd4f36a70c'),\n  '{{RG}}': getVal('f36e9cb0-f9d2-4cb8-91ea-e5014a2566c7'),\n  '{{UF_ORGAO}}': uf,\n  '{{CNH_NUMERO}}': getVal('cbefb914-0e29-4611-b992-b689d0b0fbb1'),\n  '{{CNH_CATEGORIA}}': getVal('eda497ef-b8aa-4c1a-a512-3de5b7245aa3'),\n  '{{ENDERECO_COMPLETO}}': getVal('7eae45ba-94b4-4cb4-bd1b-927ef11b8107'),\n  '{{NUMERO_AIT}}': getVal('e220c08f-03dd-487a-a8a2-6cf25e5bf9d3'),\n  '{{ORGAO_DESTINO_CABECALHO}}': orgaoCab,\n  '{{ORGAO_SIGLA}}': orgaoAut,\n  '{{ORGAO_AUTUADOR_EXTENSO}}': orgaoExtenso,\n  '{{ORGAO_ESTADO}}': estadoNome,\n  '{{CIDADE_UF}}': 'Fortaleza/CE',\n  '{{DATA_CONTRATO_EXTENSO}}': dataExtenso,\n  '{{OBJETO_CONTRATO}}': getVal('02b1dd48-1adf-4c70-b277-553ff8681b45'),\n  '{{OPCAO_PAGAMENTO}}': opcaoPag,\n  '{{COMARCA}}': COMARCA_MAP[uf] || 'Fortaleza',\n  '{{VALOR_TOTAL}}': valorTotalFmt,\n};\n\nconst nomeArquivo = task.name.replace(/[^a-zA-Z0-9 ]/g,'').replace(/\\s+/g,'_').toUpperCase();\nconst dataArq = brt.toISOString().slice(0,10).replace(/-/g,'');\n\nreturn [{ json: {\n  taskId: task.id, taskName: task.name, taskUrl: task.url,\n  placeholders, nomeArquivo, dataArq, dtBRT,\n  templates: [\n    { tipo: 'requerimento', templateId: '1ywVcGwnsRmVlwnJB0Xp3yi2zJLB1uXp-Gxv0un2a7LE' },\n    { tipo: 'procuracao',   templateId: '1WOKxYpTpOYCby-az6wXz-DkI55u3Jd3kdoDv7GYZiHA' },\n    { tipo: 'contrato',     templateId: '1hQ0FDA6x9BM29Y2KyH3XGcnEbX5Wh_YFf8lbxf2tPxU' },\n  ]\n} }];\n"
+      }
+    },
+    {
+      "id": "gd1",
+      "name": "Criar Pasta Cliente",
+      "position": [
+        1340,
+        200
+      ],
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "parameters": {
+        "operation": "createFolder",
+        "folderName": "={{ $('Montar Placeholders').first().json.taskName.toUpperCase() + ' — ' + $('Montar Placeholders').first().json.dataArq }}",
+        "options": {}
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "oRp4hBuwhcDDNu2p",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "id": "split1",
+      "name": "Loop Templates",
+      "position": [
+        1560,
+        200
+      ],
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      }
+    },
+    {
+      "id": "code3",
+      "name": "Preparar Cópia",
+      "position": [
+        1780,
+        200
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst dados = $('Montar Placeholders').first().json;\nconst folderId = $('Criar Pasta Cliente').first().json.id;\nconst tpl = $input.first().json;\nreturn [{ json: { ...tpl, folderId,\n  novoNome: dados.nomeArquivo + '_' + tpl.tipo.toUpperCase() + '_' + dados.dataArq,\n  taskId: dados.taskId, taskName: dados.taskName, taskUrl: dados.taskUrl,\n  nomeArquivo: dados.nomeArquivo, dataArq: dados.dataArq, dtBRT: dados.dtBRT,\n  placeholders: dados.placeholders\n} }];\n"
+      }
+    },
+    {
+      "id": "http2",
+      "name": "Copiar Templates",
+      "position": [
+        2000,
+        200
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.templateId }}/copy",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"name\": \"{{ $json.novoNome }}\", \"parents\": [\"{{ $json.folderId }}\"]}",
+        "options": {}
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "oRp4hBuwhcDDNu2p",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "id": "code4",
+      "name": "Adicionar Tipo ao Resultado",
+      "position": [
+        2220,
+        200
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst copy = $input.first().json;\nconst prep = $('Preparar Cópia').first().json;\nreturn [{ json: { ...copy, tipo: prep.tipo, taskId: prep.taskId, taskName: prep.taskName,\n  taskUrl: prep.taskUrl, nomeArquivo: prep.nomeArquivo, dataArq: prep.dataArq,\n  dtBRT: prep.dtBRT, placeholders: prep.placeholders, folderId: prep.folderId } }];\n"
+      }
+    },
+    {
+      "id": "http3",
+      "name": "Substituir Placeholders",
+      "position": [
+        2440,
+        200
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://docs.googleapis.com/v1/documents/{{ $json.id }}:batchUpdate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ requests: Object.entries($json.placeholders).map(([k,v]) => ({ replaceAllText: { containsText: { text: k, matchCase: false }, replaceText: v || '' } })) }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "oRp4hBuwhcDDNu2p",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "id": "http4",
+      "name": "Verificar Loop",
+      "position": [
+        2440,
+        400
+      ],
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "parameters": {}
+    },
+    {
+      "id": "code5",
+      "name": "Preparar Resultado Final",
+      "position": [
+        2660,
+        200
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst dados = $('Montar Placeholders').first().json;\nconst contratoId = $('Copiar Templates').all().find(i => i.json.tipo === 'contrato')?.json?.id || '';\nconst reqId = $('Copiar Templates').all().find(i => i.json.tipo === 'requerimento')?.json?.id || '';\nconst procId = $('Copiar Templates').all().find(i => i.json.tipo === 'procuracao')?.json?.id || '';\n\nconst linkBase = 'https://docs.google.com/document/d/';\nconst contratoLink = contratoId ? linkBase + contratoId + '/edit' : 'não gerado';\nconst reqLink = reqId ? linkBase + reqId + '/edit' : 'não gerado';\nconst procLink = procId ? linkBase + procId + '/edit' : 'não gerado';\n\nconst comentario = `📄 MF02 — MINUTA GERADA\nData: ${dados.dtBRT} (BRT)\n—\n📝 Contrato Editável: ${contratoLink}\n📝 Requerimento: ${reqLink}\n📝 Procuração: ${procLink}\n—\nCampo \"Contrato Editável URL\" atualizado no ClickUp.\n⏳ Aguardando conferência da equipe → altere o campo \"Contrato Revisado Manual\" para Validado ou Corrigir Minuta.`;\n\nreturn [{ json: { taskId: dados.taskId, comentario, contratoLink, contratoId } }];\n"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}/field/0de83118-e5c2-429f-82f7-e2e83ee4119f",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"value\": {{ JSON.stringify($json.contratoLink) }}}"
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "CU Salvar Editável",
+      "id": "http5",
+      "position": [
+        2880,
+        200
+      ]
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $('Preparar Resultado Final').first().json.taskId }}/field/c7dd2213-1294-4753-94b5-045f5511e4d2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"value\": 1}"
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "CU Salvar Versão",
+      "id": "http6",
+      "position": [
+        3100,
+        200
+      ]
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $('Preparar Resultado Final').first().json.taskId }}/comment",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"comment_text\": {{ JSON.stringify($(\"Preparar Resultado Final\").first().json.comentario) }}, \"notify_all\": false}"
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "Comentário MF02",
+      "id": "http7",
+      "position": [
+        3320,
+        200
+      ]
+    },
+    {
+      "id": "slk1",
+      "name": "Slack MF02",
+      "position": [
+        3540,
+        200
+      ],
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "parameters": {
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0AG6K4G35W",
+          "mode": "id"
+        },
+        "text": "=📄 *MF02 — MINUTA GERADA*\n\n*Cliente:* {{ $('Preparar Resultado Final').first().json.taskId }}\n*Contrato editável:* {{ $('Preparar Resultado Final').first().json.contratoLink }}\n\n⏳ Equipe: valide o contrato e altere o campo *Contrato Revisado Manual* para Validado.",
+        "otherOptions": {}
+      },
+      "credentials": {
+        "slackApi": {
+          "id": "cA4S7M9UeAR9zajC",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "id": "noop1",
+      "name": "Encerrar",
+      "position": [
+        680,
+        480
+      ],
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "Webhook MF02": {
+      "main": [
+        [
+          {
+            "node": "Extrair TaskId",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair TaskId": {
+      "main": [
+        [
+          {
+            "node": "Tem TaskId?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem TaskId?": {
+      "main": [
+        [
+          {
+            "node": "GET Task Completa",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Encerrar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Task Completa": {
+      "main": [
+        [
+          {
+            "node": "Montar Placeholders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar Placeholders": {
+      "main": [
+        [
+          {
+            "node": "Criar Pasta Cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Pasta Cliente": {
+      "main": [
+        [
+          {
+            "node": "Loop Templates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Templates": {
+      "main": [
+        [
+          {
+            "node": "Preparar Cópia",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Resultado Final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Cópia": {
+      "main": [
+        [
+          {
+            "node": "Copiar Templates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Templates": {
+      "main": [
+        [
+          {
+            "node": "Adicionar Tipo ao Resultado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Adicionar Tipo ao Resultado": {
+      "main": [
+        [
+          {
+            "node": "Substituir Placeholders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Substituir Placeholders": {
+      "main": [
+        [
+          {
+            "node": "Loop Templates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Resultado Final": {
+      "main": [
+        [
+          {
+            "node": "CU Salvar Editável",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CU Salvar Editável": {
+      "main": [
+        [
+          {
+            "node": "CU Salvar Versão",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CU Salvar Versão": {
+      "main": [
+        [
+          {
+            "node": "Comentário MF02",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comentário MF02": {
+      "main": [
+        [
+          {
+            "node": "Slack MF02",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null
+}

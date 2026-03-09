@@ -1,0 +1,245 @@
+{
+  "name": "WF-COM | CONTRACT | MF03 | Conferência da Equipe",
+  "nodes": [
+    {
+      "id": "wh1",
+      "name": "Webhook MF03",
+      "position": [
+        240,
+        300
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "parameters": {
+        "path": "wf-com-contract-mf03",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "responseCode": 200
+      }
+    },
+    {
+      "id": "code1",
+      "name": "Extrair Evento",
+      "position": [
+        460,
+        300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst body = $input.first().json.body || $input.first().json;\n\n// Pegar field_id e novo valor\nconst fieldId = body.field_id || (body.history_items?.[0]?.field?.id) || '';\nconst newValue = body.history_items?.[0]?.after?.value || body.value || '';\nconst taskId = body.task_id || body.task?.id || '';\n\n// Só processar se for o campo contrato_revisado_manual\nconst isOurField = fieldId === '37bf7603-08ed-4bed-bafd-75a828fa251f' || fieldId === '';\n\nreturn [{ json: { prosseguir: isOurField && taskId !== '', taskId, newValue: String(newValue) } }];\n"
+      }
+    },
+    {
+      "id": "if1",
+      "name": "Prosseguir?",
+      "position": [
+        680,
+        300
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.prosseguir }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}?custom_fields=true",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "GET Task MF03",
+      "id": "http1",
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "id": "code2",
+      "name": "Interpretar Estado",
+      "position": [
+        1120,
+        200
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst dados = $input.first().json;\nconst task = $('GET Task MF03').first().json;\nconst cf = task.custom_fields || [];\n\n// Pegar valor atual do campo contrato_revisado_manual\nconst campoRevisado = cf.find(f => f.id === '37bf7603-08ed-4bed-bafd-75a828fa251f');\nlet estadoAtual = '';\nif (campoRevisado) {\n  if (campoRevisado.type_config?.options) {\n    const opt = campoRevisado.type_config.options.find(o =>\n      o.orderindex === campoRevisado.value || o.id === campoRevisado.value);\n    estadoAtual = opt?.name || String(campoRevisado.value || '');\n  } else {\n    estadoAtual = String(campoRevisado.value || '');\n  }\n}\nconst estadoNorm = estadoAtual.toLowerCase().trim();\n\n// Pegar pendências\nconst campoPend = cf.find(f => f.id === 'db59580c-c1be-45c9-8af6-ef0e25ad1cef');\nconst pendencias = campoPend?.value || 'não especificado';\n\nconst now = new Date();\nconst brt = new Date(now.getTime() - 3*3600000);\nconst dtBRT = brt.toLocaleString('pt-BR', {timeZone:'UTC'});\n\nlet acao = 'pendente';\nlet comentario = '';\n\nif (estadoNorm.includes('validado')) {\n  acao = 'validado';\n  comentario = `✅ MF03 — CONFERÊNCIA VALIDADA\nData: ${dtBRT} (BRT)\n—\nMinuta aprovada pela equipe.\n✅ Pronto para MF04 — Gerar PDF Final.\n(Dispare MF04 manualmente ou via automação do ClickUp)`;\n} else if (estadoNorm.includes('corrigir') || estadoNorm.includes('correc')) {\n  acao = 'corrigir';\n  comentario = `⚠️ MF03 — CORREÇÃO NECESSÁRIA\nData: ${dtBRT} (BRT)\n—\nPendências: ${pendencias}\n—\n❌ MF04 bloqueado até nova validação.\nApós corrigir a minuta, altere o campo para \"Validado\".`;\n} else {\n  acao = 'pendente';\n  comentario = `⏳ MF03 — CONFERÊNCIA PENDENTE\nData: ${dtBRT} (BRT)\n—\nAguardando revisão da equipe.`;\n}\n\nreturn [{ json: { taskId: task.id, taskName: task.name, acao, comentario, pendencias, dtBRT } }];\n"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}/comment",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"comment_text\": {{ JSON.stringify($json.comentario) }}, \"notify_all\": false}"
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "Comentário MF03",
+      "id": "http2",
+      "position": [
+        1340,
+        200
+      ]
+    },
+    {
+      "id": "slk1",
+      "name": "Slack MF03",
+      "position": [
+        1560,
+        200
+      ],
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "parameters": {
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0AG6K4G35W",
+          "mode": "id"
+        },
+        "text": "=🔍 *MF03 — CONFERÊNCIA: {{ $('Interpretar Estado').first().json.acao.toUpperCase() }}*\n*Cliente:* {{ $('Interpretar Estado').first().json.taskName }}\n*Status:* {{ $('Interpretar Estado').first().json.acao }}\n{{ $('Interpretar Estado').first().json.acao === 'corrigir' ? '*Pendências:* ' + $('Interpretar Estado').first().json.pendencias : '' }}",
+        "otherOptions": {}
+      },
+      "credentials": {
+        "slackApi": {
+          "id": "cA4S7M9UeAR9zajC",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "id": "noop1",
+      "name": "Encerrar",
+      "position": [
+        680,
+        480
+      ],
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "Webhook MF03": {
+      "main": [
+        [
+          {
+            "node": "Extrair Evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair Evento": {
+      "main": [
+        [
+          {
+            "node": "Prosseguir?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prosseguir?": {
+      "main": [
+        [
+          {
+            "node": "GET Task MF03",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Encerrar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Task MF03": {
+      "main": [
+        [
+          {
+            "node": "Interpretar Estado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Interpretar Estado": {
+      "main": [
+        [
+          {
+            "node": "Comentário MF03",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comentário MF03": {
+      "main": [
+        [
+          {
+            "node": "Slack MF03",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null
+}

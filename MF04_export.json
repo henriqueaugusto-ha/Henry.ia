@@ -1,0 +1,478 @@
+{
+  "name": "WF-COM | CONTRACT | MF04 | Gerar PDF Final e Preparar Assinatura",
+  "nodes": [
+    {
+      "id": "wh1",
+      "name": "Webhook MF04",
+      "position": [
+        240,
+        300
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "parameters": {
+        "path": "wf-com-contract-mf04",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "responseCode": 200
+      }
+    },
+    {
+      "id": "code1",
+      "name": "Extrair TaskId MF04",
+      "position": [
+        460,
+        300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst body = $input.first().json.body || $input.first().json;\nconst taskId = body.taskId || body.task_id || body.task?.id || '';\nreturn [{ json: { taskId, prosseguir: taskId !== '' } }];\n"
+      }
+    },
+    {
+      "id": "if1",
+      "name": "Tem TaskId MF04?",
+      "position": [
+        680,
+        300
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.prosseguir }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}?custom_fields=true",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "GET Task MF04",
+      "id": "http1",
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "id": "code2",
+      "name": "Verificar Guards MF04",
+      "position": [
+        1120,
+        200
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst task = $input.first().json;\nconst cf = task.custom_fields || [];\n\nfunction getVal(id) {\n  const f = cf.find(x => x.id === id);\n  if (!f) return '';\n  if (f.type_config?.options) {\n    const opt = f.type_config.options.find(o => o.orderindex === f.value || o.id === f.value);\n    return opt?.name || String(f.value||'');\n  }\n  return String(f.value||'').trim();\n}\n\nconst revisado = getVal('37bf7603-08ed-4bed-bafd-75a828fa251f').toLowerCase();\nconst contratoEditavel = getVal('0de83118-e5c2-429f-82f7-e2e83ee4119f');\n\n// Extrair fileId do Google Docs URL\nlet fileId = '';\nconst match = contratoEditavel.match(/\\/d\\/([a-zA-Z0-9_-]{10,})/);\nif (match) fileId = match[1];\n\nconst validado = revisado.includes('validado');\nconst temEditavel = fileId !== '';\n\nconst now = new Date();\nconst brt = new Date(now.getTime() - 3*3600000);\nconst dtBRT = brt.toLocaleString('pt-BR',{timeZone:'UTC'});\n\nreturn [{ json: {\n  prosseguir: validado && temEditavel,\n  bloqueio: !validado ? 'MF03 não está Validado' : (!temEditavel ? 'contrato_editavel_url vazio' : ''),\n  taskId: task.id, taskName: task.name, taskUrl: task.url,\n  fileId, contratoEditavel, revisado, dtBRT\n} }];\n"
+      }
+    },
+    {
+      "id": "if2",
+      "name": "Guards OK?",
+      "position": [
+        1340,
+        200
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.prosseguir }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "http2",
+      "name": "Exportar PDF do Docs",
+      "position": [
+        1560,
+        100
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "GET",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}/export?mimeType=application%2Fpdf",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "data"
+            }
+          }
+        }
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "oRp4hBuwhcDDNu2p",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "id": "gd1",
+      "name": "Upload PDF Drive",
+      "position": [
+        1780,
+        100
+      ],
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "parameters": {
+        "operation": "upload",
+        "name": "={{ $('Verificar Guards MF04').first().json.taskName.replace(/[^a-zA-Z0-9 ]/g,'').replace(/\\s+/g,'_').toUpperCase() + '_CONTRATO_FINAL.pdf' }}",
+        "inputDataFieldName": "data",
+        "options": {
+          "mimeType": "application/pdf"
+        }
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "oRp4hBuwhcDDNu2p",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "id": "http3",
+      "name": "Compartilhar PDF",
+      "position": [
+        2000,
+        100
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.id }}/permissions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"role\":\"reader\",\"type\":\"anyone\"}",
+        "options": {}
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "oRp4hBuwhcDDNu2p",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "id": "code3",
+      "name": "Preparar Comentário MF04",
+      "position": [
+        2220,
+        100
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst dados = $('Verificar Guards MF04').first().json;\nconst uploadResult = $input.first().json;\nconst pdfUrl = 'https://drive.google.com/file/d/' + uploadResult.id + '/view';\n\nconst comentario = `📎 MF04 — PDF FINAL GERADO\nData: ${dados.dtBRT} (BRT)\n—\nPDF do contrato: ${pdfUrl}\n—\n✅ Pronto para MF05 — Enviar para Assinatura via ZapSign.`;\n\nreturn [{ json: { taskId: dados.taskId, taskName: dados.taskName, comentario, pdfUrl, pdfFileId: uploadResult.id } }];\n"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}/field/3a0df1f2-f38d-4020-bb94-e2c51d56e130",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"value\": {{ JSON.stringify($json.pdfUrl) }}}"
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "CU Salvar PDF URL",
+      "id": "http4",
+      "position": [
+        2440,
+        100
+      ]
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $('Preparar Comentário MF04').first().json.taskId }}/comment",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"comment_text\": {{ JSON.stringify($(\"Preparar Comentário MF04\").first().json.comentario) }}, \"notify_all\": false}"
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "Comentário MF04",
+      "id": "http5",
+      "position": [
+        2660,
+        100
+      ]
+    },
+    {
+      "id": "slk1",
+      "name": "Slack MF04",
+      "position": [
+        2880,
+        100
+      ],
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "parameters": {
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0AG6K4G35W",
+          "mode": "id"
+        },
+        "text": "=📎 *MF04 — PDF FINAL GERADO*\n*Cliente:* {{ $('Preparar Comentário MF04').first().json.taskName }}\n*PDF:* {{ $('Preparar Comentário MF04').first().json.pdfUrl }}\n\n✅ Pronto para MF05 — dispare via webhook ou automação ClickUp.",
+        "otherOptions": {}
+      },
+      "credentials": {
+        "slackApi": {
+          "id": "cA4S7M9UeAR9zajC",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "id": "noop1",
+      "name": "Encerrar MF04",
+      "position": [
+        680,
+        480
+      ],
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "parameters": {}
+    },
+    {
+      "id": "noop2",
+      "name": "Bloqueado MF03",
+      "position": [
+        1340,
+        380
+      ],
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "Webhook MF04": {
+      "main": [
+        [
+          {
+            "node": "Extrair TaskId MF04",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair TaskId MF04": {
+      "main": [
+        [
+          {
+            "node": "Tem TaskId MF04?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem TaskId MF04?": {
+      "main": [
+        [
+          {
+            "node": "GET Task MF04",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Encerrar MF04",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Task MF04": {
+      "main": [
+        [
+          {
+            "node": "Verificar Guards MF04",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Guards MF04": {
+      "main": [
+        [
+          {
+            "node": "Guards OK?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guards OK?": {
+      "main": [
+        [
+          {
+            "node": "Exportar PDF do Docs",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Bloqueado MF03",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exportar PDF do Docs": {
+      "main": [
+        [
+          {
+            "node": "Upload PDF Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload PDF Drive": {
+      "main": [
+        [
+          {
+            "node": "Compartilhar PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compartilhar PDF": {
+      "main": [
+        [
+          {
+            "node": "Preparar Comentário MF04",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Comentário MF04": {
+      "main": [
+        [
+          {
+            "node": "CU Salvar PDF URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CU Salvar PDF URL": {
+      "main": [
+        [
+          {
+            "node": "Comentário MF04",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comentário MF04": {
+      "main": [
+        [
+          {
+            "node": "Slack MF04",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null
+}

@@ -1,0 +1,134 @@
+{
+  "name": "WF-COM | CONTRACT | MF01 | Consolidar Dados do Contrato",
+  "nodes": [
+    {
+      "id": "mf01-wh",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 300],
+      "parameters": {
+        "path": "wf-com-contract-mf01",
+        "httpMethod": "POST",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "mf01-extract",
+      "name": "Extrair TaskId e Status",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [320, 300],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst taskId = body.task_id || body.taskId || '';\nconst historyItems = body.history_items || [];\nconst statusItem = historyItems.find(h => h.field === 'status');\nconst newStatus = (statusItem?.after?.status || '').toLowerCase().trim();\nreturn [{ json: { taskId, newStatus } }];"
+      }
+    },
+    {
+      "id": "mf01-if",
+      "name": "É Aguardando Assinatura",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [540, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.newStatus }}",
+              "rightValue": "aguardando assinatura",
+              "operator": { "type": "string", "operation": "contains" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "mf01-get",
+      "name": "GET Task ClickUp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [760, 180],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://api.clickup.com/api/v2/task/' + $json.taskId }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      },
+      "credentials": {
+        "clickUpApi": { "id": "KZp4O2fXwvdyQsC8", "name": "ClickUp account" }
+      }
+    },
+    {
+      "id": "mf01-format",
+      "name": "Montar Comentario MF01",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [980, 180],
+      "parameters": {
+        "jsCode": "const task = $input.first().json;\nconst fields = task.custom_fields || [];\n\nconst getField = (id) => {\n  const f = fields.find(f => f.id === id);\n  if (!f) return '';\n  if ((f.type === 'drop_down' || f.type === 'label') && f.type_config && f.type_config.options) {\n    const opt = f.type_config.options.find(o => o.orderindex === f.value || String(o.id) === String(f.value));\n    return opt ? opt.name : String(f.value != null ? f.value : '');\n  }\n  return String(f.value != null ? f.value : '');\n};\n\nconst nome = (task.name || '').toUpperCase();\nconst cpf = getField('26b4ecd6-6963-4160-a554-30cd4f36a70c');\nconst rg = getField('f36e9cb0-f9d2-4cb8-91ea-e5014a2566c7');\nconst cnh_numero = getField('cbefb914-0e29-4611-b992-b689d0b0fbb1');\nconst cnh_categoria = getField('eda497ef-b8aa-4c1a-a512-3de5b7245aa3');\nconst endereco = getField('7eae45ba-94b4-4cb4-bd1b-927ef11b8107');\nconst numero_ait = getField('e220c08f-03dd-487a-a8a2-6cf25e5bf9d3');\nconst orgao_autuador = getField('6b771374-ef1b-42dd-af5a-ffb231e29112');\nconst uf_orgao = getField('20fe659f-9eef-4aa4-b170-a7e00cd687e8');\nconst valor_contrato = getField('b8647ffd-7a76-4790-90cf-8e6314e5e469');\nconst forma_pagamento = getField('be4fac1c-4178-4a0c-8315-69747e2af05f');\n\nconst now = new Date();\nconst dataBRT = now.toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' });\n\nconst comentario = '\\u{1F4CB} MF01 \u2014 BASE CONTRATUAL CONSOLIDADA\\nData: ' + dataBRT + '\\n\u2014\\nCliente: ' + nome + '\\nCPF: ' + cpf + '\\nRG: ' + rg + '\\nCNH: ' + cnh_numero + ' / Cat: ' + cnh_categoria + '\\nEndereco: ' + endereco + '\\nAIT: ' + numero_ait + '\\nOrgao: ' + orgao_autuador + ' / UF: ' + uf_orgao + '\\nValor: ' + valor_contrato + '\\nPagamento: ' + forma_pagamento + '\\n\u2014\\n\\u2705 Pronto para MF02 \u2014 Gerar Minuta';\n\nreturn [{ json: { taskId: task.id, comentario } }];"
+      }
+    },
+    {
+      "id": "mf01-comment",
+      "name": "POST Comentario MF01",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1200, 180],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://api.clickup.com/api/v2/task/' + $json.taskId + '/comment' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ comment_text: $json.comentario, notify_all: false }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "clickUpApi": { "id": "KZp4O2fXwvdyQsC8", "name": "ClickUp account" }
+      }
+    },
+    {
+      "id": "mf01-respond",
+      "name": "Respond 200",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1420, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"ok\":true,\"workflow\":\"MF01\"}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Extrair TaskId e Status", "type": "main", "index": 0 }]]
+    },
+    "Extrair TaskId e Status": {
+      "main": [[{ "node": "É Aguardando Assinatura", "type": "main", "index": 0 }]]
+    },
+    "É Aguardando Assinatura": {
+      "main": [
+        [{ "node": "GET Task ClickUp", "type": "main", "index": 0 }],
+        [{ "node": "Respond 200", "type": "main", "index": 0 }]
+      ]
+    },
+    "GET Task ClickUp": {
+      "main": [[{ "node": "Montar Comentario MF01", "type": "main", "index": 0 }]]
+    },
+    "Montar Comentario MF01": {
+      "main": [[{ "node": "POST Comentario MF01", "type": "main", "index": 0 }]]
+    },
+    "POST Comentario MF01": {
+      "main": [[{ "node": "Respond 200", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}

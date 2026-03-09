@@ -1,0 +1,403 @@
+{
+  "name": "WF-COM | CONTRACT | MF05 | Enviar para Assinatura e Registrar Cronologia",
+  "nodes": [
+    {
+      "id": "wh1",
+      "name": "Webhook MF05",
+      "position": [
+        240,
+        300
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "parameters": {
+        "path": "wf-com-contract-mf05",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "responseCode": 200
+      }
+    },
+    {
+      "id": "code1",
+      "name": "Extrair TaskId MF05",
+      "position": [
+        460,
+        300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst body = $input.first().json.body || $input.first().json;\nconst taskId = body.taskId || body.task_id || body.task?.id || '';\nreturn [{ json: { taskId, prosseguir: taskId !== '' } }];\n"
+      }
+    },
+    {
+      "id": "if1",
+      "name": "Tem TaskId MF05?",
+      "position": [
+        680,
+        300
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.prosseguir }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}?custom_fields=true",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "GET Task MF05",
+      "id": "http1",
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "id": "code2",
+      "name": "Verificar Guards MF05",
+      "position": [
+        1120,
+        200
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst task = $input.first().json;\nconst cf = task.custom_fields || [];\n\nfunction getVal(id) {\n  const f = cf.find(x => x.id === id);\n  if (!f) return '';\n  if (f.type_config?.options) {\n    const opt = f.type_config.options.find(o => o.orderindex === f.value || o.id === f.value);\n    return opt?.name || String(f.value||'');\n  }\n  if (f.type === 'phone' && f.value && typeof f.value === 'object') return f.value.phone || '';\n  return String(f.value||'').trim();\n}\n\nconst contratoPdfUrl = getVal('3a0df1f2-f38d-4020-bb94-e2c51d56e130');\nconst zapDocId = getVal('7cda2ebe-5b03-4724-95c6-f551ad4637b1');\nconst telefone = getVal('dd097c3b-5647-4535-9847-1026f6ea70c0');\n\n// PDF deve estar preenchido, zapsign deve estar vazio (idempotência)\nconst temPdf = contratoPdfUrl !== '' && !contratoPdfUrl.includes('undefined');\nconst semZap = zapDocId === '';\n\n// Converter Drive view URL para download direto\nlet downloadUrl = '';\nconst match = contratoPdfUrl.match(/\\/d\\/([a-zA-Z0-9_-]{10,})/);\nif (match) downloadUrl = 'https://drive.google.com/uc?export=download&id=' + match[1];\n\n// Formatar telefone para ZapSign (E.164)\nlet tel = telefone.replace(/\\D/g,'');\nif (tel.length === 11 && !tel.startsWith('55')) tel = '55' + tel;\nif (tel.length === 10 && !tel.startsWith('55')) tel = '55' + tel;\n\nconst now = new Date();\nconst brt = new Date(now.getTime() - 3*3600000);\nconst dtBRT = brt.toLocaleString('pt-BR',{timeZone:'UTC'});\n\nreturn [{ json: {\n  prosseguir: temPdf && semZap,\n  bloqueio: !temPdf ? 'contrato_pdf_url vazio' : (!semZap ? 'ZapSign já enviado (idempotência)' : ''),\n  taskId: task.id, taskName: task.name, taskUrl: task.url,\n  contratoPdfUrl, downloadUrl, telefone: tel, dtBRT\n} }];\n"
+      }
+    },
+    {
+      "id": "if2",
+      "name": "Guards MF05 OK?",
+      "position": [
+        1340,
+        200
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.prosseguir }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "http2",
+      "name": "ZapSign Criar Doc",
+      "position": [
+        1560,
+        100
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.zapsign.com.br/api/v1/docs/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 30a3e64e-1faf-4392-bbab-bf0ebdd12ee021caa197-b702-4b23-9809-d2082c56c461"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"sandbox\": false, \"name\": \"{{ $json.taskName }} — Contrato\", \"url_pdf\": \"{{ $json.downloadUrl }}\", \"lang\": \"pt-br\", \"external_id\": \"{{ $json.taskId }}\", \"webhook_url\": \"https://n8n.srv1380728.hstgr.cloud/webhook/wf-fin-zapsign-assinado\", \"signers\": [{\"name\": \"{{ $json.taskName }}\", \"auth_mode\": \"assinaturaTela\", \"send_automatic_email\": false, \"send_automatic_whatsapp\": false, \"position_type\": \"auto\", \"auto_position_text\": \"{{ASSINATURA_CLIENTE}}\"}]}",
+        "options": {}
+      }
+    },
+    {
+      "id": "code3",
+      "name": "Preparar Comentário MF05",
+      "position": [
+        1780,
+        100
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst guard = $('Verificar Guards MF05').first().json;\nconst zap = $input.first().json;\n\nconst docId = zap.token || zap.id || '';\nconst signUrl = zap.signers?.[0]?.sign_url || zap.sign_url || '';\n// Campo sign_url field ID: c88fbf50-84a2-4c7e-ab59-ede658906ec2\n\nconst comentario = `📨 MF05 — CONTRATO ENVIADO PARA ASSINATURA\nData: ${guard.dtBRT} (BRT)\n—\nZapSign Doc ID: ${docId}\nLink de assinatura: ${signUrl}\nEnviado para: ${guard.telefone}\n—\n⏳ Aguardando assinatura do cliente.\n📌 Após assinatura → pipeline pós-assinatura (WF-FIN) é acionado automaticamente via webhook ZapSign.`;\n\nreturn [{ json: {\n  taskId: guard.taskId, taskName: guard.taskName, comentario,\n  docId, signUrl, telefone: guard.telefone\n} }];\n"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}/field/7cda2ebe-5b03-4724-95c6-f551ad4637b1",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"value\": {{ JSON.stringify($json.docId) }}}"
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "CU Salvar ZapSign ID",
+      "id": "http3",
+      "position": [
+        2000,
+        100
+      ]
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $('Preparar Comentário MF05').first().json.taskId }}/comment",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"comment_text\": {{ JSON.stringify($(\"Preparar Comentário MF05\").first().json.comentario) }}, \"notify_all\": false}"
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "Comentário MF05",
+      "id": "http4",
+      "position": [
+        2220,
+        100
+      ]
+    },
+    {
+      "id": "slk1",
+      "name": "Slack MF05",
+      "position": [
+        2440,
+        100
+      ],
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "parameters": {
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0AG6K4G35W",
+          "mode": "id"
+        },
+        "text": "=📨 *MF05 — CONTRATO ENVIADO PARA ASSINATURA*\n*Cliente:* {{ $('Preparar Comentário MF05').first().json.taskName }}\n*ZapSign ID:* {{ $('Preparar Comentário MF05').first().json.docId }}\n*Link:* {{ $('Preparar Comentário MF05').first().json.signUrl }}\n\n⏳ Aguardando assinatura. WF-FIN disparará automaticamente após assinatura.",
+        "otherOptions": {}
+      },
+      "credentials": {
+        "slackApi": {
+          "id": "cA4S7M9UeAR9zajC",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "id": "noop1",
+      "name": "Encerrar MF05",
+      "position": [
+        680,
+        480
+      ],
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "parameters": {}
+    },
+    {
+      "id": "noop2",
+      "name": "Bloqueado Idempotência",
+      "position": [
+        1340,
+        380
+      ],
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "Webhook MF05": {
+      "main": [
+        [
+          {
+            "node": "Extrair TaskId MF05",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair TaskId MF05": {
+      "main": [
+        [
+          {
+            "node": "Tem TaskId MF05?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem TaskId MF05?": {
+      "main": [
+        [
+          {
+            "node": "GET Task MF05",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Encerrar MF05",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Task MF05": {
+      "main": [
+        [
+          {
+            "node": "Verificar Guards MF05",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Guards MF05": {
+      "main": [
+        [
+          {
+            "node": "Guards MF05 OK?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guards MF05 OK?": {
+      "main": [
+        [
+          {
+            "node": "ZapSign Criar Doc",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Bloqueado Idempotência",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ZapSign Criar Doc": {
+      "main": [
+        [
+          {
+            "node": "Preparar Comentário MF05",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Comentário MF05": {
+      "main": [
+        [
+          {
+            "node": "CU Salvar ZapSign ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CU Salvar ZapSign ID": {
+      "main": [
+        [
+          {
+            "node": "Comentário MF05",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comentário MF05": {
+      "main": [
+        [
+          {
+            "node": "Slack MF05",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null
+}

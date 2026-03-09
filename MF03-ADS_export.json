@@ -1,0 +1,256 @@
+{
+  "name": "WF-COM | ADS | MF03 | Alerta de Conversão Manual Google",
+  "nodes": [
+    {
+      "id": "wh1",
+      "name": "ClickUp — Status Fechado",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ],
+      "parameters": {
+        "path": "wf-com-ads-mf03-fechamento",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "responseCode": 200
+      }
+    },
+    {
+      "id": "code1",
+      "name": "Verificar Fechamento",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst newStatus = (body.history_items?.[0]?.after?.status || body.status?.status || '').toLowerCase().trim();\nconst folderId = (body.task?.folder?.id || '').toString();\nconst taskId = body.task_id || body.task?.id || '';\nconst eFechamento = newStatus === 'contrato fechado';\nconst eCRM = folderId === '90117445648' || folderId === '';\nreturn [{ json: { prosseguir: eFechamento && eCRM && taskId !== '', taskId, newStatus } }];"
+      }
+    },
+    {
+      "id": "if1",
+      "name": "É Fechamento CRM?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.prosseguir }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "http1",
+      "name": "Buscar Task Completa",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        200
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}?custom_fields=true",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      }
+    },
+    {
+      "id": "code2",
+      "name": "Extrair e Consolidar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        200
+      ],
+      "parameters": {
+        "jsCode": "const task = $input.first().json;\nconst cf = task.custom_fields || [];\nfunction getField(id) {\n  const f = cf.find(x => x.id === id);\n  if (!f) return '';\n  if (f.type_config?.options) {\n    const opt = f.type_config.options.find(o => o.orderindex === f.value || o.id === f.value);\n    return opt?.name || f.value || '';\n  }\n  return (f.value || '').toString();\n}\nfunction getByName(frag) {\n  const f = cf.find(x => (x.name||'').toLowerCase().includes(frag.toLowerCase()) && x.value);\n  if (!f) return '';\n  if (f.type_config?.options) {\n    const opt = f.type_config.options.find(o => o.orderindex === f.value || o.id === f.value);\n    return opt?.name || f.value || '';\n  }\n  return (f.value || '').toString();\n}\nconst origem = getField('2cf330fd-8a82-4378-81de-27b83e6375d3') || getByName('origem');\nconst gclid = getField('7768805a-8c36-4201-90c7-d9ee3f2eb6c3') || getByName('gclid');\nconst campanha = getField('b236bc57-b08b-44bc-9b3b-7f88950c4c91') || getByName('campanha');\nconst eGoogle = origem.toLowerCase().includes('google') || origem.toLowerCase().includes('ads') || gclid !== '';\nconst closer = task.assignees?.[0]?.username || task.assignees?.[0]?.email || 'não informado';\nconst dataFechamento = task.date_done ? new Date(parseInt(task.date_done)).toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'}) : new Date().toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'});\nreturn [{ json: { eGoogle, taskId: task.id, nome: task.name, taskUrl: task.url, telefone: getField('dd097c3b-5647-4535-9847-1026f6ea70c0') || 'não informado', email: getByName('email') || getByName('e-mail') || 'não informado', origem: origem || 'não informado', canal: getByName('canal') || 'não informado', closer, dataFechamento, valorContrato: getByName('valor') || getByName('honorário') || 'não informado', gclid: gclid || 'não informado', utmSource: getByName('utm_source') || (gclid ? 'google' : 'não informado'), utmCampaign: campanha || 'não informado' } }];"
+      }
+    },
+    {
+      "id": "if2",
+      "name": "Origem Google?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        200
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.eGoogle }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "slack1",
+      "name": "Slack — Alerta Conversão Google",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1560,
+        100
+      ],
+      "parameters": {
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0AG6K4G35W",
+          "mode": "id"
+        },
+        "text": "=🚨 *FECHAMENTO DE CONTRATO — ORIGEM GOOGLE*\n\n*Cliente:* {{ $json.nome }}\n*Telefone:* {{ $json.telefone }}\n*E-mail:* {{ $json.email }}\n*Origem:* {{ $json.origem }}\n*Canal:* {{ $json.canal }}\n*Closer:* {{ $json.closer }}\n*Data do fechamento:* {{ $json.dataFechamento }}\n*Valor do contrato:* {{ $json.valorContrato }}\n\n*GCLID:* {{ $json.gclid }}\n*UTM Source:* {{ $json.utmSource }}\n*UTM Campaign:* {{ $json.utmCampaign }}\n\n🔗 *Task ClickUp:* {{ $json.taskUrl }}\n\n⚠️ *Ação necessária:*\nRealizar cadastro manual da conversão no Google Ads.",
+        "otherOptions": {}
+      },
+      "credentials": {
+        "slackApi": {
+          "id": "cA4S7M9UeAR9zajC",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "id": "noop1",
+      "name": "Encerrar Limpo",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        380
+      ],
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "ClickUp — Status Fechado": {
+      "main": [
+        [
+          {
+            "node": "Verificar Fechamento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Fechamento": {
+      "main": [
+        [
+          {
+            "node": "É Fechamento CRM?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "É Fechamento CRM?": {
+      "main": [
+        [
+          {
+            "node": "Buscar Task Completa",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Encerrar Limpo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Task Completa": {
+      "main": [
+        [
+          {
+            "node": "Extrair e Consolidar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair e Consolidar": {
+      "main": [
+        [
+          {
+            "node": "Origem Google?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Origem Google?": {
+      "main": [
+        [
+          {
+            "node": "Slack — Alerta Conversão Google",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Encerrar Limpo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null
+}
