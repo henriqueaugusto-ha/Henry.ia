@@ -1,0 +1,207 @@
+{
+  "name": "WF-COM | CONTRACT | MF01 | Consolidar Dados do Contrato",
+  "nodes": [
+    {
+      "id": "wh1",
+      "name": "ClickUp Webhook",
+      "position": [
+        240,
+        300
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "parameters": {
+        "path": "wf-com-contract-mf01",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "responseCode": 200
+      }
+    },
+    {
+      "id": "code1",
+      "name": "Verificar Status",
+      "position": [
+        460,
+        300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst body = $input.first().json.body || $input.first().json;\n\n// Formato ClickUp Automação: body.payload.id (automação já filtra status na origem)\n// Formato ClickUp Webhook API: body.history_items + body.task_id\nconst newStatus = (\n  body.history_items?.[0]?.after?.status ||\n  body.task?.status?.status ||\n  (body.payload?.id ? 'aguardando assinatura' : '')\n).toLowerCase().trim();\n\nconst taskId = body.task_id || body.task?.id || body.payload?.id || '';\nconst isAguardando = newStatus === 'aguardando assinatura';\n\nreturn [{ json: { prosseguir: isAguardando && taskId !== '', taskId, newStatus } }];\n"
+      }
+    },
+    {
+      "id": "if1",
+      "name": "É Aguardando Assinatura?",
+      "position": [
+        680,
+        300
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.prosseguir }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}?custom_fields=true",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "GET Task Completa",
+      "id": "http1",
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "id": "code2",
+      "name": "Consolidar Dados",
+      "position": [
+        1120,
+        200
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "\nconst task = $input.first().json;\nconst cf = task.custom_fields || [];\n\nfunction getVal(id) {\n  const f = cf.find(x => x.id === id);\n  if (!f || f.value == null) return '';\n  if (f.type_config?.options) {\n    const opt = f.type_config.options.find(o => o.orderindex === f.value || o.id === f.value);\n    return opt?.name || String(f.value);\n  }\n  if (f.type === 'date') return f.value ? new Date(parseInt(f.value)).toLocaleDateString('pt-BR') : '';\n  if (f.type === 'currency') return 'R$ ' + (parseFloat(f.value)/100).toLocaleString('pt-BR',{minimumFractionDigits:2});\n  return String(f.value).trim();\n}\n\nconst now = new Date();\nconst brt = new Date(now.getTime() - 3*3600000);\nconst dtBRT = brt.toLocaleString('pt-BR', {timeZone:'UTC'});\n\nconst dados = {\n  nome: task.name,\n  cpf: getVal('26b4ecd6-6963-4160-a554-30cd4f36a70c'),\n  rg: getVal('f36e9cb0-f9d2-4cb8-91ea-e5014a2566c7'),\n  cnh_numero: getVal('cbefb914-0e29-4611-b992-b689d0b0fbb1'),\n  cnh_categoria: getVal('eda497ef-b8aa-4c1a-a512-3de5b7245aa3'),\n  endereco: getVal('7eae45ba-94b4-4cb4-bd1b-927ef11b8107'),\n  numero_ait: getVal('e220c08f-03dd-487a-a8a2-6cf25e5bf9d3'),\n  orgao: getVal('6b771374-ef1b-42dd-af5a-ffb231e29112'),\n  uf: getVal('20fe659f-9eef-4aa4-b170-a7e00cd687e8'),\n  tipo_infracao: getVal('e104c668-ccc4-4a91-9dcb-6f52c6f823c5'),\n  data_infracao: getVal('ad630128-2859-40e7-a45a-a7639dfbce34'),\n  valor: getVal('b8647ffd-7a76-4790-90cf-8e6314e5e469'),\n  forma_pag: getVal('be4fac1c-4178-4a0c-8315-69747e2af05f'),\n  telefone: getVal('dd097c3b-5647-4535-9847-1026f6ea70c0'),\n  objeto: getVal('02b1dd48-1adf-4c70-b277-553ff8681b45'),\n};\n\nconst comentario = `📋 MF01 — BASE CONTRATUAL CONSOLIDADA\nData: ${dtBRT} (BRT)\n—\nCliente: ${dados.nome}\nCPF: ${dados.cpf || 'não preenchido'}\nRG: ${dados.rg || 'não preenchido'}\nCNH: ${dados.cnh_numero || 'não preenchido'} / Cat: ${dados.cnh_categoria || 'não preenchido'}\nEndereço: ${dados.endereco || 'não preenchido'}\n—\nAIT: ${dados.numero_ait || 'não preenchido'}\nÓrgão: ${dados.orgao || 'não preenchido'} / UF: ${dados.uf || 'não preenchido'}\nInfração: ${dados.tipo_infracao || 'não preenchido'}\nData da infração: ${dados.data_infracao || 'não preenchido'}\n—\nValor do contrato: ${dados.valor || 'não preenchido'}\nForma de pagamento: ${dados.forma_pag || 'não preenchido'}\n—\n✅ Dados consolidados. Pronto para MF02 — Gerar Minuta.`;\n\nreturn [{ json: { taskId: task.id, taskName: task.name, comentario, dados } }];\n"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}/comment",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"comment_text\": {{ JSON.stringify($json.comentario) }}, \"notify_all\": false}"
+      },
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "name": "Postar Comentário MF01",
+      "id": "http2",
+      "position": [
+        1340,
+        200
+      ]
+    },
+    {
+      "id": "noop1",
+      "name": "Encerrar",
+      "position": [
+        680,
+        480
+      ],
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "ClickUp Webhook": {
+      "main": [
+        [
+          {
+            "node": "Verificar Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Status": {
+      "main": [
+        [
+          {
+            "node": "É Aguardando Assinatura?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "É Aguardando Assinatura?": {
+      "main": [
+        [
+          {
+            "node": "GET Task Completa",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Encerrar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Task Completa": {
+      "main": [
+        [
+          {
+            "node": "Consolidar Dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consolidar Dados": {
+      "main": [
+        [
+          {
+            "node": "Postar Comentário MF01",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null
+}

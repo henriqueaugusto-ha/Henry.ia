@@ -1,0 +1,666 @@
+{
+  "name": "WF PONTE | MF03 Validado → F1→F2→F4 (Onboarding Jurídico Automático)",
+  "nodes": [
+    {
+      "id": "n01",
+      "name": "Webhook MF03 Validado",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "path": "wf-ponte-mf03-to-f1f5",
+        "responseMode": "responseNode"
+      }
+    },
+    {
+      "id": "n02",
+      "name": "GET Task ClickUp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://api.clickup.com/api/v2/task/' + ($json.body.task_id // $json.query.task_id // $json.task_id) }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      }
+    },
+    {
+      "id": "n03",
+      "name": "Parse MF02 e Preparar Payloads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "jsCode": "\nconst task = $input.first().json;\nconst taskId = task.id;\n\n// Anti-double: verificar se bridge já rodou (buscamos no description)\nconst desc = task.description || '';\nconst alreadyProcessed = desc.includes('[WF PONTE | Concluído]');\n\n// Extrair custom fields\nconst cf = task.custom_fields || [];\nconst getField = (id) => { const f = cf.find(x => x.id === id); return f ? f.value : null; };\n\n// MF02 texto\nconst mf02 = getField('44d936fc-62fb-4703-8c14-d49e5d8b4159') || '';\n\n// Parser de campo do MF02\nconst parse = (text, label) => {\n  const re = new RegExp(label + '[:\\\\s]+(.+?)(?=\\\\n|$)', 'im');\n  const m = text.match(re);\n  return m ? m[1].trim() : '';\n};\n\nconst nome    = parse(mf02, 'Cliente')  || task.name;\nconst cpf     = parse(mf02, 'CPF');\nconst celular = parse(mf02, 'Telefone');\nconst cidade  = parse(mf02, 'Cidade')   || 'Fortaleza';\nconst ait     = parse(mf02, 'AIT');\nconst valorStr = parse(mf02, 'Valor total');\n\n// Órgão da task (campo a0ffe748)\nconst orgaoField = cf.find(f => f.id === 'a0ffe748-deac-46a7-828f-d1d0a86393f3');\nconst orgaoOption = orgaoField && Array.isArray(orgaoField.value) && orgaoField.value.length > 0\n  ? orgaoField.value[0].name || '' : '';\nconst orgaoOpts = {'DETRAN-CE':'DETRAN-CE','PRF-CE':'PRF-CE','AMC':'AMC',\n  'DETRAN-RN':'DETRAN-RN','PRF-RN':'PRF-RN','PRF-BA':'PRF-BA','DNIT':'DNIT',\n  'DETRAN-PE':'DETRAN-PE','DETRAN-PI':'DETRAN-PI','DETRAN-SP':'DETRAN-SP'};\nconst orgao = orgaoOpts[orgaoOption] || orgaoOption || 'DETRAN-CE';\n\n// Estado derivado do órgão\nconst estado = orgao.includes('-CE') || orgao === 'AMC' ? 'CE'\n  : orgao.includes('-RN') ? 'RN'\n  : orgao.includes('-PE') ? 'PE'\n  : orgao.includes('-PI') ? 'PI'\n  : orgao.includes('-SP') ? 'SP'\n  : orgao.includes('-BA') ? 'BA' : 'CE';\n\n// Prazo NA (campo 4d56b475)\nconst prazoTs = getField('4d56b475-4a6a-43bc-a913-c5453e76e0af');\nlet prazoNa = '';\nif (prazoTs) {\n  const d = new Date(parseInt(prazoTs));\n  prazoNa = d.toISOString().split('T')[0];\n}\n\n// Tipo processo (campo d82b4898)\nconst tipoField = cf.find(f => f.id === 'd82b4898-5e57-4ff8-b60a-fe9accedfa7d');\nconst tipoLabel = tipoField && Array.isArray(tipoField.value) && tipoField.value.length > 0\n  ? tipoField.value[0].name || '' : 'PAMT';\nconst taskType = tipoLabel.includes('JARI') ? 'JARI' : '';\n\n// Payload F1\nconst payloadF1 = {\n  nome, cpf: cpf||'', rg:'', data_nascimento:'',\n  profissao:'Não informado', celular: celular||'', email:'',\n  cep:'', cidade, estado, origem_id: 200072,\n  observacoes: ait ? 'AIT: ' + ait : ''\n};\n\n// Payload F4 base (precisa de lawsuits_id depois)\nconst payloadF4Base = { prazo_na: prazoNa, orgao, task_type: taskType };\n\nreturn [{ json: {\n  taskId, alreadyProcessed, mf02, nome, cpf, celular, cidade, ait, orgao,\n  estado, prazoNa, tipoLabel, taskType, payloadF1, payloadF4Base\n}}];\n"
+      }
+    },
+    {
+      "id": "n04",
+      "name": "IF Já Processado",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.alreadyProcessed }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "n05",
+      "name": "Respond Já Processado",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        880,
+        200
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"status\":\"skipped\",\"msg\":\"WF PONTE já executado para esta task\"}"
+      }
+    },
+    {
+      "id": "n06",
+      "name": "F1 — Cadastrar Cliente ADVbox",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        -80
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.srv1380728.hstgr.cloud/webhook/advbox-cadastrar-cliente",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.payloadF1) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "n07",
+      "name": "IF F1 Sucesso",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        -80
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c2",
+              "leftValue": "={{ $json.success }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "n08",
+      "name": "Comment Erro F1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        80
+      ],
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://api.clickup.com/api/v2/task/' + $('Parse MF02 e Preparar Payloads').first().json.taskId + '/comment' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({comment_text: '[WF PONTE | ❌ Erro F1 — Cadastro Cliente ADVbox]\\n\\nNão foi possível cadastrar o cliente no ADVbox.\\n\\nMotivo: ' + JSON.stringify($json) + '\\n\\nAção necessária: verificar CPF, nome ou disponibilidade do ADVbox e reprocessar manualmente.'}) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "n09",
+      "name": "Respond Erro F1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1540,
+        80
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 500,
+        "responseBody": "{\"status\":\"error\",\"step\":\"F1\",\"msg\":\"Falha ao cadastrar cliente no ADVbox\"}"
+      }
+    },
+    {
+      "id": "n10",
+      "name": "Extrair customer_id e Preparar F2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        -80
+      ],
+      "parameters": {
+        "jsCode": "\nconst f1Resp = $input.first().json;\nconst prevData = $('Parse MF02 e Preparar Payloads').first().json;\nconst customerId = f1Resp.customer_id;\nconst payloadF2 = {\n  customers_id: customerId,\n  orgao: prevData.orgao,\n  notes: prevData.ait ? 'AIT: ' + prevData.ait : ''\n};\nreturn [{ json: { ...prevData, customerId, payloadF2, f1Resp } }];\n"
+      }
+    },
+    {
+      "id": "n11",
+      "name": "F2 — Cadastrar Processo ADVbox",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        -80
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.srv1380728.hstgr.cloud/webhook/advbox-cadastrar-processo",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.payloadF2) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "n12",
+      "name": "IF F2 Sucesso",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        -80
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c3",
+              "leftValue": "={{ $json.success }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "n13",
+      "name": "Comment Erro F2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1980,
+        80
+      ],
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://api.clickup.com/api/v2/task/' + $('Extrair customer_id e Preparar F2').first().json.taskId + '/comment' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({comment_text: '[WF PONTE | ❌ Erro F2 — Cadastro Processo ADVbox]\\n\\nCliente cadastrado (ID: ' + $('Extrair customer_id e Preparar F2').first().json.customerId + ') mas falhou ao criar o processo.\\n\\nMotivo: ' + JSON.stringify($json) + '\\n\\nAção necessária: criar processo manualmente no ADVbox.'}) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "n14",
+      "name": "Respond Erro F2",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        2200,
+        80
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 500,
+        "responseBody": "{\"status\":\"error\",\"step\":\"F2\",\"msg\":\"Falha ao cadastrar processo no ADVbox\"}"
+      }
+    },
+    {
+      "id": "n15",
+      "name": "Extrair lawsuit_id e Preparar F4",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1980,
+        -80
+      ],
+      "parameters": {
+        "jsCode": "\nconst f2Resp = $input.first().json;\nconst prevData = $('Extrair customer_id e Preparar F2').first().json;\nconst lawsuitId = f2Resp.lawsuit_id || (f2Resp.dados && f2Resp.dados.id);\nconst payloadF4 = {\n  lawsuits_id: lawsuitId,\n  prazo_na: prevData.prazoNa,\n  orgao: prevData.orgao,\n  task_type: prevData.taskType\n};\nreturn [{ json: { ...prevData, lawsuitId, payloadF4, f2Resp } }];\n"
+      }
+    },
+    {
+      "id": "n16",
+      "name": "F4 — Criar Tarefas ADVbox",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2200,
+        -80
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.srv1380728.hstgr.cloud/webhook/advbox-criar-tarefa",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.payloadF4) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "n17",
+      "name": "IF F4 Sucesso",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2420,
+        -80
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c4",
+              "leftValue": "={{ $json.success }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "n18",
+      "name": "Comment Erro F4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2640,
+        80
+      ],
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://api.clickup.com/api/v2/task/' + $('Extrair lawsuit_id e Preparar F4').first().json.taskId + '/comment' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({comment_text: '[WF PONTE | ❌ Erro F4 — Criação de Tarefas ADVbox]\\n\\nCliente (ID: ' + $('Extrair lawsuit_id e Preparar F4').first().json.customerId + ') e processo (LID: ' + $('Extrair lawsuit_id e Preparar F4').first().json.lawsuitId + ') criados, mas falhou ao criar tarefas.\\n\\nMotivo: ' + JSON.stringify($json) + '\\n\\nAção necessária: criar tarefas manualmente no ADVbox.'}) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "n19",
+      "name": "Respond Erro F4",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        80
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 500,
+        "responseBody": "{\"status\":\"error\",\"step\":\"F4\",\"msg\":\"Falha ao criar tarefas no ADVbox\"}"
+      }
+    },
+    {
+      "id": "n20",
+      "name": "Comment Sucesso Final",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2640,
+        -80
+      ],
+      "credentials": {
+        "clickUpApi": {
+          "id": "KZp4O2fXwvdyQsC8",
+          "name": "ClickUp account"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://api.clickup.com/api/v2/task/' + $('Extrair lawsuit_id e Preparar F4').first().json.taskId + '/comment' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({comment_text:\n  '[WF PONTE | ✅ Onboarding Jurídico Concluído]\\n\\n' +\n  '✅ F1 — Cliente cadastrado no ADVbox\\n' +\n  '   → customers_id: ' + $('Extrair lawsuit_id e Preparar F4').first().json.customerId + '\\n\\n' +\n  '✅ F2 — Processo cadastrado no ADVbox\\n' +\n  '   → lawsuits_id: ' + $('Extrair lawsuit_id e Preparar F4').first().json.lawsuitId + '\\n\\n' +\n  '✅ F4 — Tarefas ADVbox criadas (Defesa Prévia)\\n\\n' +\n  '⚠️ F3 (Drive) e F5 (campos jurídicos CU) — verifique se necessário completar manualmente.\\n\\n' +\n  'Executado automaticamente pelo WF PONTE em ' + new Date().toLocaleString('pt-BR', {timeZone:'America/Fortaleza'})\n}) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "n21",
+      "name": "Respond Sucesso",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        -80
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({status:'ok', customer_id: $('Extrair lawsuit_id e Preparar F4').first().json.customerId, lawsuit_id: $('Extrair lawsuit_id e Preparar F4').first().json.lawsuitId}) }}"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook MF03 Validado": {
+      "main": [
+        [
+          {
+            "node": "GET Task ClickUp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Task ClickUp": {
+      "main": [
+        [
+          {
+            "node": "Parse MF02 e Preparar Payloads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse MF02 e Preparar Payloads": {
+      "main": [
+        [
+          {
+            "node": "IF Já Processado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Já Processado": {
+      "main": [
+        [
+          {
+            "node": "Respond Já Processado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "F1 — Cadastrar Cliente ADVbox",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "F1 — Cadastrar Cliente ADVbox": {
+      "main": [
+        [
+          {
+            "node": "IF F1 Sucesso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF F1 Sucesso": {
+      "main": [
+        [
+          {
+            "node": "Comment Erro F1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extrair customer_id e Preparar F2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comment Erro F1": {
+      "main": [
+        [
+          {
+            "node": "Respond Erro F1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair customer_id e Preparar F2": {
+      "main": [
+        [
+          {
+            "node": "F2 — Cadastrar Processo ADVbox",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "F2 — Cadastrar Processo ADVbox": {
+      "main": [
+        [
+          {
+            "node": "IF F2 Sucesso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF F2 Sucesso": {
+      "main": [
+        [
+          {
+            "node": "Comment Erro F2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extrair lawsuit_id e Preparar F4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comment Erro F2": {
+      "main": [
+        [
+          {
+            "node": "Respond Erro F2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair lawsuit_id e Preparar F4": {
+      "main": [
+        [
+          {
+            "node": "F4 — Criar Tarefas ADVbox",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "F4 — Criar Tarefas ADVbox": {
+      "main": [
+        [
+          {
+            "node": "IF F4 Sucesso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF F4 Sucesso": {
+      "main": [
+        [
+          {
+            "node": "Comment Erro F4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Comment Sucesso Final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comment Erro F4": {
+      "main": [
+        [
+          {
+            "node": "Respond Erro F4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comment Sucesso Final": {
+      "main": [
+        [
+          {
+            "node": "Respond Sucesso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "pinData": null
+}

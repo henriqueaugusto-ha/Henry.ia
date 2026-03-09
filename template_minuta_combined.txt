@@ -1,0 +1,167 @@
+ILMO. SR. {{ORGAO_DESTINO_CABECALHO}}
+
+
+{{NOME_COMPLETO}}, {{NACIONALIDADE}}, portador do CPF nº {{CPF}}, RG nº {{RG}}, CNH nº {{CNH_NUMERO}}, categoria {{CNH_CATEGORIA}}, com endereço profissional registrado na {{ENDERECO_COMPLETO}} (documentação em anexo) vem, por intermédio de seu advogado que esta subscreve (procuração anexa), requerer:
+* CÓPIA INTEGRAL do Auto de Infração de Trânsito (AIT) nº {{NUMERO_AIT}}, juntamente com as informações referentes às comunicações realizadas, os procedimentos e prazos cumpridos, abrangendo todos os documentos, despachos, pareceres e quaisquer outras peças que componham os autos, desde a sua autuação até a presente data.
+Desta forma, o pedido abrange todos os documentos que componham os autos, de forma pormenorizada, incluindo, mas não se limitando a:
+1. O requerimento inicial que deu origem ao processo com todos os documentos que instruíram o pedido inicial;
+2. Todas as movimentações internas com os respectivos despachos e encaminhamentos entre os setores competentes deste órgão de trânsito;
+3. Todos os Pareceres técnicos e jurídicos emitidos;
+4. Todas as notificações, intimações e ofícios expedidos;
+5. Todos os comprovantes de envio e recebimento das notificações expedidas;
+6. Todas as Decisões, incluindo as interlocutórias e as terminativas proferidas;
+7. Os procedimentos adotados com a comprovação do cumprimento de todos os prazos legais e normativos.
+8. Qualquer outro documento juntado ao processo até o seu estado atual.
+Frisa-se, para que não reste qualquer dúvida, que o objeto do presente pedido é a cópia da TRAMITAÇÃO COMPLETA do processo, e não apenas o teor da decisão final ou do julgamento.
+Tal requerimento é um direito subjetivo do requerente, essencial para a garantia da ampla defesa e do contraditório, sendo amparado no Princípio da Publicidade, no direito fundamental de Acesso à Informação e de Petição (Art. 5º, incisos XIV, XXXIII e XXXIV, CF/88), na Lei de Acesso à Informação (Lei Federal nº 12.527/2011), e na Lei do Processo Administrativo (Lei Federal nº 9.784/1999, Art. 3º, II). A obtenção da cópia integral é a única forma de viabilizar o exercício efetivo do contraditório e da ampla defesa, garantias constitucionais inafastáveis (Art. 5º, LV, CF/88).
+Conforme a lei de Acesso à Informação, a documentação deve ser entregue imediatamente. Caso a documentação completa não seja fornecida no ato do protocolo, requer-se que seja integralmente enviada para o e-mail do advogado subscritor, suporte@henriqueaugusto.adv.br, no prazo máximo de 20 (vinte) dias corridos, conforme preceitua o Art. 11, §1º, da Lei 12.527/2011.
+Termos em que pede deferimento,
+{{CIDADE_UF}}, {{DATA_CONTRATO_EXTENSO}}
+
+
+Henrique Augusto Félix Linhares
+Advogado
+OAB/CE - 28.051
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+PROCURAÇÃO AD JUDICIA
+
+OUTORGANTE(S): {{NOME_COMPLETO}}, {{NACIONALIDADE}}, portador do CPF nº {{CPF}}, RG nº {{RG}}, CNH nº {{CNH_NUMERO}}, categoria {{CNH_CATEGORIA}}, com endereço profissional registrado na {{ENDERECO_COMPLETO}}.
+
+OUTORGADO(S): HENRIQUE AUGUSTO FÉLIX LINHARES, brasileiro, casado, advogado, inscrito na OAB/CE sob o nº 28.051, atendendo em Fortaleza e toda região metropolitana, mediante prévio agendamento no Prédio Juridical Center, localizado na Avenida Washington Soares, nº 1.400, 7º andar, Sala 711, CEP: 60.811-350, Bairro Engenheiro Luciano Cavalcante, Fortaleza/CE, e atendendo em todos os Estados do Brasil mediante videoconferência.
+
+________________
+
+
+PODERES OUTORGADOS:
+Pelo presente instrumento particular de mandato, o OUTORGANTE confere ao OUTORGADO poderes específicos para representá-lo exclusivamente em matéria de trânsito, nas esferas administrativa e/ou judicial, com as seguintes atribuições:
+________________
+
+
+I – NA ESFERA ADMINISTRATIVA:
+Representar o outorgante perante o {{ORGAO_SIGLA}}, a Secretaria Nacional de Trânsito (SENATRAN), bem como perante todas as Juntas Administrativas de Recursos de Infrações (JARIs) e o Conselho Estadual de Trânsito/ Câmara Espacial de Recursos/DF, e demais órgãos e entidades que compõem o Sistema Nacional de Trânsito (SNT), podendo Protocolar defesas prévias, recursos administrativos e pedidos de revisão; requerer vistas de processos e cópias de documentos; apresentar requerimentos, petições e manifestações; requerer acesso aos procedimentos administrativos relacionados a infrações de trânsito, bem como a processos de suspensão e cassação do direito de dirigir; solicitar informações com fundamento na Lei de Acesso à Informação (Lei nº 12.527/2011); e assinar termos, declarações e quaisquer outros documentos necessários à defesa administrativa do outorgante.
+________________
+
+
+III – FINALIDADE ESPECÍFICA:
+Os poderes ora conferidos destinam-se exclusivamente:
+1. À defesa dos interesses do outorgante relacionados ao Auto de Infração de Trânsito nº {{NUMERO_AIT}}, bem como a todos os seus desdobramentos administrativos ou judiciais, incluindo eventuais processos de suspensão ou cassação do direito de dirigir;
+
+
+{{CIDADE_UF}}, {{DATA_CONTRATO_EXTENSO}}
+*
+
+
+Outorgante
+❖ O presente mandato é assinado com dispensa de reconhecimento de firma nos termos do art. 105 do CPC c/c art. 5º, § 2º da Lei 8.906/94. No entanto, o outorgado certifica a autenticidade da assinatura do(a) outorgante.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+CONTRATO DE PRESTAÇÃO DE SERVIÇOS ADVOCATÍCIOS
+
+Pelo presente instrumento particular, que entre si fazem:
+CLIENTE/CONTRATANTE: {{NOME_COMPLETO}}, {{NACIONALIDADE}}, portador do CPF nº {{CPF}}, RG nº {{RG}}, CNH nº {{CNH_NUMERO}}, categoria {{CNH_CATEGORIA}}, com endereço profissional registrado na {{ENDERECO_COMPLETO}}.
+ESCRITÓRIO/CONTRATADO: HENRIQUE AUGUSTO LINHARES SOCIEDADE INDIVIDUAL DE ADVOCACIA, pessoa jurídica de direito privado, inscrita no CNPJ sob o nº 58.197.395/0001-44, com registro na OAB/CE sob o nº 04596 Livro B, com sede no Prédio Juridical Center, localizado na Avenida Washington Soares, nº 1.400, 7º andar, Sala 711, Bairro Engenheiro Luciano Cavalcante, Fortaleza/CE, CEP: 60.811-350, telefone: (85) 9 9125-4002, e-mail: suporte@henriqueaugusto.adv.br, neste ato representada por seu titular, Dr. Henrique Augusto Félix Linhares, advogado inscrito na OAB/CE sob o nº 28.051.
+Têm entre si justo e contratado, mediante as cláusulas e condições seguintes:
+________________
+
+
+CLÁUSULA PRIMEIRA – DO OBJETO E DA EXTENSÃO DA ATUAÇÃO
+I. O CONTRATADO compromete-se a prestar serviços advocatícios consistentes na defesa administrativa e/ou judicial relativa ao {{OBJETO_CONTRATO}}.
+________________
+
+
+II. No âmbito administrativo, a atuação tem por finalidade anular, suspender ou mitigar as penalidades decorrentes da autuação, inclusive a penalidade de multa e o eventual processo de suspensão do direito de dirigir.
+________________
+
+
+III. No âmbito judicial, caso a estratégia jurídica definida pelo CONTRATADO indique a necessidade de judicialização da matéria administrativa, o presente contrato abrangerá o ajuizamento de uma única ação judicial perante o Juizado Especial da Fazenda Pública ou Vara da Fazenda Pública competente no Estado do {{ORGAO_ESTADO}}, com atuação até o trânsito em julgado, incluindo a interposição dos recursos cabíveis, desde que juridicamente viáveis, a critério técnico do escritório.
+________________
+
+
+IV. O presente contrato limita-se exclusivamente ao Auto de Infração nº {{NUMERO_AIT}}, não abrangendo outras infrações administrativas, processos autônomos de suspensão distintos, penalidades de cassação, execuções fiscais, ações penais ou quaisquer outros procedimentos, que dependerão de aditivo contratual ou novo contrato, com honorários próprios.
+________________
+
+
+V. O CONTRATANTE declara ciência de que o presente contrato configura obrigação de meio, comprometendo-se o CONTRATADO a empregar todo o conhecimento técnico-jurídico, experiência profissional e diligência necessários à defesa dos interesses do CONTRATANTE, sem garantia de resultado, por depender de decisões administrativas e judiciais alheias à vontade do advogado.
+________________
+
+
+VI. A definição da estratégia jurídica, seja administrativa, judicial ou ambas, bem como a eventual opção por impugnações técnicas ou recursos legalmente cabíveis, compete exclusivamente ao CONTRATADO, em razão de sua autonomia técnica e responsabilidade profissional, sendo vedada qualquer ingerência do CONTRATANTE na condução técnica do caso.
+A exigência ou imposição de estratégia diversa da definida pelo CONTRATADO configurará violação contratual, autorizando a rescisão por iniciativa do CONTRATANTE, sem culpa do CONTRATADO, com:
+* perda dos valores já pagos;
+* exigibilidade integral dos honorários vincendos;
+* multa compensatória de 20%;
+* juros de mora de 2% ao mês;
+* correção monetária pelo IGP-M/FGV,
+incidentes desde a rescisão até o efetivo pagamento.
+VII. O CONTRATANTE reconhece que a relação advocatícia é fundada na confiança recíproca e na autonomia técnica do advogado, assegurada pelo art. 7º, I, da Lei nº 8.906/94 (Estatuto da Advocacia), sendo que a interferência indevida na condução do caso constitui motivo suficiente para inviabilizar a continuidade dos serviços, autorizando a resolução contratual.
+________________
+
+
+CLÁUSULA SEGUNDA – DAS OBRIGAÇÕES DO CONTRATANTE
+2.1. O CONTRATANTE obriga-se a fornecer ao CONTRATADO todos os documentos, informações e meios de prova necessários à comprovação processual do direito que pretende ver reconhecido, comparecer a todos os atos processuais nos quais sua presença seja imprescindível e não possa ser suprida por procuração ou preposto, indicar, quando requisitado, testemunhas para eventual audiência de instrução, comunicar imediatamente ao CONTRATADO qualquer mudança de endereço, telefone, e-mail ou dados bancários, e manter seus dados cadastrais atualizados junto ao CONTRATADO durante toda a vigência contratual.
+________________
+
+
+CLÁUSULA TERCEIRA – DOS HONORÁRIOS ADVOCATÍCIOS
+3.1. Pela prestação dos serviços advocatícios descritos neste contrato, o CONTRATANTE pagará ao CONTRATADO honorários advocatícios no valor total de {{VALOR_TOTAL}}, conforme a modalidade de pagamento a seguir:
+
+{{OPCAO_PAGAMENTO}}
+
+Chave PIX (CNPJ): 58.197.395/0001-44
+Titular: Henrique Augusto Linhares Sociedade Individual de Advocacia
+Banco: BTG Pactual
+________________
+
+
+CLÁUSULA QUARTA – DO INADIMPLEMENTO
+O atraso superior a 05 (cinco) dias úteis no pagamento de qualquer parcela ou do valor total dos honorários acarretará a rescisão automática do contrato, por culpa exclusiva do CONTRATANTE, independentemente de notificação.
+Configurado o inadimplemento, o CONTRATANTE ficará obrigado ao pagamento da integralidade dos honorários pactuados na Cláusula Terceira, acrescidos de multa contratual de 20% (vinte por cento), juros de mora de 2% (dois por cento) ao mês e correção monetária pelo IGP-M/FGV, desde o vencimento até o efetivo pagamento, sem direito à restituição de valores já pagos.
+Na hipótese de mora, o CONTRATADO poderá promover a inscrição do débito nos órgãos de proteção ao crédito (SPC/SERASA) e o protesto do presente instrumento, sem prejuízo das demais medidas legais cabíveis.
+________________
+
+
+CLÁUSULA QUINTA – DA RESCISÃO CONTRATUAL E INEXISTÊNCIA DE DIREITO DE ARREPENDIMENTO
+O CONTRATANTE declara ciência de que o presente contrato de prestação de serviços advocatícios não se submete ao direito de arrependimento previsto no art. 49 do Código de Defesa do Consumidor, por se tratar de relação de natureza civil, regida pelo Estatuto da Advocacia (Lei nº 8.906/94) e pelo Código de Ética e Disciplina da OAB.
+O CONTRATANTE reconhece que, a partir da assinatura deste contrato e da respectiva procuração, o CONTRATADO inicia imediatamente a prestação dos serviços advocatícios, compreendendo análise do caso, estudo técnico e jurídico, definição de estratégia, elaboração e revisão de peças e demais atividades intelectuais necessárias, independentemente de protocolo.
+Em razão do início imediato e da natureza intelectual e técnica dos serviços, não existe prazo de arrependimento ou desistência sem ônus, aperfeiçoando-se o vínculo contratual no momento da assinatura.
+Em caso de rescisão por iniciativa do CONTRATANTE, desistência da demanda, revogação do mandato ou extinção do vínculo sem culpa do CONTRATADO, serão devidos integralmente os honorários pactuados na Cláusula Terceira, acrescidos de multa contratual de 20% (vinte por cento), juros de mora de 2% (dois por cento) ao mês e correção monetária pelo IGP-M/FGV, desde a data da rescisão até o efetivo pagamento, não sendo devida a devolução de quaisquer valores pagos, independentemente da justificativa apresentada pelo CONTRATANTE.
+________________
+
+
+CLÁUSULA SEXTA – DAS DESPESAS PROCESSUAIS
+O CONTRATANTE declara ciência de que a defesa administrativa relativa ao Auto de Infração nº {{NUMERO_AIT}}, lavrado pelo {{ORGAO_AUTUADOR_EXTENSO}}, é, em regra, isenta de custas iniciais, inexistindo despesas obrigatórias além dos honorários advocatícios pactuados.
+Os protocolos realizados por meio dos sistemas eletrônicos oficiais e gratuitos do {{ORGAO_SIGLA}} e demais órgãos do Sistema Nacional de Trânsito não gerarão custos adicionais ao CONTRATANTE.
+Entretanto, caso a estratégia jurídica exija despesas indispensáveis, tais como envio de documentos via Correios, obtenção de certidões, autenticações, reconhecimentos de firma, diligências, deslocamentos, custas recursais ou quaisquer taxas eventualmente exigidas pelos órgãos competentes ou pelo Poder Judiciário, o CONTRATADO poderá antecipar os valores, ficando o CONTRATANTE obrigado ao reembolso integral, mediante comprovação.
+O reembolso deverá ocorrer no prazo máximo de 10 (dez) dias corridos da comunicação, sob pena de multa de 20%, juros de 2% ao mês e correção monetária pelo IGP-M/FGV até o efetivo pagamento.
+________________
+
+
+CLÁUSULA DÉCIMA TERCEIRA – DO TÍTULO EXECUTIVO EXTRAJUDICIAL
+13.1. O presente contrato constitui título executivo extrajudicial, nos termos do Art. 784, inciso III, do Código de Processo Civil, e do Art. 24 da Lei 8.906/94, podendo ser executado judicialmente para cobrança dos honorários pactuados e demais encargos previstos neste instrumento.
+________________
+
+
+CLÁUSULA DÉCIMA QUARTA – DO FORO
+14.1. Fica eleito o Foro da Comarca de {{COMARCA}}/{{UF_ORGAO}} para dirimir quaisquer dúvidas, controvérsias ou litígios decorrentes da interpretação, execução ou rescisão do presente contrato, com renúncia expressa a qualquer outro, por mais privilegiado que seja.
+________________
+
+
+E por estarem assim justos e contratados, as partes firmam o presente instrumento para que produza todos os seus efeitos legais e jurídicos de forma imediata.
+{{CIDADE_UF}}, {{DATA_CONTRATO_EXTENSO}}
+
+
+{{NOME_COMPLETO}},
+CPF nº {{CPF}}, RG nº {{RG}}, CNH nº {{CNH_NUMERO}}
+CONTRATANTE
+
+HENRIQUE AUGUSTO LINHARES SOCIEDADE INDIVIDUAL DE ADVOCACIA - CNPJ nº 58.197.395/0001-44
+HENRIQUE AUGUSTO FÉLIX LINHARES
+ADVOGADO - OAB/CE - 28.051
+CONTRATADO

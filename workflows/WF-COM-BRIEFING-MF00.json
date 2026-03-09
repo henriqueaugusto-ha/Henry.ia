@@ -1,0 +1,393 @@
+{
+  "name": "WF-COM | BRIEFING | MF00 | Gerar Briefing da Reunião",
+  "nodes": [
+    {
+      "id": "a1b2c3d4-0001",
+      "name": "ClickUp Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "parameters": {
+        "path": "clickup-briefing-mf00",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "responseData": "firstEntryJson"
+      },
+      "webhookId": "clickup-briefing-mf00"
+    },
+    {
+      "id": "a1b2c3d4-0002",
+      "name": "Verificar Link Gravação",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst taskId = body.task_id || body.task?.id || body.payload?.id || '';\n\n// Field ID: \"Link da Gravação\"\nconst LINK_FIELD_ID = '0100e278-0005-48d3-ad6e-d6b06d9de2d9';\n\nconst historyItems = body.history_items || [];\nconst fieldItem = historyItems.find(h =>\n  h.field === 'custom_field' &&\n  h.custom_field?.id === LINK_FIELD_ID &&\n  h.after?.value\n);\n\n// Also check direct task field value\nconst taskFields = body.task?.custom_fields || [];\nconst directField = taskFields.find(f => f.id === LINK_FIELD_ID);\n\nconst loomUrl = fieldItem?.after?.value || directField?.value || '';\nconst prosseguir = taskId !== '' && loomUrl !== '' && loomUrl.includes('http');\n\nreturn [{ json: { prosseguir, taskId, loomUrl } }];"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0003",
+      "name": "É Link Válido?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "cond-valid",
+              "leftValue": "={{ $json.prosseguir }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "true" }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "a1b2c3d4-0004",
+      "name": "GET Task ClickUp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 200],
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $('Verificar Link Gravação').item.json.taskId }}?custom_fields=true",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "options": {}
+      }
+    },
+    {
+      "id": "a1b2c3d4-0005",
+      "name": "Preparar Dados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 200],
+      "parameters": {
+        "jsCode": "const task = $input.first().json;\nconst loomUrl = $('Verificar Link Gravação').item.json.loomUrl;\nconst taskId = $('Verificar Link Gravação').item.json.taskId;\n\n// Extract Loom video ID from URL\n// Formats: https://www.loom.com/share/{id} or https://loom.com/share/{id}\nconst loomMatch = loomUrl.match(/loom\\.com\\/share\\/([a-zA-Z0-9]+)/);\nconst loomId = loomMatch ? loomMatch[1] : '';\n\n// Get existing data from task\nconst cf = task.custom_fields || [];\nconst getVal = (id) => {\n  const f = cf.find(x => x.id === id);\n  return f?.value ? String(f.value).trim() : '';\n};\n\nreturn [{ json: {\n  taskId,\n  loomUrl,\n  loomId,\n  taskName: task.name || '',\n  taskDescription: task.description || ''\n} }];"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0006",
+      "name": "Fetch Página Loom",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 200],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.loomUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "a1b2c3d4-0007",
+      "name": "Extrair Dados Loom",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 200],
+      "parameters": {
+        "jsCode": "const html = $input.first().json.data || '';\nconst loomId = $('Preparar Dados').item.json.loomId;\nconst taskId = $('Preparar Dados').item.json.taskId;\nconst loomUrl = $('Preparar Dados').item.json.loomUrl;\n\nlet transcriptUrl = '';\nlet videoDownloadUrl = '';\nlet videoTitle = '';\n\n// Try to extract __NEXT_DATA__ JSON\ntry {\n  const nextDataMatch = html.match(/<script id=\"__NEXT_DATA__\"[^>]*>([\\s\\S]*?)<\\/script>/);\n  if (nextDataMatch) {\n    const nextData = JSON.parse(nextDataMatch[1]);\n    const video = nextData?.props?.pageProps?.video || {};\n    transcriptUrl = video.transcriptUrl || video.transcript_url || '';\n    videoDownloadUrl = video.download_url || video.cdnUrl || video.cdn_url || '';\n    videoTitle = video.title || video.name || '';\n  }\n} catch(e) {\n  // JSON parse failed\n}\n\n// Fallback: try to find transcript URL in HTML directly\nif (!transcriptUrl) {\n  const transcriptMatch = html.match(/https:\\/\\/cdn\\.loom\\.com\\/[^\"'\\s]*transcript[^\"'\\s]*\\.(vtt|json)/);\n  if (transcriptMatch) transcriptUrl = transcriptMatch[0];\n}\n\n// Fallback: find video CDN URL\nif (!videoDownloadUrl) {\n  const cdnMatch = html.match(/https:\\/\\/cdn\\.loom\\.com\\/sessions\\/[^\"'\\s]+\\.mp4/);\n  if (cdnMatch) videoDownloadUrl = cdnMatch[0];\n}\n\nconst hasTranscript = !!transcriptUrl;\nconst hasVideo = !!videoDownloadUrl;\n\nreturn [{ json: {\n  taskId,\n  loomId,\n  loomUrl,\n  videoTitle,\n  transcriptUrl,\n  videoDownloadUrl,\n  hasTranscript,\n  hasVideo\n} }];"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0008",
+      "name": "Tem Transcrição Nativa?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1780, 200],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "cond-transcript",
+              "leftValue": "={{ $json.hasTranscript }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "true" }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "a1b2c3d4-0009",
+      "name": "Fetch Transcript VTT",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2000, 100],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $('Extrair Dados Loom').item.json.transcriptUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "a1b2c3d4-0010",
+      "name": "Parse VTT para Texto",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2220, 100],
+      "parameters": {
+        "jsCode": "const vttText = $input.first().json.data || '';\nconst loomData = $('Extrair Dados Loom').item.json;\n\n// Parse VTT format to plain text\nconst lines = vttText.split('\\n');\nconst textLines = [];\nlet skipLine = false;\n\nfor (const line of lines) {\n  const trimmed = line.trim();\n  // Skip WEBVTT header, timestamps, and empty lines\n  if (!trimmed || trimmed === 'WEBVTT' || trimmed.includes('-->') || /^\\d+$/.test(trimmed)) {\n    continue;\n  }\n  // Skip NOTE lines\n  if (trimmed.startsWith('NOTE')) continue;\n  textLines.push(trimmed);\n}\n\nconst transcript = textLines.join(' ').replace(/\\s+/g, ' ').trim();\n\nreturn [{ json: {\n  transcript,\n  source: 'loom_native',\n  taskId: loomData.taskId,\n  loomId: loomData.loomId,\n  videoTitle: loomData.videoTitle\n} }];"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0011",
+      "name": "Download Áudio Loom",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2000, 320],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $('Extrair Dados Loom').item.json.videoDownloadUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "a1b2c3d4-0012",
+      "name": "Whisper - Transcrever",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2220, 320],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "model", "value": "whisper-1" },
+            { "name": "language", "value": "pt" },
+            { "name": "response_format", "value": "text" },
+            { "parameterType": "formBinaryData", "name": "file", "inputDataFieldName": "data" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "a1b2c3d4-0013",
+      "name": "Formatar Transcrição Whisper",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2440, 320],
+      "parameters": {
+        "jsCode": "const whisperData = $input.first().json;\nconst loomData = $('Extrair Dados Loom').item.json;\n\n// Whisper returns text directly\nconst transcript = typeof whisperData === 'string' ? whisperData : (whisperData.text || whisperData.data || '');\n\nreturn [{ json: {\n  transcript,\n  source: 'whisper',\n  taskId: loomData.taskId,\n  loomId: loomData.loomId,\n  videoTitle: loomData.videoTitle\n} }];"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0014",
+      "name": "Merge Transcrição",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [2660, 200],
+      "parameters": {
+        "mode": "chooseBranch",
+        "chooseBranchMode": "waitForBoth"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0015",
+      "name": "GPT - Gerar Briefing",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2880, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $env.OPENAI_API_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4o\",\n  \"temperature\": 0.2,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"GERADOR DE BRIEFING COMERCIAL — H.A. ADVOCACIA\\n\\n1️⃣ CONTEXTO DO ASSISTENTE\\n\\nVocê é um Assistente Comercial do escritório H.A. Advocacia de Trânsito, especializado em analisar transcrições de reuniões comerciais e extrair informações estratégicas para gerar um Briefing Comercial objetivo e estruturado.\\n\\nSeu papel é transformar conversas longas e desorganizadas em um resumo operacional claro, que permita ao closer e ao jurídico entender rapidamente o caso do cliente.\\n\\nVocê atua como um analista de reuniões comerciais jurídicas.\\n\\n2️⃣ OBJETIVO PRINCIPAL\\n\\nAo receber uma transcrição de reunião, você deve:\\n1. Identificar as informações relevantes\\n2. Organizar as informações por categoria\\n3. Resumir os dados de forma objetiva\\n4. Gerar um Briefing Comercial estruturado\\n5. Identificar lacunas importantes de informação\\n\\nO briefing deve permitir que qualquer membro do escritório entenda o caso do cliente em menos de 1 minuto.\\n\\n3️⃣ PRINCÍPIOS OBRIGATÓRIOS\\n\\n1. Objetividade absoluta\\n• Frases curtas\\n• Resumos diretos\\n• Máximo 1–2 linhas por informação\\n\\n2. Nunca inventar informação\\nSe algo não foi mencionado, escreva: NÃO INFORMADO\\n\\n3. Nunca copiar frases da transcrição — sempre interpretar e resumir.\\n\\n4. RELATO DOS FATOS: máximo 5 linhas\\n\\n5. BLOCO 8 SEMPRE:\\n[CLOSER PREENCHE MANUALMENTE]\\n\\n4️⃣ FORMATO OBRIGATÓRIO DO BRIEFING\\n\\n📁 BRIEFING COMERCIAL — H.A. ADVOCACIA\\n\\n📅 Data da Reunião:\\n👤 Closer:\\n👤 Cliente:\\n\\n▶️ BLOCO 1: IDENTIFICAÇÃO DO CLIENTE\\n• Nome completo:\\n• CPF:\\n• RG:\\n• Motorista profissional?\\n• Depende da CNH para trabalho?\\n• PPD ou CNH definitiva?\\n\\n▶️ BLOCO 2: SITUAÇÃO ATUAL\\n• Tipo de infração:\\n• Fase atual do processo:\\n• Outras infrações?\\n• Processo de suspensão?\\n\\n▶️ BLOCO 3: DADOS DA MULTA\\n• Órgão autuador:\\n• Nº do AIT:\\n• Data da infração:\\n• Prazo para defesa/recurso:\\n• Proprietário do veículo?\\n• Aderiu ao SNE?\\n\\n▶️ BLOCO 4: DOCUMENTOS\\n• Possui o AIT?\\n• Notificações em mãos?\\n• Outros documentos:\\n\\n▶️ BLOCO 5: RELATO DOS FATOS (máx. 5 linhas)\\nResumo objetivo do ocorrido.\\n\\n▶️ BLOCO 6: CONTRATAÇÃO\\n• Serviços oferecidos:\\n• Valor do orçamento:\\n• Forma de pagamento escolhida:\\n• Expectativas alinhadas:\\n\\n▶️ BLOCO 7: PERFIL E OBSERVAÇÕES\\n• Perfil do cliente:\\n• Acompanhante na reunião?\\n• Observações importantes:\\n\\n▶️ BLOCO 8: TÁTICAS INTERNAS — CONFIDENCIAL\\n• Estratégia real:\\n[CLOSER PREENCHE MANUALMENTE]\\n• Suporte NÃO pode informar:\\n[CLOSER PREENCHE MANUALMENTE]\\n\\n📌 LACUNAS — CLOSER DEVE COMPLEMENTAR\\nListe até 10 informações importantes que não apareceram na reunião.\\n\\nALÉM DO BRIEFING, ao final, adicione um bloco JSON estruturado separado por ---JSON--- com os seguintes campos extraídos (use null se não encontrado):\\n{\\n  \\\"cpf\\\": null,\\n  \\\"rg\\\": null,\\n  \\\"nome_cliente\\\": null,\\n  \\\"numero_ait\\\": null,\\n  \\\"orgao_autuador\\\": null,\\n  \\\"data_infracao\\\": null,\\n  \\\"valor_contrato\\\": null,\\n  \\\"forma_pagamento\\\": null,\\n  \\\"cnh_numero\\\": null,\\n  \\\"endereco\\\": null\\n}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"={{ 'Transcrição da reunião:\\\\n\\\\n' + $json.transcript }}\"\n    }\n  ]\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "a1b2c3d4-0016",
+      "name": "Parse Briefing e Campos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [3100, 200],
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst content = response.choices?.[0]?.message?.content || '';\n\n// Split briefing from JSON data\nconst parts = content.split('---JSON---');\nconst briefingText = parts[0].trim();\nlet structuredData = {};\n\nif (parts[1]) {\n  try {\n    const jsonStr = parts[1].trim();\n    structuredData = JSON.parse(jsonStr);\n  } catch(e) {\n    // Try to find JSON block in the text\n    const jsonMatch = parts[1].match(/\\{[\\s\\S]*\\}/);\n    if (jsonMatch) {\n      try { structuredData = JSON.parse(jsonMatch[0]); } catch(e2) {}\n    }\n  }\n}\n\nconst taskId = $('Parse VTT para Texto').item?.json?.taskId || $('Formatar Transcrição Whisper').item?.json?.taskId || '';\n\nreturn [{ json: {\n  taskId,\n  briefingText,\n  cpf: structuredData.cpf || '',\n  rg: structuredData.rg || '',\n  nomeCliente: structuredData.nome_cliente || '',\n  numeroAit: structuredData.numero_ait || '',\n  orgaoAutuador: structuredData.orgao_autuador || '',\n  dataInfracao: structuredData.data_infracao || '',\n  valorContrato: structuredData.valor_contrato || '',\n  formaPagamento: structuredData.forma_pagamento || '',\n  cnhNumero: structuredData.cnh_numero || '',\n  endereco: structuredData.endereco || ''\n} }];"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0017",
+      "name": "Salvar Briefing no ClickUp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [3320, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}/field/36ae0875-4f7a-4853-b8ab-0ce9c29d746b",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"value\": {{ JSON.stringify($json.briefingText) }} }",
+        "options": {}
+      }
+    },
+    {
+      "id": "a1b2c3d4-0018",
+      "name": "Atualizar Campos Extraídos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [3540, 200],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// Map of field ID -> value to update\nconst updates = [];\n\n// CPF field: 26b4ecd6-6963-4160-a554-30cd4f36a70c\nif (data.cpf) updates.push({ fieldId: '26b4ecd6-6963-4160-a554-30cd4f36a70c', value: data.cpf });\n\n// RG field: f36e9cb0-f9d2-4cb8-91ea-e5014a2566c7\nif (data.rg) updates.push({ fieldId: 'f36e9cb0-f9d2-4cb8-91ea-e5014a2566c7', value: data.rg });\n\n// CNH number: cbefb914-0e29-4611-b992-b689d0b0fbb1\nif (data.cnhNumero) updates.push({ fieldId: 'cbefb914-0e29-4611-b992-b689d0b0fbb1', value: data.cnhNumero });\n\n// Endereço: 7eae45ba-94b4-4cb4-bd1b-927ef11b8107\nif (data.endereco) updates.push({ fieldId: '7eae45ba-94b4-4cb4-bd1b-927ef11b8107', value: data.endereco });\n\n// AIT number: e220c08f-03dd-487a-a8a2-6cf25e5bf9d3\nif (data.numeroAit) updates.push({ fieldId: 'e220c08f-03dd-487a-a8a2-6cf25e5bf9d3', value: data.numeroAit });\n\n// Data infração: ad630128-2859-40e7-a45a-a7639dfbce34\n// (skip - requires timestamp format)\n\nreturn updates.map(u => ({ json: { taskId: data.taskId, fieldId: u.fieldId, value: u.value } }));"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0019",
+      "name": "PUT Campos no ClickUp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [3760, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $json.taskId }}/field/{{ $json.fieldId }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"value\": {{ JSON.stringify($json.value) }} }",
+        "options": {}
+      }
+    },
+    {
+      "id": "a1b2c3d4-0020",
+      "name": "Postar Comentário MF00",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [3980, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.clickup.com/api/v2/task/{{ $('Parse Briefing e Campos').item.json.taskId }}/comment",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clickUpApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"comment_text\": \"📋 MF00 — BRIEFING COMERCIAL GERADO\\n⏳ Aguardando conferência do closer\\n\\nA transcrição da reunião foi processada e o briefing foi gerado automaticamente.\\n\\n✅ Campo 'Briefing Comercial' atualizado\\n✅ Dados extraídos preenchidos\\n\\nPróximo passo: revisar o briefing, complementar o Bloco 8 e confirmar os dados do cliente antes de avançar para assinatura.\",\n  \"notify_all\": false\n}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "ClickUp Webhook": {
+      "main": [[{ "node": "Verificar Link Gravação", "type": "main", "index": 0 }]]
+    },
+    "Verificar Link Gravação": {
+      "main": [[{ "node": "É Link Válido?", "type": "main", "index": 0 }]]
+    },
+    "É Link Válido?": {
+      "main": [
+        [{ "node": "GET Task ClickUp", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "GET Task ClickUp": {
+      "main": [[{ "node": "Preparar Dados", "type": "main", "index": 0 }]]
+    },
+    "Preparar Dados": {
+      "main": [[{ "node": "Fetch Página Loom", "type": "main", "index": 0 }]]
+    },
+    "Fetch Página Loom": {
+      "main": [[{ "node": "Extrair Dados Loom", "type": "main", "index": 0 }]]
+    },
+    "Extrair Dados Loom": {
+      "main": [[{ "node": "Tem Transcrição Nativa?", "type": "main", "index": 0 }]]
+    },
+    "Tem Transcrição Nativa?": {
+      "main": [
+        [{ "node": "Fetch Transcript VTT", "type": "main", "index": 0 }],
+        [{ "node": "Download Áudio Loom", "type": "main", "index": 0 }]
+      ]
+    },
+    "Fetch Transcript VTT": {
+      "main": [[{ "node": "Parse VTT para Texto", "type": "main", "index": 0 }]]
+    },
+    "Parse VTT para Texto": {
+      "main": [[{ "node": "Merge Transcrição", "type": "main", "index": 0 }]]
+    },
+    "Download Áudio Loom": {
+      "main": [[{ "node": "Whisper - Transcrever", "type": "main", "index": 0 }]]
+    },
+    "Whisper - Transcrever": {
+      "main": [[{ "node": "Formatar Transcrição Whisper", "type": "main", "index": 0 }]]
+    },
+    "Formatar Transcrição Whisper": {
+      "main": [[{ "node": "Merge Transcrição", "type": "main", "index": 1 }]]
+    },
+    "Merge Transcrição": {
+      "main": [[{ "node": "GPT - Gerar Briefing", "type": "main", "index": 0 }]]
+    },
+    "GPT - Gerar Briefing": {
+      "main": [[{ "node": "Parse Briefing e Campos", "type": "main", "index": 0 }]]
+    },
+    "Parse Briefing e Campos": {
+      "main": [[{ "node": "Salvar Briefing no ClickUp", "type": "main", "index": 0 }]]
+    },
+    "Salvar Briefing no ClickUp": {
+      "main": [[{ "node": "Atualizar Campos Extraídos", "type": "main", "index": 0 }]]
+    },
+    "Atualizar Campos Extraídos": {
+      "main": [[{ "node": "PUT Campos no ClickUp", "type": "main", "index": 0 }]]
+    },
+    "PUT Campos no ClickUp": {
+      "main": [[{ "node": "Postar Comentário MF00", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
