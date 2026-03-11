@@ -17,13 +17,16 @@
 
 ## Funções da Luciana (levantadas pela Ana Laura)
 
-> Fonte: mensagem da Ana Laura enviada em 11/03/2026
+> Fonte: mensagem da Ana Laura enviada em 11/03/2026 — lista completa (8 itens)
 
 1. Solicitar ao cliente a documentação necessária na entrada do processo judicial (ex: declaração de residência)
 2. Informar o protocolo aos clientes
 3. Pedir comentário/feedback dos clientes
 4. Elaborar requerimentos
-7. Organizar as pastas no Advbox (ex: criar pasta de peças/petições, organizar documentos por tipo)
+5. Manter a planilha de processos judiciais atualizada
+6. Organizar a planilha administrativa dos pedidos de cópia
+7. Organizar as pastas no Advbox (ex: pasta de defesa prévia + comprovante de protocolo; pasta de documentos assinados)
+8. Diligenciar processos na vara
 
 ---
 
@@ -132,7 +135,11 @@ R: Deve verificar a CNH Digital e os correios a cada 15 dias para ver se teve no
 **P6. "Como está meu processo?"**
 R: Verifiquei que nos contratou para [tal serviço]. Aconteceu algo? Houve alguma mudança na sua carteira? Alguma nova atualização que queira nos enviar? Peço que envie print para que possamos analisar e lhe dar um retorno melhor.
 
-> ⚠️ Solicitar a Ana Laura o documento completo com P1 e P2.
+**P1. "Eu posso transferir o veículo para outra pessoa mesmo estando com o processo administrativo tramitando?"**
+R: Pode fazer a transferência do veículo normalmente, a infração constará na sua carteira e não prejudicará o seu processo administrativo. Mas se caso resolverem pagar a multa, vale ressaltar que a multa não pode ser paga com os 40% de desconto, visto que o pagamento com esse desconto estaria assumindo a responsabilidade pela infração e assim prejudicando totalmente seu processo administrativo. Pode pagar a multa apenas com 20% ou sem o desconto.
+
+**P2. "Por que a multa está constando no licenciamento?"**
+R: Se o processo administrativo estiver com o andamento correto, o órgão não pode obrigar o cliente a pagar o licenciamento com a multa que ainda está sendo recorrida.
 
 ---
 
