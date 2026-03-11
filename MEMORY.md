@@ -328,6 +328,14 @@ Headers:
 - Prazos vencidos: 2 (HUMBERTO ANPP 04/02, HERICKLEPTON 24/02)
 - Causa raiz: WF-CONTRACT quebrado (PDF Master URL vazio)
 
+## Grupos Telegram — Configuração em Andamento (11/03/2026)
+
+- Config openclaw.json com wildcard `*` aplicada — aceita qualquer grupo
+- Backup: `openclaw.json.bak-groups-20260311022146`
+- Falta: `docker restart openclaw` → testar nos grupos restantes → capturar IDs → config final
+- Grupo "Automações" → chat_id: `telegram:-5138173805` ✅ (capturado 11/03 12h49)
+- Grupos pendentes de ID: Gestão & Estratégia, Jurídico, Comercial, Vida Pessoal
+
 ## Pendente
 
 - [ ] OAuth Google Ads — VENCE HOJE 03/03 🔴 CRÍTICO
