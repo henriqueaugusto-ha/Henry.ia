@@ -230,13 +230,19 @@ Todo sub-agent spawnado DEVE ter follow-up:
 4. Falha: retry imediato → se falhar 2x → avisar o Dr. Henrique
 5. **NUNCA** deixar sub-agent cair no limbo silencioso
 
-### Split de Modelos — Regra de Custo
-| Uso | Modelo | Regra |
-|-----|--------|-------|
-| Interação direta | Sonnet | Padrão atual |
-| Crons e automação | Sonnet | Obrigatório |
-| Heartbeats / Watchdog | Haiku | Obrigatório |
-| Nunca em cron | Opus | Proibido |
+### Split de Modelos — Regra de Uso (atualizado 11/03/2026)
+| Uso | Modelo | Alias | Regra |
+|-----|--------|-------|-------|
+| Operação padrão | `anthropic/claude-sonnet-4-6` | `/model sonnet` | Padrão — todas as tarefas do dia a dia |
+| Pensamento/Orquestração | `nexos/1c331ce6-650c-43ad-882b-75421467258b` | `/model opus` | Raciocínio complexo, estratégia, arquitetura, revisão crítica, prompts-mãe |
+| Crons e automação | Sonnet | — | Obrigatório |
+| Heartbeats / Watchdog | Sonnet ou Haiku | — | Sonnet preferível (Haiku teve erro de model string) |
+| Nunca em cron | Opus | — | Proibido (custo) |
+
+**Uso manual no Telegram:**
+- `/model opus` → ativa modo pensamento/orquestração para aquela sessão
+- `/model sonnet` → volta ao padrão operacional
+- Opus nunca vira padrão global — sempre troca manual e consciente
 
 ### Feedback Loops — Como Usar
 - Arquivos: `memory/feedback/comercial.json`, `automacao.json`, `operacional.json`
