@@ -225,3 +225,9 @@ Registrar em `lessons.md` com análise de causa raiz. Sem exceção.
 - Decisão: APENAS reportar + aguardar instrução do Dr. Henrique
 - Motivo: operações de correção em massa requerem protocolo Nível 4
 - Bloqueado: investigação WF-CONTRACT e preenchimento manual até ordem direta
+
+
+## Decisão — Grupo Setor Financeiro (11/03/2026 18h39)
+- Chat ID: telegram:-5220749274
+- **Uso exclusivo:** questões financeiras apenas
+- Origem: instrução direta do Dr. Henrique por áudio

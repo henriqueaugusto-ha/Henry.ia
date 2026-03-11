@@ -7,10 +7,14 @@
 
 ## 🔴 URGENTE
 
-### OAuth Google Ads — Vence AMANHÃ (03/03/2026) 🔴
-- Status: vence em 24h
-- Impacto: WF-ROAS para de reportar, campanhas ficam cegas
-- Ação: renovar OAuth via console Google Ads
+### ✅ OAuth Google Ads — RESOLVIDO (08/03/2026)
+- Token renovado em 08/03/2026 — sem data de expiração fixa
+- Status atual: funcionando ✅
+- **Gap de dados:** 25/02 a 07/03 = 11 dias sem dados de investimento Google Ads
+  - Token anterior (renovado 24/02) parou com ERRO 401: NOT_ADS_USER entre 04-07/03
+  - Dias afetados: 25-28/02 + 01-07/03
+- Impacto: dados de ROAS/atribuição desse período são inválidos ou ausentes
+- Ação pendente: decidir se vale reconstituir dados manuais do período ou ignorar o gap
 
 ### Crons Falhando — 4/6 Quebrados 🔴
 - Daily Briefing 7h: "cron announce delivery failed"
