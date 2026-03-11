@@ -91,6 +91,22 @@ Aplica-se a TODAS as ferramentas. Padrão universal = **SOMENTE LEITURA**.
 
 ---
 
+## Google Drive — Regras de Acesso (11/03/2026)
+
+Acesso autorizado pelo Dr. Henrique para consulta e busca de arquivos.
+
+**Regras permanentes:**
+- ✅ Somente leitura — nunca excluir, mover, renomear ou criar arquivos
+- ✅ Não compartilhar nenhum arquivo ou link com terceiros sem autorização explícita
+- ✅ Não extrair dados de clientes para fora do ambiente (nome, CPF, telefone)
+- ✅ Apresentar tudo que encontrar ao Dr. Henrique antes de qualquer ação
+- ✅ Dados de clientes = sigilo profissional, mesmo nível de dados de processo
+- ✅ Acesso somente para o objetivo autorizado naquela sessão
+- ❌ Nunca acessar Drive para finalidade diferente da solicitada no momento
+
+**Link compartilhado:** https://drive.google.com/drive/folders/1MCYUmOr3tgGog6pMeTbKM-xMumyWSmuk
+**Status:** aguardando Dr. Henrique alterar para "qualquer pessoa com o link pode visualizar"
+
 ## Sempre Perguntar Antes
 
 ❌ Enviar mensagens (WhatsApp, Telegram, email) para clientes ou equipe
