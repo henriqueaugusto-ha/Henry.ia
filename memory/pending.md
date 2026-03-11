@@ -83,6 +83,21 @@
 ### ✅ Etapa 3 — groupPolicy allowlist — CONCLUÍDA 02/03/2026
 - Telegram, Slack e WhatsApp: groupPolicy allowlist
 
+### 🔴 Grupos Telegram — Configuração pausada (11/03/2026)
+- Status: IDs dos 5 grupos capturados, config preparado, mas NÃO aplicado
+- Bloqueador: `/data/.openclaw/openclaw.json` não encontrado no host pela equipe
+- O arquivo existe DENTRO do container (confirmado), mas o caminho no host é diferente
+- Próximo passo: mapear o caminho real do openclaw.json no HOST antes de qualquer sobrescrita
+- Config atual: wildcard `"*"` aplicado (funcional para DM e grupos existentes)
+- IDs capturados:
+  - Vida Pessoal: -5145538226
+  - Comercial: -5146692074
+  - Jurídico: -5001797443
+  - Automações: -5138173805
+  - Gestão & Estratégia: -5240379406
+- Até resolução: operação segue pelo DM normalmente
+- Config final preparado em `/tmp/openclaw_new.json` (dentro do container)
+
 ### 🔴 ClickUp — Planos/Metas (868hpad3h) — PRIMEIRA TAREFA PRÓXIMA SESSÃO
 - Tarefa vazia — Dr. Henrique disse ter adicionado "pensamentos e hábitos" mas conteúdo não encontrado
 - Aguardando clarificação: Opção A (construir com base na sessão) ou Opção B (localizar em outro lugar do ClickUp)
