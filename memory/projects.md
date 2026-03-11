@@ -111,19 +111,20 @@
   - `/data/.openclaw/workspace/memory/2026-03-02-janeiro.md` (janeiro específico)
 - **Próximos passos:** Aguardando decisão Dr. Henrique sobre correção workflow + preenchimento manual
 
-### 🔴 Correção Crons Falhando (02/03)
-- **Problema:** 4/6 crons quebrados há dias sem alerta visível
+### 🔴 Correção Crons Falhando (02/03 — 8 dias parado)
+- **Problema:** 4/6 crons quebrados há 8+ dias sem alerta visível
   - Daily Briefing 7h: "cron announce delivery failed"
   - Heartbeat 10h/14h: 2 erros consecutivos
   - Watchdog 8h: delivery failure
   - Git Backup 2h: "model not allowed: anthropic/claude-haiku-3-5"
-- **Causa provável:** modo "announce" delivery + modelo Haiku string inválido
-- **Impacto:** Sistema imunológico desativado (watchdog, heartbeat, security audit)
-- **Status:** Identificado, correção pendente
-- **Próximo passo:** Testar delivery mode alternativo + validar modelo Haiku
+- **Causa:** modo "announce" delivery + modelo Haiku string inválida
+- **Impacto:** Sistema imunológico desativado (watchdog, heartbeat, briefing não chegam)
+- **Status:** Script criado (`scripts/fix-cron-delivery.py`) em 03/03 — NÃO APLICADO
+- **Ação:** Dr. Henrique aplicar 2 comandos no terminal VPS (2 minutos)
+- **Atualizado:** 11/03/2026
 
-### 🔴 OAuth Google Ads — Renovação (vence 03/03)
-- **Urgência:** CRÍTICO — vence em 24h
-- **Impacto:** WF-ROAS (relatório diário) para de funcionar
-- **Ação:** Dr. Henrique renovar via console Google Ads
-- **Status:** Pendente ação
+### 🔴 OAuth Google Ads — Status DESCONHECIDO (venceu 03/03)
+- **Urgência:** CRÍTICO — venceu em 03/03, status de renovação não confirmado
+- **Impacto:** WF-ROAS pode estar cego há 8 dias (sem dados de campanha)
+- **Ação:** Confirmar renovação; se não renovado, renovar agora
+- **Status:** Sem confirmação de renovação nos registros (atualizado 11/03)
