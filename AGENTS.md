@@ -304,3 +304,19 @@ Este arquivo é vivo. Quando:
 - O escopo do meu papel mudar → reflito aqui
 
 *Última atualização: 2026-03-02*
+
+---
+
+## Regra de Áudio — Atualização (11/03/2026)
+
+### Regra anterior (George ElevenLabs)
+- Áudios curtos → ElevenLabs George (JBFqnCBsd6RMkjVDRZzb)
+
+### Nova regra (definida pelo Dr. Henrique em 11/03/2026)
+- Áudio **até ~1 minuto** → ElevenLabs George (script elevenlabs-tts.sh)
+- Áudio **acima de 1 minuto** → OpenAI TTS API, voz **onyx** (masculina grave), fracionado em partes
+  - Nomear: "Parte 1 — [tema]", "Parte 2 — [tema]", etc.
+  - API Key: 1Password "OpenAI API Key" → campo password
+  - Endpoint: POST https://api.openai.com/v1/audio/speech
+  - Modelo: tts-1, voice: onyx
+
