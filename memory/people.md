@@ -37,10 +37,21 @@
 - Monitorar desenvolvimento sem microgerenciar
 
 ### Ana Laura — Suporte ao Cliente
-- Tempo de casa: ~20 dias (fev/2026)
+- Tempo de casa: ~20 dias (fev/2026) → ~1 mês (mar/2026)
 - Papel: atualizar clientes, acompanhar status, comunicação organizada
 - Status: em formação, ainda não autônoma
 - Objetivo: reduzir retrabalho jurídico e evitar que Henrique responda cliente à noite
+- Responsabilidade extra: treinamento da Luciana (amizade prévia — manter profissionalismo)
+
+### Luciana — Jurídico (auxiliar administrativo)
+- Entrada: 11/03/2026
+- Papel: auxiliar Ana Laura em tarefas administrativas e burocráticas do jurídico
+- Quem treina: Ana Laura (diário) + Dr. Henrique (estratégico)
+- Perfil: vontade, mas deficiência em sistemas — exige paciência e treinamento progressivo
+- Modelo: estagiária — aprende fazendo, uma tarefa por vez
+- Funções definidas (8 itens): solicitar docs ao cliente, informar protocolo, pedir feedback, elaborar requerimentos, manter planilha judicial, organizar planilha de cópias, organizar pastas Advbox, diligenciar processos na vara
+- ⚠️ Risco cultural: amizade com Ana Laura — manter foco e profissionalismo
+- Arquivo completo: tasks/onboarding-nova-colaboradora-2026-03-11.md
 
 ---
 
