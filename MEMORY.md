@@ -334,7 +334,8 @@ Headers:
 - Backup: `openclaw.json.bak-groups-20260311022146`
 - Falta: `docker restart openclaw` → testar nos grupos restantes → capturar IDs → config final
 - Grupo "Automações" → chat_id: `telegram:-5138173805` ✅ (capturado 11/03 12h49)
-- Grupos pendentes de ID: Gestão & Estratégia, Jurídico, Comercial, Vida Pessoal
+- Grupo "Setor Financeiro" → chat_id: `telegram:-5220749274` ✅ (capturado 11/03 18h39)
+- Todos os 6 grupos mapeados: Vida Pessoal (-5145538226), Comercial (-5146692074), Jurídico (-5001797443), Automações (-5138173805), Gestão & Estratégia (-5240379406), Setor Financeiro (-5220749274)
 
 ## Pendente
 
