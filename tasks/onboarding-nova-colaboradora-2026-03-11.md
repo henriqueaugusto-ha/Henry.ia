@@ -1,16 +1,29 @@
-# Onboarding — Nova Colaboradora (Jurídico)
+# Onboarding — Luciana (Jurídico)
 > Criado: 11/03/2026 | Baseado na reunião Dr. Henrique + Ana Laura
-> Status: RASCUNHO — validar com Dr. Henrique antes de aplicar
+> Atualizado: 11/03/2026 — FAQ da Ana Laura incorporado
+> Status: PRONTO para uso
 
 ---
 
 ## Contexto
 
-Nova colaboradora entrando no setor jurídico para auxiliar a Ana Laura em tarefas administrativas e burocráticas. Amiga da Ana Laura. Tem vontade, mas deficiência em sistemas — exige paciência e treinamento progressivo.
+**Luciana** entra no setor jurídico para auxiliar a Ana Laura em tarefas administrativas e burocráticas. Amiga da Ana Laura. Tem vontade, mas deficiência em sistemas — exige paciência e treinamento progressivo.
 
 **Quem treina:** Ana Laura (acompanhamento diário) + Dr. Henrique (alinhamento estratégico)
 **Modelo:** estagiária — aprende fazendo, uma tarefa por vez
 **Cultura a passar:** padrão do escritório é inegociável. Foco. Sem distração (ela e Ana Laura são amigas — manter profissionalismo).
+
+---
+
+## Funções da Luciana (levantadas pela Ana Laura)
+
+> Fonte: mensagem da Ana Laura enviada em 11/03/2026
+
+1. Solicitar ao cliente a documentação necessária na entrada do processo judicial (ex: declaração de residência)
+2. Informar o protocolo aos clientes
+3. Pedir comentário/feedback dos clientes
+4. Elaborar requerimentos
+7. Organizar as pastas no Advbox (ex: criar pasta de peças/petições, organizar documentos por tipo)
 
 ---
 
@@ -99,6 +112,27 @@ Resposta padrão: "Sua defesa foi protocola em [data]. Aguardamos o prazo de 30 
 **Por quê:** isso vira a base do FAQ e futuramente alimenta o bot de suporte automatizado.
 **Prazo:** até o fim do dia de hoje.
 **Entregar para:** Dr. Henrique via Slack ou WhatsApp.
+
+---
+
+## FAQ de Suporte — Respostas Padrão (Ana Laura, 11/03/2026)
+
+> Base para treinar a Luciana e futuramente alimentar o bot de suporte.
+> Perguntas 1 e 2 não capturadas nas imagens — Ana Laura tem o documento completo.
+
+**P3. "Vocês falaram que em 60 dias resolveriam meu problema, por que está demorando tanto?"**
+R: Em regra, os processos do escritório são resolvidos de forma rápida, mas infelizmente acontece de o processo cair em uma vara que não dá muito celeridade. O que podemos fazer? Diligenciar na vara para que seja dado andamento o mais rápido possível.
+
+**P4. "Quando inicia o processo de suspensão?"**
+R: O processo de multa e de suspensão em regra era pra iniciar conjuntamente, mas o órgão na maioria das vezes só inicia o processo de suspensão após o encerramento do processo de multa.
+
+**P5. "Depois que vocês protocolaram minha defesa, quais são os próximos passos?"**
+R: Deve verificar a CNH Digital e os correios a cada 15 dias para ver se teve nova atualização. Após o protocolo da defesa: se deferida → ganhamos. Se indeferida → será expedida notificação de penalidade para interposição de Recurso à JARI. Se o recurso for indeferido → nova notificação de penalidade para Recurso ao CETRAN.
+
+**P6. "Como está meu processo?"**
+R: Verifiquei que nos contratou para [tal serviço]. Aconteceu algo? Houve alguma mudança na sua carteira? Alguma nova atualização que queira nos enviar? Peço que envie print para que possamos analisar e lhe dar um retorno melhor.
+
+> ⚠️ Solicitar a Ana Laura o documento completo com P1 e P2.
 
 ---
 
