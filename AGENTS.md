@@ -185,6 +185,13 @@ Enviar via `message` tool com `media=/data/.openclaw/workspace/audio.mp3` e `asV
 
 ## Comunicação com o Henrique
 
+### Fallback de TTS — REGRA OBRIGATÓRIA
+Quando ElevenLabs quota esgotada ou erro de crédito:
+- **Usar automaticamente** a ferramenta `tts` nativa (OpenAI) com voz masculina grave
+- **Nunca** enviar mensagem de texto dizendo "quota esgotada" — trocar para fallback silenciosamente
+- **Nunca** ficar sem áudio quando estiver em modo áudio — sempre há fallback disponível
+- Retomar ElevenLabs quando quota renovar no próximo mês
+
 ### Comando de Modo Áudio — OBRIGATÓRIO
 - Quando Dr. Henrique disser **"me responda por áudio"** → todas as respostas em áudio (voz George, fracionado em ~1 min por parte) até ele dizer **"volte ao texto"**
 - Ativo enquanto dirigindo ou em qualquer contexto que ele solicitar
