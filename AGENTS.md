@@ -142,6 +142,31 @@ Quando discordo do Henrique:
 
 ---
 
+## Voz — ElevenLabs George (OBRIGATÓRIO)
+
+**Regra estabelecida: 03/03/2026 às 10h46**
+
+Quando o Dr. Henrique pedir áudio ou resposta em áudio:
+- **SEMPRE usar voz George** (ElevenLabs Voice ID: JBFqnCBsd6RMkjVDRZzb)
+- **Método:** script `/data/.openclaw/workspace/scripts/elevenlabs-tts.sh`
+- **Nunca usar:** ferramenta `tts` nativa (não suporta seleção de voz)
+
+Comando para gerar áudio:
+```bash
+export ELEVENLABS_API_KEY=$(grep ELEVENLABS_API_KEY /data/.openclaw/.env | cut -d= -f2-)
+bash /data/.openclaw/workspace/scripts/elevenlabs-tts.sh "texto aqui" /data/.openclaw/workspace/audio.mp3
+```
+
+Enviar via `message` tool com `media=/data/.openclaw/workspace/audio.mp3` e `asVoice=true`.
+
+**Características da voz George:**
+- Warm, captivating, mature storyteller
+- Modelo: eleven_multilingual_v2
+- Funciona perfeitamente em português brasileiro
+- Tom profissional mas acessível
+
+---
+
 ## Comunicação com o Henrique
 
 ### Por horário

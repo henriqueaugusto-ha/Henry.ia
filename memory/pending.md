@@ -115,6 +115,17 @@
 
 ## 🟡 IMPORTANTE
 
+### Organização de Canais Telegram — Estruturar (não urgente)
+- Status: registrado 03/03/2026 às 10h44
+- Objetivo: criar canais separados no Telegram para organização por assunto
+- Canais sugeridos:
+  - 📊 Daily Briefing — relatórios matinais automáticos
+  - 🚨 Alertas Críticos — OAuth, falhas de sistema, prazos vencidos
+  - 📋 Projetos — updates de projetos em andamento
+  - 💬 Conversas Gerais — DM atual
+- Prioridade: baixa, mas fixado para não esquecer
+- Próximo passo: quando tiver tempo, criar estrutura e configurar delivery dos crons
+
 ### 54 Contratos Sem Documentos ZapSign (52% do Q4+Q1) 🔴
 - Descoberto: auditoria 02/03/2026
 - Total: 103 contratos (Dez 42, Jan 35, Fev 26)
