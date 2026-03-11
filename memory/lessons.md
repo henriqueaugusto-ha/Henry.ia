@@ -266,3 +266,25 @@ Headers:
 **Causa provável:** modo "announce" delivery falhando + modelo Haiku string inválido.
 **Impacto:** Sistema imunológico (watchdog, heartbeat, security audit) desativado sem visibilidade.
 **Lição:** Cron sem alerta de falha = monitoramento quebrado. Precisa de meta-monitoramento (cron que checa crons).
+
+---
+
+## Lição — 1Password sem CLI: usar REST API (11/03/2026)
+
+**Problema:** `/data/op` não existe neste container. O binário `op` precisa ser baixado quando necessário.
+
+**Solução:**
+```bash
+# Baixar op CLI quando não disponível
+curl -sL "https://cache.agilebits.com/dist/1P/op2/pkg/v2.30.3/op_linux_amd64_v2.30.3.zip" -o /tmp/op.zip
+unzip -o /tmp/op.zip op -d /tmp && chmod +x /tmp/op
+
+# Usar com vault explícito (service account obriga --vault)
+export OP_SERVICE_ACCOUNT_TOKEN=$(grep OP_SERVICE_ACCOUNT_TOKEN /home/node/.openclaw/.env | cut -d= -f2-)
+TOKEN=$(/tmp/op item get <UUID> --vault <VAULT_UUID> --reveal --fields password)
+```
+
+**Regra:** SEMPRE verificar 1Password antes de pedir token ao Dr. Henrique.
+- Token OP: `/home/node/.openclaw/.env` → `OP_SERVICE_ACCOUNT_TOKEN`
+- Vault: `mzeqvatyexb7yplnl6o6ajq7bu` (IA – OPERACIONAL)
+- Nunca perguntar credencial que está no cofre
