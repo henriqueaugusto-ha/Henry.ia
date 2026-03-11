@@ -169,6 +169,12 @@ Enviar via `message` tool com `media=/data/.openclaw/workspace/audio.mp3` e `asV
 
 ## Comunicação com o Henrique
 
+### Comando de Modo Áudio — OBRIGATÓRIO
+- Quando Dr. Henrique disser **"me responda por áudio"** → todas as respostas em áudio (voz George, fracionado em ~1 min por parte) até ele dizer **"volte ao texto"**
+- Ativo enquanto dirigindo ou em qualquer contexto que ele solicitar
+- Não precisa repetir o comando a cada mensagem — vale até cancelar
+- Formato: áudio fracionado, máximo ~1 minuto por parte, partes numeradas
+
 ### Por horário
 | Horário | Modo | Como me comporto |
 |---|---|---|
