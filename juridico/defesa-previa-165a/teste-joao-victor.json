@@ -1,0 +1,36 @@
+{
+  "nome_cliente": "JOAO VICTOR LOURENÇO NOBRE",
+  "nacionalidade": "brasileiro",
+  "estado_civil": "solteiro",
+  "cpf": "609.820.763-12",
+  "rg": "20080634200 SSP/CE",
+  "tipo_doc": "CNH",
+  "numero_habilitacao": "07525922534",
+
+  "placa": "ORO8509",
+  "marca_modelo": "VW/FOX 1.0",
+  "renavam": "00502955899",
+
+  "endereco_rua": "Av. Moura Matos",
+  "endereco_numero": "1683, Passaré, CEP 60.861-350",
+  "cidade_cliente": "Fortaleza-CE",
+
+  "numero_ait": "SC01175794",
+  "data_infracao": "07/03/2026",
+  "hora_infracao": "21:14",
+  "local_infracao": "Av. José Jatahy, 1688, Fortaleza/CE",
+
+  "orgao_nome": "DEPARTAMENTO ESTADUAL DE TRÂNSITO DO CEARÁ",
+  "orgao_sigla": "DETRAN/CE",
+  "orgao_estado": "DO CEARÁ",
+
+  "marca_etilometro": "[VERIFICAR AIT]",
+  "modelo_etilometro": "[VERIFICAR AIT]",
+  "serie_etilometro": "[VERIFICAR AIT]",
+
+  "cidade_assinatura": "Fortaleza-CE",
+  "data_assinatura": "12 de março de 2026",
+
+  "nome_advogado": "Henrique Augusto Félix Linhares",
+  "oab_advogado": "OAB/CE - 28.051"
+}
