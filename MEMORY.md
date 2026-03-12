@@ -418,6 +418,29 @@ Headers:
 - [x] N8N API Key ✅ 02/03/2026
 - [x] 1Password CLI ✅ 02/02/2026
 
+## Mapeamento Completo F10–F22 (12/03/2026 — 16h)
+
+### Arquivados com prefixo [ARQUIVO]
+- rKMGK7ETZKIAu4JJ → [ARQUIVO] WF-CONTRACT - AG-01 Briefing
+- vj8WSQWsE4fgPePm → [ARQUIVO] WF-CONTRACT — MF-04 ZapSign
+- nf6OPZ9PxLbHWErs → [ARQUIVO] WF-ADVBOX F6 Test
+- ny26c1eLf9pUgF15 → [ARQUIVO] TEMP — Ler Tracking GCLID
+
+### F10–F22 Mapeados e Renomeados
+- ppws3IRJo8K6QQJd → WF-FIN | F10 | ZapSign Assinado → Disparar Pipeline ✅
+- F11 — PÓS-ASSINATURA | Pipeline Financeiro Unificado → ⬜ NÃO EXISTE (criar)
+- waHjYonLSnWTMYkD → WF-FIN | F12 | Verificação de Pagamentos e Orquestração ✅ (inativo)
+- wxP9YXDz4t5JSiJ6 → WF-JUR | F13 | PONTE — Onboarding Automático ✅
+- imtGbPavAHjLZ6Nf → WF-JUR | F14 | ADVbox — Cadastro do Cliente ✅
+- d8LugSfOKgAP3mn6 → WF-JUR | F15 | ADVbox — Cadastro do Processo ✅
+- haR02rfUyP43LkYD → WF-JUR | F16 | ADVbox — Cadastro de Tarefas ✅
+- l92kHCXK38YZOc6C → WF-JUR | F17 | ADVbox — Criar Tarefa ✅
+- xbYmfV0ptyu1KUsK → WF-JUR | F18 | ADVbox — Organizar Docs Drive + ClickUp ✅ (inativo)
+- F19 — JURÍDICO | ADVbox — Atualizar Campos ClickUp → ⬜ NÃO EXISTE (criar)
+- F20 — ROAS | Painel Diário Completo → ⬜ localizar ou criar
+- F21 — ROAS | Scan Retroativo → vp02pRAs1GaBZb00 (TEMP — confirmar com Dr. Henrique)
+- lJrZZwctS1tXWcZv → WF-ADS | F22 | Tracking Google Ads (Captura GCLID) ✅
+
 ## Workflows Comerciais — Nomenclatura Atualizada (12/03/2026)
 
 Padrão: `WF-COM | F[n] | Descrição` (renomeado de MF para F em 12/03)
