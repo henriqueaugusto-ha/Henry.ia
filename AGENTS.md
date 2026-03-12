@@ -158,28 +158,38 @@ Quando discordo do Henrique:
 
 ---
 
-## Voz — ElevenLabs George (OBRIGATÓRIO)
+## Voz Padrão — OpenAI Onyx (OBRIGATÓRIO — atualizado 12/03/2026)
 
-**Regra estabelecida: 03/03/2026 às 10h46**
+**Regra atualizada: 12/03/2026 — Dr. Henrique aprovou a voz Onyx como padrão definitivo**
 
 Quando o Dr. Henrique pedir áudio ou resposta em áudio:
-- **SEMPRE usar voz George** (ElevenLabs Voice ID: JBFqnCBsd6RMkjVDRZzb)
-- **Método:** script `/data/.openclaw/workspace/scripts/elevenlabs-tts.sh`
-- **Nunca usar:** ferramenta `tts` nativa (não suporta seleção de voz)
+- **SEMPRE usar voz Onyx** — OpenAI TTS API, modelo `tts-1`, voz `onyx`
+- **NUNCA mais usar:** ElevenLabs George (substituído) nem ferramenta `tts` nativa
+- Funciona para qualquer duração — sem limite de 1 minuto
 
-Comando para gerar áudio:
+Comando padrão para gerar áudio:
 ```bash
-export ELEVENLABS_API_KEY=$(grep ELEVENLABS_API_KEY /data/.openclaw/.env | cut -d= -f2-)
-bash /data/.openclaw/workspace/scripts/elevenlabs-tts.sh "texto aqui" /data/.openclaw/workspace/audio.mp3
+export OP_SERVICE_ACCOUNT_TOKEN=$(grep OP_SERVICE_ACCOUNT_TOKEN /home/node/.openclaw/.env | cut -d= -f2-)
+OPENAI_KEY=$(/tmp/op item get "OpenAI API Key" --vault "IA – OPERACIONAL" --fields password --reveal 2>/dev/null)
+
+cat > /tmp/tts_payload.json << 'PAYLOAD'
+{"model":"tts-1","voice":"onyx","input":"TEXTO AQUI"}
+PAYLOAD
+
+curl -s -X POST https://api.openai.com/v1/audio/speech \
+  -H "Authorization: Bearer $OPENAI_KEY" \
+  -H "Content-Type: application/json" \
+  -d @/tmp/tts_payload.json \
+  --output /home/node/.openclaw/workspace/audio.mp3
 ```
 
-Enviar via `message` tool com `media=/data/.openclaw/workspace/audio.mp3` e `asVoice=true`.
+Enviar via `message` tool com `media=/home/node/.openclaw/workspace/audio.mp3` e `asVoice=true`, `channel=telegram`, `target=[chat_id]`.
 
-**Características da voz George:**
-- Warm, captivating, mature storyteller
-- Modelo: eleven_multilingual_v2
+**Características da voz Onyx:**
+- Masculina, grave, natural
+- Preferida pelo Dr. Henrique (aprovada em 12/03/2026)
+- Modelo: tts-1 (OpenAI)
 - Funciona perfeitamente em português brasileiro
-- Tom profissional mas acessível
 
 ---
 
@@ -307,16 +317,13 @@ Este arquivo é vivo. Quando:
 
 ---
 
-## Regra de Áudio — Atualização (11/03/2026)
+## Regra de Áudio — Atualização Final (12/03/2026)
 
-### Regra anterior (George ElevenLabs)
-- Áudios curtos → ElevenLabs George (JBFqnCBsd6RMkjVDRZzb)
-
-### Nova regra (definida pelo Dr. Henrique em 11/03/2026)
-- Áudio **até ~1 minuto** → ElevenLabs George (script elevenlabs-tts.sh)
-- Áudio **acima de 1 minuto** → OpenAI TTS API, voz **onyx** (masculina grave), fracionado em partes
-  - Nomear: "Parte 1 — [tema]", "Parte 2 — [tema]", etc.
-  - API Key: 1Password "OpenAI API Key" → campo password
-  - Endpoint: POST https://api.openai.com/v1/audio/speech
-  - Modelo: tts-1, voice: onyx
+### Regra definitiva (Dr. Henrique aprovou em 12/03/2026)
+- **TODA resposta em áudio** → OpenAI TTS API, voz **onyx** (masculina grave)
+- Sem distinção de duração — onyx para tudo
+- API Key: 1Password "OpenAI API Key" → campo password
+- Endpoint: POST https://api.openai.com/v1/audio/speech
+- Modelo: tts-1, voice: onyx
+- ElevenLabs George: descontinuado como padrão (pode ser usado pontualmente se solicitado)
 
