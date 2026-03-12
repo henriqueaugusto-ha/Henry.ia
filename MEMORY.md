@@ -349,19 +349,68 @@ Headers:
 - Pipeline Asaas pendente (requer "CONFIRMO A EXECUÇÃO")
 - Detalhes completos: `memory/2026-03-12.md`
 
-## Pendente
+## Pendente — Atualizado 12/03/2026
 
-- [ ] OAuth Google Ads — VENCE HOJE 03/03 🔴 CRÍTICO
-- [ ] Corrigir 4/6 crons falhando 🔴
-- [ ] Investigar WF-CONTRACT workflow (54 contratos sem docs) 🔴
-- [ ] Preencher 51 deadlines faltantes (Jan+Fev) 🔴
-- [ ] Alertar equipe jurídica — 2 prazos vencidos fevereiro
-- [ ] Régua cobrança Asaas (497 vencidas ~R$473k → 20% = R$95k)
-- [x] GitHub PAT ✅ — 1Password "GitHub - GitHub Personal Access Token (Henry IA)" (ID: 7rmwyq2laxxzoavgcyi5hcxfvq) — push configurado via HTTPS
+### 🔴 CRÍTICO
+- [ ] Leads perdidos 02-12/03 — MF01 morto 10 dias → recriar manualmente via ChatGuru/Waspeed
+- [ ] ROAS Backfill Fev 25-28 — TEMP workflow `ydx0dYp8auEwN2tJ` com jsCode bugado (`\n` literais) → reescrever via UI N8N
+- [ ] Crons falhando (4/6) — Daily Briefing, Heartbeat, Watchdog, Git Backup com delivery failure / model inválido
+- [ ] Lembrete GCLID 9h 13/03 — cron falhou "pairing required" → reconfigurar
+
+### 🟡 IMPORTANTE
+- [ ] Documentar workflows restantes no padrão Prompt Mestre (prioridade após blockers)
+- [ ] Docxtemplater automação jurídica — aguarda templates Word do Dr. Henrique
+- [ ] F2 + F4 + Pipeline Asaas → JOAO VICTOR, DARLAN, CRISTIANO
 - [ ] Salvar Nexos apiKey no 1Password (Dr. Henrique)
 - [ ] Campanha ANPP Google+Meta (aguarda briefing)
-- [x] API Brasil integração ✅ 2026-03-02
-- [x] Security hardening 9.0/10 ✅ 2026-03-02
-- [x] Auditoria contratos Q4+Q1 ✅ 2026-03-02
-- [x] N8N API Key ✅ 2026-03-02
-- [x] 1Password CLI ✅ 2026-02-28
+- [ ] Régua cobrança Asaas (497 vencidas ~R$473k)
+- [ ] GCP Production mode — fix permanente OAuth (tokens expiram 7 dias em Testing)
+
+### ✅ Resolvidos
+- [x] OAuth Google Ads ✅ 08/03/2026 — token renovado
+- [x] MF01 Captura de Leads ✅ 12/03/2026 — operador LIKE → = (morto desde 02/03)
+- [x] WF-PONTE ✅ 12/03/2026 — operador // → ??
+- [x] WF-01 ROAS ✅ 12/03/2026 — expandido com 11 colunas por canal
+- [x] GitHub PAT ✅ 12/03/2026 — push via HTTPS funcionando
+- [x] Workflows renomeados F0-F9 ✅ 12/03/2026
+- [x] API Brasil integração ✅ 02/03/2026
+- [x] Security hardening 9.0/10 ✅ 02/03/2026
+- [x] N8N API Key ✅ 02/03/2026
+- [x] 1Password CLI ✅ 02/02/2026
+
+## Workflows Comerciais — Nomenclatura Atualizada (12/03/2026)
+
+Padrão: `WF-COM | F[n] | Descrição` (renomeado de MF para F em 12/03)
+
+- BgcnSId0gMyGsFLg → WF-COM | F0 | Entrada Automática de Leads via WhatsApp
+- 7h43EOcN7eZL0dov → WF-COM | F1 | Classificação Inicial do Lead
+- eGs22NeplPH8ILf2 → WF-COM | F2 | Gerar Briefing da Reunião
+- VGyNOb0hYaZVQaTX → WF-COM | F3 | Consolidar Dados do Contrato
+- cncPGeyHW1cWaokv  → WF-COM | F4 | Gerar Minuta em Word Padrão
+- 4RuMRxttDpOaxDTu → WF-COM | F5 | Conferência da Equipe
+- 4iRquwGEMm7wonvj → WF-COM | F6 | Gerar PDF Final e Preparar Assinatura
+- TqsSrUem3qdA07OX → WF-COM | F7 | Enviar para Assinatura e Registrar Cronologia
+- uH26VqCHCC6YkUzu → WF-COM | F8 — ADS | Alerta de Conversão Google
+- l0gHVcqbvaPLSpA3 → WF-COM | F9 — ADS | Envio Automático de Conversões
+
+## Documentação — Padrão Prompt Mestre (12/03/2026)
+
+- URL: https://docs.google.com/document/d/18R4rycqxlPhXGBDwXGWOw8UZHm-OQQnU6WMvUw5Vmhk/edit
+- Task referência (feita pelo Dr. Henrique): 868hvcq41 — NÃO MODIFICAR
+- Padrão: 12 seções com visual premium (╔═.✵.═══╗, CSS blocks, fluxo com setas)
+- Próximos workflows a documentar: F0-F9 + ROAS + PONTE + ADVBOX
+
+## GCLID — Diagnóstico (12/03/2026)
+
+- Tracking sheet: só dados TEST — webhook nunca conectado à landing page real
+- 11 contratos março: TODOS com GCLID vazio
+- Google Ads refresh token expirado (kaywkiowy3lojymxnqndot5s7y)
+- Próximo passo: URL landing page → script captura GCLID → reconectar webhook
+- Lembrete 13/03 9h: enviar prompt ao agente do Dr. Henrique sobre GTM
+
+## CRM Março — Campo Origem (IDs decodificados)
+
+0=Google | 1=INSTA-TP-API | 2=Indicação | 3=Parceria | 4=TikTok | 5=Cliente da Base
+6=Google Meu Negocio | 7=Origem Desconhecida | 8=Youtube | 9=REPESCAGEM
+10=INST-ORGÂNICO | 11=DISPARO API | 12=INSTA-TP-WAPP2
+Campo ID: 2cf330fd-8a82-4378-81de-27b83e6375d3
