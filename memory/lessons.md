@@ -288,3 +288,21 @@ TOKEN=$(/tmp/op item get <UUID> --vault <VAULT_UUID> --reveal --fields password)
 - Token OP: `/home/node/.openclaw/.env` → `OP_SERVICE_ACCOUNT_TOKEN`
 - Vault: `mzeqvatyexb7yplnl6o6ajq7bu` (IA – OPERACIONAL)
 - Nunca perguntar credencial que está no cofre
+
+## Padrão de Documentação ClickUp — OBRIGATÓRIO (12/03/2026)
+
+Prompt Mestre recebido do Dr. Henrique. Toda documentação no ClickUp deve seguir:
+1. Título forte + missão em uma frase
+2. Visão Executiva com checkboxes
+3. Entradas em caixas ASCII visuais
+4. Fluxo Geral com setas e bifurcações
+5. Passo a Passo detalhado (Função / O que acontece / Objetivo / Observações)
+6. Blocos de Decisão visuais
+7. Saídas claras
+8. Dados Técnicos em bloco separado
+9. Regra Operacional Central
+10. Leitura Estratégica
+11. Frase Final Oficial
+
+Doc de referência: https://docs.google.com/document/d/18R4rycqxlPhXGBDwXGWOw8UZHm-OQQnU6WMvUw5Vmhk/edit
+Proibido: texto corrido, anotação seca, estrutura sem hierarquia, documentação sem impacto visual.
