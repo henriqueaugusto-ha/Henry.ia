@@ -337,6 +337,46 @@ Headers:
 - Grupo "Setor Financeiro" → chat_id: `telegram:-5220749274` ✅ (capturado 11/03 18h39) — **uso exclusivo para questões financeiras** (decisão Dr. Henrique 11/03)
 - Todos os 6 grupos mapeados: Vida Pessoal (-5145538226), Comercial (-5146692074), Jurídico (-5001797443), Automações (-5138173805), Gestão & Estratégia (-5240379406), Setor Financeiro (-5220749274)
 
+## Sessão 12/03/2026 — Encerrada 04h59 UTC
+
+### Destaques do dia
+- MF01 corrigido (10 dias morto) + WF-PONTE corrigido
+- Plano automação jurídica: 4 fases definidas (Contrato→Procuração→DP→Recurso)
+- Dashboard CRM mapeado: 15 widgets → prompt gerado em `prompts/clickup-paineis-marco2026.md`
+- GitHub backup funcionando via HTTPS com PAT do 1Password
+- op binary path correto: `/tmp/op` (não `/data/op`)
+- Equipe real: 4 pessoas (não 5) — Ingrid migrando para Previdenciário
+
+### Pendentes críticos para próxima sessão
+- Leads perdidos 02-12/03 (10 dias sem captura MF01) → recriar manualmente
+- ROAS Backfill Fev 25-28 (jsCode com `\n` literais bugado)
+- Automação jurídica: aguarda templates Word + decisão Fase 2 vs 3
+- F2 + F4 + Asaas para 3 clientes Advbox (JOAO VICTOR, DARLAN, CRISTIANO)
+- Dashboard Painéis Março → Claude Navegador executar prompt
+
+## Sessão 12/03/2026 — Encerrada 04h59 UTC
+
+### ✅ Resolvidos
+- MF01 captura de leads: corrigido (LIKE → =)
+- WF-PONTE: corrigido (// → ??)
+- WF-01 ROAS: expandido com 11 colunas por canal
+- Workflows renomeados F0-F9
+- GitHub push via HTTPS com PAT funcionando
+- 3 clientes Advbox cadastrados (JOAO VICTOR, DARLAN, CRISTIANO)
+- Dashboard CRM Nov/2025 mapeado + prompt gerado (`prompts/clickup-paineis-marco2026.md`)
+- Plano automação jurídica: Procuração → Defesa Prévia → Recurso (incremental)
+
+### 🔴 Crítico para próxima sessão
+1. Leads perdidos 02-12/03 (10 dias sem captura) → recriar manualmente
+2. ROAS Backfill Fev 25-28 — TEMP `ydx0dYp8auEwN2tJ` com jsCode bugado
+3. Crons falhando (4/6) — delivery failure + modelo Haiku inválido
+4. OAuth Google Ads — token provavelmente expirado
+
+### ⬜ Aguardando Dr. Henrique
+- Templates Word: procuração ou defesa prévia (Fase 2 vs 3)
+- F2 + F4 + Pipeline Asaas para os 3 clientes
+- Nexos apiKey no 1Password
+
 ## Sessão 12/03/2026 — 3 clientes cadastrados no Advbox
 
 - **JOAO VICTOR** (task 868hua52t) → Advbox ID 14303030 ✅
