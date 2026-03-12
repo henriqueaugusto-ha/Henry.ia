@@ -357,7 +357,7 @@ Headers:
 - [ ] Preencher 51 deadlines faltantes (Jan+Fev) 🔴
 - [ ] Alertar equipe jurídica — 2 prazos vencidos fevereiro
 - [ ] Régua cobrança Asaas (497 vencidas ~R$473k → 20% = R$95k)
-- [ ] GitHub PAT — criar e salvar no 1Password
+- [x] GitHub PAT ✅ — 1Password "GitHub - GitHub Personal Access Token (Henry IA)" (ID: 7rmwyq2laxxzoavgcyi5hcxfvq) — push configurado via HTTPS
 - [ ] Salvar Nexos apiKey no 1Password (Dr. Henrique)
 - [ ] Campanha ANPP Google+Meta (aguarda briefing)
 - [x] API Brasil integração ✅ 2026-03-02
