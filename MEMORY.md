@@ -377,16 +377,16 @@ Headers:
 - F2 + F4 + Pipeline Asaas para os 3 clientes
 - Nexos apiKey no 1Password
 
-## Sessão 12/03/2026 — 3 clientes cadastrados no Advbox
+## Sessão 12/03/2026 — Jurídico (atualizado 05h00 UTC)
 
-- **JOAO VICTOR** (task 868hua52t) → Advbox ID 14303030 ✅
-- **DARLAN** (task 868huwt25) → Advbox ID 14303031 ✅
-- **CRISTIANO** (task 868ht3fzr) → Advbox ID 14303032 ✅
-- CPF corretos extraídos dos PDFs via tool `pdf` (strings era unreliable — extraia RG)
-- ClickUp: CPF field + MF02 field corrigidos para os 3
-- WF PONTE bugado (`//` interpretado como JS comment → fix: trocar por `??`) — requer Dr. Henrique autorizar
-- F2 + F4 (processo + tarefas Advbox) pendentes para próxima sessão
-- Pipeline Asaas pendente (requer "CONFIRMO A EXECUÇÃO")
+- **JOAO VICTOR** (task 868hua52t) → Advbox 14303030 | AIT SC01175794 Lei Seca DETRAN-CE | Prazo DP 22/04/2026
+- **DARLAN** (task 868huwt25) → Advbox 14303031 | 🔴 3 AITs: PS00202879 (Lei Seca) + PS00202880 + PS00202881 | Prazo DP 23/04/2026
+- **CRISTIANO** (task 868ht3fzr) → Advbox 14303032 | AIT SC01064019 Capacete | dados completos pendentes
+- Pastas Drive criadas para os 3 ✅ (workflow F4 executado)
+- Contratos assinados localizados no ZapSign página 114
+- ZapSign: page_size fixo 25 — última página = 114 (não 57!)
+- Advbox API: usar sempre via N8N (curl direto → 403 Cloudflare)
+- Convenção pastas Advbox: `1 - Documentação` / `2 - DP.[nº AIT]`
 - Detalhes completos: `memory/2026-03-12.md`
 
 ## Pendente — Atualizado 12/03/2026
