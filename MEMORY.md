@@ -337,6 +337,18 @@ Headers:
 - Grupo "Setor Financeiro" → chat_id: `telegram:-5220749274` ✅ (capturado 11/03 18h39) — **uso exclusivo para questões financeiras** (decisão Dr. Henrique 11/03)
 - Todos os 6 grupos mapeados: Vida Pessoal (-5145538226), Comercial (-5146692074), Jurídico (-5001797443), Automações (-5138173805), Gestão & Estratégia (-5240379406), Setor Financeiro (-5220749274)
 
+## Sessão 12/03/2026 — 3 clientes cadastrados no Advbox
+
+- **JOAO VICTOR** (task 868hua52t) → Advbox ID 14303030 ✅
+- **DARLAN** (task 868huwt25) → Advbox ID 14303031 ✅
+- **CRISTIANO** (task 868ht3fzr) → Advbox ID 14303032 ✅
+- CPF corretos extraídos dos PDFs via tool `pdf` (strings era unreliable — extraia RG)
+- ClickUp: CPF field + MF02 field corrigidos para os 3
+- WF PONTE bugado (`//` interpretado como JS comment → fix: trocar por `??`) — requer Dr. Henrique autorizar
+- F2 + F4 (processo + tarefas Advbox) pendentes para próxima sessão
+- Pipeline Asaas pendente (requer "CONFIRMO A EXECUÇÃO")
+- Detalhes completos: `memory/2026-03-12.md`
+
 ## Pendente
 
 - [ ] OAuth Google Ads — VENCE HOJE 03/03 🔴 CRÍTICO
