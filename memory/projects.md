@@ -23,11 +23,23 @@
 
 | Prioridade | Módulo | Descrição | Status |
 |---|---|---|---|
-| 🔴 URGENTE | OAuth Google Ads | Token expira ~03/03 | ⚠️ Renovar imediatamente |
+| ✅ RESOLVIDO | OAuth Google Ads | Token renovado 08/03 | ✅ Ativo — gap dados 25/02–07/03 |
+| 🔴 URGENTE | F11 Pipeline Financeiro | Unificar pipeline pós-assinatura | ❌ NÃO EXISTE — criar |
+| 🔴 URGENTE | F19 Atualizar ClickUp Jurídico | Atualizar campos ClickUp com dados ADVbox | ❌ NÃO EXISTE — criar |
 | 🔴 ALTA | WF-SDR-AI | Agente IA para Walisom qualificar leads | Planejado |
-| 🔴 ALTA | WF-LEGAL | IA para produção jurídica / petições | Planejado |
+| 🔴 ALTA | WF-LEGAL | IA para produção jurídica / petições | 🔄 Iniciado — template DP Art.165-A v2 criado 13/03 |
+| 🟡 MÉDIA | Docxtemplater Jurídico | Procuração + Defesa Prévia automatizadas | ⏳ Aguarda templates Word Dr. Henrique |
 | 🟡 MÉDIA | WF-SUPPORT | IA no suporte ao cliente (Ana Laura) | Planejado |
-| 🟡 MÉDIA | Advbox API | Documentação (API retorna 302) | Bloqueado |
+| 🟡 MÉDIA | Advbox API Updates | PATCH/PUT não suportado via API token | ⚠️ Bloqueado — workaround: web scraping |
+
+### Automação Jurídica — Plano de Fases (definido 12/03/2026)
+
+| Fase | Módulo | Status |
+|---|---|---|
+| Fase 1 | Contrato (MF02 / F4) | ✅ Existente |
+| Fase 2 | Procuração — gatilho: contrato assinado → ZapSign → Drive | ⬜ Aguarda template Word |
+| Fase 3 | Defesa Prévia — IA por tipo de caso → revisão humana | 🔄 Template v2 criado 13/03 (Art.165-A) |
+| Fase 4 | Recurso — usa resultado anterior → revisão obrigatória | ⬜ Futuro |
 
 ---
 
@@ -123,8 +135,28 @@
 - **Ação:** Dr. Henrique aplicar 2 comandos no terminal VPS (2 minutos)
 - **Atualizado:** 11/03/2026
 
-### 🔴 OAuth Google Ads — Status DESCONHECIDO (venceu 03/03)
-- **Urgência:** CRÍTICO — venceu em 03/03, status de renovação não confirmado
-- **Impacto:** WF-ROAS pode estar cego há 8 dias (sem dados de campanha)
-- **Ação:** Confirmar renovação; se não renovado, renovar agora
-- **Status:** Sem confirmação de renovação nos registros (atualizado 11/03)
+### ✅ OAuth Google Ads — RESOLVIDO (08/03/2026)
+- Token renovado em 08/03/2026
+- Gap de dados: 25/02–07/03 (11 dias) — decisão sobre reconstituição pendente
+- Causa raiz: GCP app em modo Testing → tokens expiram em ~7 dias
+- Fix permanente: mover app para Production (aguarda Dr. Henrique)
+
+### 🔴 F10 Bug + GABRIEL LINHARES (confirmado 13/03/2026)
+- **Bug:** F10 (`ppws3IRJo8K6QQJd`) com operador `//` no node "Buscar Task por Signer" (mesmo bug F13)
+- **Impacto:** todos os contratos assinados via ZapSign após 12/03 sem onboarding ADVbox automático
+- **Caso confirmado:** GABRIEL LINHARES BARBOSA (task 868hvjr0v) — contrato 12/03 não cadastrado
+- **Fix:** substituir `//` por `??` + disparar F13→F14→F15→F16 para Gabriel manualmente
+- **Aguarda:** ok do Dr. Henrique para executar
+
+### 🔴 Base Lookalike Meta Ads — CEP Histórico em Andamento (11/03)
+- CSV: 1.117 clientes | 21% com CEP | 79% sem CEP
+- ZapSign index construído: 613 matches de 868 sem CEP
+- Batches processados: B1-B14 (133 CEPs coletados)
+- **Parado:** B15-B62 (480 PDFs) — sessão interrompida por compactação
+- **Bloqueado:** arquivos temporários em /tmp (perdem-se entre sessões)
+
+### 🔄 Sistema de Defesa Prévia Art.165-A (iniciado 13/03/2026)
+- Template v2 criado: `juridico/defesa-previa-165a/template_defesa_previa_165a_v2.docx`
+- Script: `gerar-defesa.js` com 26 placeholders
+- Casos gerados: IOMAR LIMA DIAS ✅ | AMARILIO LINO JUNIOR (aguarda AIT completo)
+- Pacote de protocolo: Formulário AMC + Defesa + Procuração + Docs pessoais

@@ -7,7 +7,7 @@
 
 ## 🔴 URGENTE
 
-### ✅ OAuth Google Ads — RESOLVIDO (08/03/2026)
+### ✅ OAuth Google Ads — RESOLVIDO (08/03/2026) ← confirmado semana 09-13/03
 - Token renovado em 08/03/2026 — sem data de expiração fixa
 - Status atual: funcionando ✅
 - **Gap de dados:** 25/02 a 07/03 = 11 dias sem dados de investimento Google Ads
@@ -16,13 +16,11 @@
 - Impacto: dados de ROAS/atribuição desse período são inválidos ou ausentes
 - Ação pendente: decidir se vale reconstituir dados manuais do período ou ignorar o gap
 
-### Crons Falhando — 4/6 Quebrados 🔴
-- Daily Briefing 7h: "cron announce delivery failed"
-- Heartbeat 10h/14h: 2 erros consecutivos
-- Watchdog 8h: delivery failure
-- Git Backup 2h: "model not allowed: anthropic/claude-haiku-3-5"
-- Impacto: monitoramento automático cego
-- Causa provável: modo "announce" delivery + modelo Haiku string inválido
+### Crons Falhando — 4/6 (delivery silencioso) 🔴 — atualizado 13/03
+- Diagnóstico real: crons EXECUTAM mas não entregam (delivery mode "announce" sem `to` configurado)
+- Daily Briefing 7h, Heartbeat, Watchdog, Git Backup: sem entrega ao Dr. Henrique
+- Fix preparado: `scripts/fix-cron-delivery.py` — aguarda Dr. Henrique aplicar 2 comandos na VPS
+- Git Backup: modelo `anthropic/claude-haiku-3-5` inválido — fix junto com delivery
 
 ### ✅ API Brasil — RESOLVIDO (02/03/2026 17h21)
 - Integração 100% funcional
@@ -31,14 +29,34 @@
 - Teste validado: placa ABC1234 retornou dados completos
 - Próximo: testar com placa real de cliente
 
-### GitHub PAT — Push do workspace travado 🔴
-- git init ✅, commit inicial ✅ (38 arquivos), push ❌ (sem token)
-- Repo: `henriqueaugusto-ha/Henry.ia` (privado)
-- Ação: github.com → Settings → Developer settings → Personal access tokens (classic) → permissão `repo` → salvar no 1Password item "GitHub Henry.IA" campo `token`
+### ✅ GitHub PAT — RESOLVIDO (12/03/2026)
+- PAT: 1Password "GitHub - GitHub Personal Access Token (Henry IA)" (ID: 7rmwyq2laxxzoavgcyi5hcxfvq)
+- Push via HTTPS funcionando — workspace sincronizado
+- op binary correto: `/tmp/op` (não `/data/op`)
 
 ### Haiku model string — Validar às 10h
 - Heartbeat configurado com `anthropic/claude-haiku-3-5`
 - Se falhar: ajustar para modelo disponível (ex: Gemini Flash)
+
+### 🔴 F10 Bug Crítico — GABRIEL LINHARES sem onboarding (confirmado 13/03)
+- F10 (`ppws3IRJo8K6QQJd`) bug `//` → `??` em "Buscar Task no ClickUp por Signer"
+- GABRIEL LINHARES BARBOSA (task 868hvjr0v): contrato 12/03, NÃO cadastrado ADVbox
+- Ação: fix F10 + disparar F13→F14→F15→F16 manualmente para Gabriel
+- Aguarda: ok do Dr. Henrique
+
+### 🔴 Clientes ADVbox — Onboarding Incompleto (semana 09-13/03)
+- DARLAN (868huwt25): AITs PS00202880 e PS00202881 sem processo no ADVbox
+- ALAN QUESTER: deletar customer duplicado 14311233 + processo 13651174 + 3 tarefas erradas (manual no painel)
+- JOAO VICTOR, DARLAN, CRISTIANO: verificar tipo de processo ADVbox (pode estar com tipo Bafômetro errado)
+- JOAO VICTOR, DARLAN, CRISTIANO: Asaas pipeline pendente (aguarda "CONFIRMO A EXECUÇÃO")
+- ADVbox: email + RG + endereço detalhado não atualizados (API não suporta PATCH — manual ou scraping)
+
+### 🔴 Defesas Prévia — Pacotes Incompletos (13/03)
+- IOMAR: aguarda formulário AMC + docs pessoais + procuração correta do ZapSign
+- AMARILIO: aguarda AIT completo do Dr. Henrique para regenerar defesa
+
+### 🔴 CRISTIANO SANTOS SOUSA — Prazo PSDD: 02/04/2026 ⚠️
+- 20 dias a partir de 13/03 — monitorar ativamente
 
 ### ⚠️ 497 Cobranças Vencidas no Asaas (~R$473k)
 - Encontrado em 02/03 via API
