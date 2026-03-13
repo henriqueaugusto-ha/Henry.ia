@@ -173,6 +173,44 @@ O autor vai até o nível do vendedor individual:
 
 ---
 
+## ANÁLISE CRM — Dados reais do funil (13/03/2026)
+
+### Comparativo histórico
+
+| Mês | Leads | Fechados | % | Desq% | Canal dominante |
+|-----|-------|----------|---|-------|-----------------|
+| Julho 2025 | 483 | 1* | - | 0% | Google 53% |
+| Dezembro 2025 | 800 | 41 | 5.1% | 32.1% | INSTA-TP-API 62% |
+| Janeiro 2026 | 562 | 33 | 5.9% | 50.4% | INSTA-TP-API 32% |
+| Fevereiro 2026 | 600 | 25 | 4.2% | 54.0% | Sem canal 85% (bug) |
+| Março 2026 (13d) | 137 | 13 | 9.5% | 51.8% | Google 42% |
+
+*Julho: estrutura CRM diferente — quase todos em status "leads novo", contratos contados separadamente
+
+### Funil Março 2026 (detalhado)
+- 1 lead novo | 17 oportunidade mês | 15 aquecendo reunião
+- 4 faltou reunião | 10 pós-reunião | 1 aguardando assinatura
+- 13 contrato fechado | 4 repescagem | 1 não interagiu
+- Desqualificados: 54 (filtro 1) + 7 (filtro 2) + 10 (filtro 3) = 71 total
+
+### Canais Março 2026
+Google: 58 (42%) | Cliente-Base: 21 (15%) | INST-ORGÂNICO: 17 (12%) | INSTA-TP-WAPP2: 16 (12%) | Sem canal: 9 | Desconhecida: 9 | Indicação: 2
+
+### Insight estratégico — Google = qualidade
+**Correlação confirmada pelos dados:**
+- Quando Google domina o mix → conversão sobe, desqualificação cai
+- Quando INSTA/Meta domina → volume alto, conversão baixa, desqualificação sobe
+- Google = tráfego de busca (intenção ativa) → lead já está procurando solução
+- Meta = interrupção → lead pode ser elegível mas sem urgência de decisão
+- **Recomendação: priorizar Google Ads no mix de investimento**
+
+### Outros achados
+- Fevereiro tem 251 leads "em andamento" — pipeline de repescagem esquecido
+- Rastreamento de origem estava quebrado em fev (85% sem canal) → MF01 precisa garantir 100% de preenchimento
+- Taxa de março (9.5%) é a melhor do período analisado → tendência positiva com Google voltando
+
+---
+
 ## CAPÍTULOS ANALISADOS ATÉ AGORA
 - [x] Capítulo 1 — Gestão de Objetivos ✅
 - [x] Capítulo 2 — Gestão de Metas ✅ (parcial — NA PRÁTICA do Cap 2 ainda não respondida)
