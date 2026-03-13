@@ -478,6 +478,16 @@ Padrão: `WF-COM | F[n] | Descrição` (renomeado de MF para F em 12/03)
 10=INST-ORGÂNICO | 11=DISPARO API | 12=INSTA-TP-WAPP2
 Campo ID: 2cf330fd-8a82-4378-81de-27b83e6375d3
 
+## REGRA PERMANENTE — Documentos em Pastas ADVbox/Drive (13/03/2026)
+
+Antes de inserir qualquer documento na pasta de um cliente:
+1. Abrir e verificar o documento
+2. Confirmar nome + CPF dentro do documento
+3. Comparar com o cliente da pasta de destino
+4. Só inserir se os dados baterem 100%
+5. Divergência → reportar ao Dr. Henrique antes de agir
+Origem: equipe reportou 3 casos de docs inseridos em pastas erradas (já corrigidos em 13/03)
+
 ## F10 — Bug Crítico + GABRIEL LINHARES (13/03/2026)
 
 - **F10** (`ppws3IRJo8K6QQJd`) tem bug `//` → `??` em "Buscar Task no ClickUp por Signer"
