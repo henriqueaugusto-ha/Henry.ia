@@ -12,3 +12,6 @@ backups/
 *.bak
 *.swp
 .DS_Store
+-e 
+# Dependências de Node
+node_modules/
