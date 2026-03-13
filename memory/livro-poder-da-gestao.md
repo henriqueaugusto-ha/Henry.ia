@@ -211,6 +211,51 @@ Google: 58 (42%) | Cliente-Base: 21 (15%) | INST-ORGÂNICO: 17 (12%) | INSTA-TP-
 
 ---
 
+## FÓRMULA "FEIJÃO COM ARROZ" — Matemática do R$180k (13/03/2026)
+
+Confirmado por Dr. Henrique: taxa reunião→contrato = 50% (1 em cada 2 reuniões fecha)
+
+**Cascateamento reverso:**
+- Meta: R$180k/mês
+- → 72 contratos/mês (@ ticket médio R$2.500)
+- → 144 reuniões/mês
+- → 240 leads em "aquecendo para reunião" (assumindo 60% de presença)
+- → 500 leads qualificados entrando no funil (com 52% desqualificação atual)
+- → com Google dominando (menor desqualificação): ~400 leads suficientes
+
+**Metas diárias derivadas:**
+- Dr. Henrique: 3 contratos/dia
+- Lucas: 6 reuniões/dia
+- Walissom: X aquecimentos/dia (a definir com base na capacidade do Lucas)
+
+**Rocha identificada**: a meta diária de reuniões do Lucas É a Rocha do funil comercial
+
+## ESTRATÉGIA DE MARKETING — Decisões e insights (13/03/2026)
+
+- Google Ads: conta antiga, algoritmo bem calibrado → degrada quando Dr. Henrique para de otimizar
+- Meta/Instagram: interrupção, não intenção → cliques acidentais em stories/reels
+- Ideia aprovada: testar Meta em formato FEED (reduz cliques acidentais, aumenta qualidade)
+- Criativos pendentes: 5 vídeos por produto (suspensão, cassação, PPD, Lei Seca, ANPP)
+- **Risco crítico**: Dr. Henrique é o único que otimiza os anúncios → mesmo gargalo da operação
+- Solução AIOS: alertas automáticos de ROAS, custo por lead acima do padrão, volume de cliques
+
+## ESTRATÉGIA PÓS-REUNIÃO — Campanha de recaptação (13/03/2026)
+
+- 10 leads ativos em março em pós-reunião, fechamento pendente por preço
+- Ideia Dr. Henrique: oferta especial mensal para leads >15 dias em pós-reunião
+- Ticket de R$2.499 → R$2.000 | R$2.000 → R$1.900
+- Regra: script de "condição especial de recaptação" — nunca falar em desconto de tabela
+- Proteção: campanha fechada, não exposta à equipe → preserva cultura de preço
+- ROI: mesmo com desconto, cobre custos e gera receita vs lead perdido
+
+## DEVEDORES — Protocolo sugerido
+
+- Régua automática Asaas já cobre até o extrajudicial
+- AIOS apresenta lista mensal de devedores elegíveis para ação judicial (por valor/ROI)
+- Dr. Henrique decide top 5-10 para oficialização — não precisa atacar todos
+
+---
+
 ## CAPÍTULOS ANALISADOS ATÉ AGORA
 - [x] Capítulo 1 — Gestão de Objetivos ✅
 - [x] Capítulo 2 — Gestão de Metas ✅ (parcial — NA PRÁTICA do Cap 2 ainda não respondida)
