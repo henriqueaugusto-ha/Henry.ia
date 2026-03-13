@@ -1,0 +1,38 @@
+{
+  "nome_cliente": "IOMAR LIMA DIAS",
+  "nacionalidade": "brasileiro",
+  "estado_civil": "casado",
+  "profissao": "psicanalista",
+  "qualidade": "Condutor",
+  "cpf": "416.083.642-91",
+  "rg": "37567 MTPS AM",
+  "tipo_doc": "CNH",
+  "numero_habilitacao": "00158043075",
+
+  "placa": "RHA7I61",
+  "marca_modelo": "FORD/RANGER XLTCD4A32C",
+  "renavam": "[RENAVAM NÃO INFORMADO]",
+
+  "endereco_rua": "Rua 19, A, Conjunto Industrial",
+  "endereco_numero": "n. 40",
+  "cidade_cliente": "Maracanaú/CE",
+
+  "numero_ait": "AS01751678",
+  "data_infracao": "25/01/2026",
+  "hora_infracao": "02:13",
+  "local_infracao": "Avenida Godofredo Maciel, nº 1945 — OPOSTO",
+
+  "orgao_nome": "AUTARQUIA MUNICIPAL DE TRÂNSITO E CIDADANIA DE FORTALEZA",
+  "orgao_sigla": "AMC",
+  "orgao_estado": "DE FORTALEZA",
+
+  "marca_etilometro": "INTOXIMETERS",
+  "modelo_etilometro": "ALCO SENSOR IV",
+  "serie_etilometro": "114809",
+
+  "cidade_assinatura": "Fortaleza-CE",
+  "data_assinatura": "12 de março de 2026",
+
+  "nome_advogado": "Henrique Augusto Félix Linhares",
+  "oab_advogado": "OAB/CE - 28.051"
+}

@@ -1,0 +1,38 @@
+{
+  "nome_cliente": "AMARILIO LINO JUNIOR",
+  "nacionalidade": "brasileiro",
+  "estado_civil": "divorciado",
+  "profissao": "servidor público",
+  "qualidade": "Condutor",
+  "cpf": "247.922.843-68",
+  "rg": "91004019095 SSPDS CE",
+  "tipo_doc": "CNH",
+  "numero_habilitacao": "04012067580",
+
+  "placa": "[PLACA NÃO INFORMADA]",
+  "marca_modelo": "[MARCA/MODELO NÃO INFORMADO]",
+  "renavam": "[RENAVAM NÃO INFORMADO]",
+
+  "endereco_rua": "Rua Paulo Mendes",
+  "endereco_numero": "nº 312, Apartamento 201",
+  "cidade_cliente": "Fortaleza/CE",
+
+  "numero_ait": "AS01732938",
+  "data_infracao": "[DATA DA INFRAÇÃO]",
+  "hora_infracao": "[HORA]",
+  "local_infracao": "[LOCAL DA INFRAÇÃO]",
+
+  "orgao_nome": "AUTARQUIA MUNICIPAL DE TRÂNSITO E CIDADANIA DE FORTALEZA",
+  "orgao_sigla": "AMC",
+  "orgao_estado": "DE FORTALEZA",
+
+  "marca_etilometro": "[MARCA ETILÔMETRO]",
+  "modelo_etilometro": "[MODELO]",
+  "serie_etilometro": "[SÉRIE]",
+
+  "cidade_assinatura": "Fortaleza-CE",
+  "data_assinatura": "12 de março de 2026",
+
+  "nome_advogado": "Henrique Augusto Félix Linhares",
+  "oab_advogado": "OAB/CE - 28.051"
+}

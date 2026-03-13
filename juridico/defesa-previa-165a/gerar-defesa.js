@@ -32,7 +32,7 @@ if (args.length === 0) {
 
 const inputJson = args[0];
 const outputFile = args[1] || `defesa_previa_${Date.now()}.docx`;
-const templatePath = path.join(__dirname, 'template_defesa_previa_165a.docx');
+const templatePath = path.join(__dirname, 'template_defesa_previa_165a_v2.docx');
 
 // ── Carregar dados ─────────────────────────────────────────────────────────────
 let dados;
@@ -46,7 +46,7 @@ try {
 // ── Validação de campos obrigatórios ──────────────────────────────────────────
 const obrigatorios = [
   'nome_cliente', 'cpf', 'rg', 'tipo_doc', 'numero_habilitacao',
-  'placa', 'marca_modelo', 'renavam',
+  'placa', 'marca_modelo',
   'numero_ait', 'data_infracao', 'hora_infracao', 'local_infracao',
   'orgao_nome', 'orgao_sigla', 'orgao_estado',
   'cidade_assinatura', 'data_assinatura',
