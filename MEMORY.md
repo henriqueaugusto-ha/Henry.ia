@@ -477,3 +477,12 @@ Padrão: `WF-COM | F[n] | Descrição` (renomeado de MF para F em 12/03)
 6=Google Meu Negocio | 7=Origem Desconhecida | 8=Youtube | 9=REPESCAGEM
 10=INST-ORGÂNICO | 11=DISPARO API | 12=INSTA-TP-WAPP2
 Campo ID: 2cf330fd-8a82-4378-81de-27b83e6375d3
+
+## F10 — Bug Crítico + GABRIEL LINHARES (13/03/2026)
+
+- **F10** (`ppws3IRJo8K6QQJd`) tem bug `//` → `??` em "Buscar Task no ClickUp por Signer"
+- Falhou 6x em 12/03 (17h47–18h05 UTC) para contrato do GABRIEL LINHARES BARBOSA
+- GABRIEL: task 868hvjr0v | contrato 12/03 16h43 | **NÃO cadastrado no ADVbox** ✅ confirmado
+- Fix pendente: editar F10 + disparar F13→F14→F15→F16 manualmente → aguarda ok Dr. Henrique
+- ⚠️ Verificar se há outros clientes afetados pós-12/03 (F10 estava quebrado)
+- Último ADVbox ID ativo: ALAN QUESTER = 14308394 (12/03 13h36)
