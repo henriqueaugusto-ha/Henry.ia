@@ -544,3 +544,13 @@ Origem: equipe reportou 3 casos de docs inseridos em pastas erradas (já corrigi
 - [ ] Crons delivery fix — 4/6 não entregam
 - [ ] ROAS Backfill Fev 25-28
 - [ ] GCP Production mode (OAuth expira 7 dias em Testing)
+
+## Sessão 16/03/2026 — ADVbox 3 clientes concluídos (22h36 UTC)
+
+- **ADAILDO** (868hwkm07) → ADVbox cliente `14351422` | processo `13690343` ✅ | ⚠️ duplicado 14351397 a deletar
+- **MARCIO LINO** (868hwjwbj) → ADVbox cliente `14369225` | processo `13711485` ✅ | Asaas: R$2.500 PIX em 3x (16/03 R$1k pago, 17/03 R$1k, 18/03 R$500)
+- **NAIRTON** (868hwt0tm) → ADVbox cliente `14369227` | processo `13711487` ✅ | ⚠️ DETRAN-PB como DETRAN-CE placeholder — corrigir manualmente
+- Bug descoberto: IF F1 Sucesso no F13 tem conexões TRUE/FALSE **invertidas** — workaround via F15/F16 diretos ✅
+- **Asaas PENDENTE todos 3** — aguarda "CONFIRMO A EXECUÇÃO" + opção NAIRTON (à vista R$2.499 ou 3x R$1.099)
+- ADAILDO 1ª parcela R$1.299 VENCIDA (16/03) | MARCIO parcela R$1.000 vence AMANHÃ 17/03
+- Detalhes completos + dados todos clientes: memory/2026-03-16.md
