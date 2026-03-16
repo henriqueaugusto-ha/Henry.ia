@@ -505,3 +505,42 @@ Origem: equipe reportou 3 casos de docs inseridos em pastas erradas (já corrigi
 - Fix pendente: editar F10 + disparar F13→F14→F15→F16 manualmente → aguarda ok Dr. Henrique
 - ⚠️ Verificar se há outros clientes afetados pós-12/03 (F10 estava quebrado)
 - Último ADVbox ID ativo: ALAN QUESTER = 14308394 (12/03 13h36)
+
+## Sessão 16/03/2026 — JOSÉ ADAILDO PEREIRA (cadastro incompleto)
+
+- Task ClickUp: `868hwkm07` | Status: contrato fechado
+- CPF: 442.200.573-15 | Tel: (85) 99152-6116 | Email: adaildop6@gmail.com
+- ZapSign token: `b1d2c2e3-0f94-4597-b98f-230eb1f2aafa` → salvo no ClickUp ✅
+- MF02 + Órgão Responsável → atualizados no ClickUp ✅
+- ADVbox: NÃO cadastrado ❌ — F13→F1 falha em ambas as tentativas
+- Causa provável: Bearer token ADVbox expirado no F14 (`imtGbPavAHjLZ6Nf`)
+- Bearer hardcoded: `xz33X9sHtnVKWAG10ofpIFoDtK7u8JkLZYhczatxxaki7U7ZfOr9L7bq3kXE`
+- Asaas: NÃO cadastrado ❌ — aguarda Advbox + "CONFIRMO A EXECUÇÃO"
+- ⚠️ 1ª parcela R$1.299 vence HOJE 16/03/2026
+- Detalhes completos: memory/2026-03-16.md
+
+## Novo Bug — F14 ADVbox Cadastro (16/03/2026)
+
+- Sintoma: `{"status":"error","step":"F1","msg":"Falha ao cadastrar cliente no ADVbox"}`
+- Workflow: F14 (`imtGbPavAHjLZ6Nf`) → `POST /api/v1/customers` no Advbox
+- Bearer token hardcoded pode ter expirado
+- ADVbox 1Password UUID: `kvwv6ocrhgtwvvcvg2224cticm`
+- Passo a passo para resolver: memory/2026-03-16.md seção 4
+- Afeta todos os cadastros automáticos desde a última falha
+
+## Pendente — Atualizado 16/03/2026
+
+### 🔴 URGENTE (hoje)
+- [ ] ADAILDO — diagnosticar/corrigir F14 (token ADVbox) → cadastrar Advbox
+- [ ] ADAILDO — Asaas: cadastro + 3 cobranças (aguarda "CONFIRMO A EXECUÇÃO") — 1ª parcela vence HOJE
+- [ ] Fix F10 (`ppws3IRJo8K6QQJd`) — trocar `//` por `??` → aguarda autorização Dr. Henrique
+- [ ] GABRIEL LINHARES (868hvjr0v) — onboarding Advbox manual (dependente fix F14/token)
+
+### 🟡 PENDENTE CONTÍNUO
+- [ ] ALAN QUESTER — limpeza ADVbox: deletar customer 14311233 + processo 13651174 + 3 tarefas PROTOCOLAR
+- [ ] DARLAN — AITs PS00202880 e PS00202881 no ADVbox + Asaas pipeline
+- [ ] CRISTIANO — Asaas pipeline (prazo processo: 02/04/2026)
+- [ ] Leads perdidos 02-12/03 → recriar manualmente
+- [ ] Crons delivery fix — 4/6 não entregam
+- [ ] ROAS Backfill Fev 25-28
+- [ ] GCP Production mode (OAuth expira 7 dias em Testing)
