@@ -143,12 +143,13 @@ Padrão universal para TODAS as ferramentas = **SOMENTE LEITURA**.
 - Combinado com Matriz de Eisenhower na vida pessoal
 - Tarefa com 5×5×5 = prioridade máxima, execução imediata
 
-## 1Password CLI — Status (2026-02-28)
+## 1Password CLI — Status (atualizado 2026-03-16)
 
-- ✅ CLI instalado em `/data/op` (v2.30.3)
+- ✅ CLI instalado em `/tmp/op` (⚠️ migrou de `/data/op` — atualizado 16/03)
 - ✅ OP_SERVICE_ACCOUNT_TOKEN configurado em `/data/.openclaw/.env` (permissões 600)
 - ✅ Conexão testada — cofre IA-OPERACIONAL acessível
-- Acesso via: `export OP_SERVICE_ACCOUNT_TOKEN=$(grep OP_SERVICE_ACCOUNT_TOKEN /data/.openclaw/.env | cut -d= -f2-) && /data/op item get "Nome" --vault "IA – OPERACIONAL"`
+- Acesso via: `export OP_SERVICE_ACCOUNT_TOKEN=$(grep OP_SERVICE_ACCOUNT_TOKEN /data/.openclaw/.env | cut -d= -f2-) && /tmp/op item get "Nome" --vault "IA – OPERACIONAL"`
+- ⚠️ Sempre verificar caminho real com `which op` antes de usar
 
 ## Compaction / MemoryFlush (2026-03-01)
 
@@ -388,6 +389,14 @@ Headers:
 - Advbox API: usar sempre via N8N (curl direto → 403 Cloudflare)
 - Convenção pastas Advbox: `1 - Documentação` / `2 - DP.[nº AIT]`
 - Detalhes completos: `memory/2026-03-12.md`
+
+## Tarefa Pendente — 16/03/2026
+
+*Extração leads CRM_2026 para disparo vídeo vitória (Dr. Henrique, grupo Comercial):*
+- Lista "12/03" → filtrar 13/03 a 16/03 → status: Oportunidade / Aquecente reunião / Reunião marcada / Pós-reunião
+- Exportar: Nome + Data entrada + Telefone → CSV para disparo em massa
+- Status: ❌ incompleto — bloqueado por caminho errado do op CLI (`/data/op` → `/tmp/op`)
+- Retomar assim que Dr. Henrique solicitar
 
 ## Pendente — Atualizado 12/03/2026
 
