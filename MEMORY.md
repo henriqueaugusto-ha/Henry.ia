@@ -683,3 +683,12 @@ Docs recentes NÃO estão na última página calculada pelo count. Solução:
 - Contrato via Lucas, entrada R$1.099 paga (comprovante BB confirmado)
 - Total proposto: R$4.396 em 4x R$1.099 — aguarda confirmação Dr. Henrique
 - ClickUp: tarefa NÃO criada | ADVbox: NÃO | Asaas: NÃO — aguarda "CONFIRMO A EXECUÇÃO"
+
+## Números Comerciais — Confirmados (17/03/2026)
+
+- **ChatGuru:** (85) 99143-6886 — API oficial | vídeos + campanhas Google/Meta
+- **WhatsApp Business:** (85) 99246-3891 — comercial 2 (Waspeed)
+
+Verificação de leads (2 critérios obrigatórios):
+1. ClickUp → CRM_2026 → Março → filtro *"data de entrada" = hoje* + tarefas arquivadas
+2. Fonte: ChatGuru webhook + WA Business webhook + execuções WF-CAPTURE no N8N
