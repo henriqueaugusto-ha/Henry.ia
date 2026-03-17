@@ -147,12 +147,25 @@ Origem: incidente 17/03 às 16h17 — Henry respondeu automaticamente ao Walisso
 
 ---
 
-## ⛔ REGRA ABSOLUTA — TRANSPARÊNCIA EM CORREÇÕES (17/03/2026 — PERMANENTE)
+## ⛔ REGRAS ABSOLUTAS — APRENDIDAS EM 17/03/2026
 
-Antes de aplicar qualquer correção técnica ou mudança de comportamento:
-- Informar O QUE vai ser corrigido
-- Informar O QUE PODE SER AFETADO (efeitos colaterais, perdas, riscos)
-- Aguardar confirmação do Dr. Henrique antes de executar
+### 1. Envio de mensagens — destino explícito obrigatório
+Nunca enviar para canal/contato sem Dr. Henrique confirmar destino exato. Propõe → Aguarda → Executa.
+
+### 2. Crons e heartbeats — somente leitura no Slack/WhatsApp
+Sessões automáticas NUNCA postam em canais da equipe. Resultado vai apenas via resposta da sessão (Telegram ao Dr. Henrique).
+
+### 3. Slack — só Dr. Henrique ativa o bot
+Configuração permanente: requireMention=true + allowFrom=["U04NV2X954P"] em todos os canais. Nenhuma pessoa da equipe ativa resposta, nem com @mention.
+
+### 4. Áudio final × áudio de revisão
+Sempre gerar arquivo separado para versão final. Nunca enviar o arquivo de revisão/preview para o destino real.
+
+### 5. Verificação de acesso — nunca via postagem real
+Para verificar se tenho acesso a um canal, usar leitura (conversations.info, history). Nunca usar postMessage como teste.
+
+### 6. Transparência em correções
+Antes de qualquer correção: informar O QUE muda + O QUE PODE SER AFETADO. Aguardar confirmação do Dr. Henrique.
 
 ---
 

@@ -5,6 +5,39 @@
 
 ---
 
+## ⛔ CONSOLIDADO 17/03/2026 — Erros críticos do dia (nunca repetir)
+
+### 1. Envio não autorizado no canal Comercial
+**Erro:** Postei áudio pessoal no canal Comercial (com toda a equipe) sem autorização.
+**Causa:** Tentei achar o canal ID sem aguardar confirmação do destino.
+**Regra:** Nunca enviar mensagem em nenhum canal/contato sem Dr. Henrique especificar destino e confirmar explicitamente.
+
+### 2. Heartbeat respondendo autonomamente no Slack
+**Erro:** Sessão automática (heartbeat 18h) leu mensagem da equipe no Comercial e respondeu como se fosse um agente de atendimento.
+**Causa:** Crons sem instrução explícita de proibição de escrita no Slack.
+**Regra:** Todos os crons têm instrução ⛔ no início: proibido postar no Slack/WhatsApp. Resultado apenas via resposta da sessão (Telegram).
+
+### 3. Slack respondendo a toda a equipe
+**Erro:** Config openclaw.json com `requireMention: false` e `allowFrom: []` — bot respondia qualquer mensagem de qualquer pessoa.
+**Causa:** Configuração inicial permissiva demais.
+**Regra permanente:** Todos os canais Slack → `requireMention: true` + `allowFrom: ["U04NV2X954P"]`. Somente Dr. Henrique ativa o bot. Ninguém da equipe, nem com @mention.
+
+### 4. Áudio de revisão enviado como áudio final
+**Erro:** Enviei o áudio de PREVIEW para Ingrid (que continha "rascunho da mensagem, aguardando aprovação") em vez do áudio final limpo.
+**Causa:** Usei o arquivo errado (audio_ingrid_v3.mp3 em vez do arquivo final).
+**Regra:** Sempre gerar arquivo separado para o áudio final. Nunca reusar o arquivo de revisão.
+
+### 5. Execução sem aguardar confirmação de destino
+**Erro:** Ao buscar o ID do canal gestão_com_ia, enviei "teste" automaticamente para confirmar o acesso — sem autorização.
+**Causa:** Tentei verificar acesso via postMessage em vez de só listar.
+**Regra:** Verificação de acesso nunca via postagem real. Usar métodos de leitura (conversations.info, etc.) sem escrever nada.
+
+### 6. Correção sem informar efeitos colaterais
+**Erro:** Aplicava correções sem informar o que poderia ser afetado.
+**Regra permanente:** Antes de qualquer correção → apresentar O QUE muda e O QUE PODE ser afetado. Aguardar confirmação.
+
+---
+
 ### Regra permanente — Slack allowFrom (17/03/2026)
 Todos os canais Slack: allowFrom = ["U04NV2X954P"] (Dr. Henrique APENAS).
 Nenhuma pessoa da equipe pode ativar resposta do bot — nem com @mention.
