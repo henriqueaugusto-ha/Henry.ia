@@ -7,18 +7,35 @@
 
 ## 🔴 URGENTE
 
-### ⚠️ FRANCISCO DOS SANTOS COELHO — Contrato a confirmar (17/03/2026)
-- Walison enviou "Perfeito. Luca" + mesmo comprovante → confirmou versão Lucas ✅
-- Entrada: R$ 1.099,00 ✅ confirmada (Walison havia digitado R$ 1.199,00 por engano)
-- Versão Lucas (provável correta): Total R$ 4.396,00 | 3x R$ 1.099,00 após entrada
-- ⚠️ PENDENTE: Dr. Henrique confirmar total R$ 4.396,00 antes de criar Asaas
-
-### FRANCISCO DOS SANTOS COELHO — Onboarding Pendente (17/03/2026)
-- Contrato fechado 17/03/2026
-- Entrada paga: R$ 1.099,00 (comprovante BB confirmado)
-- ClickUp: tarefa NÃO criada ainda (chegou via Slack)
+### ⚠️ FRANCISCO DOS SANTOS COELHO — Onboarding Pendente (17/03/2026)
+- Contrato fechado 17/03/2026 via Lucas/Walisom (chegou via Slack)
+- Entrada paga: R$ 1.099,00 ✅ (comprovante BB confirmado)
+- Versão correta (Lucas): Total R$ 4.396,00 | entrada R$1.099 + 3x R$1.099
+- ⚠️ PENDENTE: Dr. Henrique confirmar total R$4.396,00
+- ClickUp: tarefa NÃO criada
 - ADVbox: NÃO cadastrado
-- Asaas: cobranças NÃO criadas — aguarda definição do contrato correto + "CONFIRMO A EXECUÇÃO"
+- Asaas: cobranças NÃO criadas — aguarda confirmação total + "CONFIRMO A EXECUÇÃO"
+
+### ⚠️ ANA LAURA — PEDIU DEMISSÃO (17/03/2026)
+- Faltou 16/03 e 17/03 sem comunicação prévia; não retorna esta semana
+- Suporte ao cliente sem cobertura — risco: Dr. Henrique / Ingrid absorvem operação
+- Verificar: Luciana consegue assumir parte do suporte sozinha?
+- Solução urgente: priorizar WF-SUPPORT (automação suporte WhatsApp via N8N + IA)
+
+### ⚠️ MARCIO LINO — Asaas URGENTE (parcela R$1.000 vence 17/03)
+- ADVbox: ✅ cliente 14369225 | processo 13711485
+- Asaas: NÃO criado — aguarda "CONFIRMO A EXECUÇÃO"
+- Plano: R$2.500 total, 3x (16/03 R$1k pago, 17/03 R$1k, 18/03 R$500)
+
+### ⚠️ ADAILDO — Asaas URGENTE (1ª parcela R$1.299 VENCIDA 16/03)
+- ADVbox: ✅ cliente 14351422 | processo 13690343
+- Duplicado a deletar: customer 14351397
+- Asaas: NÃO criado — aguarda "CONFIRMO A EXECUÇÃO"
+
+### ⚠️ NAIRTON — Asaas Pendente
+- ADVbox: ✅ cliente 14369227 | processo 13711487
+- ⚠️ DETRAN-PB inserido como DETRAN-CE placeholder — corrigir manualmente no ADVbox
+- Asaas: aguarda decisão plano (à vista R$2.499 ou 3x R$1.099) + "CONFIRMO A EXECUÇÃO"
 
 ### ✅ OAuth Google Ads — RESOLVIDO (08/03/2026) ← confirmado semana 09-13/03
 - Token renovado em 08/03/2026 — sem data de expiração fixa
