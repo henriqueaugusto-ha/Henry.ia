@@ -75,14 +75,19 @@ Agente contextual que:
 7. [ ] Período de teste → validar se resumo é fiel à operação
 8. [ ] Ajustar prompt de classificação com padrão real observado
 
-## STATUS (17/03/2026 16h58 UTC)
+## STATUS (17/03/2026 19h05 UTC)
 
 - ✅ Briefing recebido e documentado
 - ✅ Template JSON importado no N8N pelo Dr. Henrique
-- ⬜ Aguardando: URL da instância Evolution API
-- ⬜ Aguardando: confirmação se Evolution já está conectada ao WhatsApp suporte
-- ⬜ Aguardando: nome do canal Slack (sugestão: #suporte-monitoramento)
-- 🔴 PRIORIDADE MÁXIMA — problema é pra ontem, Ana Laura saiu
+- ✅ Evolution API v1.8.7 instalada — container `evolution-api`
+- ✅ Instância `suporte-ha` conectada ao WhatsApp (estado: open)
+- ✅ Webhook configurado → N8N
+- ✅ Canal Slack #suporte-monitoramento (C0AM6CY5CV8) criado
+- ✅ 4 fixes aplicados: filtro event, $env, channel Slack, markdown parse
+- ✅ **PIPELINE TEXTO FUNCIONANDO** — mensagens chegando no Slack com análise IA
+- ❌ Download Media — N8N não resolve DNS `evolution-api` (redes Docker separadas)
+- 🟡 Mensagens "fromMe" — prompt precisa tratar respostas da equipe
+- 🟡 Resumo diário — endpoint placeholder, não funcional
 
 ## CONTEXTO COMPLETO (para referência cruzada)
 
