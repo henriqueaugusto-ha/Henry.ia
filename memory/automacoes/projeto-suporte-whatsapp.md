@@ -1,0 +1,68 @@
+# Projeto: Suporte ao Cliente via WhatsApp — Automação N8N
+
+> Criado: 17/03/2026
+> Motivação: Ana Laura (suporte) pediu demissão → gargalo operacional imediato
+> Prioridade: 🔴 ALTA — Dr. Henrique volta pra operação sem isso
+
+---
+
+## DECISÕES DO DR. HENRIQUE (17/03/2026)
+
+1. ✅ 80% das perguntas = status do processo + procedimentos → agente resolve sozinho
+2. ✅ 20% = situações específicas → escala pro humano (Dr. Henrique / Dra. Ingrid / futuro contratado)
+3. ✅ Base de conhecimento já existe: ~50 perguntas e respostas + fluxo de atendimento (GPT já montado)
+4. ✅ Consulta ao ClickUp: Central do Cliente com status do processo
+5. ✅ Quando agente não souber: "Vou encaminhar, retornamos em até 72h"
+6. ✅ Botão liga/desliga: quando tiver humano → desliga agente; sem humano → liga agente
+7. ✅ Canal Slack "Suporte ao Cliente" para alertas e escalonamento
+8. ✅ Report diário automático: atendimentos, resolvidos, pendentes, fila
+
+## ARQUITETURA PROPOSTA
+
+```
+WhatsApp Business API
+  ↓ (webhook)
+N8N — Recepção
+  ├── Identifica cliente (telefone → ClickUp lookup)
+  ├── Consulta status do processo (ClickUp API)
+  ├── Verifica base de conhecimento (~50 Q&A)
+  │
+  ├── [80%] Resposta automática → WhatsApp
+  │
+  ├── [20%] Não sabe → "Encaminhando, retorno em 72h"
+  │   └── Alerta no Slack #suporte-cliente
+  │   └── Marca como pendente no ClickUp
+  │
+  └── [Report] Fim do dia → resumo no Slack
+      - Total atendimentos
+      - Resolvidos pelo agente
+      - Pendentes (humano)
+      - Quem não foi respondido
+
+Switch liga/desliga:
+  - Flag no N8N ou ClickUp
+  - Quando OFF: mensagens vão direto pro humano (notifica no Slack)
+  - Quando ON: agente ativo
+```
+
+## STACK TÉCNICO
+
+- **N8N** (self-hosted, já rodando)
+- **WhatsApp Business API** (número já é API oficial)
+- **ClickUp API** (já conectada, token ativo)
+- **Modelo IA**: OpenAI GPT (prompt específico com base de conhecimento)
+- **Slack API** (já conectada)
+- **ChatGuru**: avaliar se pode coexistir ou se precisa migrar
+
+## QUESTÕES A RESOLVER
+
+- [ ] ChatGuru e automação externa podem coexistir no mesmo número?
+- [ ] Credenciais do WhatsApp Business API — Dr. Henrique tem acesso ao Meta Business Manager?
+- [ ] Node N8N para WhatsApp: nativo vs Evolution API vs Z-API vs outro
+- [ ] Base de conhecimento das 50 Q&A — onde está? (GPT, doc, planilha?)
+- [ ] Estrutura do ClickUp "Central do Cliente" — quais campos e status?
+
+## ORDEM DE EXECUÇÃO
+
+1. **Report diário comercial no Slack** (mais simples, resultado imediato)
+2. **Suporte WhatsApp automatizado** (mais complexo, resolve gargalo estrutural)
