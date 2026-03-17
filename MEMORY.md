@@ -11,6 +11,49 @@ Padrão universal para TODAS as ferramentas = **SOMENTE LEITURA**.
 - Nova ferramenta → somente leitura até Dr. Henrique definir níveis
 - Regra completa: decisions.md (primeira entrada)
 
+## ⛔ REGRA ABSOLUTA — SLACK COMERCIAL (17/03/2026 — PERMANENTE)
+
+NUNCA postar no Slack Comercial de forma automática.
+- Autorização explícita do Dr. Henrique OU cron agendado = única forma válida
+- Antes de qualquer postagem: autorizado? formato 6 blocos? horário Fortaleza?
+- Regra completa: `memory/comercial/slack-padrao-comercial.md`
+- Incidente origem: 17/03 — Henry respondeu Walissom automaticamente → mensagem deletada
+
+## Padrão Visual Slack Comercial (17/03/2026 — PERMANENTE)
+
+- Toda mensagem ao Slack Comercial segue o padrão de 6 blocos com separadores ━━━
+- Prefixos: 📊 Relatório / 🔴 Urgente / 🟡 Acompanhamento / 🟢 Concluído
+- Cabeçalho sempre em *negrito*, emoji fora do asterisco (ex: `📊 *TÍTULO*`)
+- Horário sempre fuso Fortaleza (UTC-3) — nunca UTC
+- Regra completa: `memory/comercial/slack-padrao-comercial.md`
+
+## Relatório Comercial Diário — Formato Aprovado (17/03/2026)
+
+- 7 seções: Contexto → Resumo → Reuniões → Financeiro → Ação → Alertas → Conclusão + Painel de Metas
+- Cores metas (Contexto e Painel): 🟢 contratos | 🟡 condição especial | 💰 recuperação
+- Cores reuniões: 🟢 fechou | 🔵 realizada/não fechou | 🟡 condição especial ofertada | 🟣 em andamento
+- Barra de progresso: `▓▓▓░░░░░░░░░░░░░░` (17 chars, proporcional ao %)
+- Status global: 🔴 <50% | 🟡 50-80% | 🟢 >80% | 🏆 100%
+- Script: `/home/node/.openclaw/workspace/scripts/relatorio-comercial-slack.py`
+- Cron: 23h UTC (20h Fortaleza) — pendente Dr. Henrique ativar no painel
+- Formato completo: `memory/comercial/relatorio-comercial-formato.md`
+
+## Slack Token — Localização (17/03/2026)
+
+- Token Slack NÃO está no 1Password (item "Slack Bot Token" não existe no cofre)
+- Token está em: `openclaw.json` → `channels.slack.botToken`
+- Para uso em scripts: `json.load(open("/home/node/.openclaw/openclaw.json"))["channels"]["slack"]["botToken"]`
+- Envio sempre via Python com UTF-8 (shell corrompe emojis/acentos)
+
+## Google Agenda ICS — 4 Feeds Ativos (17/03/2026)
+
+- ADM H.A.: `https://calendar.google.com/calendar/ical/adv.henriqueaugusto%40gmail.com/private-276abc1fb7f333f6ba972bff521611aa/basic.ics`
+- Henrique-Closer: `https://calendar.google.com/calendar/ical/e50e3cabb583ec22c6f1189eeb0b0ada0bb058abd208a0d05577c739bc405118%40group.calendar.google.com/private-e094cdd8f55577c5412392991d999366/basic.ics`
+- Lucas-Closer: `https://calendar.google.com/calendar/ical/6c8ed9278f1271811c39ea28fd268d5048cce40b7222ce1edfdf888a15fa1a48%40group.calendar.google.com/private-983bfd48dbab59b798799f39905a9719/basic.ics`
+- Walissom-SDR: `https://calendar.google.com/calendar/ical/ha.advocacia.walisonlima%40gmail.com/private-067644b5b8c5f1594977a0cbade98d6f/basic.ics`
+- Padrão título: `[STATUS -] NOME - TIPO - CIDADE - ESTADO - ORIGEM`
+- Todos confirmados 200 OK | Config completa: `memory/comercial/google-agenda.md`
+
 ## Regras Obrigatórias (impostas por Henrique)
 
 ### ⚠️ Alertas de Segurança — PROATIVO

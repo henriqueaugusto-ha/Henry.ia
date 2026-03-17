@@ -5,10 +5,12 @@
 
 ---
 
-## ATUALIZAÇÃO 17/03 19h32 UTC
-- Padrão visual Slack Comercial estabelecido → `memory/comercial/slack-padrao-comercial.md`
-- Relatório comercial diário (cron 20h) aprovado conceitualmente — aguarda validação de dados antes de ativar
-- Henry postou mensagem irregular no Slack às 16h17 → deletada → regra reforçada: nunca auto-responder
+## ATUALIZAÇÃO 17/03 19h59 UTC
+- ✅ Relatório Comercial Diário: formato aprovado + postado no Slack Comercial
+- ✅ Script Python pronto: `scripts/relatorio-comercial-slack.py`
+- ✅ Padrão visual 6 blocos Slack Comercial: salvo e ativo
+- ✅ Google Agenda integrada: 4 feeds ICS funcionando
+- 🟡 Cron 20h: pendente Dr. Henrique ativar no painel henry.henriqueaugusto.adv.br
 
 ---
 
