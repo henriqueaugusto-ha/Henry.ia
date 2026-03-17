@@ -141,10 +141,18 @@ Dr. Henrique pediu e aprovamos a mensagem em 10:38 BRT. Texto final:
 
 ---
 
-## STATUS (17/03 04h30 UTC)
+## STATUS (atualizado 17/03 12h27 UTC)
 
 - Plano definido ✅
-- Comunicação ao comercial: **pendente disparo** (Dr. Henrique vai disparar)
-- Cobrança inadimplentes: Dr. Henrique iniciou em 16/03
+- Comunicação ao comercial: ✅ **FEITO** — reunião presencial 16/03 com equipe
+  - Cascateou 3 contratos/dia + 1 repescagem/dia (R$1.900–R$2.000)
+  - Explicou cobrança: meta R$2.000/dia
+  - Micrometa operacional: 5 reuniões/dia (taxa fechamento >50% = ~2.5 contratos)
+  - Se não fechar no dia → acumula pro próximo
+- Cobrança inadimplentes: ✅ iniciado — 16/03 não atingiu R$2k, 17/03 meta acumulada R$4k
+- Repescagem: ✅ cobrou equipe pela manhã para catalogar no CRM quem pode receber condição especial (2 ofertas/dia)
 - F4 criminal: campanha google ainda não performando — por ora depende de base/indicação
-- Acompanhamento diário: a implementar (tracker ClickUp ou planilha — pendente decisão)
+- Report diário comercial: 🟡 EM CONSTRUÇÃO — automação N8N (não Henry direto no Slack)
+  - Decisão: Slack instável com Henry → automação via N8N + agente IA
+  - Gatilho: ClickUp (área exclusiva Dr. Henrique) ou automático via CRM
+  - Saída: grupo Slack setor comercial, diário pela manhã
