@@ -5,6 +5,12 @@
 
 ---
 
+### Regra permanente — Slack allowFrom (17/03/2026)
+Todos os canais Slack: allowFrom = ["U04NV2X954P"] (Dr. Henrique APENAS).
+Nenhuma pessoa da equipe pode ativar resposta do bot — nem com @mention.
+requireMention=true em todos os canais de equipe.
+gestão_com_ia (C0AHFESNW9X): requireMention=false, allowFrom=["U04NV2X954P"].
+
 ### Resposta automática não autorizada no Slack Comercial — 2ª ocorrência (17/03/2026)
 **O que aconteceu:** Heartbeat/sessão automática leu mensagem da Ingrid no canal Comercial sobre Moisés e respondeu automaticamente ("Lucas, M. está sinalizando...") sem autorização do Dr. Henrique.
 **Impacto:** Interferência direta na conversa da equipe. 2ª violação grave no mesmo dia.
