@@ -640,3 +640,23 @@ Origem: equipe reportou 3 casos de docs inseridos em pastas erradas (já corrigi
 - **Asaas PENDENTE todos 3** — aguarda "CONFIRMO A EXECUÇÃO" + opção NAIRTON (à vista R$2.499 ou 3x R$1.099)
 - ADAILDO 1ª parcela R$1.299 VENCIDA (16/03) | MARCIO parcela R$1.000 vence AMANHÃ 17/03
 - Detalhes completos + dados todos clientes: memory/2026-03-16.md
+
+## Sessão 17/03/2026 — 2 Contratos Assinados + F10 ainda quebrado
+
+- **FRANCISCO DOS SANTOS COELHO FILHO** (868hx7fkp) → fechado 14:24 Fortaleza | Renúncia de Propriedade | Google | +55 85 97674-860 | Sem ADVbox/Asaas ❌
+- **ADALBERTO SARAIVA LEAO** (868hxd9pw) → fechado 16:05 Fortaleza | Acúmulo de Pontos | Google | +55 85 82108-651 | Honorários Pagos | Sem ADVbox/Asaas ❌
+- F10 continua com erros desde 12/03 — nenhum contrato pós-12/03 passou pelo pipeline automático
+- ZapSign API `/docs/` NÃO retorna contratos recentes (N8N) — usar ClickUp como fonte de verdade
+- Detalhes completos: memory/diario/2026-03-17.md
+
+## ANA LAURA — Pediu Demissão (17/03/2026)
+
+- Faltou 16/03 e 17/03 sem comunicação prévia
+- Suporte ao cliente descoberto — risco Ingrid/Henrique absorverem
+- Pendência: priorizar WF-SUPPORT + decisão de reposição
+
+## FRANCISCO DOS SANTOS COELHO (negociação Slack) — 17/03
+
+- Contrato via Lucas, entrada R$1.099 paga (comprovante BB confirmado)
+- Total proposto: R$4.396 em 4x R$1.099 — aguarda confirmação Dr. Henrique
+- ClickUp: tarefa NÃO criada | ADVbox: NÃO | Asaas: NÃO — aguarda "CONFIRMO A EXECUÇÃO"

@@ -21,6 +21,25 @@
 
 ## 🔴 URGENTE
 
+### ⚠️ F10 QUEBRADO — Contratos sem pipeline desde 12/03 (17/03/2026)
+- F10 (`ppws3IRJo8K6QQJd`) — última execução: 12/03 — todas com ERRO
+- Bug: `//` → `??` em "Buscar Task no ClickUp por Signer"
+- Impacto: todos contratos assinados desde 12/03 sem ADVbox + Asaas automático
+- AFETADOS HOJE (17/03): FRANCISCO DOS SANTOS COELHO FILHO (868hx7fkp) + ADALBERTO SARAIVA LEAO (868hxd9pw)
+- Ação necessária: fix F10 + executar onboarding manual dos contratos acumulados
+
+### ⚠️ FRANCISCO DOS SANTOS COELHO FILHO — Novo Contrato 17/03 (sem pipeline)
+- Task: 868hx7fkp | Fechado: 14:24 Fortaleza | Serviço: Renúncia de Propriedade
+- Tel: +55 85 97674-860 | Origem: Google
+- ADVbox: NÃO cadastrado | Asaas: NÃO criado
+- Aguarda autorização para onboarding manual
+
+### ⚠️ ADALBERTO SARAIVA LEAO — Novo Contrato 17/03 (sem pipeline)
+- Task: 868hxd9pw | Fechado: 16:05 Fortaleza | Serviço: Acúmulo de Pontos
+- Tel: +55 85 82108-651 | Origem: Google | Pagamento: Honorários Pagos
+- ADVbox: NÃO cadastrado | Asaas: NÃO criado
+- Aguarda autorização para onboarding manual
+
 ### ⚠️ FRANCISCO DOS SANTOS COELHO — Onboarding Pendente (17/03/2026)
 - Contrato fechado 17/03/2026 via Lucas/Walisom (chegou via Slack)
 - Entrada paga: R$ 1.099,00 ✅ (comprovante BB confirmado)
