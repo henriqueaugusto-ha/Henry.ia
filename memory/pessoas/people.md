@@ -36,12 +36,16 @@
 - Risco: centralizar demais = não cresce | soltar demais = perde padrão
 - Monitorar desenvolvimento sem microgerenciar
 
-### Ana Laura — Suporte ao Cliente
+### Ana Laura — Suporte ao Cliente — ⚠️ PEDIU DEMISSÃO (17/03/2026)
 - Tempo de casa: ~20 dias (fev/2026) → ~1 mês (mar/2026)
 - Papel: atualizar clientes, acompanhar status, comunicação organizada
-- Status: em formação, ainda não autônoma
-- Objetivo: reduzir retrabalho jurídico e evitar que Henrique responda cliente à noite
-- Responsabilidade extra: treinamento da Luciana (amizade prévia — manter profissionalismo)
+- Status: **SAINDO** — pediu demissão 17/03 (problemas pessoais c/ namorado)
+- Faltou: 16/03 (segunda) e 17/03 (terça), não volta na semana
+- ⚠️ **IMPACTO:** suporte ao cliente volta para Dr. Henrique ou Dra. Ingrid
+- ⚠️ **RISCO:** Dr. Henrique sai do comercial e volta pra operação (ciclo vicioso)
+- **SOLUÇÃO EM CONSTRUÇÃO:** automação suporte WhatsApp via N8N + agentes IA
+- Responsabilidade extra: treinava Luciana (amizade prévia)
+- ⚠️ Verificar: Luciana consegue assumir parte do suporte sozinha?
 
 ### Luciana — Jurídico (auxiliar administrativo)
 - Entrada: 11/03/2026
