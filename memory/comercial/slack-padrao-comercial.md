@@ -91,14 +91,32 @@ Status esperado: [resultado esperado]
 
 ---
 
+## ⛔ REGRA ABSOLUTA — NUNCA POSTAR DE FORMA AUTOMÁTICA (17/03/2026)
+
+> "Nunca de forma automática." — Dr. Henrique Augusto, 17/03/2026 19h32 UTC
+
+**Antes de qualquer postagem no Slack Comercial, verificar obrigatoriamente:**
+1. Dr. Henrique autorizou explicitamente esta postagem?
+2. O conteúdo está no padrão de 6 blocos?
+3. O horário está em fuso Fortaleza (UTC-3)?
+
+**Se qualquer resposta for NÃO → não postar.**
+
+Não existe exceção. Nem urgência. Nem "óbvio que ele ia querer".
+Autorização explícita do Dr. Henrique é condição necessária e suficiente.
+
+---
+
 ## FLUXO OBRIGATÓRIO
 
 Quando Dr. Henrique mandar informação no Telegram:
-1. Interpretar
-2. Organizar
-3. Limpar
-4. Transformar no padrão acima
-5. Só então publicar no Slack Comercial
+1. Verificar se está autorizado a postar
+2. Interpretar
+3. Organizar
+4. Limpar
+5. Transformar no padrão dos 6 blocos
+6. Apresentar para Dr. Henrique revisar (se ele não tiver visto)
+7. Só então publicar no Slack Comercial
 
 ---
 

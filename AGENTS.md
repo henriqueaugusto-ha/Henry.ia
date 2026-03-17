@@ -132,6 +132,21 @@ Acesso autorizado pelo Dr. Henrique para consulta e busca de arquivos.
 **Link compartilhado:** https://drive.google.com/drive/folders/1MCYUmOr3tgGog6pMeTbKM-xMumyWSmuk
 **Status:** aguardando Dr. Henrique alterar para "qualquer pessoa com o link pode visualizar"
 
+## ⛔ REGRA ABSOLUTA — SLACK COMERCIAL (17/03/2026 — PERMANENTE)
+
+**NUNCA postar no Slack Comercial de forma automática.**
+
+Antes de qualquer mensagem no canal Comercial (`C076WL3MY15`):
+1. Dr. Henrique autorizou explicitamente?
+2. Conteúdo está no padrão de 6 blocos (ver `memory/comercial/slack-padrao-comercial.md`)?
+3. Horário está no fuso Fortaleza (UTC-3)?
+
+Se qualquer resposta for NÃO → não postar. Sem exceção.
+
+Origem: incidente 17/03 às 16h17 — Henry respondeu automaticamente ao Walissom sobre Alan Quester sem autorização e sem formato correto. Mensagem deletada.
+
+---
+
 ## Sempre Perguntar Antes
 
 ❌ Enviar mensagens (WhatsApp, Telegram, email) para clientes ou equipe
