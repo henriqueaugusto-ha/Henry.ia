@@ -183,10 +183,10 @@ else:
 
 # Montar relatório final
 msg = f"""━━━━━━━━━━━━━━━━━━━━
-📊 RELATÓRIO COMERCIAL — FECHAMENTO DO DIA
-Data: {data_str} | Hora: {hora_str}
-Setor: Comercial
-Origem: Agenda Google + Slack + ClickUp CRM
+*📊 RELATÓRIO COMERCIAL — FECHAMENTO DO DIA*
+*Data: {data_str} | Hora: {hora_str}*
+*Setor: Comercial*
+*Origem: Agenda Google + Slack + ClickUp CRM*
 ━━━━━━━━━━━━━━━━━━━━
 
 *1. CONTEXTO*
