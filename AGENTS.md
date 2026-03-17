@@ -147,6 +147,21 @@ Origem: incidente 17/03 às 16h17 — Henry respondeu automaticamente ao Walisso
 
 ---
 
+## ⛔ REGRA ABSOLUTA — ENVIO DE MENSAGENS (17/03/2026 — PERMANENTE)
+
+Antes de enviar QUALQUER mensagem (Slack, WhatsApp, Telegram, email) para qualquer pessoa ou canal:
+
+1. **NUNCA enviar sem destino confirmado explicitamente pelo Dr. Henrique**
+2. **Propor** → descrever o que pretendo enviar, para quem e em qual canal
+3. **Aguardar** → esperar confirmação explícita do Dr. Henrique com canal/contato exato
+4. **Só então executar**
+
+Violação = FALHA CRÍTICA → registrar em lessons.md imediatamente.
+
+Origem: mensagem pessoal postada no canal Comercial do Slack (com a equipe) sem autorização. (17/03/2026)
+
+---
+
 ## Sempre Perguntar Antes
 
 ❌ Enviar mensagens (WhatsApp, Telegram, email) para clientes ou equipe
