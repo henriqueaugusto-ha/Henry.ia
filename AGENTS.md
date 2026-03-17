@@ -12,23 +12,48 @@ Seguir o checklist completo em `BOOT.md` antes de responder ao Henrique.
 
 ## Estrutura de Memória
 
+> Atualizado: 17/03/2026 — subpastas por espaço temático
+
 ```
-MEMORY.md          ← Índice enxuto (sempre carregado em sessão principal)
+MEMORY.md                    ← Índice enxuto + alertas críticos (sempre carregado)
 memory/
-├── YYYY-MM-DD.md  ← Notas diárias (rascunho)
-├── lessons.md     ← Lições aprendidas permanentes
-├── decisions.md   ← Decisões estratégicas registradas
-├── people.md      ← Equipe, clientes, contatos relevantes
-└── heartbeat-state.json ← Estado dos checks periódicos
-tasks/             ← Tarefas pendentes com contexto completo
-SECURITY_STRATEGY.md ← Estado e roadmap de segurança da VPS
+├── gestao/                  ← Planos, metas, decisões estratégicas
+│   ├── plano-marco-2026.md
+│   ├── projects.md
+│   ├── decisions.md
+│   └── livro-poder-da-gestao.md
+├── comercial/               ← Funil, leads, conversão, scripts SDR
+│   └── comercial.json
+├── automacoes/              ← N8N, workflows, bugs, integrações
+│   ├── api-brasil-integration-success.md
+│   ├── docxtemplater-contratos-guia.md
+│   ├── automacao.json
+│   └── operacional.json
+├── juridico/                ← Clientes, processos, ADVbox, prazos
+│   ├── clickup-estrutura.md
+│   └── projeto-agentes-juridico.md
+├── pessoas/                 ← Equipe, clientes, contatos relevantes
+│   └── people.md
+├── diario/                  ← Notas diárias YYYY-MM-DD.md (rascunho pré-compactação)
+├── lessons.md               ← Lições aprendidas permanentes (global)
+├── pending.md               ← Pendências abertas (global)
+└── README.md                ← Mapa completo da estrutura
+tasks/                       ← Tarefas pendentes com contexto completo
+SECURITY_STRATEGY.md         ← Estado e roadmap de segurança da VPS
 ```
 
-### Regras de memória
+### Regras de memória — OBRIGATÓRIO
 - **MEMORY.md = índice.** Não duplicar conteúdo dos arquivos topic.
-- **Lição aprendida?** → `memory/lessons.md`
-- **Decisão do Henrique?** → `memory/decisions.md`
-- **Contexto de pessoa nova?** → `memory/people.md`
+- **Salvar no grupo certo:**
+  - Mensagem do grupo *Gestão & Estratégia* → `memory/gestao/`
+  - Mensagem do grupo *Comercial* → `memory/comercial/`
+  - Mensagem do grupo *Automações* → `memory/automacoes/`
+  - Mensagem do grupo *Jurídico* → `memory/juridico/`
+  - Contexto de pessoa nova → `memory/pessoas/people.md`
+  - Lição aprendida → `memory/lessons.md`
+  - Pendência → `memory/pending.md`
+  - Nota diária (flush/compactação) → `memory/diario/YYYY-MM-DD.md`
+- **Consulta cruzada:** pode e deve ler qualquer subpasta para enriquecer análise
 - **Se importa, escreve.** O que não está escrito não existe.
 - **Commitar** mudanças no workspace após edições relevantes.
 
