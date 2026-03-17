@@ -287,3 +287,18 @@
 - Domínios: `comercial.json`, `automacao.json`, `comunicacao.json`, `operacional.json`
 - Ativar após ~20-30 registros de decisões aceitas/rejeitadas
 - Status: estrutura definida, implementação adiada conscientemente
+
+## ⏰ LEMBRETE 18/03 ANTES DAS 12H — REBECA NOTIFICAÇÃO
+
+**Ação:** Notificar Walison Lima no Slack para disparar notificação formal à REBECA
+**Contexto:**
+- Valor em aberto: R$ 3.138,00 (17/03)
+- Ela pediu prazo até hoje (18/03)
+- Notificação formal preparada pelo Dr. Henrique
+- Após notificação → negociar no período da noite
+- Negociação já alinhada com Dr. Henrique
+
+**Mensagem sugerida para o Slack:**
+> Walison, lembrete: hoje é o prazo da Rebeca. Dispare a notificação formal no período da tarde para abrir negociação à noite. Valor em aberto: R$ 3.138,00+.
+
+**Prazo:** ANTES DAS 12H de 18/03/2026
