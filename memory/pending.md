@@ -7,13 +7,11 @@
 
 ## 🔴 URGENTE
 
-### ⚠️ DISCREPÂNCIA FINANCEIRA — FRANCISCO DOS SANTOS COELHO (17/03/2026)
-- Walison reportou: Total R$ 3.397,00 | Entrada R$ 1.199,00 | 2x R$ 1.099,00
-- Lucas reportou: Total R$ 4.396,00 | Entrada R$ 1.099,00 | 3x R$ 1.099,00
-- Comprovante BB confirmado: pagamento R$ 1.099,00 ✅ (entrada de Lucas bate)
-- Diferença no total: R$ 999,00 a maior em Lucas | diferença nas parcelas: 2x vs 3x
-- CPF pagador: ***.591.263-** | Pagou via PIX Banco do Brasil
-- Ação: Dr. Henrique verificar qual versão do contrato está correta
+### ⚠️ FRANCISCO DOS SANTOS COELHO — Contrato a confirmar (17/03/2026)
+- Walison enviou "Perfeito. Luca" + mesmo comprovante → confirmou versão Lucas ✅
+- Entrada: R$ 1.099,00 ✅ confirmada (Walison havia digitado R$ 1.199,00 por engano)
+- Versão Lucas (provável correta): Total R$ 4.396,00 | 3x R$ 1.099,00 após entrada
+- ⚠️ PENDENTE: Dr. Henrique confirmar total R$ 4.396,00 antes de criar Asaas
 
 ### FRANCISCO DOS SANTOS COELHO — Onboarding Pendente (17/03/2026)
 - Contrato fechado 17/03/2026
