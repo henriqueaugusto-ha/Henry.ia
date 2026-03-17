@@ -329,6 +329,25 @@ Headers:
 - Prazos vencidos: 2 (HUMBERTO ANPP 04/02, HERICKLEPTON 24/02)
 - Causa raiz: WF-CONTRACT quebrado (PDF Master URL vazio)
 
+## Slack — Canais Monitorados (17/03/2026) — ORDEM PERMANENTE
+
+*Regra absoluta: SOMENTE LEITURA em todos os canais Slack de equipe.*
+*Só reporto ao Dr. Henrique quando ele perguntar ou criticidade máxima.*
+*Nunca respondo ninguém nos canais sem autorização explícita do Dr. Henrique.*
+
+Canais configurados (`allowFrom: []`):
+- `C076WL3MY15` — Comercial ✅
+- `C07LJA7KW1Y` — Jurídico ✅
+- `C07LBN4KWT0` — CC Geral HA Advocacia ✅
+- `C08LMJLDMK9` — Suporte ao Cliente ✅
+- `C0ACVJ8NTD4` — Agenda Jurídico Lara ✅
+- `C09KPCB0ZM1` — Agenda Jurídico Flora ✅
+- `C0AHFESNW9X` — Alertas/Sistema ✅
+
+Membros Comercial: Walison Lima, Lucas Furtado, Dra. Ingrid (= "M."), Dr. Henrique
+Container VPS: `openclaw-ulim-openclaw-1` | Config host: `/docker/openclaw-ulim/data/.openclaw/`
+Reload sem queda: `docker kill --signal=SIGUSR1 openclaw-ulim-openclaw-1`
+
 ## Slack Comercial — Configurado (17/03/2026)
 
 - Canal: `C076WL3MY15` | `requireMention: false` | modo SOMENTE LEITURA
