@@ -75,6 +75,23 @@ Agente contextual que:
 7. [ ] Período de teste → validar se resumo é fiel à operação
 8. [ ] Ajustar prompt de classificação com padrão real observado
 
+## STATUS (17/03/2026 16h58 UTC)
+
+- ✅ Briefing recebido e documentado
+- ✅ Template JSON importado no N8N pelo Dr. Henrique
+- ⬜ Aguardando: URL da instância Evolution API
+- ⬜ Aguardando: confirmação se Evolution já está conectada ao WhatsApp suporte
+- ⬜ Aguardando: nome do canal Slack (sugestão: #suporte-monitoramento)
+- 🔴 PRIORIDADE MÁXIMA — problema é pra ontem, Ana Laura saiu
+
+## CONTEXTO COMPLETO (para referência cruzada)
+
+- Diagnóstico do problema: `memory/gestao/problema-suporte-solucao.md`
+- Projeto suporte WhatsApp: `memory/automacoes/projeto-suporte-whatsapp.md`
+- Situação Ana Laura: `memory/pessoas/people.md` (seção Ana Laura)
+- Plano de março: `memory/gestao/plano-marco-2026.md`
+- Capítulo 3 livro gestão: `memory/gestao/livro-cap3-indicadores.md`
+
 ## REFERÊNCIA
 
-- Template: `monitoramento_suporte_evolution_template_n8n.json` (mencionado no briefing — não recebido ainda)
+- Template: `monitoramento_suporte_evolution_template_n8n.json` — já importado no N8N pelo Dr. Henrique
