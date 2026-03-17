@@ -5,6 +5,13 @@
 
 ---
 
+## ATUALIZAÇÃO 17/03 19h32 UTC
+- Padrão visual Slack Comercial estabelecido → `memory/comercial/slack-padrao-comercial.md`
+- Relatório comercial diário (cron 20h) aprovado conceitualmente — aguarda validação de dados antes de ativar
+- Henry postou mensagem irregular no Slack às 16h17 → deletada → regra reforçada: nunca auto-responder
+
+---
+
 ## 🔴 URGENTE
 
 ### ⚠️ FRANCISCO DOS SANTOS COELHO — Onboarding Pendente (17/03/2026)
