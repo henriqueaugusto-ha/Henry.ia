@@ -66,3 +66,42 @@ Switch liga/desliga:
 
 1. **Report diário comercial no Slack** (mais simples, resultado imediato)
 2. **Suporte WhatsApp automatizado** (mais complexo, resolve gargalo estrutural)
+
+---
+
+## PROGRESSO FASE 1 — MONITORAMENTO (17/03/2026)
+
+### Setup completo ✅
+- Evolution API v1.8.7 instalada na VPS (container `evolution-api`)
+- Instância `suporte-ha` conectada ao WhatsApp suporte (estado: open)
+- Webhook → N8N workflow `lahexgzvNT2f3WRU` (15 nodes)
+- Canal Slack #suporte-monitoramento (C0AM6CY5CV8)
+- Proxy Nginx HTTPS: `https://henry.henriqueaugusto.adv.br/evolution/`
+
+### 6 fixes aplicados no workflow
+1. Event name normalization (lowercase→uppercase)
+2. $env references removidas (modelo + API keys)
+3. Channel Slack adicionado no body
+4. Markdown strip no parser de JSON da OpenAI
+5. Filtro fromMe + grupos + eventos vazios
+6. Download Media URL → proxy HTTPS público
+
+### Funcionando
+- ✅ Mensagens de texto de clientes → IA analisa → Slack
+- ✅ Filtro inteligente: só clientes, ignora equipe e ruído
+- ⏳ Mídia: proxy configurado, aguardando teste real
+
+### Pendente Fase 1
+- [ ] Teste real de download de mídia (áudio/imagem/doc)
+- [ ] Resumo diário 12h/18h (endpoint de query não existe ainda)
+- [ ] OpenAI API key → mover de hardcode pra N8N Credentials
+- [ ] Prompt IA: melhorar classificação de urgência e tema
+
+### Dados técnicos
+- Evolution API: `http://127.0.0.1:8080` (bind localhost) / proxy `https://henry.henriqueaugusto.adv.br/evolution/`
+- API key Evolution: `henry-evolution-2026`
+- N8N workflow: `lahexgzvNT2f3WRU`
+- Slack channel: `C0AM6CY5CV8`
+- Webhook path: `/webhook/evolution-support-monitor`
+- 556 conversas no WhatsApp suporte, 40 ativas últimas 24h
+- Acesso total a mensagens via Evolution API (findChats + findMessages)

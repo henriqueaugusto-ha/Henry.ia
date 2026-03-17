@@ -85,9 +85,10 @@ Agente contextual que:
 - ✅ Canal Slack #suporte-monitoramento (C0AM6CY5CV8) criado
 - ✅ 4 fixes aplicados: filtro event, $env, channel Slack, markdown parse
 - ✅ **PIPELINE TEXTO FUNCIONANDO** — mensagens chegando no Slack com análise IA
-- ❌ Download Media — N8N não resolve DNS `evolution-api` (redes Docker separadas)
-- 🟡 Mensagens "fromMe" — prompt precisa tratar respostas da equipe
+- ✅ Download Media — proxy Nginx HTTPS configurado, aguardando teste real com mídia
+- ✅ Filtro fromMe — respostas da equipe ignoradas, só alerta de clientes
 - 🟡 Resumo diário — endpoint placeholder, não funcional
+- ⚠️ OpenAI API key hardcoded — mover pra N8N Credentials
 
 ## CONTEXTO COMPLETO (para referência cruzada)
 
