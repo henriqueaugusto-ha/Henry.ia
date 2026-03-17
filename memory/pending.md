@@ -10,7 +10,12 @@
 - ✅ Script Python pronto: `scripts/relatorio-comercial-slack.py`
 - ✅ Padrão visual 6 blocos Slack Comercial: salvo e ativo
 - ✅ Google Agenda integrada: 4 feeds ICS funcionando
-- 🟡 Cron 20h: pendente Dr. Henrique ativar no painel henry.henriqueaugusto.adv.br
+- 🔴 **AMANHÃ 18/03 — Ativar cron relatório comercial 20h no painel:**
+  1. Acessar `henry.henriqueaugusto.adv.br` → Crons → Novo
+  2. Nome: `Relatório Comercial Diário — 20h`
+  3. Schedule: `0 23 * * *`
+  4. Tipo: Agent Turn | Modelo: sonnet
+  5. Mensagem: `Executar: python3 /home/node/.openclaw/workspace/scripts/relatorio-comercial-slack.py`
 
 ---
 
