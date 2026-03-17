@@ -60,6 +60,29 @@
   - Objetivo: equipe entenda o problema tão bem quanto possível
   - Depois da causa-raiz, solução correta fica mais clara
 - Exemplo: microempreendedora cortava tráfego para aumentar vendas (contraditório) → problema real era dimensionamento da equipe (74% vendas em 3 de 5 vendedoras)
+- Exemplo 5 Porquês (Figura 8):
+  1. Por que vendas em queda? → Poucas pessoas, fluxo diminuiu
+  2. Por que fluxo diminuiu? → Paramos campanhas de email marketing
+  3. Por que diminuiu ações de captura? → Queríamos economizar e melhorar fluxo de caixa
+  4. Por que precisa reduzir custo de captura? Não tem outras despesas? → Acharam que era o caminho mais fácil
+  5. Por que não recalibrou e reduziu progressivamente? → Precisavam de caixa rápido, vendas já estavam ruins
+- "Não tem problema errar no meio do caminho, mas deve-se ter coerência para reconhecer o erro e corrigir rápido, para manter a reputação inabalável."
+
+### 5. PREMIAÇÃO
+- Último pilar — mantém o time engajado por longos períodos
+- Distribuir prêmios ao longo do tempo = ferramenta de acompanhamento
+- "Não tenho verba" não é desculpa — prêmio não precisa ser caro, basta alinhar objetivos
+- Exemplo Ambev RJ: vendedores com escala sábado → desafio "bateu meta da semana, sábado livre" → bateram todas as metas em outubro, Top 10 nacional
+- Remuneração vendas: **60% fixo + 40% variável** atrelada a performance
+- Prêmio como ferramenta de acompanhamento: apresentar desafio e prêmios todo dia nas reuniões
+- **"Bateu, Levou"** (não ranking Top 3): se bater o desafio, ganha. Evita desmotivar quem fica fora do top
+- Se dinheiro escasso: Top 3 funciona, mas cuidado para não desmotivar os demais
+
+### EXERCÍCIO "NA PRÁTICA" (p. 53)
+1. Liste os 5 principais indicadores da empresa
+2. Escreva como vai mensurá-los e onde a equipe os verá
+3. Dos 5, quais itens os influenciam? (ex: faturamento → impactado por quantidade de vendas, ticket médio etc.)
+4. Quais incentivos pode implementar hoje e para quem?
 
 ---
 
