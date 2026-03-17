@@ -306,3 +306,12 @@ Prompt Mestre recebido do Dr. Henrique. Toda documentação no ClickUp deve segu
 
 Doc de referência: https://docs.google.com/document/d/18R4rycqxlPhXGBDwXGWOw8UZHm-OQQnU6WMvUw5Vmhk/edit
 Proibido: texto corrido, anotação seca, estrutura sem hierarquia, documentação sem impacto visual.
+
+## Asaas — Forma de Pagamento Padrão (16/03/2026)
+
+**Regra permanente (Dr. Henrique, 16/03/2026):**
+- Cadastrar SEMPRE como **PIX** no Asaas
+- **NUNCA boleto**
+- Mesmo que o contrato diga "cartão de crédito" → cadastrar PIX no Asaas
+- Opção 1 (à vista) ou Opção 2 (parcelado) — ambas via PIX
+- Não perguntar sobre forma de pagamento — já é PIX por definição
