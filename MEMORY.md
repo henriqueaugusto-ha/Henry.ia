@@ -583,6 +583,29 @@ Antes de inserir qualquer documento na pasta de um cliente:
 5. Divergência → reportar ao Dr. Henrique antes de agir
 Origem: equipe reportou 3 casos de docs inseridos em pastas erradas (já corrigidos em 13/03)
 
+## Onboarding Manual ADVbox — Método Confirmado (17/03/2026)
+
+Quando F13 falha (IF invertido) ou F10 quebrado, usar diretamente:
+- F14: `POST /webhook/advbox-cadastrar-cliente` → `{nome, cpf, rg, celular, email, cep, estado, cidade}`
+- F15: `POST /webhook/advbox-cadastrar-processo` → `{customers_id, orgao, notes}`
+- F16: `POST /webhook/advbox-cadastrar-tarefas` → `{lawsuits_id, orgao, prazo_defesa, cadastro_date}`
+- BUG F13: IF TRUE/FALSE invertido — F14 retorna success mas F13 reporta erro. Workaround: F14→F15→F16 direto.
+
+## ZapSign Paginação — Workaround Confirmado (17/03/2026)
+
+Docs recentes NÃO estão na última página calculada pelo count. Solução:
+- Busca binária nas páginas 100-120 com page_size=10
+- page=110: Jan 2026 | page=114: Mar 2026 (contratos mais recentes)
+- Briefing incompleto → extrair CPF/dados do PDF do contrato assinado (ferramenta `pdf`)
+- ZapSign token correto (N8N): `30a3e64e-1faf-4392-bbab-bf0ebdd12ee021caa197-b702-4b23-9809-d2082c56c461`
+
+## Contratos 17/03/2026 — ADVbox Concluídos
+
+- FRANCISCO DOS SANTOS COELHO FILHO (868hx7fkp): cliente 14393401 | processo 13735725 | tarefas 203461547 + 203461549
+  - CPF: 729.591.263-00 | email: vickitordossantos@gmail.com | Asaas: PENDENTE
+- ADALBERTO SARAIVA LEAO (868hxd9pw): cliente 14393421 | processo 13735744 | tarefas 203461972 + 203461974
+  - CPF: 485.874.943-68 | email: adalberto634@gmail.com | 4 AITs Art.208 CTB vencidos Dez/25 | Asaas: PENDENTE
+
 ## F10 — Bug Crítico + GABRIEL LINHARES (13/03/2026)
 
 - **F10** (`ppws3IRJo8K6QQJd`) tem bug `//` → `??` em "Buscar Task no ClickUp por Signer"

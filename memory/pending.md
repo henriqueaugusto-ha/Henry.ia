@@ -28,26 +28,16 @@
 - AFETADOS HOJE (17/03): FRANCISCO DOS SANTOS COELHO FILHO (868hx7fkp) + ADALBERTO SARAIVA LEAO (868hxd9pw)
 - Ação necessária: fix F10 + executar onboarding manual dos contratos acumulados
 
-### ⚠️ FRANCISCO DOS SANTOS COELHO FILHO — Novo Contrato 17/03 (sem pipeline)
-- Task: 868hx7fkp | Fechado: 14:24 Fortaleza | Serviço: Renúncia de Propriedade
-- Tel: +55 85 97674-860 | Origem: Google
-- ADVbox: NÃO cadastrado | Asaas: NÃO criado
-- Aguarda autorização para onboarding manual
+### ⚠️ FRANCISCO COELHO FILHO — Asaas Pendente (17/03)
+- Task: 868hx7fkp | ADVbox: ✅ 14393401 | Processo: ✅ 13735725
+- R$4.396 total | entrada R$1.099 paga 17/03 | 3x R$1.099 mensais venc. dia 17
+- **Aguarda "CONFIRMO A EXECUÇÃO" para criar cobranças Asaas**
 
-### ⚠️ ADALBERTO SARAIVA LEAO — Novo Contrato 17/03 (sem pipeline)
-- Task: 868hxd9pw | Fechado: 16:05 Fortaleza | Serviço: Acúmulo de Pontos
-- Tel: +55 85 82108-651 | Origem: Google | Pagamento: Honorários Pagos
-- ADVbox: NÃO cadastrado | Asaas: NÃO criado
-- Aguarda autorização para onboarding manual
-
-### ⚠️ FRANCISCO DOS SANTOS COELHO — Onboarding Pendente (17/03/2026)
-- Contrato fechado 17/03/2026 via Lucas/Walisom (chegou via Slack)
-- Entrada paga: R$ 1.099,00 ✅ (comprovante BB confirmado)
-- Versão correta (Lucas): Total R$ 4.396,00 | entrada R$1.099 + 3x R$1.099
-- ⚠️ PENDENTE: Dr. Henrique confirmar total R$4.396,00
-- ClickUp: tarefa NÃO criada
-- ADVbox: NÃO cadastrado
-- Asaas: cobranças NÃO criadas — aguarda confirmação total + "CONFIRMO A EXECUÇÃO"
+### ⚠️ ADALBERTO SARAIVA LEAO — Asaas + Decisão Plano (17/03)
+- Task: 868hxd9pw | ADVbox: ✅ 14393421 | Processo: ✅ 13735744
+- R$2.399 total | 1ª vence 18/03 (AMANHÃ)
+- Decidir: à vista R$2.399 OU entrada R$1.099 + 2x R$1.099 (venc 18/04 e 18/05)
+- **Aguarda decisão do plano + "CONFIRMO A EXECUÇÃO"**
 
 ### ⚠️ ANA LAURA — PEDIU DEMISSÃO (17/03/2026)
 - Faltou 16/03 e 17/03 sem comunicação prévia; não retorna esta semana
