@@ -329,6 +329,18 @@ Headers:
 - Prazos vencidos: 2 (HUMBERTO ANPP 04/02, HERICKLEPTON 24/02)
 - Causa raiz: WF-CONTRACT quebrado (PDF Master URL vazio)
 
+## Evolution API — Instalada e Ativa (17/03/2026)
+
+- Container: `evolution-api` | Imagem: `atendai/evolution-api:v1.8.7`
+- Acesso OpenClaw: `http://evolution-api:8080` | API Key: `henry-evolution-2026`
+- Acesso N8N (host): `http://127.0.0.1:8080`
+- Instância: `suporte-ha` | Status: `open` (WhatsApp suporte conectado)
+- Webhook → N8N: `https://n8n.srv1380728.hstgr.cloud/webhook/evolution-support-monitor`
+- Rede Docker: `openclaw-ulim_openclaw` (acesso interno garantido)
+- N8N Workflow ID: `lahexgzvNT2f3WRU` | Status: ATIVO ✅
+- Canal Slack suporte: `C0AM6CY5CV8` (#suporte-monitoramento)
+- Pendente: validar com mensagem real no número de suporte
+
 ## Slack — Canais Monitorados (17/03/2026) — ORDEM PERMANENTE
 
 *Regra absoluta: SOMENTE LEITURA em todos os canais Slack de equipe.*
