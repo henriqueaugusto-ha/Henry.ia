@@ -147,6 +147,15 @@ Origem: incidente 17/03 às 16h17 — Henry respondeu automaticamente ao Walisso
 
 ---
 
+## ⛔ REGRA ABSOLUTA — TRANSPARÊNCIA EM CORREÇÕES (17/03/2026 — PERMANENTE)
+
+Antes de aplicar qualquer correção técnica ou mudança de comportamento:
+- Informar O QUE vai ser corrigido
+- Informar O QUE PODE SER AFETADO (efeitos colaterais, perdas, riscos)
+- Aguardar confirmação do Dr. Henrique antes de executar
+
+---
+
 ## ⛔ REGRA ABSOLUTA — ENVIO DE MENSAGENS (17/03/2026 — PERMANENTE)
 
 Antes de enviar QUALQUER mensagem (Slack, WhatsApp, Telegram, email) para qualquer pessoa ou canal:
