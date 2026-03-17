@@ -7,6 +7,21 @@
 
 ## 🔴 URGENTE
 
+### ⚠️ DISCREPÂNCIA FINANCEIRA — FRANCISCO DOS SANTOS COELHO (17/03/2026)
+- Walison reportou: Total R$ 3.397,00 | Entrada R$ 1.199,00 | 2x R$ 1.099,00
+- Lucas reportou: Total R$ 4.396,00 | Entrada R$ 1.099,00 | 3x R$ 1.099,00
+- Comprovante BB confirmado: pagamento R$ 1.099,00 ✅ (entrada de Lucas bate)
+- Diferença no total: R$ 999,00 a maior em Lucas | diferença nas parcelas: 2x vs 3x
+- CPF pagador: ***.591.263-** | Pagou via PIX Banco do Brasil
+- Ação: Dr. Henrique verificar qual versão do contrato está correta
+
+### FRANCISCO DOS SANTOS COELHO — Onboarding Pendente (17/03/2026)
+- Contrato fechado 17/03/2026
+- Entrada paga: R$ 1.099,00 (comprovante BB confirmado)
+- ClickUp: tarefa NÃO criada ainda (chegou via Slack)
+- ADVbox: NÃO cadastrado
+- Asaas: cobranças NÃO criadas — aguarda definição do contrato correto + "CONFIRMO A EXECUÇÃO"
+
 ### ✅ OAuth Google Ads — RESOLVIDO (08/03/2026) ← confirmado semana 09-13/03
 - Token renovado em 08/03/2026 — sem data de expiração fixa
 - Status atual: funcionando ✅
