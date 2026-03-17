@@ -315,3 +315,58 @@ Proibido: texto corrido, anotação seca, estrutura sem hierarquia, documentaç�
 - Mesmo que o contrato diga "cartão de crédito" → cadastrar PIX no Asaas
 - Opção 1 (à vista) ou Opção 2 (parcelado) — ambas via PIX
 - Não perguntar sobre forma de pagamento — já é PIX por definição
+
+---
+
+## N8N + Evolution API — Sessão 17/03/2026
+
+### Evolution API v1.8.7 usa event names em lowercase com ponto
+- Formato recebido: `messages.upsert` (não `MESSAGES_UPSERT`)
+- Fix: `event.replace(/\./g, '_').toUpperCase()` antes do switch/case
+- Nunca assumir que webhook events são uppercase — verificar payload real
+
+### N8N bloqueia `$env` em expressões — completamente
+- `$env.QUALQUER_COISA` retorna undefined — não avalia nem o fallback `||`
+- Solução: hardcode o valor ou usar N8N Credentials (Credential Store)
+- Não existe workaround dentro de expressão — é bloqueio do N8N por design
+
+### API PUT do N8N (atualizar workflow) rejeita chaves extras
+- Aceita apenas `settings` com `executionOrder`
+- Rejeita: `binaryMode`, `availableInMCP`, `callerPolicy`, qualquer outra key
+- Antes de fazer PUT, remover todas as keys além das essenciais
+
+### OpenAI Responses API retorna JSON em markdown code fences
+- Formato: ` ```json\n{...}\n``` `
+- Sempre strip antes do `JSON.parse()`: remover ```json e ``` antes de parsear
+- Aplicar mesmo quando prompt diz "retorne apenas JSON" — pode retornar com fences
+
+### Shell `$MSG` com heredoc corrompe UTF-8 para emojis e acentos
+- Emojis viram `ð`, acentos viram `Ã§Ã£o` etc.
+- SEMPRE enviar para Slack via Python com encoding UTF-8 explícito
+- Nunca passar mensagem com caracteres especiais por variável shell
+
+### Slack botToken está no openclaw.json — não no 1Password
+- Item "Slack Bot Token" não existe no 1Password
+- Token real em: `openclaw.json` → `channels.slack.botToken`
+- Em scripts Python: `json.load(open("/home/node/.openclaw/openclaw.json"))["channels"]["slack"]["botToken"]`
+
+### Nginx proxy reverso pode resolver problemas de rede cross-container
+- N8N em servidor externo não alcança `evolution-api:8080` (Docker DNS local)
+- Solução: proxy reverso Nginx no servidor com Evolution → `/evolution/` → `http://127.0.0.1:8080`
+- Proteção: exigir header `apikey` no bloco location do Nginx
+- Resultado: Evolution acessível via HTTPS com proteção de API key
+
+---
+
+## Comercial / Financeiro — 17/03/2026
+
+### Walisom pode digitar valor errado no comprovante
+- Padrão identificado: Walisom digitou R$1.199 quando era R$1.099 (Francisco Coelho)
+- Regra: SEMPRE confirmar valor com Dr. Henrique ou Lucas antes de cadastrar no Asaas
+- Protocolo: se comprovante enviado por Walisom → validar cruzado com contrato antes de qualquer ação financeira
+
+### Henry NUNCA responde automaticamente a mensagens da equipe no Slack Comercial
+- Incidente 17/03: Henry respondeu Walisom sem autorização
+- Mensagem deletada via API
+- Regra absoluta: só postar no Slack quando Dr. Henrique solicita explicitamente
+- Toda postagem segue padrão de 6 blocos (memory/comercial/slack-padrao-comercial.md)
