@@ -91,6 +91,27 @@ Status esperado: [resultado esperado]
 
 ---
 
+## ⛔ REGRA DE VERIFICAÇÃO — CONTRATOS × REUNIÕES (17/03/2026)
+
+> Erro cometido: relatório contabilizou reunião em andamento como contrato fechado.
+
+**Regra permanente antes de qualquer relatório comercial:**
+
+Contrato só conta quando:
+1. Reunião realizada ✅
+2. Assinatura confirmada ✅
+3. Entrada recebida ou cobrança criada no Asaas ✅ (confirmação via Upside/Asaas)
+
+**Verificação obrigatória por fonte:**
+- Contratos assinados → checar na API do Upside / ZapSign (não apenas no Telegram da equipe)
+- Pagamentos recebidos → checar no Asaas (não apenas comprovante enviado)
+- Reunião em andamento → **nunca contabilizar** até haver confirmação de fechamento
+
+**Nunca contar reunião em andamento como contrato — nem como "provável".**
+**Separar sempre: Contratos | Pagamentos | Reuniões realizadas | Em andamento**
+
+---
+
 ## ⛔ REGRA ABSOLUTA — NUNCA POSTAR DE FORMA AUTOMÁTICA (17/03/2026)
 
 > "Nunca de forma automática." — Dr. Henrique Augusto, 17/03/2026 19h32 UTC
