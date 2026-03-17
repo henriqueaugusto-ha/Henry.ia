@@ -337,6 +337,7 @@ Headers:
 - Editar config sempre no HOST (python3 direto) — permission denied dentro do container
 - Reload sem queda: `docker kill --signal=USUSR1 openclaw-ulim-openclaw-1`
 - Henry NÃO responde ninguém no canal — só lê e reporta ao Dr. Henrique via Telegram
+- ⚠️ Timestamps Slack = UTC → sempre converter para BRT (UTC-3) antes de exibir
 
 ## Grupos Telegram — Configuração em Andamento (11/03/2026)
 
