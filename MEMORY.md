@@ -329,6 +329,15 @@ Headers:
 - Prazos vencidos: 2 (HUMBERTO ANPP 04/02, HERICKLEPTON 24/02)
 - Causa raiz: WF-CONTRACT quebrado (PDF Master URL vazio)
 
+## Slack Comercial — Configurado (17/03/2026)
+
+- Canal: `C076WL3MY15` | `requireMention: false` | modo SOMENTE LEITURA
+- Container VPS: `openclaw-ulim-openclaw-1` (não `openclaw`)
+- Volume host: `/docker/openclaw-ulim/data/.openclaw/`
+- Editar config sempre no HOST (python3 direto) — permission denied dentro do container
+- Reload sem queda: `docker kill --signal=USUSR1 openclaw-ulim-openclaw-1`
+- Henry NÃO responde ninguém no canal — só lê e reporta ao Dr. Henrique via Telegram
+
 ## Grupos Telegram — Configuração em Andamento (11/03/2026)
 
 - Config openclaw.json com wildcard `*` aplicada — aceita qualquer grupo
