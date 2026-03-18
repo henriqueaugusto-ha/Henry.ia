@@ -243,3 +243,57 @@ Se 15% dos fechamentos forem duplos: mesmo número de clientes atendidos, +15% d
 
 *Arquivo criado em: 18/03/2026*
 *Próxima atualização: quando novos dados históricos forem confirmados*
+
+---
+
+## 11. PLANO ANUAL 2026 — META R$2,5 MILHÕES
+
+> Confirmado por Dr. Henrique em 18/03/2026
+
+### Números reais de 2025
+| Métrica | Valor |
+|---------|-------|
+| Total faturado 2025 | R$1.500.745 |
+| Total recebido 2025 | **R$1.339.184** |
+| Média mensal recebida 2025 | R$111.598/mês |
+
+### Meta 2026
+- **Meta total recebido:** R$2.500.000
+- **Crescimento necessário:** +R$1.160.816 (+86,7% sobre 2025)
+- **Média mensal necessária:** R$208.333/mês
+
+### Situação atual (18/03/2026)
+- Já recebido Jan-Mar/26: R$185.334
+- Falta para atingir a meta: R$2.314.666
+- Meses restantes (Abr-Dez): 9 meses
+- **Média mensal necessária Abr-Dez para fechar a meta: R$257.185/mês**
+
+### Estratégia declarada para atingir R$2,5M
+Dr. Henrique confirmou que a meta não será atingida apenas com trânsito. Novos braços incluem:
+- Trânsito (core) — base do negócio
+- Criminal / ANPP — ticket alto (R$6.000+)
+- Cobrança — novo braço
+- Outras áreas a definir
+
+> "Não discutimos sobre isso ainda em detalhes" — tópico a aprofundar
+
+### Ramp-up necessário (cenário Abr–Dez/26)
+Para sair do vale atual (~R$65-84k) e chegar à média de R$257k:
+
+| Mês | Meta Recebimento |
+|-----|-----------------|
+| Abr/26 | R$130.000 |
+| Mai/26 | R$160.000 |
+| Jun/26 | R$190.000 |
+| Jul/26 | R$220.000 |
+| Ago/26 | R$250.000 |
+| Set/26 | R$270.000 |
+| Out/26 | R$280.000 |
+| Nov/26 | R$290.000 |
+| Dez/26 | R$300.000 |
+| **Total Abr-Dez** | **~R$2.090.000** |
+| + Jan-Mar recebido | R$185.334 |
+| **Total 2026 projetado** | **~R$2.275.000** |
+
+> Observação: mesmo com ramp-up agressivo (R$130k em Abr chegando a R$300k em Dez), a meta de R$2,5M exige que os novos braços (criminal, cobrança, outras áreas) contribuam com ~R$225k ao longo do ano para fechar o gap.
+
