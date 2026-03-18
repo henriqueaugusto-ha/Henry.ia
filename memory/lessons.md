@@ -436,3 +436,23 @@ Proibido: texto corrido, anotação seca, estrutura sem hierarquia, documentaç�
 - Quando ClickUp token válido: `GET /list/{list_id}/task?date_created_gt={ts}&date_created_lt={ts}` filtrando CRM Março/período correto
 - Token atual inválido (`pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL`) → renovar antes de qualquer consulta de volume
 - CRM = fonte de verdade. N8N executions = dado operacional, não de negócio.
+
+---
+
+## Regra — Campo Correto para Contagem de Leads (18/03/2026)
+
+**Erro cometido:** Usei `date_created` (data de criação da task) nas primeiras consultas e apresentei números errados antes de verificar o campo customizado correto.
+
+**Regra atualizada:**
+> Para contagem de leads por data, SEMPRE filtrar pelo campo customizado *"Data de Entrada"* do CRM.
+> NUNCA usar `date_created` como proxy de data de entrada.
+
+**Campo correto:**
+- Nome: `Data de Entrada`
+- ID: `dff8ca4a-8cbb-468f-92de-064ca8a950d3`
+- Lista CRM Março: `901113249319`
+- Incluir tasks fechadas: `include_closed=true`
+- Token ClickUp: buscar em 1Password "ClickUp API Token"
+
+**Implementação correta (Python):**
+Iterar todas as páginas da lista, filtrar client-side pelo campo `dff8ca4a-...` com o timestamp do período desejado (Fortaleza UTC-3).
