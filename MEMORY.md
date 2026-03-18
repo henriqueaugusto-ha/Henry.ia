@@ -878,3 +878,17 @@ Referência para próxima sessão:
 - Diário completo: `memory/diario/2026-03-18.md`
 - ADVbox credenciais: `adv.henriqueaugusto@gmail.com` / `28051oabcebrasil`
 - REBECA: notificar Walisom (R$3.138 em aberto) — urgente 18/03
+
+## Histórico Completo H.A. Advocacia — Criado 18/03/2026
+
+Arquivo master: `memory/gestao/historico-ha-advocacia.md`
+Contém: linha do tempo 10 fases (Mai/24–Mar/26), arquitetura dashboards Looker Studio, tabela histórica completa, ticket médio, metas, funil reverso para R$200k, inadimplência, canais de marketing.
+
+Fatos-chave gravados:
+- Escritório presencial: Jun/2024
+- Pico contratos: 67 (Ago/24) | Pico financeiro: R$164.691 (Jul/25)
+- Meta configurada nos dashboards: 100 contratos | R$200k/mês (nunca atingida — 82% foi o máximo)
+- Ticket atual: R$2.250–R$2.600 (criminal/duplo = ticket alto)
+- Dashboard Looker Studio tinha 2 painéis: equipe (sem financeiro, meta 76/mês) e Dr. Henrique (meta 100/mês, R$200k)
+- Total inadimplente Jan/25–Mar/26: R$188.946
+- Gargalo atual: agendamentos e presença nas reuniões (não volume de leads)
