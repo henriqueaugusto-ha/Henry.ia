@@ -616,6 +616,33 @@ Docs recentes NÃO estão na última página calculada pelo count. Solução:
 - ADALBERTO SARAIVA LEAO (868hxd9pw): cliente 14393421 | processo 13735744 | tarefas 203461972 + 203461974
   - CPF: 485.874.943-68 | email: adalberto634@gmail.com | 4 AITs Art.208 CTB vencidos Dez/25 | Asaas: PENDENTE
 
+## ADVbox Upload — Bloqueado (18/03/2026 01h UTC)
+
+- F19 (`VtzjQ0StPV8iJcWd`) criado via API = webhook não registra sem restart N8N
+- Dr. Henrique optou por NÃO reiniciar N8N (risco de interrupção de 25s)
+- Senha ADVbox hardcoded no TEMP-Search-v3 (`henriqueaugusto.fl@gmail.com` / `28051OABcebrasil`) está ERRADA
+- 4 combinações testadas → todas redirecionam para /login (falha de auth)
+- Credenciais corretas ADVbox NÃO estão no 1Password nem na memória
+- **Ação**: Dr. Henrique deve salvar em 1Password cofre IA–OPERACIONAL: item `ADVbox - Login Web`, campos `email` e `password`
+- Upload de documentos ADVbox = MANUAL por enquanto
+
+## N8N Webhook — Lição Crítica (18/03/2026)
+
+- Workflows criados/ativados via API NÃO registram webhook na memória do N8N
+- O banco de dados fica `active: true` mas o handler em memória não existe
+- Resultado: 404 em qualquer chamada ao webhook
+- Toggle ON→OFF→ON no painel UI NÃO resolve para workflows criados pós-restart
+- ÚNICO caminho: reiniciar o container N8N (docker restart)
+- Para workflows de produção: SEMPRE criar no painel N8N, não via API
+
+## ADVbox Credenciais Web — NÃO armazenadas (18/03)
+
+- 1Password cofre IA–OPERACIONAL: 26 itens, nenhum com login web ADVbox
+- Item `kvwv6ocrhgtwvvcvg2224cticm` = só Bearer token API REST
+- Item `ybuchmxmhp3ccygey2f7bu3qre` = WordPress hotmail, não ADVbox
+- Hardcoded N8N TEMP-Search-v3: `henriqueaugusto.fl@gmail.com` / `28051OABcebrasil` = INVÁLIDAS
+- Ação necessária: Dr. Henrique salvar credenciais no 1Password
+
 ## F10 — Bug Crítico + GABRIEL LINHARES (13/03/2026)
 
 - **F10** (`ppws3IRJo8K6QQJd`) tem bug `//` → `??` em "Buscar Task no ClickUp por Signer"

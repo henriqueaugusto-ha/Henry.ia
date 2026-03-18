@@ -5,6 +5,25 @@
 
 ---
 
+## ATUALIZAÇÃO 18/03 01h20 UTC
+
+### ❌ F19 ADVbox Upload — Webhook não registra (BLOQUEADO)
+- F19 (`VtzjQ0StPV8iJcWd`) criado via API, ativo no DB, mas webhook NÃO registra em memória N8N
+- Toggle UI feito por Dr. Henrique → ainda 404
+- Causa: workflows criados via API pós-restart não registram webhook sem novo restart
+- Dr. Henrique optou por NÃO reiniciar N8N
+- **Bloqueador adicional**: senha ADVbox hardcoded no workflow está errada (mudou)
+- Credenciais testadas: 4 combinações diferentes, todas falham no login web
+- **Ação pendente**: Dr. Henrique salvar credenciais corretas ADVbox no 1Password:
+  item `ADVbox - Login Web` | campos `email` + `password` | cofre `IA – OPERACIONAL`
+- Assim que credenciais salvas: upload funciona sem restart (mecanismo curl testado ✅)
+
+### ADVbox upload manual temporariamente
+- Documentos = arrastar manualmente no site ADVbox
+- Contratos já estão no ClickUp (Central do Cliente) e Google Drive
+
+---
+
 ## ATUALIZAÇÃO 18/03 00h30 UTC
 
 ### ✅ ADALBERTO e FRANCISCO — Central do Cliente + Drive (18/03)
