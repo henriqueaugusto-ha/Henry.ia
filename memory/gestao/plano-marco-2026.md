@@ -156,3 +156,45 @@ Dr. Henrique pediu e aprovamos a mensagem em 10:38 BRT. Texto final:
   - Decisão: Slack instável com Henry → automação via N8N + agente IA
   - Gatilho: ClickUp (área exclusiva Dr. Henrique) ou automático via CRM
   - Saída: grupo Slack setor comercial, diário pela manhã
+
+---
+
+## HISTÓRICO FINANCEIRO COMPLETO — Asaas (extraído 18/03/2026)
+
+> Fonte: API Asaas v3 | Filtro: dueDate (parcelas com vencimento no mês)
+> Cobranças = parcelas vencidas naquele mês (inclui parcelamentos de contratos anteriores)
+> Contratos estimados = installmentNumber=1 + pagamentos únicos criados naquele mês
+
+| Mês | Total Faturado | Pago | Vencido/Inadimpl | % Pago | Cobranças | Contratos Est. |
+|-----|---------------|------|-----------------|--------|-----------|----------------|
+| Jan/25 | R$150.629 | R$137.791 | R$6.741 | 91,5% | 155 | 82 |
+| Fev/25 | R$122.889 | R$113.321 | R$9.568 | 92,2% | 123 | 75 |
+| Mar/25 | R$121.742 | R$110.174 | R$9.869 | 90,5% | 124 | 73 |
+| Abr/25 | R$131.080 | R$114.118 | R$16.962 | 87,1% | 129 | 109 |
+| Mai/25 | R$117.440 | R$102.931 | R$14.509 | 87,6% | 132 | 67 |
+| Jun/25 | R$141.403 | R$126.741 | R$12.363 | 89,6% | 136 | 86 |
+| **Jul/25** | **R$164.691** | **R$143.931** | R$18.360 | **87,4%** | 154 | **113** |
+| Ago/25 | R$123.818 | R$104.057 | R$17.462 | 84,0% | 122 | 78 |
+| Set/25 | R$102.938 | R$91.054 | R$11.884 | 88,5% | 98 | 68 |
+| Out/25 | R$99.992 | R$95.060 | R$3.683 | 95,1% | 86 | 60 |
+| Nov/25 | R$106.735 | R$99.837 | R$6.898 | 93,5% | 91 | 62 |
+| Dez/25 | R$117.388 | R$100.169 | R$17.219 | 85,3% | 91 | 65 |
+| Jan/26 | R$91.233 | R$76.955 | R$14.278 | 84,4% | 72 | 41 |
+| Fev/26 | R$84.142 | R$65.286 | R$18.856 | 77,6% | 67 | 34 |
+| Mar/26* | R$73.545 | R$43.093 | R$10.295 | 58,6%* | 61 | 38 |
+
+*Março/26: mês em aberto — R$20.157 ainda pendente
+
+### TOTAIS ACUMULADOS (Jan/25–Mar/26)
+- Total faturado: R$1.749.664
+- Total pago: R$1.524.519 (87,1%)
+- Total vencido/inadimplente: R$188.946
+- Pendente em aberto: R$20.157
+
+### INSIGHTS CHAVE
+- PICO: Julho/2025 = R$164.691 (o melhor mês do período)
+- Início da queda: Agosto/2025 → -24% vs julho
+- Mínima histórica: Fevereiro/2026 = R$84.142 (caixa real ~R$65k)
+- Inadimplência crescendo: 91% de pagamento em jan/25 → 77% em fev/26
+- Contratos caindo: ~80-113/mês (2025 H1) → ~34-41 (jan-fev/26)
+- CRM confirmou: Dez/25=42, Jan/26=35, Fev/26=26 contratos reais
