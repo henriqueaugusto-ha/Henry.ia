@@ -224,3 +224,13 @@ Dr. Henrique pediu e aprovamos a mensagem em 10:38 BRT. Texto final:
 
 Obs: Out/Nov/Abr/Mai/25 ausentes — sheet parcialmente preenchida nesses meses
 Obs: Ticket médio confirmado Jun-Ago/25: ~R$2.564 (por assinatura data)
+
+---
+
+## TICKET MÉDIO REAL — Confirmado por Dr. Henrique (18/03/2026)
+
+- **Trânsito core:** R$2.250 a R$2.600 (faixa real do escritório)
+- **Ticket alto:** Criminal (ex: ANPP = R$6.000) OU duplo serviço (ex: bafômetro + suspensão = dois contratos)
+- Ticket médio ponderado adotado para cálculos: **R$2.425** (ponto médio da faixa)
+- Confirmado em 18/03/2026
+
