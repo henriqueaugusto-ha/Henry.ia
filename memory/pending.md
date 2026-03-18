@@ -5,6 +5,26 @@
 
 ---
 
+## ATUALIZAÇÃO 18/03 00h30 UTC
+
+### ✅ ADALBERTO e FRANCISCO — Central do Cliente + Drive (18/03)
+- Tasks Central do Cliente Março 2026 criadas: `868hxnvbn` (ADALBERTO) + `868hxnvbq` (FRANCISCO) ✅
+- PDFs dos contratos assinados anexados nas tasks ✅
+- Pastas Google Drive criadas via F4 ✅
+- **PENDENTE**: Upload PDF dentro da pasta Drive — F6 é esqueleto, ADVbox sem API de upload
+- **PENDENTE**: Tipo ADVbox FRANCISCO `13735725` = `577852` (BAFÔMETRO) está ERRADO — corrigir
+
+### 🔴 Google Drive OAuth — Reconectado por Dr. Henrique (18/03 00h15)
+- F4 voltou a funcionar após reconexão da credencial Google Drive no N8N
+- Causa: GCP Testing mode, token expira em 7 dias — expirou após 6 dias
+- **Ação**: migrar GCP para Production mode (URGENTE — vai expirar de novo em ~7 dias)
+
+### 🔴 F6 Upload Drive — Implementar
+- F6 (`QULGGmXizKkgdwnm`) é esqueleto (só Webhook + Resposta)
+- Implementar: Webhook → Download ZapSign PDF → Upload Google Drive
+- Credencial: `MXwK2XnNndg0AdQQ` (Google Sheets OAuth, mesmos escopos Drive)
+- Fazer no painel N8N (API rejeita criação de workflows via POST/PUT)
+
 ## ATUALIZAÇÃO 17/03 19h59 UTC
 - ✅ Relatório Comercial Diário: formato aprovado + postado no Slack Comercial
 - ✅ Script Python pronto: `scripts/relatorio-comercial-slack.py`

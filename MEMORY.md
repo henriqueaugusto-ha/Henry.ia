@@ -573,6 +573,16 @@ Padrão: `WF-COM | F[n] | Descrição` (renomeado de MF para F em 12/03)
 10=INST-ORGÂNICO | 11=DISPARO API | 12=INSTA-TP-WAPP2
 Campo ID: 2cf330fd-8a82-4378-81de-27b83e6375d3
 
+## Sessão 18/03/2026 — Central do Cliente + Drive (00h30 UTC)
+
+- **ADALBERTO** (868hxd9pw) → Central Cliente task `868hxnvbn` ✅ | Drive: https://drive.google.com/drive/folders/1-_4s4w5oY0rmmDweyn1lzsZqWgYBiT9D ✅ | PDF anexado ✅ | Asaas ❌ aguarda plano + "CONFIRMO A EXECUÇÃO"
+- **FRANCISCO** (868hx7fkp) → Central Cliente task `868hxnvbq` ✅ | Drive: https://drive.google.com/drive/folders/1SbxVou2YP-vU5ZZi2228sSiFuJd5Q6l6 ✅ | PDF anexado ✅ | Asaas ❌ | tipo ADVbox ERRADO (`577852`=bafômetro) ❌
+- **Google OAuth Drive** reconectado por Dr. Henrique 00h15 → F4 voltou a funcionar
+- **F6** = esqueleto vazio — implementar no painel N8N (não via API)
+- **ADVbox** não tem endpoint de upload de arquivo (405) — somente interface web
+- **Central do Cliente Março 2026** (ClickUp lista): `901113203399`
+- Detalhes completos: `memory/diario/2026-03-18.md`
+
 ## REGRA PERMANENTE — Documentos em Pastas ADVbox/Drive (13/03/2026)
 
 Antes de inserir qualquer documento na pasta de um cliente:
