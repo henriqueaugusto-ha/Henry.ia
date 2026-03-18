@@ -421,3 +421,18 @@ Proibido: texto corrido, anotação seca, estrutura sem hierarquia, documentaç�
 - Mensagem deletada via API
 - Regra absoluta: só postar no Slack quando Dr. Henrique solicita explicitamente
 - Toda postagem segue padrão de 6 blocos (memory/comercial/slack-padrao-comercial.md)
+
+---
+
+## Regra — Contagem de Leads (18/03/2026)
+
+**Contexto:** Reportei 33 leads para 17/03 usando contagem de execuções do N8N (F1). Dr. Henrique confirmou que o CRM mostrava 28. Discrepância porque F1 pode executar múltiplas vezes pro mesmo contato.
+
+**Regra permanente:**
+> Para qualquer consulta de volume de leads (hoje, ontem, período X), SEMPRE usar o CRM (ClickUp) como fonte de verdade, filtrando por **data de entrada** no período solicitado.
+> Nunca usar contagem de execuções de workflow N8N como proxy de leads.
+
+**Implementação:**
+- Quando ClickUp token válido: `GET /list/{list_id}/task?date_created_gt={ts}&date_created_lt={ts}` filtrando CRM Março/período correto
+- Token atual inválido (`pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL`) → renovar antes de qualquer consulta de volume
+- CRM = fonte de verdade. N8N executions = dado operacional, não de negócio.
