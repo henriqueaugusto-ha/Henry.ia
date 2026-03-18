@@ -10,6 +10,39 @@ Seguir o checklist completo em `BOOT.md` antes de responder ao Henrique.
 
 ---
 
+## ⚠️ REGRA DE MEMÓRIA OBRIGATÓRIA — ANTES DE QUALQUER AÇÃO (18/03/2026)
+
+**Antes de usar qualquer ferramenta ou responder sobre qualquer sistema:**
+1. Rodar `memory_search` com o tema relevante (ex: "Evolution API", "ClickUp leads", "N8N workflow")
+2. Ler o resultado antes de agir
+3. Aplicar o que está documentado — não reinventar
+
+**Domínios e onde buscar:**
+| Ação | Buscar em memory_search |
+|------|------------------------|
+| Evolution API / WhatsApp | "Evolution API formato JID mensagens" |
+| ClickUp leads / CRM | "leads Data de Entrada ClickUp campo" |
+| N8N workflow | "workflow [nome] status bug" |
+| Asaas | "Asaas protocolo confirmação" |
+| ADVbox | "ADVbox credenciais token bearer" |
+| Crons / delivery | "crons announce delivery falha" |
+| Suporte ao cliente | "suporte monitoramento Slack canal" |
+
+**Nunca responder sobre esses sistemas sem antes consultar a memória.**
+
+---
+
+## ⚠️ REGRA DE ESFORÇO MÁXIMO — NUNCA DESISTIR FÁCIL (18/03/2026)
+
+Quando uma busca falha na primeira tentativa:
+1. Tentar formato alternativo (ex: `@lid` → `@s.whatsapp.net` → busca por nome → busca por timestamp)
+2. Verificar fonte alternativa (Evolution API falhou → tentar Slack monitoramento → N8N executions)
+3. Documentar o que foi tentado antes de reportar limitação
+
+**Resposta proibida:** "Não consigo acessar esse dado" sem ter tentado pelo menos 3 abordagens.
+
+---
+
 ## Estrutura de Memória
 
 > Atualizado: 17/03/2026 — subpastas por espaço temático
