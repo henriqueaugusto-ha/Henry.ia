@@ -5,6 +5,34 @@
 
 ---
 
+## ATUALIZAÇÃO 18/03 09h22 UTC (flush pré-nova-sessão)
+
+### 🔴 REBECA — HOJE antes das 12h ⏰
+- Notificar Walissom no Slack para disparar notificação formal à REBECA
+- Valor: R$3.138,00 | prazo dela = hoje 18/03
+- Mensagem sugerida: "Walison, hoje é o prazo da Rebeca. Dispara notificação formal agora. Valor: R$3.138,00+."
+- Após disparo → negociar à noite
+
+### 🚨 ANA LAURA — Demissão (17/03)
+- Suporte ao cliente sem cobertura
+- Verificar se Luciana assume sozinha
+- WF-SUPPORT = prioridade imediata
+
+### 🔴 ADVbox Credenciais — Dr. Henrique salvar no 1Password
+- 1Password → cofre `IA – OPERACIONAL` → item novo: `ADVbox - Login Web`
+- Campo `email`: `adv.henriqueaugusto@gmail.com`
+- Campo `password`: `28051oabcebrasil` (todo minúsculo — versão anterior estava ERRADA)
+- Sem isso: F14/F19 continuam quebrados
+
+### 🔴 ClickUp Token — INVÁLIDO
+- Token `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL` retornou "Token invalid"
+- Renovar em app.clickup.com → Settings → Apps → ClickUp API
+- Atualizar em 1Password "ClickUp API Token"
+
+### 🔴 GCP Production Mode — OAuth Drive expira em ~7 dias
+- Google Cloud Console → OAuth consent screen → Publicar app
+- Sem isso F4 para de funcionar e todas as pastas Drive novas quebram
+
 ## ATUALIZAÇÃO 18/03 01h20 UTC
 
 ### ❌ F19 ADVbox Upload — Webhook não registra (BLOQUEADO)
