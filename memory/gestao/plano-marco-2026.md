@@ -198,3 +198,29 @@ Dr. Henrique pediu e aprovamos a mensagem em 10:38 BRT. Texto final:
 - Inadimplência crescendo: 91% de pagamento em jan/25 → 77% em fev/26
 - Contratos caindo: ~80-113/mês (2025 H1) → ~34-41 (jan-fev/26)
 - CRM confirmou: Dez/25=42, Jan/26=35, Fev/26=26 contratos reais
+
+---
+
+## DADOS HISTÓRICOS — Google Sheets CRM (Mai/24 a Ago/25)
+
+> Planilha: https://docs.google.com/spreadsheets/d/1KJQ4iiWAwHInARZD6imzhbZe8anIoQ0Z6NEFci2WwL4
+> Extraído em 18/03/2026 | Total: 4.833 leads | 420 contratos (Sim)
+
+### Contratos por mês de entrada (proxy de fechamento)
+| Mês | Leads | Contratos | Conv% |
+|-----|-------|-----------|-------|
+| Mai/24 | 233 | 37 | 15,9% |
+| Jun/24 | 281 | 36 | 12,8% |
+| Jul/24 | 628 | 57 | 9,1% |
+| Ago/24 | 663 | 67 | 10,1% |
+| Set/24 | 594 | 35 | 5,9% |
+| Dez/24 | 79 | 11 | 13,9% |
+| Jan/25 | 293 | 42 | 14,3% |
+| Fev/25 | 480 | 34 | 7,1% |
+| Mar/25 | 477 | 24 | 5,0% |
+| Jun/25 | 478 | 25 | 5,2% |
+| Jul/25 | 512 | 47 | 9,2% |
+| Ago/25 | 58 | 3 | 5,2% |
+
+Obs: Out/Nov/Abr/Mai/25 ausentes — sheet parcialmente preenchida nesses meses
+Obs: Ticket médio confirmado Jun-Ago/25: ~R$2.564 (por assinatura data)
