@@ -765,6 +765,70 @@ Docs recentes NÃO estão na última página calculada pelo count. Solução:
 - **MARCIO LINO** (868hwjwbj) → ADVbox cliente `14369225` | processo `13711485` ✅ | Asaas: R$2.500 PIX em 3x (16/03 R$1k pago, 17/03 R$1k, 18/03 R$500)
 - **NAIRTON** (868hwt0tm) → ADVbox cliente `14369227` | processo `13711487` ✅ | ⚠️ DETRAN-PB como DETRAN-CE placeholder — corrigir manualmente
 - Bug descoberto: IF F1 Sucesso no F13 tem conexões TRUE/FALSE **invertidas** — workaround via F15/F16 diretos ✅
+
+## Sessão 17-18/03/2026 — Flush Completo (09h22 UTC 18/03)
+
+### ADVbox — Credenciais Web Descobertas (18/03)
+- Email correto: `adv.henriqueaugusto@gmail.com` | Senha: `28051oabcebrasil` (todo minúsculo)
+- Senha antiga hardcoded no TEMP workflow (`28051OABcebrasil`) estava ERRADA — nunca funcionou
+- **Ação pendente**: Dr. Henrique salvar em 1Password cofre `IA – OPERACIONAL`: item `ADVbox - Login Web`
+
+### ADVbox Upload — Bloqueado por Cloudflare WAF
+- F19 (`VtzjQ0StPV8iJcWd`): webhook ativo no DB mas sem handler em memória N8N (criado pós-restart via API)
+- POST /s3 de fora da VPS retorna 200 com body vazio mas arquivo não salva (Cloudflare bloqueia)
+- N8N (mesmo IP da VPS = whitelistado) é único caminho automático confiável
+- Dr. Henrique optou por NÃO reiniciar N8N → upload = manual por enquanto
+- Resolução: Dr. Henrique salva credenciais ADVbox no 1Password → upload via curl funciona
+
+### Ana Laura — Pediu Demissão (17/03/2026) 🚨
+- Faltou 16/03 e 17/03 sem comunicação prévia
+- Suporte ao cliente sem cobertura — verificar se Luciana aguenta sozinha
+- WF-SUPPORT (automação IA suporte WhatsApp) = **PRIORIDADE URGENTE**
+
+### Evolution API — Instalada (17/03/2026)
+- Container: `evolution-api` | Imagem: `atendai/evolution-api:v1.8.7`
+- Instância: `suporte-ha` | Status: `open` | Webhook → N8N workflow `lahexgzvNT2f3WRU` ATIVO
+- Acesso OpenClaw: `http://evolution-api:8080` | API Key: `henry-evolution-2026`
+
+### ClickUp Token — INVÁLIDO (detectado ~18/03)
+- `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL` retornou "Token invalid"
+- Renovar token urgente (bloqueia automações que dependem do ClickUp)
+
+### Pipeline de Clientes — Estado em 18/03 09h22 UTC
+
+| Cliente | Task | ADVbox Cliente | ADVbox Processo | Tipo ADVbox | Asaas | Central Cliente |
+|---|---|---|---|---|---|---|
+| GABRIEL LINHARES | 868hvjr0v | ❌ | ❌ | ❌ | ❌ | ❓ |
+| ADAILDO | 868hwkm07 | 14351422 ✅ | 13690343 ✅ | ⚠️ verificar | ❌ VENCIDO 16/03 | ✅ |
+| MARCIO LINO | 868hwjwbj | 14369225 ✅ | 13711485 ✅ | ⚠️ verificar | ❌ VENCIDO 17/03 | ✅ |
+| NAIRTON | 868hwt0tm | 14369227 ✅ | 13711487 ✅ | ⚠️ DETRAN-CE errado | ❌ aguarda plano | ✅ |
+| FRANCISCO COELHO | 868hx7fkp | 14393401 ✅ | 13735725 ⚠️ | BAFÔMETRO errado | ❌ 3 parcelas criar | ✅ |
+| ADALBERTO LEÃO | 868hxd9pw | 14393421 ✅ | 13735744 ✅ | JUDICIAL ✅ | ❌ JÁ QUITADO (registrar) | ✅ |
+
+### REBECA — Notificação Formal (18/03 antes das 12h)
+- R$3.138,00 em aberto | prazo dado pela cliente = hoje 18/03
+- Notificar Walissom via Slack → ele dispara para REBECA → negociação à noite
+- Detalhes: pending.md seção lembrete 18/03
+
+### Dados Pagamento (fonte oficial = Slack)
+- ADALBERTO: R$2.399 PIX à vista — **JÁ QUITADO** antes 16h30 de 17/03
+- FRANCISCO: entrada R$1.199 paga 17/03 | saldo 3x R$1.099 venc. 17/04, 17/05, 17/06
+
+### IDs Críticos Adicionais (18/03)
+| Item | ID |
+|---|---|
+| F19 ADVbox Upload | `VtzjQ0StPV8iJcWd` |
+| TEMP-ADVbox-Search-v3 | `2bX6HDL4k8mpIgI1` |
+| Central do Cliente Março | `901113203399` |
+| CRM Março 2026 | `901113249319` |
+| ADALBERTO Central | `868hxnvbn` |
+| FRANCISCO Central | `868hxnvbq` |
+
+### ADVbox type_lawsuits_ids Confirmados
+- `577848` = AÇÃO JUDICIAL | `577852` = BAFÔMETRO (default errado F15) | `579789` = DEFESA PRÉVIA | `577851` = DEFESA INICIAL
+- Renúncia de Propriedade (FRANCISCO) = **DESCONHECIDO** — identificar
+
+### Detalhes completos: `memory/diario/2026-03-18.md`
 - **Asaas PENDENTE todos 3** — aguarda "CONFIRMO A EXECUÇÃO" + opção NAIRTON (à vista R$2.499 ou 3x R$1.099)
 - ADAILDO 1ª parcela R$1.299 VENCIDA (16/03) | MARCIO parcela R$1.000 vence AMANHÃ 17/03
 - Detalhes completos + dados todos clientes: memory/2026-03-16.md
@@ -797,3 +861,20 @@ Docs recentes NÃO estão na última página calculada pelo count. Solução:
 Verificação de leads (2 critérios obrigatórios):
 1. ClickUp → CRM_2026 → Março → filtro *"data de entrada" = hoje* + tarefas arquivadas
 2. Fonte: ChatGuru webhook + WA Business webhook + execuções WF-CAPTURE no N8N
+
+## Encerramento de Sessão — 18/03/2026 09h23 UTC
+
+Dr. Henrique solicitou atualização de memória + push Git para início de nova sessão.
+
+Estado consolidado no encerramento:
+- Pipeline Asaas: 6 clientes pendentes (ADALBERTO, FRANCISCO, ADAILDO, MARCIO, NAIRTON, GABRIEL)
+- ADVbox: 5 clientes cadastrados (pendente: GABRIEL LINHARES) — bugs F10, F13, F14, F19 ativos
+- Ana Laura demitida — suporte descoberto → WF-SUPPORT urgente
+- ClickUp token inválido — renovar antes da próxima sessão
+- GCP OAuth Drive em Testing — ~7 dias para expirar
+- Cron Relatório Comercial 20h Fortaleza — aguarda ativação manual
+
+Referência para próxima sessão:
+- Diário completo: `memory/diario/2026-03-18.md`
+- ADVbox credenciais: `adv.henriqueaugusto@gmail.com` / `28051oabcebrasil`
+- REBECA: notificar Walisom (R$3.138 em aberto) — urgente 18/03
