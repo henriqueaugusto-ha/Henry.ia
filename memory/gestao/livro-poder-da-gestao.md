@@ -265,3 +265,36 @@ Confirmado por Dr. Henrique: taxa reunião→contrato = 50% (1 em cada 2 reuniõ
 
 *Criado: 13/03/2026 — Henry*
 *Próxima atualização: ao receber novos capítulos ou após sessão estratégica de aplicação*
+
+---
+
+## ESTRATÉGIA DE MARKETING — Atualização (18/03/2026)
+
+### Contexto histórico — Instagram Stories/Reels (tática anterior)
+- Formato Stories e Reels gerava ALTO volume de leads
+- Problema crítico: muitos cliques por ERRO (formato de interrupção = dedo escorrega no story)
+- Resultado: leads sem necessidade real poluíam o comercial
+- Impacto operacional: equipe perdia tempo qualificando leads que nunca comprariam
+- Desqualificação chegou a 50-54% (Jan-Fev/2026) em parte por causa disso
+- Decisão do Dr. Henrique: mudar formato
+
+### Nova tática — Feed (decisão estratégica)
+- Agora anuncia SOMENTE no feed do Instagram
+- Feed = formato de consumo intencional (pessoa para para ver, não clica por acidente)
+- Resultado: volume de leads DIMINUIU, mas qualidade AUMENTOU
+- Perfil que chega agora = pessoa com necessidade real e interesse genuíno
+- Consequência: menos trabalho inútil para o comercial, melhor aproveitamento do time
+
+### Google Ads — Canal principal + Problemas recentes
+- Google Ads = tráfego principal da H.A. (base do negócio)
+- Houve vários erros no Google durante o período de queda (Ago-Dez/25 → Jan-Fev/26)
+- Erros identificados: provavelmente desotimização da conta (Dr. Henrique é o único que otimiza → quando para de otimizar, algoritmo degrada)
+- Gap de dados confirmado: token OAuth Google Ads expirou → 25/02 a 07/03 sem dados de atribuição
+- Situação atual: normalizando — conta sendo reestabilizada
+- Objetivo: acertar o perfil do cliente ideal (ICP) e reduzir o CAC
+
+### CAC — Custo de Aquisição de Cliente
+- Meta estratégica: diminuir CAC com melhor segmentação
+- Caminho: Google (intenção ativa) + Feed Instagram (qualidade) + menos Stories/Reels (ruído)
+- Correlação confirmada pelos dados: quando Google domina → conversão sobe, desqualificação cai
+- Meta de ICP: motorista profissional ou CNH essencial para renda, com urgência real
