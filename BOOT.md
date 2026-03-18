@@ -18,6 +18,21 @@
 
 ---
 
+## ⚠️ REGRA DE GRUPO — CARREGAR ANTES DO GERAL (18/03/2026)
+
+**Quando a mensagem vem de um grupo específico, carregar o arquivo do grupo PRIMEIRO:**
+
+| Grupo | Chat ID | Arquivo a carregar PRIMEIRO |
+|-------|---------|----------------------------|
+| Comercial | `-5146692074` | `memory/comercial/grupo-comercial.md` |
+| Gestão & Estratégia | *(ID quando disponível)* | `memory/gestao/decisions.md` |
+| Automações | *(ID quando disponível)* | `memory/automacoes/automacao.json` |
+| Jurídico | *(ID quando disponível)* | `memory/juridico/clickup-estrutura.md` |
+
+Depois do arquivo do grupo → carregar memória geral normalmente.
+
+---
+
 ## Checklist de Startup — OBRIGATÓRIO
 
 ### 1. Identidade

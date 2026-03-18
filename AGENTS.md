@@ -75,7 +75,17 @@ tasks/                       ← Tarefas pendentes com contexto completo
 SECURITY_STRATEGY.md         ← Estado e roadmap de segurança da VPS
 ```
 
-### Regras de memória — OBRIGATÓRIO
+### Regra de Lixo — Observações Obsoletas (18/03/2026)
+
+Quando uma regra ou observação for substituída ou não se aplicar mais:
+- **Não deletar** — mover para a seção "Regras Obsoletas — ARQUIVO LIXO" do arquivo do grupo correspondente
+- Cada arquivo de grupo (`memory/*/grupo-*.md`) tem uma seção LIXO
+- Isso evita acúmulo de regras conflitantes sem perder histórico
+- Revisão mensal: limpar o lixo de regras com mais de 60 dias
+
+---
+
+## Regras de memória — OBRIGATÓRIO
 - **MEMORY.md = índice.** Não duplicar conteúdo dos arquivos topic.
 - **Salvar no grupo certo:**
   - Mensagem do grupo *Gestão & Estratégia* → `memory/gestao/`
