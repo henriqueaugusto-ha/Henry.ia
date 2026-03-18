@@ -24,10 +24,9 @@
 - Campo `password`: `28051oabcebrasil` (todo minúsculo — versão anterior estava ERRADA)
 - Sem isso: F14/F19 continuam quebrados
 
-### 🔴 ClickUp Token — INVÁLIDO
-- Token `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL` retornou "Token invalid"
-- Renovar em app.clickup.com → Settings → Apps → ClickUp API
-- Atualizar em 1Password "ClickUp API Token"
+### ✅ ClickUp Token — RENOVADO (18/03/2026)
+- Token: `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W`
+- Atualizado em 1Password "ClickUp API Token" ✅
 
 ### 🔴 GCP Production Mode — OAuth Drive expira em ~7 dias
 - Google Cloud Console → OAuth consent screen → Publicar app
