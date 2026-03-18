@@ -583,6 +583,37 @@ Campo ID: 2cf330fd-8a82-4378-81de-27b83e6375d3
 - **Central do Cliente Março 2026** (ClickUp lista): `901113203399`
 - Detalhes completos: `memory/diario/2026-03-18.md`
 
+## Sessão 17-18/03/2026 — Onboarding FRANCISCO + ADALBERTO
+
+### ADVbox concluídos
+- FRANCISCO DOS SANTOS COELHO FILHO (868hx7fkp) → cliente 14393401 | processo 13735725 ⚠️ tipo ERRADO (577852 Bafômetro — Renúncia de Propriedade desconhecido)
+- ADALBERTO SARAIVA LEAO (868hxd9pw) → cliente 14393421 | processo 13735744 ✅ tipo corrigido para 577848 AÇÃO JUDICIAL
+
+### Pagamentos (fonte: Slack Comercial)
+- ADALBERTO: R$2.399 PIX à vista — **JÁ QUITADO** ✅ (pagou 17/03 antes das 16h30)
+- FRANCISCO: entrada R$1.199 paga 17/03 + 3x R$1.099 venc. 17/04, 17/05, 17/06/2026
+
+### Asaas — 6 clientes pendentes (aguardam "CONFIRMO A EXECUÇÃO")
+GABRIEL LINHARES, ADAILDO (vencida 16/03), MARCIO LINO (venceu 17/03), NAIRTON (decidir plano), FRANCISCO (3 parcelas criar), ADALBERTO (à vista quitado — registrar retroativo?)
+
+### ADVbox credenciais corretas (DESCOBERTAS 17/03)
+- Email: `adv.henriqueaugusto@gmail.com` | Senha: `28051oabcebrasil` (todo minúsculo)
+- Token antigo (`28051OABcebrasil`) estava ERRADO — causa dos bugs F14
+- Dr. Henrique deve salvar no 1Password: item `ADVbox - Login Web` | cofre `IA – OPERACIONAL`
+
+### Infraestrutura 18/03
+- Google Drive OAuth reconectado por Dr. Henrique (00h15) — F4 funcional ✅
+- GCP em Testing mode — OAuth expira em ~7 dias — migrar para Production URGENTE
+- ClickUp token `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL` INVÁLIDO — renovar
+- Ana Laura PEDIU DEMISSÃO 17/03 — suporte sem cobertura
+- Cron relatório comercial 20h (Fortaleza) = `0 23 * * *` — aguarda ativação no painel
+- F10 bug ainda ativo | F14 token expirado | F19 webhook não registra (aguarda restart N8N)
+
+### ADVbox S3 Upload (mecanismo descoberto)
+- POST /s3 multipart com cookies HttpOnly extraídos manualmente
+- Bloqueado do OpenClaw (Cloudflare WAF) — N8N da VPS é único caminho automático
+- F19 (`VtzjQ0StPV8iJcWd`) ativo no DB mas webhook não registra — requer restart ou toggle UI
+
 ## REGRA PERMANENTE — Documentos em Pastas ADVbox/Drive (13/03/2026)
 
 Antes de inserir qualquer documento na pasta de um cliente:
@@ -690,6 +721,43 @@ Docs recentes NÃO estão na última página calculada pelo count. Solução:
 - [ ] Crons delivery fix — 4/6 não entregam
 - [ ] ROAS Backfill Fev 25-28
 - [ ] GCP Production mode (OAuth expira 7 dias em Testing)
+
+## Sessão 18/03/2026 — Estado Atual (09h23 UTC)
+
+### ADVbox — Concluídos 17-18/03
+- FRANCISCO DOS SANTOS COELHO FILHO (868hx7fkp) → ADVbox 14393401 | Processo 13735725 ✅ | tipo errado (Bafômetro) — corrigir
+- ADALBERTO SARAIVA LEAO (868hxd9pw) → ADVbox 14393421 | Processo 13735744 ✅ | tipo corrigido para AÇÃO JUDICIAL (577848)
+- Central do Cliente Março: tasks 868hxnvbn (ADALBERTO) + 868hxnvbq (FRANCISCO) com PDFs ✅
+
+### Asaas — AGUARDA "CONFIRMO A EXECUÇÃO" (6 clientes)
+1. ADALBERTO — PIX à vista R$2.399 já pago; confirmar se cria retroativa ou só registra
+2. FRANCISCO — 3x R$1.099 venc. 17/04, 17/05, 17/06 | entrada R$1.199 já paga
+3. ADAILDO — 1ª parcela R$1.299 VENCIDA desde 16/03
+4. MARCIO LINO — parcela R$1.000 venceu 17/03
+5. NAIRTON — à vista R$2.499 ou 3x R$1.099?
+6. GABRIEL LINHARES (868hvjr0v) — ADVbox + Asaas NADA feito
+
+### Infraestrutura Crítica
+- Ana Laura pediu demissão 17/03 — WF-SUPPORT urgente
+- ClickUp token inválido — renovar `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL`
+- F10 quebrado (`ppws3IRJo8K6QQJd`) — `//`→`??` — aguarda autorização
+- F14 bearer token ADVbox expirado — todos cadastros automáticos quebrados
+- F19 webhook não registra — requer restart N8N (Dr. Henrique optou por não reiniciar)
+- ADVbox credenciais corretas: `adv.henriqueaugusto@gmail.com` / `28051oabcebrasil`
+- GCP Testing mode — OAuth Drive expira em ~7 dias — migrar para Production
+- Cron Relatório Comercial 20h — aguarda ativação manual no painel
+- ADALBERTO duplicado ADVbox: deletar cliente 14351397
+- NAIRTON ADVbox cadastrado como DETRAN-CE (correto: DETRAN-PB)
+
+### Pagamentos Confirmados (Slack Comercial — fonte oficial)
+- ADALBERTO: R$2.399 PIX à vista, pago 17/03 ✅
+- FRANCISCO: entrada R$1.199 paga 17/03 ✅ | saldo 3x R$1.099
+
+### Lições 18/03
+- Slack Comercial = fonte confiável de pagamentos (values difere do rascunho inicial)
+- ADVbox web upload bloqueado por Cloudflare WAF (200 body vazio = silencioso)
+- N8N webhooks precisam toggle UI ou restart — API insuficiente
+- HttpOnly cookies: extrair manualmente (curl não envia prefixo #HttpOnly_)
 
 ## Sessão 16/03/2026 — ADVbox 3 clientes concluídos (22h36 UTC)
 
