@@ -5,25 +5,26 @@
 
 ---
 
-## ATUALIZAÇÃO 19/03 17h22 UTC
+## ATUALIZAÇÃO 19/03 20h58 UTC
 
-### 🔴 ANA KARINE — Onboarding manual PENDENTE
-- Contrato assinado 19/03 16h12 UTC — F10 NÃO disparou automaticamente
-- **Nome:** Ana Karine da Silva Sousa Pinto | **Tel:** (85) 99639-0769
-- **Email:** karinedivamatematica@gmail.com
-- **CPF:** DESCONHECIDO — precisa confirmar com Dr. Henrique ou ClickUp
-- **ZapSign token:** `261d175a-aa0e-4fd1-934a-4a3c1b6d3f17`
-- Pendente: ADVbox (F14→F15→F16), Asaas (MF01-MF06)
+### ✅ ANA KARINE — ONBOARDING CONCLUÍDO (19/03/2026)
+- CPF: 714.559.063-87 | ADVbox cliente: 14421551 | Processo: 13767202
+- Asaas customer: cus_000166848854 | Payment: pay_6inmnw7bdxalijtr
+- Vencimento: 02/04/2026 | Valor: R$ 2.499,00 PIX à vista
+- Invoice: https://www.asaas.com/i/6inmnw7bdxalijtr
+- ClickUp task 868hy9mdz: todos os campos atualizados ✅
 
-### 🔴 ClickUp API Token — INVÁLIDO (401)
-- 1Password UUID: `mth7e2mb6nkrsk2bbty3e4iuli`
-- Dr. Henrique precisa gerar novo token: ClickUp > Settings > Apps > API Token
-- Salvar no 1Password substituindo o atual
-- Impacto: Henry não consegue acessar CRM, tasks, dados de clientes
+### 🔴 ClickUp API Token — Atualizar no 1Password (PENDENTE)
+- Token ativo usado na sessão: `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W`
+- 1Password UUID: `mth7e2mb6nkrsk2bbty3e4iuli` — ainda tem o token antigo
+- Dr. Henrique precisa atualizar manualmente (service account é read-only)
 
-### 🟡 F10 ZapSign — Investigar falha de disparo
-- Nenhuma execução de ppws3IRJo8K6QQJd após assinatura de Ana Karine (16:12 UTC)
-- Hipótese: busca da task ClickUp dentro do F10 falha porque token está inválido
+### 🔴 Pipeline Asaas N8N — Token CU hardcoded desatualizado
+- Workflow `OwXrNkgiCqRykq7O` tem token CU antigo hardcoded em 2 nós
+- Nós afetados: "MF01 | Identificar Contrato Correto" e "MF01 | Extrair Dados do Contrato"
+- Token hardcoded: `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL` — pode estar inválido
+- Pipeline vai falhar para todos os clientes até ser corrigido
+- Ação: editar workflow no painel N8N e substituir pelo token válido
 
 ---
 

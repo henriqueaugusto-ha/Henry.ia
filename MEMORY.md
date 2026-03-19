@@ -954,6 +954,38 @@ Vigência: PERMANENTE — obrigatório antes de qualquer consulta a dados operac
 
 Origem: Evolution API retornou 6 clientes (cache parcial) quando histórico indica 30+ → erro de confirmação sem sanity check
 
+## ANA KARINE — Onboarding Completo (19/03/2026 20h50 UTC)
+
+- Task ClickUp: `868hy9mdz` | CPF: 71455906387
+- Caso: AIT AS01772142 — Art. 165-A CTB (recusa bafômetro) — 28/02/2026 Av. Humberto Monte
+- ADVbox: cliente `14421551` | processo `13767202`
+- ADVbox tarefas: T1 req. AIT `204289976` (26/03) | T2 defesa `204289982` (27/04)
+- Asaas: customer `cus_000166848854` | payment `pay_6inmnw7bdxalijtr`
+- R$ 2.499,00 PIX à vista | Vencimento: 02/04/2026
+- Invoice: https://www.asaas.com/i/6inmnw7bdxalijtr
+- Pipeline N8N Asaas (OwXrNkgiCqRykq7O) falhou — executado diretamente via API ✅
+- Causa falha pipeline: token CU hardcoded antigo em 2 nós do workflow
+
+## ClickUp Token — Estado (19/03/2026)
+
+- Token válido (sessão): `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W`
+- 1Password UUID: `mth7e2mb6nkrsk2bbty3e4iuli` → ⚠️ ainda com token antigo (Dr. Henrique atualizar)
+- Pipeline Asaas usa token CU hardcoded antigo: `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL` → corrigir no N8N
+
+## Webhooks F14/F15/F16 ADVbox (confirmados funcionais 19/03)
+
+- F14 ADVbox cliente: `POST /webhook/advbox-cadastrar-cliente` → `{nome, cpf, rg, celular, email, profissao, cep, estado, cidade, observacoes}`
+- F15 ADVbox processo: `POST /webhook/advbox-cadastrar-processo` → `{customers_id, orgao, notes}`
+- F16 ADVbox tarefas: `POST /webhook/advbox-cadastrar-tarefas` → `{lawsuits_id, prazo_defesa, orgao, cadastro_date}`
+- ADVbox Bearer (hardcoded nos workflows): `xz33X9sHtnVKWAG10ofpIFoDtK7u8JkLZYhczatxxaki7U7ZfOr9L7bq3kXE` ✅ válido em 19/03
+- orgaoMap: DETRAN-CE=14204088 | PRF-CE=14204089 | AMC=14204092 | DETRAN-RN=14204093 | PRF-RN=14206420
+
+## Ferramenta pdf nativa OpenClaw — Funcional para PDFs complexos
+
+- Testada em 19/03 com contrato ZapSign image-based / fonte custom
+- Extrai texto com sucesso quando pdftotext, pypdf, Stirling PDF falham
+- Usar como solução definitiva para extração de CPF/dados de contratos
+
 ## Agente Suporte IA — Diagnóstico 19/03/2026
 
 Dois bugs identificados e fixes propostos (aguardam CONFIRMO A EXECUÇÃO):
