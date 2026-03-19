@@ -705,11 +705,25 @@ Docs recentes NÃO estão na última página calculada pelo count. Solução:
 - Passo a passo para resolver: memory/2026-03-16.md seção 4
 - Afeta todos os cadastros automáticos desde a última falha
 
-## Pendente — Atualizado 16/03/2026
+## Reunião Comercial PPD — 19/03/2026
 
-### 🔴 URGENTE (hoje)
+- Ata completa: `memory/2026-03-19.md`
+- Pipeline T1: 42 leads | 8 fechados | 13 pós-reunião | 18 aquecidos | 3 no-show
+- Taxa conversão atual: ~20% — gargalo é lead aquecido resistente ao agendamento (não no-show)
+- Precificação PPD: abertura R$2.500 → intermediário R$2.100 → piso R$1.900
+- Inadimplente Cauã Cardoso: R$1.124,89 em atraso | 4 propostas definidas | prazo venceu 19/03 | ajuizamento no fim de semana se não houver acordo
+- Campanhas PPD por estado: CE, PE, PI, RN, ES — disparo madrugada 19→20/03
+- Wirespeed: testar antes de comprar (R$800 por 2 licenças)
+- ⚠️ Caso Antônio: delicado, sem responsável definido na reunião
+- ⚠️ Lead sem capacete/PPD provisória: Wallace deve retomar com abordagem revisada
+
+## Pendente — Atualizado 19/03/2026
+
+### 🔴 URGENTE
+- [ ] **Caso Antônio** — designar responsável urgente (saiu da reunião sem dono)
+- [ ] **Cauã Cardoso** — monitorar retorno às propostas; ajuizar 21–22/03 se sem acordo
 - [ ] ADAILDO — diagnosticar/corrigir F14 (token ADVbox) → cadastrar Advbox
-- [ ] ADAILDO — Asaas: cadastro + 3 cobranças (aguarda "CONFIRMO A EXECUÇÃO") — 1ª parcela vence HOJE
+- [ ] ADAILDO — Asaas: cadastro + 3 cobranças (aguarda "CONFIRMO A EXECUÇÃO") — 1ª parcela VENCIDA
 - [ ] Fix F10 (`ppws3IRJo8K6QQJd`) — trocar `//` por `??` → aguarda autorização Dr. Henrique
 - [ ] GABRIEL LINHARES (868hvjr0v) — onboarding Advbox manual (dependente fix F14/token)
 
