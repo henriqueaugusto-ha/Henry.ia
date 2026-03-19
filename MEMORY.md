@@ -904,3 +904,18 @@ Fatos-chave gravados:
 - Dashboard Looker Studio tinha 2 painéis: equipe (sem financeiro, meta 76/mês) e Dr. Henrique (meta 100/mês, R$200k)
 - Total inadimplente Jan/25–Mar/26: R$188.946
 - Gargalo atual: agendamentos e presença nas reuniões (não volume de leads)
+
+## PROTOCOLS.md — Protocolo de Confiança de Dados (PCD) v1.0 (18/03/2026)
+
+Arquivo: `PROTOCOLS.md` (raiz do workspace)
+Vigência: PERMANENTE — obrigatório antes de qualquer consulta a dados operacionais
+
+6 Regras:
+- R1: Classificar confiança da fonte (🟢 ALTA / 🟡 MÉDIA / 🔴 BAIXA) antes de apresentar qualquer dado
+- R2: Sanity Check — 4 perguntas internas (compatibilidade, completude, impacto, precedente)
+- R3: Cruzamento obrigatório — NUNCA confirmar dados operacionais com fonte única. Matriz: Supabase+Slack / Supabase+ClickUp / ClickUp+ADVbox
+- R4: Declarar limitação da fonte antes de consultar (Evolution API = cache ~1h, Slack = só msgs do workflow, ClickUp = manual)
+- R5: Autoauditoria — checklist de 7 itens antes de entregar qualquer dado ao Dr. Henrique
+- R6: Registrar todo erro em agent_errors (Supabase) imediatamente
+
+Origem: Evolution API retornou 6 clientes (cache parcial) quando histórico indica 30+ → erro de confirmação sem sanity check
