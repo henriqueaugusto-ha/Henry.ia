@@ -705,6 +705,21 @@ Docs recentes NÃO estão na última página calculada pelo count. Solução:
 - Passo a passo para resolver: memory/2026-03-16.md seção 4
 - Afeta todos os cadastros automáticos desde a última falha
 
+## Reuniões 19/03/2026 — Detalhes em memory/2026-03-19.md
+
+**(1) Reunião Comercial PPD**
+- Pipeline T1: 42 leads | 8 fechados | 13 pós-reunião | 18 aquecidos | 3 no-show
+- Precificação PPD: abertura R$2.500 → intermediário R$2.100 → piso R$1.900
+- Cauã Cardoso: R$1.124,89 inadimplente | 4 propostas | ajuizar 21–22/03 se sem acordo
+- Campanhas PPD: CE, PE, PI, RN, ES — disparo madrugada 19→20/03
+
+**(2) Reunião Dra. Ingrid — Jurídica/Comercial**
+- Meta anual: **R$2.500.000** | T1: R$300k | T2: R$300k | Projeção atual: ~R$2M
+- Frentes: Trânsito (principal) + PPD judicial + FGTS + Novas áreas T2+
+- Infinity Pay: descontinuado | Parcelamento PR: máx 3 usos (50%+ inadimplência)
+- Qualidade > volume: não aceitar clientes com baixo potencial de pagamento
+- ⚠️ Caso Antônio: sem responsável | Audiência 2º grau: janela 21–26 (confirmar)
+
 ## Reunião Comercial PPD — 19/03/2026
 
 - Ata completa: `memory/2026-03-19.md`
