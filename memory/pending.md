@@ -5,6 +5,28 @@
 
 ---
 
+## ATUALIZAÇÃO 19/03 17h22 UTC
+
+### 🔴 ANA KARINE — Onboarding manual PENDENTE
+- Contrato assinado 19/03 16h12 UTC — F10 NÃO disparou automaticamente
+- **Nome:** Ana Karine da Silva Sousa Pinto | **Tel:** (85) 99639-0769
+- **Email:** karinedivamatematica@gmail.com
+- **CPF:** DESCONHECIDO — precisa confirmar com Dr. Henrique ou ClickUp
+- **ZapSign token:** `261d175a-aa0e-4fd1-934a-4a3c1b6d3f17`
+- Pendente: ADVbox (F14→F15→F16), Asaas (MF01-MF06)
+
+### 🔴 ClickUp API Token — INVÁLIDO (401)
+- 1Password UUID: `mth7e2mb6nkrsk2bbty3e4iuli`
+- Dr. Henrique precisa gerar novo token: ClickUp > Settings > Apps > API Token
+- Salvar no 1Password substituindo o atual
+- Impacto: Henry não consegue acessar CRM, tasks, dados de clientes
+
+### 🟡 F10 ZapSign — Investigar falha de disparo
+- Nenhuma execução de ppws3IRJo8K6QQJd após assinatura de Ana Karine (16:12 UTC)
+- Hipótese: busca da task ClickUp dentro do F10 falha porque token está inválido
+
+---
+
 ## ATUALIZAÇÃO 19/03 02h40 UTC
 
 ### ✅ WF-SUPPORT — CONFIGURADO E ATIVO (19/03/2026 02h38 UTC)

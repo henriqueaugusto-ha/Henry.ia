@@ -759,6 +759,26 @@ Docs recentes NÃO estão na última página calculada pelo count. Solução:
 - N8N webhooks precisam toggle UI ou restart — API insuficiente
 - HttpOnly cookies: extrair manualmente (curl não envia prefixo #HttpOnly_)
 
+## ClickUp API Token — INVÁLIDO (19/03/2026)
+
+- Token em 1Password (UUID: mth7e2mb6nkrsk2bbty3e4iuli) retorna HTTP 401
+- Impacta: busca de dados de clientes, CPF, tasks do CRM
+- **Ação necessária:** Dr. Henrique gerar novo token em ClickUp Settings > Apps > API Token
+- CRM List ID (conforme 1Password notes): `901112572305`
+
+## Ana Karine — Onboarding PENDENTE (19/03/2026)
+
+- Contrato assinado 19/03 às 16h12 UTC via ZapSign
+- **Nome:** Ana Karine da Silva Sousa Pinto
+- **Email:** karinedivamatematica@gmail.com | **Tel:** (85) 99639-0769
+- **CPF:** DESCONHECIDO (não está no ZapSign, ClickUp inacessível)
+- **ZapSign doc token:** `261d175a-aa0e-4fd1-934a-4a3c1b6d3f17`
+- **Pasta ZapSign:** /Ana Karine da Silva Sousa/
+- Contrato criado por: Lucas Furtado
+- F10 NÃO disparou automaticamente → onboarding manual pendente
+- Bloqueador: CPF + ClickUp token inválido
+- Detalhes completos: memory/diario/2026-03-19.md
+
 ## Sessão 16/03/2026 — ADVbox 3 clientes concluídos (22h36 UTC)
 
 - **ADAILDO** (868hwkm07) → ADVbox cliente `14351422` | processo `13690343` ✅ | ⚠️ duplicado 14351397 a deletar
