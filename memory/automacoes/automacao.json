@@ -37,5 +37,34 @@
       "reason": "Henry nunca executa no N8N — só analisa e instrui o agente VSCode",
       "tags": ["arquitetura", "n8n", "papel"]
     }
+  ,
+    {
+      "date": "2026-03-19",
+      "context": "WF-SUPPORT configurado — N8N free não suporta env vars (feat:variables)",
+      "decision": "approve",
+      "reason": "Contornado hardcodando valores diretamente nos nós. Funciona igual para N8N community.",
+      "tags": ["n8n", "env-vars", "wf-support", "limitacao"]
+    },
+    {
+      "date": "2026-03-19",
+      "context": "Evolution API v1.8.7 tem apenas 1 webhook por instância — precisava receber em 2 workflows",
+      "decision": "approve",
+      "reason": "Solução: nó HTTP forward no workflow de monitoramento repassa payload para o novo workflow em paralelo (fire-and-forget, timeout 1s).",
+      "tags": ["evolution-api", "webhook", "arquitetura", "wf-support"]
+    },
+    {
+      "date": "2026-03-19",
+      "context": "Slack sem Incoming Webhook — workflow usava $env.SLACK_WEBHOOK_URL",
+      "decision": "approve",
+      "reason": "Trocado por chat.postMessage com bot token existente (xoxb-...) hardcoded no header + channel C0AM6CY5CV8. Mesmo resultado.",
+      "tags": ["slack", "webhook", "bot-token", "wf-support"]
+    },
+    {
+      "date": "2026-03-19",
+      "context": "N8N API: PATCH não é permitido para ativar workflow",
+      "decision": "approve",
+      "reason": "Usar POST /api/v1/workflows/{id}/activate em vez de PATCH com {active: true}.",
+      "tags": ["n8n-api", "ativacao", "workflow"]
+    }
   ]
 }

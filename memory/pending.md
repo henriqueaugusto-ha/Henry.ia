@@ -5,6 +5,17 @@
 
 ---
 
+## ATUALIZAÇÃO 19/03 02h40 UTC
+
+### ✅ WF-SUPPORT — CONFIGURADO E ATIVO (19/03/2026 02h38 UTC)
+- Workflow ID: `wXPbGYVJb7pbiaSn` | ATIVO em Shadow + Whitelist
+- Credenciais: Evolution API Key (`yVC6Uaky50m5Fy3N`) + OpenAI (`2ZZ3V3iGHzah9mBm`)
+- Whitelist: 5585991436886 + 5585994502609
+- ⚠️ PENDENTE: Dr. Henrique testar do número pessoal → confirmar simulação no Slack
+- ⚠️ PENDENTE: Número da Dra. Ingrid para adicionar à whitelist
+
+---
+
 ## ATUALIZAÇÃO 18/03 09h22 UTC (flush pré-nova-sessão)
 
 ### 🔴 REBECA — HOJE antes das 12h ⏰

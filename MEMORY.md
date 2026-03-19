@@ -869,10 +869,22 @@ Dr. Henrique solicitou atualização de memória + push Git para início de nova
 Estado consolidado no encerramento:
 - Pipeline Asaas: 6 clientes pendentes (ADALBERTO, FRANCISCO, ADAILDO, MARCIO, NAIRTON, GABRIEL)
 - ADVbox: 5 clientes cadastrados (pendente: GABRIEL LINHARES) — bugs F10, F13, F14, F19 ativos
-- Ana Laura demitida — suporte descoberto → WF-SUPPORT urgente
+- Ana Laura demitida — suporte descoberto → WF-SUPPORT ✅ ATIVO (19/03)
 - ClickUp token inválido — renovar antes da próxima sessão
 - GCP OAuth Drive em Testing — ~7 dias para expirar
 - Cron Relatório Comercial 20h Fortaleza — aguarda ativação manual
+
+## WF-SUPPORT — Agente Suporte IA ATIVO (19/03/2026)
+
+- ID N8N: `wXPbGYVJb7pbiaSn` | Status: ATIVO ✅ Shadow + Whitelist
+- Creds N8N: Evolution `yVC6Uaky50m5Fy3N` | OpenAI `2ZZ3V3iGHzah9mBm`
+- Whitelist: `5585991436886` (principal) + `5585994502609` (pessoal)
+- Arquitetura: Evolution → monitoramento → forward → agente (paralelo, fire-and-forget)
+- Controles: MODO_SHADOW=true | MODO_TESTE=true | IA_ATIVA=true
+- Modelo: gpt-4o-mini | temp 0.3 | /v1/chat/completions
+- Slack: chat.postMessage → C0AM6CY5CV8 (#suporte-monitoramento)
+- ⚠️ Pendente: teste Dr. Henrique + número Ingrid para whitelist
+- Detalhes completos: memory/2026-03-19.md
 
 Referência para próxima sessão:
 - Diário completo: `memory/diario/2026-03-18.md`
