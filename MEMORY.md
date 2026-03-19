@@ -919,3 +919,21 @@ Vigência: PERMANENTE — obrigatório antes de qualquer consulta a dados operac
 - R6: Registrar todo erro em agent_errors (Supabase) imediatamente
 
 Origem: Evolution API retornou 6 clientes (cache parcial) quando histórico indica 30+ → erro de confirmação sem sanity check
+
+## Agente Suporte IA — Diagnóstico 19/03/2026
+
+Dois bugs identificados e fixes propostos (aguardam CONFIRMO A EXECUÇÃO):
+
+**Bug 1 — Shadow Mode ativo:**
+- Workflow: `HA Advocacia — Agente Suporte IA v1.0` (ID: `wXPbGYVJb7pbiaSn`)
+- Nó 03: `MODO_SHADOW = true` → IA gera resposta mas nunca envia ao cliente
+- Fix: `MODO_SHADOW = false`, manter `MODO_TESTE = true` (whitelist: 5585991436886, 5585994502609)
+
+**Bug 2 — Triplicação Slack:**
+- Workflow: `Monitoramento Suporte Evolution + IA + Slack` (ID: `lahexgzvNT2f3WRU`)
+- Filtro aceita MESSAGES_UPDATE + CHATS_UPDATE + SEND_MESSAGE → 3+ eventos por mensagem
+- Fix: manter apenas `['MESSAGES_UPSERT', 'MESSAGES_SET']` no array `allowed`
+- Agravante: Monitoramento chama agente via nó HTTP → duplo disparo (Evolution + Monitoramento)
+
+Detalhes completos + arquitetura + inventário workflows: `memory/diario/2026-03-19.md`
+Lições aprendidas: `memory/lessons.md` (entrada 19/03/2026)

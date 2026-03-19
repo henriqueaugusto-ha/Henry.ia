@@ -65,6 +65,20 @@
       "decision": "approve",
       "reason": "Usar POST /api/v1/workflows/{id}/activate em vez de PATCH com {active: true}.",
       "tags": ["n8n-api", "ativacao", "workflow"]
+    },
+    {
+      "date": "2026-03-19",
+      "context": "Agente Suporte IA v1.0 em Shadow Mode — IA não responde ao cliente",
+      "decision": "pending",
+      "reason": "Fix aprovado mas aguarda CONFIRMO A EXECUÇÃO: MODO_SHADOW=false no Nó 03. IDs: wXPbGYVJb7pbiaSn (agente), lahexgzvNT2f3WRU (monitoramento).",
+      "tags": ["wf-support", "shadow-mode", "agente-ia", "fix-pendente"]
+    },
+    {
+      "date": "2026-03-19",
+      "context": "Monitoramento Suporte triplicando notificações Slack",
+      "decision": "pending",
+      "reason": "Fix aprovado mas aguarda CONFIRMO: remover MESSAGES_UPDATE, CHATS_UPDATE, SEND_MESSAGE do allowed. Manter apenas MESSAGES_UPSERT + MESSAGES_SET.",
+      "tags": ["wf-support", "monitoramento", "triplicacao", "evolution-api", "fix-pendente"]
     }
   ]
 }

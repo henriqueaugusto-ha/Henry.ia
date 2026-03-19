@@ -5,6 +5,22 @@
 
 ---
 
+## Lições — 19/03/2026
+
+### N8N tem paginação de 50 — sempre verificar nextCursor
+**Contexto:** Ao listar workflows, retornou 50 mas havia 58. O Agente Suporte IA só apareceu na página 2. Diagnóstico estaria incompleto sem checar `nextCursor`.
+**Regra:** Sempre verificar `nextCursor` ao fazer `GET /api/v1/workflows`. Se não for null, buscar próxima página.
+
+### Evolution API envia múltiplos eventos por mensagem
+**Contexto:** Monitoramento Suporte disparando 3x no Slack por cada mensagem do cliente. Causa: lista `allowed` incluía `MESSAGES_UPDATE`, `CHATS_UPDATE`, `SEND_MESSAGE` que chegam como follow-up de cada `MESSAGES_UPSERT`.
+**Regra:** Em workflows que consomem webhooks Evolution API, filtrar apenas `MESSAGES_UPSERT` (e opcionalmente `MESSAGES_SET`). Nunca incluir eventos de status/update na lista se o objetivo é processar mensagens novas.
+
+### Monitoramento + Agente com duplo disparo
+**Contexto:** Workflow de Monitoramento tem nó `→ Agente Suporte IA` que chama o webhook do agente. E a Evolution API chama o agente diretamente. Resulta em chamada dupla ao agente.
+**Regra:** Monitoramento deve apenas monitorar. Se precisar acionar agente, fazer via um único ponto de entrada (direto da Evolution API) e remover a chamada do Monitoramento.
+
+---
+
 ## ⛔ CONSOLIDADO 17/03/2026 — Erros críticos do dia (nunca repetir)
 
 ### 1. Envio não autorizado no canal Comercial
