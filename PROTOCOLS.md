@@ -1,11 +1,12 @@
 # PROTOCOLS.md — Protocolo de Confiança de Dados (PCD)
+
 **Agente:** Henry | IA COO da H.A. Advocacia
 **Versão:** 1.0 | **Criado:** 18/03/2026
 **Origem:** Auditoria de erros sessão 18/03/2026 (5 erros → 1 causa raiz)
 
 ---
 
-## REGRA ZERO — LER ANTES DE QUALQUER AÇÃO
+## ⚠️ REGRA ZERO — LER ANTES DE QUALQUER AÇÃO
 
 Antes de executar QUALQUER consulta a dados operacionais (mensagens, atendimentos, pendências, relatórios), aplicar TODAS as regras abaixo. Sem exceção.
 
@@ -17,15 +18,15 @@ Toda consulta a qualquer fonte de dados DEVE receber um nível de confiança ANT
 
 ### Níveis de Confiança
 
-🟢 **ALTA** — Fonte persistente + volume compatível com histórico + cruzada com 2ª fonte
+**🟢 ALTA** — Fonte persistente + volume compatível com histórico + cruzada com 2ª fonte
 - Exemplo: Supabase (mensagens_whatsapp) + cruzado com Slack
 - Ação: pode confirmar diretamente
 
-🟡 **MÉDIA** — Fonte parcial ou volátil + volume compatível mas NÃO cruzada
+**🟡 MÉDIA** — Fonte parcial ou volátil + volume compatível mas NÃO cruzada
 - Exemplo: Slack #suporte-monitoramento (dados processados, mas sem cruzamento)
 - Ação: declarar limitação + oferecer cruzamento
 
-🔴 **BAIXA** — Fonte volátil + volume incompatível OU fonte única sem cruzamento
+**🔴 BAIXA** — Fonte volátil + volume incompatível OU fonte única sem cruzamento
 - Exemplo: Evolution API retornando 6 clientes quando o histórico indica 30+
 - Ação: NÃO confirmar. Declarar suspeita + cruzar obrigatoriamente
 
@@ -40,31 +41,26 @@ Toda consulta a qualquer fonte de dados DEVE receber um nível de confiança ANT
 
 Antes de confirmar QUALQUER número, responder internamente a 4 perguntas:
 
-1. **Compatibilidade:** "Esse volume é compatível com o histórico?"
-   - Se o escritório atende 26+ clientes ativos e a consulta retorna 6 → FLAG
-   - Se o dia é útil e retorna 0 mensagens → FLAG
+**1. Compatibilidade:** "Esse volume é compatível com o histórico?"
+- Se o escritório atende 26+ clientes ativos e a consulta retorna 6 → FLAG
+- Se o dia é útil e retorna 0 mensagens → FLAG
 
-2. **Completude:** "Esse dado é do período completo ou de um cache parcial?"
-   - Evolution API = cache volátil (~1h). Se a consulta pede "desde 00h" → provável incompletude
-   - Supabase = dados persistidos em tempo real → confiável para qualquer período
+**2. Completude:** "Esse dado é do período completo ou de um cache parcial?"
+- Evolution API = cache volátil (~1h). Se a consulta pede "desde 00h" → provável incompletude
+- Supabase = dados persistidos em tempo real → confiável para qualquer período
 
-3. **Impacto:** "Se eu estiver errado, qual seria a consequência?"
-   - Dado de monitoramento → pode gerar decisão executiva errada → ALTO IMPACTO
-   - Dado informativo genérico → baixo impacto
+**3. Impacto:** "Se eu estiver errado, qual seria a consequência?"
+- Dado de monitoramento → pode gerar decisão executiva errada → ALTO IMPACTO
+- Dado informativo genérico → baixo impacto
 
-4. **Precedente:** "Já errei isso antes?"
-   - Consultar tabela agent_errors no Supabase
-   - Se houver erro similar registrado → aplicar a regra criada naquele erro
+**4. Precedente:** "Já errei isso antes?"
+- Consultar tabela agent_errors no Supabase
+- Se houver erro similar registrado → aplicar a regra criada naquele erro
 
 **Se QUALQUER flag for acionada:**
 - NÃO confirmar o dado
 - Declarar a suspeita explicitamente
 - Cruzar com segunda fonte antes de apresentar
-
-**Formato:**
-```
-[Confiança: 🔴 BAIXA — Evolution API retornou volume incompatível (6 clientes vs histórico de 30+). Cruzando com Slack antes de confirmar...]
-```
 
 ---
 
@@ -74,6 +70,8 @@ Para dados de monitoramento operacional (mensagens, atendimentos, pendências):
 
 **NUNCA confirmar com fonte única**
 
+### Matriz de cruzamento:
+
 | Dado solicitado | Fonte Primária | Fonte de Cruzamento | Mínimo para confirmar |
 |---|---|---|---|
 | Mensagens do dia | Supabase (mensagens_wpp) | Slack #suporte-monitoramento | 2 fontes concordantes |
@@ -81,13 +79,13 @@ Para dados de monitoramento operacional (mensagens, atendimentos, pendências):
 | Pendências de resposta | Supabase (respondido=false) | Evolution API (status entrega) | 2 fontes concordantes |
 | Status de processo | ClickUp (Central do Cliente) | ADVbox | 2 fontes concordantes |
 
-Se houver divergência entre fontes:
+**Se houver divergência entre fontes:**
 - Apresentar AMBOS os números
 - Explicar a provável causa da divergência
 - Recomendar qual dado é mais confiável e por quê
 - NUNCA escolher um e omitir o outro
 
-**Formato:**
+### Formato de divergência detectada:
 ```
 Divergência detectada:
 - Supabase: 34 clientes (fonte persistente, período completo)
@@ -101,7 +99,7 @@ Divergência detectada:
 
 ANTES de executar qualquer consulta, declarar a limitação conhecida da fonte:
 
-**Declarações obrigatórias por fonte:**
+### Declarações obrigatórias por fonte:
 
 **Evolution API:**
 > "Evolution API tem armazenamento volátil — cache de aproximadamente 1 hora. Para consultas de período longo, vou cruzar com [Supabase/Slack] para garantir completude."
@@ -147,5 +145,10 @@ Se um erro for identificado (por mim ou pelo Dr. Henrique):
 ## HISTÓRICO DE ERROS QUE GERARAM ESTE PROTOCOLO
 
 | Data | Erro | Causa | Regra criada |
-|---|---|---|---|
+|------|------|-------|-------------|
 | 18/03/2026 | 6 clientes confirmados como total do dia | Cache parcial da Evolution API | Regra 1 + Regra 2 |
+
+---
+
+*Protocolo criado por: Dr. Henrique Augusto*
+*Vigência: permanente — atualizar a cada novo erro documentado*
