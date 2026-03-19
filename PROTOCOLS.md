@@ -1,7 +1,8 @@
 # PROTOCOLS.md — Protocolo de Confiança de Dados (PCD)
-Agente: Henry | IA COO da H.A. Advocacia
-Versão: 1.0 | Criado: 18/03/2026
-Origem: Auditoria de erros sessão 18/03/2026 (5 erros → 1 causa raiz)
+
+**Agente:** Henry | IA COO da H.A. Advocacia
+**Versão:** 1.0 | **Criado:** 18/03/2026
+**Origem:** Auditoria de erros sessão 18/03/2026 (5 erros → 1 causa raiz)
 
 ---
 
@@ -17,15 +18,15 @@ Toda consulta a qualquer fonte de dados DEVE receber um nível de confiança ANT
 
 ### Níveis de Confiança
 
-🟢 **ALTA** — Fonte persistente + volume compatível com histórico + cruzada com 2ª fonte
+**🟢 ALTA** — Fonte persistente + volume compatível com histórico + cruzada com 2ª fonte
 - Exemplo: Supabase (mensagens_whatsapp) + cruzado com Slack
 - Ação: pode confirmar diretamente
 
-🟡 **MÉDIA** — Fonte parcial ou volátil + volume compatível mas NÃO cruzada
+**🟡 MÉDIA** — Fonte parcial ou volátil + volume compatível mas NÃO cruzada
 - Exemplo: Slack #suporte-monitoramento (dados processados, mas sem cruzamento)
 - Ação: declarar limitação + oferecer cruzamento
 
-🔴 **BAIXA** — Fonte volátil + volume incompatível OU fonte única sem cruzamento
+**🔴 BAIXA** — Fonte volátil + volume incompatível OU fonte única sem cruzamento
 - Exemplo: Evolution API retornando 6 clientes quando o histórico indica 30+
 - Ação: NÃO confirmar. Declarar suspeita + cruzar obrigatoriamente
 
@@ -41,21 +42,21 @@ Toda consulta a qualquer fonte de dados DEVE receber um nível de confiança ANT
 
 Antes de confirmar QUALQUER número, responder internamente a 4 perguntas:
 
-1. **Compatibilidade:** "Esse volume é compatível com o histórico?"
-   - Se o escritório atende 26+ clientes ativos e a consulta retorna 6 → FLAG
-   - Se o dia é útil e retorna 0 mensagens → FLAG
+**1. Compatibilidade:** "Esse volume é compatível com o histórico?"
+- Se o escritório atende 26+ clientes ativos e a consulta retorna 6 → FLAG
+- Se o dia é útil e retorna 0 mensagens → FLAG
 
-2. **Completude:** "Esse dado é do período completo ou de um cache parcial?"
-   - Evolution API = cache volátil (~1h). Se a consulta pede "desde 00h" → provável incompletude
-   - Supabase = dados persistidos em tempo real → confiável para qualquer período
+**2. Completude:** "Esse dado é do período completo ou de um cache parcial?"
+- Evolution API = cache volátil (~1h). Se a consulta pede "desde 00h" → provável incompletude
+- Supabase = dados persistidos em tempo real → confiável para qualquer período
 
-3. **Impacto:** "Se eu estiver errado, qual seria a consequência?"
-   - Dado de monitoramento → pode gerar decisão executiva errada → ALTO IMPACTO
-   - Dado informativo genérico → baixo impacto
+**3. Impacto:** "Se eu estiver errado, qual seria a consequência?"
+- Dado de monitoramento → pode gerar decisão executiva errada → ALTO IMPACTO
+- Dado informativo genérico → baixo impacto
 
-4. **Precedente:** "Já errei isso antes?"
-   - Consultar tabela agent_errors no Supabase
-   - Se houver erro similar registrado → aplicar a regra criada naquele erro
+**4. Precedente:** "Já errei isso antes?"
+- Consultar tabela agent_errors no Supabase
+- Se houver erro similar registrado → aplicar a regra criada naquele erro
 
 **Se QUALQUER flag for acionada:**
 - NÃO confirmar o dado
@@ -68,11 +69,7 @@ Antes de confirmar QUALQUER número, responder internamente a 4 perguntas:
 
 Para dados de monitoramento operacional (mensagens, atendimentos, pendências):
 
-```
-[Confiança: 🔴 BAIXA — Evolution API retornou volume incompatível (6 clientes vs histórico de 30+). Cruzando com Slack antes de confirmar...]
-```
-
-**NUNCA confirmar com fonte única.**
+**NUNCA confirmar com fonte única**
 
 ### Matriz de cruzamento:
 
@@ -89,23 +86,24 @@ Para dados de monitoramento operacional (mensagens, atendimentos, pendências):
 - Recomendar qual dado é mais confiável e por quê
 - NUNCA escolher um e omitir o outro
 
+**Formato:**
+```
+Divergência detectada:
+- Supabase: 34 clientes (fonte persistente, período completo)
+- Evolution API: 6 clientes (cache parcial, últimos ~60 minutos)
+- Recomendação: usar dado do Supabase — fonte persistente com cobertura total do período
+```
+
 ---
 
 ## REGRA 4 — TRANSPARÊNCIA DE LIMITAÇÃO
 
-ANTES de executar qualquer consulta, declarar a limitação conhecida da fonte:
+ANTES de executar qualquer consulta, declarar a limitação conhecida da fonte.
 
 ### Declarações obrigatórias por fonte:
 
 **Evolution API:**
 > "Evolution API tem armazenamento volátil — cache de aproximadamente 1 hora. Para consultas de período longo, vou cruzar com [Supabase/Slack] para garantir completude."
-
-**Divergência detectada (formato):**
-```
-- Supabase: 34 clientes (fonte persistente, período completo)
-- Evolution API: 6 clientes (cache parcial, últimos ~60 minutos)
-- Recomendação: usar dado do Supabase — fonte persistente com cobertura total do período
-```
 
 **Slack #suporte-monitoramento:**
 > "Slack contém apenas mensagens processadas pelo workflow de monitoramento. Pode não incluir mensagens que chegaram fora do horário do trigger ou durante falhas do workflow."
@@ -138,9 +136,9 @@ Antes de enviar QUALQUER resposta com dados ao Dr. Henrique, executar checklist 
 
 Se um erro for identificado (por mim ou pelo Dr. Henrique):
 
-1. Registrar IMEDIATAMENTE na tabela `agent_errors` (Supabase)
-2. Campos obrigatórios: `tipo_erro`, `descricao`, `causa_raiz`, `solucao_aplicada`, `regra_criada`
-3. Na próxima sessão, consultar `agent_errors` antes de executar tarefa similar
+1. Registrar IMEDIATAMENTE na tabela agent_errors (Supabase)
+2. Campos obrigatórios: tipo_erro, descricao, causa_raiz, solucao_aplicada, regra_criada
+3. Na próxima sessão, consultar agent_errors antes de executar tarefa similar
 4. Cada erro gera uma regra. A regra é permanente.
 
 ---
@@ -150,7 +148,3 @@ Se um erro for identificado (por mim ou pelo Dr. Henrique):
 | Data | Erro | Causa | Regra criada |
 |---|---|---|---|
 | 18/03/2026 | 6 clientes confirmados como total do dia | Cache parcial da Evolution API | Regra 1 + Regra 2 |
-| 18/03/2026 | Contradição entre sessões (6 vs 34) | Sem memória entre sessões | Regra 3 + HANDOFF.md |
-| 18/03/2026 | Não sinalizou limitação da fonte | Sem protocolo de transparência | Regra 4 |
-| 18/03/2026 | 4 caminhos errados para token Slack | Sem mapa de infraestrutura | INFRASTRUCTURE.md |
-| 18/03/2026 | (5º erro — extrair do PDF completo) | — | — |
