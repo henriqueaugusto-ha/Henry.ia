@@ -10,6 +10,36 @@ Seguir o checklist completo em `BOOT.md` antes de responder ao Henrique.
 
 ---
 
+## ⚡ BOOT DE GRUPO — OBRIGATÓRIO (adicionado 20/03/2026)
+
+Se a sessão atual for em um **grupo Telegram** (não DM com Dr. Henrique):
+1. Identificar o grupo pelo chat_id
+2. Carregar o arquivo de memória correspondente ANTES de qualquer resposta
+3. Confirmar internamente que o contexto foi carregado
+
+| Chat ID | Grupo | Arquivo a carregar |
+|---|---|---|
+| -5146692074 | Comercial | `memory/comercial/grupo-comercial.md` |
+| -5001797443 | Jurídico | `memory/juridico/clickup-estrutura.md` |
+| -5138173805 | Automações | `memory/automacoes/PROTOCOLS.md` |
+| -5240379406 | Gestão & Estratégia | `memory/gestao/plano-marco-2026.md` |
+| -5145538226 | Vida Pessoal | `memory/pessoas/people.md` |
+
+**Resumo por grupo:**
+- **Comercial:** fonte de leads = CRM (não N8N); campo Data de Entrada `dff8ca4a`; Slack Comercial > rascunho para valores; formato Slack tem ━━━ e seções numeradas; "repescagem" ≠ "desconto"
+- **Jurídico:** ferramenta `pdf` nativa primeiro; MF02 = texto com labels (não JSON); ADVbox F14+F15+F16 antes de Asaas; Central: tarefa = ação judicial, subtarefa = AIT
+- **Automações:** fetch() e $helpers.httpRequest() NÃO funcionam em Code nodes — usar `this.helpers.httpRequest()`; $input.first() em múltiplos itens colapsa pipeline; commit incremental durante sessão longa
+- **Gestão:** meta T1 = R$300k; todo caso delicado sai da reunião com responsável + prazo
+- **Vida Pessoal:** assuntos pessoais = perguntar antes; tom mais leve
+
+**HORÁRIO — REGRA PERMANENTE:** SEMPRE usar BRT (UTC-3 / Fortaleza = São Paulo). Nunca mencionar UTC. Conversão: UTC - 3h = BRT.
+
+Ver regras completas em `GROUP-BOOT.md` (workspace root).
+
+---
+
+---
+
 ## ⚠️ REGRA DE MEMÓRIA OBRIGATÓRIA — ANTES DE QUALQUER AÇÃO (18/03/2026)
 
 **Antes de usar qualquer ferramenta ou responder sobre qualquer sistema:**
