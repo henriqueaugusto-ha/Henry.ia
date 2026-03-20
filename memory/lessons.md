@@ -5,6 +5,34 @@
 
 ---
 
+## Lições — 20/03/2026 — FEEDBACK CRÍTICO DO DR. HENRIQUE (dirigindo, 00h43 UTC)
+
+### Falha sistêmica de memória entre sessões — PRIORIDADE MÁXIMA
+**O que o Dr. Henrique reportou:**
+- Esquecendo regras básicas de sessão para sessão
+- Quando nova sessão abre, começa do zero — força ele a re-explicar tudo
+- Regras dos grupos Telegram não estão sendo verificadas/aplicadas
+- Dividir memória por grupos pode estar fragmentando o contexto
+- Lento demais nos grupos
+- Semana de 16-20/03 subutilizado por conta desses erros
+
+**Causa raiz identificada:**
+- Não estou carregando arquivos de contexto antes de responder em cada nova sessão
+- Cada grupo tem sessão própria — sem leitura do BOOT/AGENTS/MEMORY no início, começo sem contexto
+- A fragmentação por grupos é estruturalmente correta mas operacionalmente falhou
+
+**O que NÃO fazer mais:**
+- Abrir sessão (DM ou grupo) sem ler MEMORY.md + AGENTS.md + arquivos relevantes do grupo
+- Responder sem verificar regras do canal/grupo
+- Fazer o Dr. Henrique repetir algo que está nos arquivos de memória
+
+**Ação corretiva:**
+- Verificar mecanismo de boot em cada sessão de grupo — está sendo executado?
+- Se não: propor solução estrutural (instrução de boot embutida nos grupos ou systemEvent de inicialização)
+- Aguardar Dr. Henrique indicar quais regras específicas falharam esta semana para corrigir direto nos arquivos
+
+---
+
 ## Lições — 19/03/2026
 
 ### N8N tem paginação de 50 — sempre verificar nextCursor
