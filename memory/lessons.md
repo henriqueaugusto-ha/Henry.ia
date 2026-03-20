@@ -129,6 +129,12 @@
 **Regra:** Ao receber mensagem em qualquer grupo, verificar se existe arquivo de memória específico do grupo em `memory/[domínio]/` e carregar antes de responder.
 **Esta é a causa raiz dos erros desta semana.**
 
+### ⚠️ HORÁRIO — SEMPRE usar Fortaleza/São Paulo (BRT = UTC-3)
+**Contexto:** Em 20/03/2026 às 01h21 UTC eu disse "passou da meia-noite". Errado. Em Fortaleza eram 22h21. Dr. Henrique identificou o erro: estou usando UTC ou horário errado nas referências de hora.
+**Regra permanente:** TODA referência de horário ao Dr. Henrique usa BRT (UTC-3 / America/Fortaleza = America/Sao_Paulo). Nunca UTC. Nunca mencionar horário sem converter para BRT primeiro.
+**Conversão:** UTC - 3h = BRT. Exemplo: 01h UTC = 22h BRT (dia anterior).
+**Aplica-se a:** DM, todos os grupos, briefings, alertas, crons, agendamentos, lembretes.
+
 ### Lição repetida não aplicada = prioridade máxima de correção estrutural
 **Contexto:** Lição "Slack botToken em openclaw.json" registrada em 17/03, não aplicada em 19/03. Quando uma lição não é aplicada na sessão seguinte, o problema não é memória — é arquitetura de boot.
 **Regra:** Lição repetida em sessão subsequente → investigar por que o boot não carregou o arquivo que contém essa lição, não apenas re-registrar.
