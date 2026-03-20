@@ -76,6 +76,54 @@
 **Contexto:** Cadastrei cobrança do FRANCISCO com R$1.099 (rascunho) em vez de R$1.199 (Slack Comercial). Discrepância de R$100.
 **Regra:** Valores financeiros de contratos → sempre confirmar no Slack Comercial antes de cadastrar no Asaas. Slack Comercial tem o valor final confirmado pelo closer.
 
+### Caso delicado em reunião comercial deve sair com responsável explícito
+**Contexto:** Reunião comercial 19/03 — caso Antônio encerrou sem responsável designado.
+**Regra:** Todo caso delicado, sensível ou em risco deve sair de toda reunião com: responsável explícito + prazo + próxima ação. Se não tiver responsável ao encerrar, não encerra.
+
+### Valores de contratos — validar no Slack Comercial antes de cadastrar no Asaas
+**Contexto:** Caso Francisco Coelho: rascunho do contrato tinha R$1.099 de entrada, Slack Comercial confirmava R$1.199. Discrepância de R$100 cadastrada no Asaas antes de checar.
+**Regra:** Antes de qualquer cadastro financeiro no Asaas, confirmar o valor no Slack Comercial. Slack Comercial = fonte para valores finais de pagamento.
+
+### Evolution API v1.8.7 — event names lowercase com ponto (messages.upsert, não MESSAGES_UPSERT)
+**Contexto:** Grupo Automações — workflow disparava com event name errado.
+**Regra:** Evolution API 1.8.7 usa formato `messages.upsert` (lowercase, ponto). Para comparar com o padrão uppercase usado internamente: `event.replace(/\./g, '_').toUpperCase()`.
+
+### N8N bloqueia $env completamente em expressões
+**Contexto:** Tentativa de usar `$env.VARIAVEL` em expressão retornava undefined sem aviso.
+**Regra:** $env não funciona em expressões N8N. Usar credenciais armazenadas no próprio N8N ou passar via HTTP Request node headers.
+
+### N8N PUT API rejeita campos extras em settings de workflow
+**Contexto:** PUT em workflow via API falhava silenciosamente com campos extras.
+**Regra:** N8N PUT /api/v1/workflows/{id} aceita somente `executionOrder` e `callerPolicy` em `settings`. Outros campos causam rejeição silenciosa.
+
+### OpenAI Responses API retorna JSON em markdown code fences
+**Contexto:** Resposta da API vinha como ```json {...} ``` — JSON.parse() falhava.
+**Regra:** Sempre fazer strip das code fences antes de JSON.parse(): `response.replace(/^```json\n?/, '').replace(/\n?```$/, '')`.
+
+### Shell com $MSG contendo emojis/acentos corrompe UTF-8
+**Contexto:** Script bash com variável contendo acentos/emojis produzia caracteres corrompidos.
+**Regra:** Para enviar texto com emojis/acentos via shell, usar Python com `charset=utf-8`: `python3 -c "import sys; print(msg)" | ...` ou exportar com `export PYTHONIOENCODING=utf-8`.
+
+### Nginx proxy reverso resolve rede cross-container entre N8N e Evolution API
+**Contexto:** N8N não conseguia chamar Evolution API diretamente por nome de container.
+**Regra:** Quando dois containers Docker não se comunicam diretamente, configurar Nginx como proxy reverso ou usar rede bridge compartilhada via docker-compose.
+
+### ClickUp field IDs — typo retorna null silenciosamente
+**Contexto:** Field ID `d828b498` estava errado (correto: `d82b4898`). Dois caracteres invertidos. Campo retornava null sem erro.
+**Regra:** Sempre copiar field IDs diretamente da API ou da memória. Nunca digitar manualmente. Se campo retorna null inesperadamente, verificar typo no ID.
+
+### N8N — ClickUp lookup deve vir DEPOIS da filtragem, não antes
+**Contexto:** Nó 05.5 buscava dados do cliente antes do Nó 06 filtrar a fila. Resultado: busca executada 30 vezes desnecessariamente e com input errado.
+**Regra:** Primeiro confirmar que o evento é relevante (filtrar fila). Depois buscar dados adicionais (ClickUp, ADVbox, etc.). Nunca o contrário.
+
+### N8N — Inserir nó intermediário requer re-verificação de todos os nós downstream
+**Contexto:** Inserção do Nó 05.5 entre Nó 05 e Nó 06 mudou a cardinalidade de itens (30→1), quebrando o Nó 06. Não foi verificado antes de salvar.
+**Regra:** Ao inserir qualquer nó intermediário: listar todos os nós downstream, verificar se dependem de $input.all() ou cardinalidade específica, confirmar que a mudança não quebra nenhum deles.
+
+### Commit incremental em sessões longas — não esperar solicitação explícita
+**Contexto:** Sessão de 8h no grupo Automações (19/03) sem commit até Dr. Henrique pedir explicitamente às 17h46 UTC. Dados e estados novos ficaram desprotegidos por horas.
+**Regra:** Em sessão com mais de 1h ou após cada bloco significativo de trabalho: commit imediato. Não esperar solicitação. "Se importa, escreve" — e commita.
+
 ### Boot de grupo = carregar arquivo de memória do grupo ANTES de qualquer resposta
 **Contexto:** Grupo Comercial tem `memory/comercial/grupo-comercial.md` com Regra 1 explícita: "carregar este arquivo PRIMEIRO". Não foi carregado → causou erros de formato, terminologia e contexto.
 **Regra:** Ao receber mensagem em qualquer grupo, verificar se existe arquivo de memória específico do grupo em `memory/[domínio]/` e carregar antes de responder.
