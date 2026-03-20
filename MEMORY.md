@@ -1,66 +1,17 @@
 # MEMORY.md — Memória de Longo Prazo
-> Compactado em 20/03/2026. Detalhes históricos → `memory/diario/`. Lições → `memory/lessons.md`.
+> Reestruturado em 20/03/2026. Detalhes históricos → `memory/diario/`. Lições → `memory/lessons.md`.
+> Critério de entrada aqui: erro repetido 2x no mesmo ponto. Detalhe técnico/código → apenas lessons.md.
 
 ---
 
-## 🔴 REGRAS OPERACIONAIS — CLICKUP / CRM
-- **Busca de leads por data:** SEMPRE pelo campo `Data de Entrada` (ID: `dff8ca4a-8cbb-468f-92de-064ca8a950d3`) — NUNCA por `date_created`
-- **Implementação:** iterar TODAS as páginas da lista + filtrar client-side pelo campo customizado. Incluir `include_closed=true`
-- **Token atual (⚠️ temporário — remover após recuperar 1Password):** `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W`
-- **Após recuperar 1Password:** token em "ClickUp API Token" (UUID: `mth7e2mb6nkrsk2bbty3e4iuli`) → campo `password`
-- **Terminologia:** nunca "Q1" (→ T1) | nunca "pipeline" (→ funil) | nunca "desconto" (→ repescagem)
-- Detalhes completos: `memory/lessons.md` → "Regra — Campo Correto para Contagem de Leads"
-
-## 🔴 REGRAS OPERACIONAIS — ASAAS
-- **GET** (consultar, extrato, clientes, cobranças): autônomo ✅
-- **POST / PUT / DELETE / estorno:** exige frase exata **"CONFIRMO A EXECUÇÃO"** — nenhuma outra aceita
-- "sim", "ok", "pode fazer" = insuficiente → responder: *"Preciso da confirmação: CONFIRMO A EXECUÇÃO"*
-- Violação = FALHA CRÍTICA → registrar em `memory/lessons.md` imediatamente
-- Credencial: 1Password "Asaas Pagamentos" (UUID: `nr3hshfgglth6qd3yo3ddayuxa`)
-- Detalhes completos: `memory/gestao/decisions.md` → "Asaas — Protocolo de Confirmação Dupla"
-
-## 🔴 REGRAS OPERACIONAIS — SLACK COMERCIAL
-- **Somente leitura** em todos os canais — nunca postar automaticamente, nunca responder equipe sem autorização
-- Antes de qualquer post: Dr. Henrique autorizou? Canal confirmado? Destinatário confirmado?
-- Crons: ⛔ proibido postar no Slack — resultado só via Telegram para Dr. Henrique
-- Nunca contar reunião em andamento como contrato. Sempre separar: Contratos | Pagamentos | Reuniões realizadas | Em andamento
-- Canal Comercial: `C076WL3MY15`
-- Formato obrigatório: `memory/comercial/slack-padrao-comercial.md`
-
-## 🔴 REGRAS OPERACIONAIS — GOOGLE AGENDA
-- Acesso: somente leitura via ICS (não cria/edita eventos)
-- Não tem tempo real — fazer novo `web_fetch` a cada consulta
-- 4 feeds: ADM H.A. | Henrique-Closer | Lucas-Closer | Walisom-SDR
-- URLs completas e padrão de título dos eventos: `memory/comercial/google-agenda.md`
-- Padrão título: `[STATUS -] NOME - TIPO - CIDADE - ESTADO - ORIGEM` | Status: `REALIZADA`, `FECHOU`, ou sem prefixo
-
-## 🔴 REGRAS OPERACIONAIS — N8N
-- `fetch()` não funciona em Code nodes → usar `this.helpers.httpRequest()`
-- Ao inserir nó novo: re-verificar conexões downstream antes de ativar
-- Workflows criados via API pós-restart não registram webhook sem novo restart no N8N
-- **Nunca ativar/editar workflow em produção sem autorização** — nível 4 ("CONFIRMO A EXECUÇÃO")
-- URL N8N: `https://n8n.srv1380728.hstgr.cloud` | API key: 1Password "N8N API - Henry.Ia" (UUID: `vv6rbyo6rhpauyurzc3jvopqwe`)
-
-## 🔴 REGRAS OPERACIONAIS — ADVBOX
-- **Acesso direto bloqueado:** API retorna 403 (Cloudflare bloqueia VPS) — sem chamada direta possível
-- **F14 usa Bearer hardcoded** — ⚠️ PENDENTE: salvar credencial no 1Password + atualizar workflow
-- **Credencial:** email `adv.henriqueaugusto@gmail.com` | senha `28051oabcebrasil` → 1Password item "ADVbox - Login Web" (cofre IA – OPERACIONAL) — **PENDENTE CRIAÇÃO**
-- **Estrutura Central do Cliente:** tarefa = ação judicial | subtarefa = AIT (ação administrativa) | múltiplos AITs = múltiplas subtarefas separadas
-- **Sequência obrigatória de onboarding:** F14 → F15 → F16 antes de qualquer cadastro no Asaas
-- Detalhes: `memory/juridico/clickup-estrutura.md`
-
----
-
-## 🕐 HORÁRIO — REGRA PERMANENTE (20/03/2026)
-TODA referência de horário usa **BRT (UTC-3 / Fortaleza / São Paulo)**.
-Nunca usar UTC nas respostas ao Dr. Henrique. Conversão: hora UTC - 3 = BRT.
-Janela de silêncio: 23h00–07h00 BRT. Fins de semana: só GUT ≥ 75 ou sistema caído.
+## 🕐 HORÁRIO — REGRA PERMANENTE
+TODA referência de horário usa **BRT (UTC-3 / Fortaleza / São Paulo)**. Nunca UTC nas respostas.
+Conversão: hora UTC - 3 = BRT. Janela de silêncio: 23h–07h BRT. Fins de semana: só GUT ≥ 75 ou sistema caído.
 
 ---
 
 ## 🗂️ BOOT DE GRUPO — OBRIGATÓRIO AO INICIAR SESSÃO EM GRUPO
-
-Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo ANTES de responder:
+Carregar o arquivo do grupo ANTES de qualquer resposta:
 
 | Grupo | Chat ID | Arquivo obrigatório |
 |---|---|---|
@@ -69,14 +20,7 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 | Automações | -5138173805 | `memory/automacoes/PROTOCOLS.md` |
 | Gestão & Estratégia | -5240379406 | `memory/gestao/plano-marco-2026.md` |
 | Vida Pessoal | -5145538226 | `memory/gestao/decisions.md` |
-| Financeiro | -5220749274 | `memory/financeiro/grupo-financeiro.md` ← **CRIAR** |
-
-**Regras rápidas por grupo:**
-- *Comercial:* leads = CRM (não N8N); Slack Comercial > rascunho para valores; "repescagem" ≠ "desconto"
-- *Jurídico:* pdf nativa primeiro; MF02 = texto com labels (nunca JSON); tarefa = ação judicial; subtarefa = AIT
-- *Automações:* fetch() não funciona em Code nodes → `this.helpers.httpRequest()`; re-verificar downstream ao inserir nó; ADVbox API 403 (sem acesso direto); F14→F15→F16 antes do Asaas
-- *Gestão:* meta março R$160k; ANPP prioritário; caso delicado → sair da reunião com responsável explícito
-- *Todos:* nunca postar no Slack sem destino confirmado; crons nunca postam em canais de equipe
+| Financeiro | -5220749274 | `memory/gestao/decisions.md` |
 
 ---
 
@@ -92,16 +36,93 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 ### Regras Absolutas
 - **NUNCA** editar `openclaw.json` diretamente (derrubou gateway 3x em 01/03)
 - **NUNCA** reiniciar gateway sem autorização explícita
-- **TODA** credencial → 1Password. Referência: `op read "op://IA – OPERACIONAL/Item/field"`
-- **Asaas** POST/PUT/DELETE → exige "CONFIRMO A EXECUÇÃO" — GET é autônomo
+- **TODA** credencial → 1Password. Acesso: `/tmp/op` | Token: `.env` → `OP_SERVICE_ACCOUNT_TOKEN`
 - **Slack Comercial** = somente leitura — nunca postar automaticamente
 - **openclaw.json** alterações: propor → aguardar aprovação → Dr. Henrique aplica na VPS
+- NUNCA desativar 3 flags controlUi simultaneamente → lockout (incidente 26/02)
 
-### Segurança Operacional — Estado Atual
-- VPS: Hostinger Ubuntu `72.60.49.222` (srv1427194) | Docker | UFW ativo (22/80/443)
-- Nginx + HTTPS: `henry.henriqueaugusto.adv.br` ✅ | Fail2ban ativo ✅
-- Hardening score: 9.0/10 ✅ | 1Password CLI: `/tmp/op` ✅
-- NUNCA desativar 3 flags controlUi simultaneamente → lockout (lição 26/02)
+---
+
+## 🔴 REGRAS OPERACIONAIS — CLICKUP / CRM
+
+- **Leads por data:** usar campo `Data de Entrada` (ID: `dff8ca4a-8cbb-468f-92de-064ca8a950d3`) — nunca `date_created`
+- **Implementação:** iterar TODAS as páginas da lista + filtrar client-side + `include_closed=true`
+- **Fonte de volume:** leads = CRM ClickUp; nunca contar execuções N8N como proxy de leads
+- **Confirmar fonte:** antes de buscar número mencionado, confirmar se é CRM, Central ou outra lista
+- **MF02:** sempre texto com labels (`CPF: / Valor Total: / Vencimento:`) — jamais JSON estruturado
+- **Token:** ao renovar, atualizar 1Password antes de encerrar a sessão — token fora do cofre = bloqueio
+- **Terminologia:** nunca "Q1" (→ T1) | nunca "pipeline" (→ funil) | nunca "desconto" (→ repescagem)
+- Detalhes: `memory/lessons.md` → "Regra — Campo Correto para Contagem de Leads"
+
+**Token atual:** `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W` (⚠️ 1Password UUID `mth7e2mb6nkrsk2bbty3e4iuli` desatualizado — pendente)
+
+---
+
+## 🔴 REGRAS OPERACIONAIS — ASAAS
+
+- **GET** (consultar, extrato, clientes, cobranças): autônomo ✅
+- **POST / PUT / DELETE / estorno:** exige frase exata **"CONFIRMO A EXECUÇÃO"** — "sim/ok" não é suficiente
+- **Forma de pagamento:** sempre PIX — nunca boleto, mesmo que contrato diga "cartão"
+- **Valores:** confirmar no Slack Comercial ANTES de cadastrar — rascunho do contrato ≠ valor final
+- **Violação = FALHA CRÍTICA** → registrar em `memory/lessons.md` imediatamente
+- Credencial: 1Password "Asaas Pagamentos" (UUID: `nr3hshfgglth6qd3yo3ddayuxa`)
+- Detalhes: `memory/gestao/decisions.md` → "Asaas — Protocolo de Confirmação Dupla"
+
+---
+
+## 🔴 REGRAS OPERACIONAIS — N8N
+
+- **HTTP em Code nodes:** `fetch()` e `$helpers.httpRequest()` não funcionam → usar HTTP Request node dedicado
+- **`$input` referencia nó anterior imediato** — para nó específico: `$('Nome Exato do Nó').first().json.campo`
+- **`$input.first()` em múltiplos itens** colapsa pipeline downstream (cardinalidade N→1 quebra tudo)
+- **Inserir nó intermediário:** re-verificar TODOS os nós downstream antes de salvar
+- **Lookup após filtragem:** primeiro filtrar/confirmar relevância do evento, depois buscar dados externos
+- **`$env` bloqueado** em expressões — usar credenciais N8N ou HTTP Request node headers
+- **PUT /api/v1/workflows:** aceita apenas `executionOrder` em `settings` — campos extras = rejeição silenciosa
+- **Emoji em `{{ }}`:** interpolar com emoji/caracteres especiais corrompe JSON Slack → usar JSON Builder node
+- **Paginação:** sempre verificar `nextCursor` ao listar workflows — retorna 50 por página, pode ter mais
+- **Ativar/editar workflow em produção:** nível 4 — exige "CONFIRMO A EXECUÇÃO"
+- **⚠️ Bug ativo:** pipeline Asaas `OwXrNkgiCqRykq7O` com token CU hardcoded desatualizado — quebrado
+- URL N8N: `https://n8n.srv1380728.hstgr.cloud` | API key: 1Password "N8N API - Henry.Ia" (UUID: `vv6rbyo6rhpauyurzc3jvopqwe`)
+- Detalhes: `memory/lessons.md` → "N8N Community — fetch() e $helpers.httpRequest()"
+
+---
+
+## 🔴 REGRAS OPERACIONAIS — ADVBOX
+
+- **API bloqueada:** retorna 403 (Cloudflare bloqueia VPS) — acesso direto impossível
+- **Estrutura Central do Cliente:** tarefa = ação judicial | subtarefa = AIT | múltiplos AITs = múltiplas subtarefas
+- **Ordem obrigatória:** F14 (cadastro cliente) → F15 (processo) → F16 (tarefa) antes de qualquer outra ação
+- **Credencial:** ⚠️ PENDENTE salvar no 1Password item `ADVbox - Login Web` (email: `adv.henriqueaugusto@gmail.com` | senha: `28051oabcebrasil`)
+- Detalhes: `memory/juridico/clickup-estrutura.md`
+
+---
+
+## 🔴 REGRAS OPERACIONAIS — SLACK
+
+- **Somente leitura** em todos os canais — nunca responder equipe sem autorização explícita do Dr. Henrique
+- **Nunca postar sem destino confirmado:** propor → aguardar confirmação de canal/contato → executar
+- **Crons:** ⛔ proibido postar no Slack — resultado só via `message` tool ao Telegram do Dr. Henrique
+- **botToken:** está em `openclaw.json` → `channels.slack.botToken` (não no 1Password — erro repetido 2x)
+- **allowFrom:** `["U04NV2X954P"]` em todos os canais — só Dr. Henrique ativa o bot
+- **Formato:** `*asterisco simples*` para negrito | `**duplo**` não renderiza no Slack
+- **Timestamps Slack = UTC** → sempre converter para BRT antes de exibir
+- Canal Comercial: `C076WL3MY15` | Detalhes de formato: `memory/comercial/slack-padrao-comercial.md`
+- Detalhes: `memory/lessons.md` → "⛔ CONSOLIDADO 17/03/2026 — Erros críticos do dia"
+
+---
+
+## 🔴 REGRAS OPERACIONAIS — GERAL
+
+- **PDF:** ferramenta nativa `pdf` do OpenClaw = primeira tentativa (não última) — pdftotext/pypdf falham com fontes embutidas
+- **Token ao renovar:** atualizar 1Password **antes de encerrar a sessão** — token novo fora do cofre = bloqueio
+- **Credencial ambígua (UUID vs JWT):** pedir print da tela quando instrução textual falhar 2x
+- **Commit:** em sessão > 1h ou após bloco significativo → commit imediato, sem esperar solicitação
+- **Lição repetida em sessão subsequente:** investigar arquitetura de boot, não apenas re-registrar
+- **Caso delicado em reunião:** sair com responsável explícito + prazo + próxima ação
+- **OpenAI Responses API:** retorna JSON em markdown fences — strip antes de `JSON.parse()`
+- **Evolution API v1.8.7:** events em lowercase+ponto (`messages.upsert`) → `event.replace(/\./g,'_').toUpperCase()`
+- **ASAAS pagamento padrão:** PIX (nunca boleto — nem se contrato disser cartão)
 
 ---
 
@@ -109,47 +130,47 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 
 | Sistema | Item 1Password | UUID |
 |---|---|---|
-| Asaas | "Asaas Pagamentos" | nr3hshfgglth6qd3yo3ddayuxa |
-| N8N API | "N8N API - Henry.Ia" | vv6rbyo6rhpauyurzc3jvopqwe |
-| ZapSign | "ZapSign" → campo `password` | mauxhgx5unbr7dzanovqzdvu2i |
-| ClickUp API | "ClickUp API Token" → `password` | mth7e2mb6nkrsk2bbty3e4iuli |
-| API Brasil | "API Brasil - Consultas" | pxqiqpv6s5qr3t66kzx5vkblme |
+| Asaas | "Asaas Pagamentos" | `nr3hshfgglth6qd3yo3ddayuxa` |
+| N8N API | "N8N API - Henry.Ia" | `vv6rbyo6rhpauyurzc3jvopqwe` |
+| ZapSign | "ZapSign" → campo `password` | `mauxhgx5unbr7dzanovqzdvu2i` |
+| ClickUp API | "ClickUp API Token" → `password` | `mth7e2mb6nkrsk2bbty3e4iuli` |
+| API Brasil | "API Brasil - Consultas" | `pxqiqpv6s5qr3t66kzx5vkblme` |
 | OpenAI | "OpenAI API Key" → `password` | — |
-| ADVbox | "ADVbox - Login Web" (⚠️ PENDENTE CRIAÇÃO) → email + password | — |
+| ADVbox | ⚠️ PENDENTE — Dr. Henrique deve criar no 1Password | — |
 
-- Slack botToken: **não está no 1Password** — está em `openclaw.json` → `channels.slack.botToken`
-- 1Password acesso: `export OP_SERVICE_ACCOUNT_TOKEN=$(grep OP_SERVICE_ACCOUNT_TOKEN /home/node/.openclaw/.env | cut -d= -f2-)`
+- **Slack botToken:** em `openclaw.json` → `channels.slack.botToken` (não no 1Password)
+- **1Password CLI:** `/tmp/op` | Token: `grep OP_SERVICE_ACCOUNT_TOKEN /home/node/.openclaw/.env | cut -d= -f2-`
+- **Vault:** `mzeqvatyexb7yplnl6o6ajq7bu` (IA – OPERACIONAL)
 
 ---
 
 ## 🏗️ Infraestrutura e Sistemas
 
+### VPS / Infraestrutura
+- VPS: Hostinger Ubuntu `72.60.49.222` (srv1427194) | Docker | UFW ativo (22/80/443)
+- Nginx + HTTPS: `henry.henriqueaugusto.adv.br` ✅ | Fail2ban ativo ✅ | Hardening score: 9.0/10
+
 ### N8N
 - URL: `https://n8n.srv1380728.hstgr.cloud`
-- 24 workflows | 20 ativos | 4 inativos
 - ⚠️ Pipeline Asaas (`OwXrNkgiCqRykq7O`): token CU hardcoded desatualizado → Dr. Henrique corrigir no N8N UI
 - ⚠️ GCLID workflows inativos → atribuição Google Ads possivelmente quebrada
-- F10 (`ppws3IRJo8K6QQJd`): corrigido 20/03 ✅ (token + fetch→this.helpers)
+- F10 (`ppws3IRJo8K6QQJd`): corrigido 20/03 ✅
 
 ### Evolution API
 - Container: `evolution-api` | Imagem: `atendai/evolution-api:v1.8.7`
 - Acesso OpenClaw: `http://evolution-api:8080` | API Key: `henry-evolution-2026`
 - Instância: `suporte-ha` | Status: `open` ✅
-- Event names: lowercase com ponto (`messages.upsert`) — conversão: `event.replace(/\./g,'_').toUpperCase()`
 
 ### ADVbox
-- API retorna 403 (Cloudflare bloqueia VPS) — acesso direto bloqueado
-- F14 usa Bearer hardcoded → ⚠️ PENDENTE: criar "ADVbox - Login Web" no 1Password (email: `adv.henriqueaugusto@gmail.com` | senha: `28051oabcebrasil`)
-- Estrutura: tarefa = ação judicial | subtarefa = AIT | múltiplos AITs = múltiplas subtarefas
-- Ver regras completas: bloco `## 🔴 REGRAS OPERACIONAIS — ADVBOX`
+- API retorna 403 (Cloudflare bloqueia VPS) — sem acesso direto
+- F14 usa Bearer hardcoded → ⚠️ PENDENTE: salvar credencial no 1Password
 
 ### ZapSign
-- Total: 2.825 docs | 2.272 assinados
 - Retorna telefone do signatário diretamente (não precisa extrair do PDF)
 
 ### API Brasil (Veículos)
 - Endpoint: `POST https://cluster.apigratis.com/api/v2/vehicles/dados`
-- Credenciais: 1Password "API Brasil - Consultas" (DeviceToken + Bearer JWT)
+- Credenciais: 1Password "API Brasil - Consultas" (DeviceToken UUID + Bearer JWT + SecretKey)
 - Status: 100% operacional ✅
 
 ---
@@ -157,51 +178,49 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 ## 📊 ClickUp — IDs Críticos
 
 - Workspace: `9011774778`
-- Lista CRM Janeiro 2026: `901112824742`
-- Lista CRM Fevereiro 2026: `901113201405`
-- Lista CRM Março 2026: `901113249319`
+- CRM Janeiro: `901112824742` | CRM Fevereiro: `901113201405` | CRM Março: `901113249319`
+- Central Janeiro: `901113203395` | Central Fevereiro: `901113203396` | Central Março: `901113203399`
 - Execuções Mensais pasta: `90117567885` | Lista Março execuções: `901113249320`
-- Campo *Data de Entrada* (leads): `dff8ca4a-8cbb-468f-92de-064ca8a950d3` — usar para contagem (não date_created)
-- Campo *MF02*: texto com labels (CPF: / Valor Total: / Vencimento:) — nunca JSON
-- Campo *Origem* valores: 1=Google Ads | 2=Facebook | 3=Instagram | 4=Indicação | 5=Orgânico Site | 6=WhatsApp Direto | 7=Origem Desconhecida | 8=Youtube | 9=REPESCAGEM | 10=INST-ORGÂNICO | 11=DISPARO API | 12=INSTA-TP-WAPP2
-- Campo Origem ID: `2cf330fd-8a82-4378-81de-27b83e6375d3`
+- Campo *Data de Entrada*: `dff8ca4a-8cbb-468f-92de-064ca8a950d3` — usar para contagem (não date_created)
+- Campo *MF02*: texto com labels — nunca JSON
+- Campo *Origem* ID: `2cf330fd-8a82-4378-81de-27b83e6375d3`
+- Valores Origem: 1=Google Ads | 2=Facebook | 3=Instagram | 4=Indicação | 5=Orgânico Site | 6=WhatsApp Direto | 7=Desconhecida | 8=Youtube | 9=REPESCAGEM | 10=INST-ORGÂNICO | 11=DISPARO API | 12=INSTA-TP-WAPP2
 - Login: henry.ia.assistant@gmail.com | Senha: 1Password "Click-Up - Henry.IA"
 
 ---
 
-## ⚙️ Crons Ativos (9 total — todos com delivery via message tool → Telegram 7630266660)
+## ⚙️ Crons Ativos (9 total — delivery via `message` tool → Telegram 7630266660)
 
-| ID | Nome | Schedule |
+| ID | Nome | Schedule (BRT) |
 |---|---|---|
-| b220a99c | Daily Briefing 7h | `0 10 * * *` UTC (7h BRT) |
-| 20dd0668 | Watchdog 8h | `0 11 * * *` UTC (8h BRT) |
-| ebc04ad3 | Heartbeat 10h/14h/18h | `0 13,17,21 * * *` UTC |
-| cf1f1b80 | Revisão Semanal sexta 18h | `0 21 * * 5` UTC |
-| ea726fe8 | Security Audit domingo 6h | `0 9 * * 0` UTC |
-| fbf579e2 | Git Backup 2h | `0 5 * * *` UTC |
-| c792df19 | Revisão Decisões 1º dia 12h | `0 15 1 * *` UTC |
+| b220a99c | Daily Briefing | 7h diário |
+| 20dd0668 | Watchdog | 8h diário |
+| ebc04ad3 | Heartbeat | 10h / 14h / 18h |
+| cf1f1b80 | Revisão Semanal | sexta 18h |
+| ea726fe8 | Security Audit | domingo 6h |
+| fbf579e2 | Git Backup | 2h diário |
+| c792df19 | Revisão de Decisões | 1º dia do mês 12h |
 
-- Delivery fix aplicado 20/03: todos usam `delivery.mode: "none"` + agent envia via `message` tool
+- **Fix 20/03:** todos usam `delivery.mode: "none"` + agent envia via `message` tool (comportamental — payloads já corretos)
+- **Silêncio = ok** para: Watchdog, Heartbeat, Git Backup — só enviam se houver alerta
+- **Entrega obrigatória** para: Daily Briefing, Revisão Semanal, Security Audit, Revisão de Decisões
 - Modelos: Sonnet para todos (Haiku teve erros de model string)
+- jobs.json: `/data/.openclaw/cron/jobs.json`
 
 ---
 
-## 💬 Slack — Canais e Regras
+## 💬 Slack — Canais
 
-- **Regra absoluta:** SOMENTE LEITURA em todos os canais. Nunca responder equipe sem autorização.
-- Reportar ao Dr. Henrique via Telegram quando ele perguntar ou criticidade máxima.
 - `C076WL3MY15` — Comercial | `C07LJA7KW1Y` — Jurídico | `C0ACVJ8NTD4` — Agenda Lara
 - `C07LBN4KWT0` — CC Geral | `C08LMJLDMK9` — Suporte ao Cliente | `C09KPCB0ZM1` — Agenda Flora
 - `C0AM6CY5CV8` — #suporte-monitoramento | `C0AHFESNW9X` — Alertas/Sistema
-- Formato Slack: divisores ━━━, seções numeradas, emojis de setor. Detalhe: `memory/comercial/slack-padrao-comercial.md`
-- Timestamps Slack = UTC → sempre converter para BRT antes de exibir
+- Formato: `memory/comercial/slack-padrao-comercial.md`
 
 ---
 
 ## 🗓️ Google Agenda ICS — 4 Feeds Ativos
 
-- ADM H.A.: `.../adv.henriqueaugusto%40gmail.com/.../basic.ics`
-- Henrique-Closer, Lucas-Closer, Walissom-SDR: ver `memory/comercial/google-agenda.md`
+- ADM H.A., Henrique-Closer, Lucas-Closer, Walissom-SDR: ver `memory/comercial/google-agenda.md`
 - Padrão título: `[STATUS -] NOME - TIPO - CIDADE - ESTADO - ORIGEM`
 
 ---
@@ -219,23 +238,23 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 ## ⚠️ Pendências Críticas (atualizado 20/03/2026)
 
 ### 🔴 Requerem Dr. Henrique
-1. **ADVbox → 1Password** — salvar credencial (email + senha) → desbloqueia F14/onboarding automático
-2. **Pipeline Asaas token** — workflow `OwXrNkgiCqRykq7O` → 2 nós → trocar token hardcoded no N8N UI
+1. **ADVbox → 1Password** — salvar credencial → desbloqueia F14/onboarding automático
+2. **Pipeline Asaas N8N** — workflow `OwXrNkgiCqRykq7O` → trocar token hardcoded nos 2 nós no painel N8N
 3. **GCP Production Mode** — OAuth Drive expira ~25/03 → Google Cloud Console → publicar app
 4. **ClickUp token 1Password** — item `mth7e2mb6nkrsk2bbty3e4iuli` → atualizar para token atual
+5. **Asaas ADAILDO** — 3x R$1.299 (1ª parcela VENCIDA 16/03) → aguarda "CONFIRMO A EXECUÇÃO"
+6. **Asaas MARCIO LINO** — R$1k/R$1k/R$500 (vencida 17/03) → aguarda "CONFIRMO A EXECUÇÃO"
+7. **Asaas NAIRTON** — aguarda decisão plano (à vista R$2.499 ou 3x R$1.099) + "CONFIRMO A EXECUÇÃO"
+8. **GABRIEL LINHARES** (868hvjr0v) — sem ADVbox/Asaas desde 12/03 → aguarda ok para F14→F15→F16
 
 ### 🟡 Pendências técnicas
-5. ALAN QUESTER — limpeza ADVbox: deletar customer 14311233 + processo + 3 tasks PROTOCOLAR
-6. DARLAN — AITs PS00202880/81 no ADVbox + Asaas pipeline
-7. CRISTIANO — Asaas pipeline (prazo processo 02/04/2026)
-8. GitHub push — PAT pendente (item "GitHub Henry.IA" no 1Password)
-9. ROAS Backfill Fev 25-28
-10. Semana Santa — decisão Noronha vs RJ (verificar partir 22/03)
-11. **Dashboard "Objetivos Diários" ClickUp** — aprovado conceitualmente em 20/03; aguarda 2 confirmações:
-    - Meta 3 contratos: dia corrido ou só dias úteis?
-    - Reuniões realizadas: como registrar? (tarefa / campo numérico / checklist)
-12. Processar transcripts reuniões equipe (Alisson, Lucas, Dra. Índia) — ainda não lidas
-13. Dra. Índia e Alisson: novos membros mencionados — detalhes a confirmar (people.md atualizado 20/03)
+9. ALAN QUESTER — deletar customer duplicado 14311233 + processo + 3 tasks PROTOCOLAR
+10. DARLAN — AITs PS00202880/81 no ADVbox + Asaas pipeline
+11. CRISTIANO — Asaas pipeline (prazo processo 02/04/2026)
+12. NAIRTON — DETRAN-PB placeholder → corrigir para DETRAN-CE no ADVbox
+13. ADAILDO — customer duplicado 14351397 → deletar no ADVbox
+14. Semana Santa — Noronha vs RJ (verificar a partir de 22/03)
+15. Dashboard "Objetivos Diários" ClickUp — aguarda 2 confirmações do Dr. Henrique
 
 ---
 
