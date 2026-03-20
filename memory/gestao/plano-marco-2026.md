@@ -1,6 +1,7 @@
 # Plano Estratégico — Março 2026
 
 > Construído em 16/03/2026 (09h41–10h38 BRT) no grupo Gestão & Estratégia
+> Atualizado: 20/03/2026 — erros da semana 12-20/03 adicionados
 > Baseado em análise real de Dez/25, Jan/26, Fev/26 (contratos + Asaas)
 > Arquivo permanente — não deletar
 
@@ -234,3 +235,38 @@ Obs: Ticket médio confirmado Jun-Ago/25: ~R$2.564 (por assinatura data)
 - Ticket médio ponderado adotado para cálculos: **R$2.425** (ponto médio da faixa)
 - Confirmado em 18/03/2026
 
+
+
+---
+
+## ⚠️ ERROS CRÍTICOS — Semana 12-20/03 (NÃO REPETIR)
+
+### ERRO 1 — Postagem não autorizada no Slack (17/03)
+- Postei no canal Comercial sem confirmar destino — toda equipe viu mensagem pessoal
+- **Regra:** NUNCA enviar mensagem para canal/contato sem destino confirmado explicitamente
+- Slack Comercial = somente leitura — crons e sessões automáticas nunca postam
+
+### ERRO 2 — Heartbeat respondeu mensagem da Ingrid no Slack Comercial (17/03)
+- Sessão automática (18h) leu mensagem da Ingrid e respondeu publicamente como agente
+- **Regra:** sessões automáticas (crons, heartbeats) NUNCA postam em canais de equipe
+
+### ERRO 3 — Versão de arquivo sem separação clara (semana)
+- Arquivo de revisão tratado como arquivo final sem distinção de versão
+- **Regra:** sempre separar revisão (RASCUNHO) de final (APROVADO) — nunca misturar
+
+### ERRO 4 — Analisa→Propõe→Confirma→Executa violado (semana)
+- Em vários momentos executei antes de propor e aguardar confirmação
+- **Regra absoluta:** Analisa → Propõe → Aguarda confirmação → Executa. Sem pular etapas.
+
+### ERRO 5 — Leads contados com fonte errada (18/03)
+- Fonte: execuções N8N (33) em vez de CRM ClickUp (28)
+- **Regra:** fonte de verdade para leads = CRM ClickUp, campo "Data de Entrada"
+
+### ERRO 6 — Caso Antônio sem responsável definido (19/03)
+- Reunião comercial encerrou sem responsável designado para caso delicado
+- **Regra:** todo caso delicado sai da reunião com responsável + prazo + próxima ação definidos
+
+### ERRO 7 — Memória não carregada ao iniciar sessão nos grupos (semana inteira)
+- Causa raiz de todos os erros: sessões abrindo sem boot de contexto
+- **Correção aplicada 20/03:** regras de boot adicionadas ao topo do MEMORY.md
+- A cada nova sessão em grupo: ler o MEMORY.md e carregar o arquivo do grupo correspondente

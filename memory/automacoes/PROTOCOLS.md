@@ -151,6 +151,62 @@ Se um erro for identificado (por mim ou pelo Dr. Henrique):
 
 ---
 
+---
+
+## ⚠️ ERROS CRÍTICOS N8N — Semana 12-20/03 (NÃO REPETIR)
+
+### ERRO 1 — fetch() e $helpers.httpRequest() em Code nodes (19/03)
+- Ambos falham silenciosamente em N8N Community: executam em ~13ms, catch engole o erro
+- **Regra:** HTTP em Code node = `this.helpers.httpRequest()` ou usar HTTP Request node dedicado
+- fetch() e $helpers = PROIBIDO em Code nodes
+
+### ERRO 2 — $input em nó intermediário colapsa itens (19/03)
+- Nó que faz `$input.first()` com 30 itens → retorna 1 → downstream perde todos
+- Antes de inserir nó intermediário: verificar se downstream usa `$input.all()`
+- Se sim: o nó intermediário DEVE retornar todos os itens, não só o primeiro
+
+### ERRO 3 — ClickUp lookup antes da filtragem (19/03)
+- Nó 05.5 buscava dados do cliente antes do Nó 06 filtrar — executou 30x desnecessariamente
+- **Regra:** primeiro filtrar (confirmar relevância), depois buscar dados adicionais
+
+### ERRO 4 — Inserir nó sem re-verificar downstream (19/03)
+- Inseri Nó 05.5 e quebrei Nó 06 por mudança de cardinalidade (30→1)
+- **Regra:** inserir nó = revisar TODOS os nós downstream antes de salvar
+
+### ERRO 5 — Typo em field ID ClickUp retorna null silenciosamente (semana)
+- `d828b498` em vez de `d82b4898` — dois caracteres invertidos
+- **Regra:** copiar field IDs diretamente da API, nunca digitar manualmente
+
+### ERRO 6 — Memória salva só quando pedido (sessão 8h em 19/03)
+- Sessão de 8h sem commit até solicitação explícita às 17h46 UTC
+- **Regra:** commit incremental a cada bloco significativo — não esperar solicitação
+
+### ERRO 7 — Evolution API v1.8.7 event names (semana)
+- Event names são lowercase com ponto: `messages.upsert` (não `MESSAGES_UPSERT`)
+- Conversão: `event.replace(/\./g, '_').toUpperCase()`
+
+### ERRO 8 — $env bloqueado em expressões N8N
+- `$env.VARIAVEL` retorna `undefined` sem aviso em qualquer expressão
+- Usar credenciais armazenadas no N8N ou passar via HTTP Request headers
+
+### ERRO 9 — Shell com emojis corrompe UTF-8
+- Variável bash com emojis/acentos → caracteres corrompidos
+- Usar Python: `python3 -c "..." | ...` com `PYTHONIOENCODING=utf-8`
+
+### ERRO 10 — OpenAI Responses API retorna JSON em code fences
+- Resposta vem como \`\`\`json {...} \`\`\` — JSON.parse() falha
+- Sempre strip antes de parsear: `response.replace(/^```json\n?/, '').replace(/\n?```$/, '')`
+
+---
+
+## F10 — Status pós-fix (20/03/2026)
+
+- Workflow: `ppws3IRJo8K6QQJd` (WF-FIN | ZapSign Assinado → Disparar Pipeline)
+- Bug corrigido: token antigo → novo + `await fetch()` → `await this.helpers.httpRequest()`
+- Status: ativo ✅
+
+---
+
 ## OBSERVAÇÃO TÉCNICA — Estado atual das fontes (19/03/2026)
 
 - **Supabase/Data Lake:** ainda não implementado — referenciado como fonte primária futura
