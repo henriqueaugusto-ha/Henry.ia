@@ -181,6 +181,11 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 8. GitHub push — PAT pendente (item "GitHub Henry.IA" no 1Password)
 9. ROAS Backfill Fev 25-28
 10. Semana Santa — decisão Noronha vs RJ (verificar partir 22/03)
+11. **Dashboard "Objetivos Diários" ClickUp** — aprovado conceitualmente em 20/03; aguarda 2 confirmações:
+    - Meta 3 contratos: dia corrido ou só dias úteis?
+    - Reuniões realizadas: como registrar? (tarefa / campo numérico / checklist)
+12. Processar transcripts reuniões equipe (Alisson, Lucas, Dra. Índia) — ainda não lidas
+13. Dra. Índia e Alisson: novos membros mencionados — detalhes a confirmar (people.md atualizado 20/03)
 
 ---
 

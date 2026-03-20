@@ -47,6 +47,18 @@
 - Responsabilidade extra: treinava Luciana (amizade prévia)
 - ⚠️ Verificar: Luciana consegue assumir parte do suporte sozinha?
 
+### Alisson — Operação / Jurídico
+- Primeira menção: 20/03/2026
+- Papel: operação e jurídico (participou de reunião com Dr. Henrique em 19-20/03)
+- Contexto: reunião de alinhamento de tarefas com Dr. Henrique, Lucas e Dra. Índia
+- Detalhes adicionais: a confirmar
+
+### Dra. Índia — Jurídico
+- Primeira menção: 20/03/2026
+- Papel: jurídico (participou de reunião com Dr. Henrique, Alisson e Lucas em 19-20/03)
+- Contexto: reunião de alinhamento de tarefas (gestão do escritório / jurídico)
+- Detalhes adicionais: a confirmar
+
 ### Luciana — Jurídico (auxiliar administrativo)
 - Entrada: 11/03/2026
 - Papel: auxiliar Ana Laura em tarefas administrativas e burocráticas do jurídico
