@@ -33,6 +33,60 @@
 
 ---
 
+## Lições — 20/03/2026 — Consolidação semana 12-20/03 (todos os grupos)
+
+### N8N Community — fetch() e $helpers.httpRequest() não funcionam em Code nodes
+**Contexto:** Nó 05.5 grupo Automações usou fetch() e depois $helpers.httpRequest() para chamar ClickUp. Ambos falhavam silenciosamente (execução em 13ms, catch sem log, clienteEncontrado: false).
+**Regra:** Para chamadas HTTP externas em N8N Community, usar HTTP Request node dedicado. Nunca fetch() ou $helpers.httpRequest() em Code nodes para chamadas externas.
+
+### N8N — $input referencia sempre o nó anterior imediato
+**Contexto:** Nó 05.5 usava `$input.first().json.clienteNumero` mas $input no Nó 05.5 era o output do Nó 05 (mensagens da Evolution API), não do Nó 03 onde `clienteNumero` existe.
+**Regra:** Para acessar campo de nó específico: `$('Nome Exato do Nó').first().json.campo`. Nunca assumir que $input tem o campo sem verificar de onde vem.
+
+### N8N — $input.first() em contexto de múltiplos itens colapsa pipeline
+**Contexto:** Nó 05.5 recebia 30 itens mas usava $input.first() → retornava 1 item → Nó 06 não detectava fila → pipeline parava.
+**Regra:** Sempre verificar cardinalidade ($input.all().length) antes de decidir entre first() e all(). Nó que transforma 30→1 quebra tudo downstream.
+
+### N8N — Emoji/caracteres especiais em interpolação {{ }} quebra Slack webhook
+**Contexto:** Nó 11/17 usava interpolação direta com emoji → JSON corrompido → Slack retornava erro.
+**Regra:** Em payloads Slack via N8N, usar JSON Builder node ou escapar explicitamente. Nunca interpolação direta com {{ }} quando há emojis ou caracteres especiais.
+
+### Ferramenta pdf nativa do OpenClaw — usar PRIMEIRO para extração de texto
+**Contexto:** Jurídico 19/03 — tentou pdftotext (não instalado), pypdf (não instalado), pdf-parse (ESM incompatível), Stirling PDF (401 externo). A ferramenta `pdf` nativa funcionou na primeira tentativa mas foi testada por último — 30 min perdidos.
+**Regra:** Para extração de texto/dados de PDF → ferramenta nativa `pdf` é a 1ª tentativa. Só ir para alternativas se ela falhar.
+
+### MF02 deve ser texto com labels — nunca JSON
+**Contexto:** Pipeline Asaas `OwXrNkgiCqRykq7O` usa regex para ler MF02: `CPF: xxx`, `Valor Total: xxx`, `Vencimento: xxx`. Se salvo como JSON, falha silenciosamente.
+**Regra:** MF02 no ClickUp = sempre texto plano com labels. Formato: `CPF: 000.000.000-00\nValor Total: R$X.XXX\nVencimento: DD/MM/YYYY`.
+
+### Slack botToken está no openclaw.json — não no 1Password
+**Contexto:** Em 17/03 e novamente em 19/03, busquei Slack botToken no 1Password → vazio. Token está em openclaw.json.
+**Regra:** Slack botToken = openclaw.json. Se precisar, ler com: `grep botToken /home/node/.openclaw/openclaw.json`.
+**⚠️ Lição já registrada em 17/03 e não aplicada em 19/03 — erro repetido.**
+
+### Campo correto para contagem de leads no ClickUp = Data de Entrada
+**Contexto:** Usei `date_created` para filtrar leads do dia → número errado (33 vs 28 reais). Campo correto é "Data de Entrada".
+**Regra:** Filtro de leads por data = campo "Data de Entrada" (ID: `dff8ca4a-8cbb-468f-92de-064ca8a950d3`). `date_created` = data de criação da task, não data de entrada do lead.
+
+### Fonte de leads = CRM — nunca execuções N8N
+**Contexto:** Reportei 33 leads usando contagem de execuções do workflow F1. N8N pode executar múltiplas vezes para o mesmo contato (webhook duplicado, reenvio).
+**Regra:** Volume de leads = contagem de tasks no CRM. N8N executions = dado operacional, não de negócio.
+
+### Slack Comercial > rascunho de contrato para valores financeiros
+**Contexto:** Cadastrei cobrança do FRANCISCO com R$1.099 (rascunho) em vez de R$1.199 (Slack Comercial). Discrepância de R$100.
+**Regra:** Valores financeiros de contratos → sempre confirmar no Slack Comercial antes de cadastrar no Asaas. Slack Comercial tem o valor final confirmado pelo closer.
+
+### Boot de grupo = carregar arquivo de memória do grupo ANTES de qualquer resposta
+**Contexto:** Grupo Comercial tem `memory/comercial/grupo-comercial.md` com Regra 1 explícita: "carregar este arquivo PRIMEIRO". Não foi carregado → causou erros de formato, terminologia e contexto.
+**Regra:** Ao receber mensagem em qualquer grupo, verificar se existe arquivo de memória específico do grupo em `memory/[domínio]/` e carregar antes de responder.
+**Esta é a causa raiz dos erros desta semana.**
+
+### Lição repetida não aplicada = prioridade máxima de correção estrutural
+**Contexto:** Lição "Slack botToken em openclaw.json" registrada em 17/03, não aplicada em 19/03. Quando uma lição não é aplicada na sessão seguinte, o problema não é memória — é arquitetura de boot.
+**Regra:** Lição repetida em sessão subsequente → investigar por que o boot não carregou o arquivo que contém essa lição, não apenas re-registrar.
+
+---
+
 ## Lições — 19/03/2026
 
 ### N8N tem paginação de 50 — sempre verificar nextCursor

@@ -28,6 +28,28 @@
 
 ---
 
+## ATUALIZAÇÃO 20/03 01h15 UTC
+
+### 🔴 Pipeline Asaas N8N — Token ClickUp hardcoded URGENTE
+- Workflow `OwXrNkgiCqRykq7O` tem token `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL` hardcoded em 2 nós
+- Token é o antigo/revogado → pipeline Asaas quebrado para TODOS os clientes silenciosamente
+- Ação: Dr. Henrique abrir workflow no N8N → substituir token nos nós "MF01 | Extrair Dados" e "MF01 | Identificar Contrato" pelo token atual `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W`
+
+### 🔴 Boot estrutural dos grupos — Proposta formal a criar
+- Causa raiz da semana: sessões de grupo abrindo sem carregar contexto
+- Ação: criar proposta formal de boot por grupo → apresentar ao Dr. Henrique → aguardar aprovação
+
+### ⏰ Semana Santa — Noronha vs RJ — decisão não registrada
+- Diário 15/03: decisão pendente, monitoramento climático a partir de 22/03
+- Verificar com Dr. Henrique se decisão foi tomada e registrar
+
+### 🔴 Estrutura Central do Cliente ADVbox — documentar formalmente
+- Tarefa principal = ação judicial | Subtarefa = AIT (ação administrativa)
+- Múltiplos AITs = múltiplas subtarefas separadas
+- Não estava documentado em nenhum arquivo de memória
+
+---
+
 ## ATUALIZAÇÃO 19/03 02h40 UTC
 
 ### ✅ WF-SUPPORT — CONFIGURADO E ATIVO (19/03/2026 02h38 UTC)

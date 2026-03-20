@@ -573,6 +573,15 @@ Padrão: `WF-COM | F[n] | Descrição` (renomeado de MF para F em 12/03)
 10=INST-ORGÂNICO | 11=DISPARO API | 12=INSTA-TP-WAPP2
 Campo ID: 2cf330fd-8a82-4378-81de-27b83e6375d3
 
+## ClickUp — IDs Críticos CRM 2026 (confirmados 20/03/2026)
+- Lista CRM Março 2026: `901113249319`
+- Lista CRM Fevereiro 2026: `901113201405`
+- Lista CRM Janeiro 2026: `901112824742`
+- Campo *Data de Entrada*: `dff8ca4a-8cbb-468f-92de-064ca8a950d3` — usar para contagem de leads (não date_created)
+- Fonte correta de volume de leads = CRM (não execuções N8N)
+- MF02 = texto com labels (CPF: / Valor Total: / Vencimento:) — nunca JSON
+- Slack botToken = openclaw.json — não 1Password
+
 ## Sessão 18/03/2026 — Central do Cliente + Drive (00h30 UTC)
 
 - **ADALBERTO** (868hxd9pw) → Central Cliente task `868hxnvbn` ✅ | Drive: https://drive.google.com/drive/folders/1-_4s4w5oY0rmmDweyn1lzsZqWgYBiT9D ✅ | PDF anexado ✅ | Asaas ❌ aguarda plano + "CONFIRMO A EXECUÇÃO"
