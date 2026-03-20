@@ -7,6 +7,12 @@
 
 ## Lições — 20/03/2026
 
+### Atualizar 1Password imediatamente ao renovar tokens (20/03 — sessão Comercial)
+**O que aconteceu:** Token ClickUp renovado em 18/03, mas 1Password não foi atualizado. Em 20/03, consulta ao CRM falhou com `OAUTH_025 Token invalid` — Dr. Henrique estava dirigindo e precisava da info por áudio.
+**Impacto:** Henry bloqueado de consultar CRM; entregou apenas aviso de bloqueio em vez da informação solicitada.
+**Regra permanente:** Ao renovar qualquer token (ClickUp, N8N, Asaas, ZapSign, etc.), o passo final obrigatório é atualizar o 1Password **antes de encerrar a sessão**. Token novo fora do 1Password = bloqueio na próxima consulta.
+**Token correto ClickUp:** `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W` (UUID 1Password: `mth7e2mb6nkrsk2bbty3e4iuli`)
+
 ### IDs das listas CRM 2026 — DEFINITIVOS (nunca assumir)
 - **CRM Janeiro:** `901112824742` | **CRM Fevereiro:** `901113201405` | **CRM Março:** `901113249319`
 - **Central Janeiro:** `901113203395` | **Central Fevereiro:** `901113203396` | **Central Março:** `901113203399`

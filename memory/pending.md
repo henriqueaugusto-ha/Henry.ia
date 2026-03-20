@@ -5,6 +5,21 @@
 
 ---
 
+## ATUALIZAÇÃO 20/03 13h49 UTC
+
+### 🔴 ClickUp API Token — ATUALIZAR 1PASSWORD (BLOQUEADOR ATIVO)
+- UUID: `mth7e2mb6nkrsk2bbty3e4iuli` | campo `password`
+- Token armazenado (INVÁLIDO): `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL`
+- Token correto: `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W`
+- Impacto: Henry não consegue consultar CRM, tarefas, nada no ClickUp via API
+- **Ação:** Dr. Henrique abrir 1Password → "ClickUp API Token" → atualizar campo password
+
+### 🔴 Consulta CRM Março 19/03 — Pendente de entrega
+- Dr. Henrique solicitou: leads cadastrados no CRM de março no dia 19/03, com status
+- Bloqueado pelo token inválido — entregar assim que token for atualizado
+
+---
+
 ## ATUALIZAÇÃO 20/03 02h02 UTC
 
 ### 🔴 6 TASKS PENDENTES — Central do Cliente Março 2026 (list `901113203399`)
