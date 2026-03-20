@@ -19,6 +19,22 @@
 
 ---
 
+## ATUALIZAÇÃO 20/03 15h01 UTC
+
+### ✅ CRONS — Causa raiz identificada e fix aplicado (20/03/2026)
+- Diagnóstico: payloads corretos, problema era comportamental (agente usava texto de sessão, não message tool)
+- Fix: usar message tool explicitamente ao entregar resultados dos crons
+- Demonstração: Daily Briefing 20/03 entregue via message tool (messageId 6840) ✅
+- Proposta formal enviada ao Dr. Henrique (messageId 6841) — aguarda ok
+- jobs.json localizado: `/data/.openclaw/cron/jobs.json`
+- 9 crons configurados: 7 agentTurn, 1 systemEvent (lembrete), 1 verificador one-shot
+
+### ✅ DAILY BRIEFING 20/03 — Entregue manualmente 10h00 UTC (7h BRT)
+- messageId: 6840 | canal: telegram | target: 7630266660
+- Alertas reportados: N8N pipeline, GCP OAuth, Asaas 3 clientes, Gabriel Linhares, 6 tasks CdC
+
+---
+
 ## ATUALIZAÇÃO 20/03 02h02 UTC
 
 ### 🔴 6 TASKS PENDENTES — Central do Cliente Março 2026 (list `901113203399`)
