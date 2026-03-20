@@ -3,12 +3,43 @@
 
 ---
 
-## 🔴 CRM — REGRA OBRIGATÓRIA DE CONSULTA (20/03/2026)
-**ANTES de qualquer consulta ao CRM ClickUp: filtrar pelo campo `Data de Entrada`, NUNCA por `date_created`.**
-- Campo: `Data de Entrada` | ID: `dff8ca4a-8cbb-468f-92de-064ca8a950d3`
-- Lista CRM Março: `901113249319` | Incluir fechadas: `include_closed=true`
-- Implementação: iterar todas as páginas e filtrar client-side pelo campo customizado
-- Detalhes técnicos completos: `memory/lessons.md` → "Regra — Campo Correto para Contagem de Leads"
+## 🔴 REGRAS OPERACIONAIS — CLICKUP / CRM
+- **Busca de leads por data:** SEMPRE pelo campo `Data de Entrada` (ID: `dff8ca4a-8cbb-468f-92de-064ca8a950d3`) — NUNCA por `date_created`
+- **Implementação:** iterar TODAS as páginas da lista + filtrar client-side pelo campo customizado. Incluir `include_closed=true`
+- **Token atual (⚠️ temporário — remover após recuperar 1Password):** `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W`
+- **Após recuperar 1Password:** token em "ClickUp API Token" (UUID: `mth7e2mb6nkrsk2bbty3e4iuli`) → campo `password`
+- **Terminologia:** nunca "Q1" (→ T1) | nunca "pipeline" (→ funil) | nunca "desconto" (→ repescagem)
+- Detalhes completos: `memory/lessons.md` → "Regra — Campo Correto para Contagem de Leads"
+
+## 🔴 REGRAS OPERACIONAIS — ASAAS
+- **GET** (consultar, extrato, clientes, cobranças): autônomo ✅
+- **POST / PUT / DELETE / estorno:** exige frase exata **"CONFIRMO A EXECUÇÃO"** — nenhuma outra aceita
+- "sim", "ok", "pode fazer" = insuficiente → responder: *"Preciso da confirmação: CONFIRMO A EXECUÇÃO"*
+- Violação = FALHA CRÍTICA → registrar em `memory/lessons.md` imediatamente
+- Credencial: 1Password "Asaas Pagamentos" (UUID: `nr3hshfgglth6qd3yo3ddayuxa`)
+- Detalhes completos: `memory/gestao/decisions.md` → "Asaas — Protocolo de Confirmação Dupla"
+
+## 🔴 REGRAS OPERACIONAIS — SLACK COMERCIAL
+- **Somente leitura** em todos os canais — nunca postar automaticamente, nunca responder equipe sem autorização
+- Antes de qualquer post: Dr. Henrique autorizou? Canal confirmado? Destinatário confirmado?
+- Crons: ⛔ proibido postar no Slack — resultado só via Telegram para Dr. Henrique
+- Nunca contar reunião em andamento como contrato. Sempre separar: Contratos | Pagamentos | Reuniões realizadas | Em andamento
+- Canal Comercial: `C076WL3MY15`
+- Formato obrigatório: `memory/comercial/slack-padrao-comercial.md`
+
+## 🔴 REGRAS OPERACIONAIS — GOOGLE AGENDA
+- Acesso: somente leitura via ICS (não cria/edita eventos)
+- Não tem tempo real — fazer novo `web_fetch` a cada consulta
+- 4 feeds: ADM H.A. | Henrique-Closer | Lucas-Closer | Walisom-SDR
+- URLs completas e padrão de título dos eventos: `memory/comercial/google-agenda.md`
+- Padrão título: `[STATUS -] NOME - TIPO - CIDADE - ESTADO - ORIGEM` | Status: `REALIZADA`, `FECHOU`, ou sem prefixo
+
+## 🔴 REGRAS OPERACIONAIS — N8N
+- `fetch()` não funciona em Code nodes → usar `this.helpers.httpRequest()`
+- Ao inserir nó novo: re-verificar conexões downstream antes de ativar
+- Workflows criados via API pós-restart não registram webhook sem novo restart no N8N
+- **Nunca ativar/editar workflow em produção sem autorização** — nível 4 ("CONFIRMO A EXECUÇÃO")
+- URL N8N: `https://n8n.srv1380728.hstgr.cloud` | API key: 1Password "N8N API - Henry.Ia" (UUID: `vv6rbyo6rhpauyurzc3jvopqwe`)
 
 ---
 

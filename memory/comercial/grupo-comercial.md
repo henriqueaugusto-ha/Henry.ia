@@ -2,7 +2,7 @@
 
 > Grupo Telegram: `-5146692074`
 > Carregar ANTES das regras gerais quando a mensagem vier deste grupo.
-> Última atualização: 18/03/2026
+> Última atualização: 20/03/2026
 
 ---
 
@@ -118,9 +118,19 @@ Ver formato completo em `memory/comercial/relatorio-comercial-formato.md`
 
 ---
 
+## Chaves API — Temporárias (migrar para 1Password após acesso recuperado)
+
+| Chave | Valor | Destino 1Password |
+|---|---|---|
+| Brave Search API | `BSAWMf5TcVaUolx3zx1eYsbKxlY21xj` | "Brave Search - Henry" |
+| ClickUp API Token | `pk_60972410_18YZ08VGC8Q1W14SYJ7XYRJ20VH1RZ4W` | "ClickUp API Token" (UUID: mth7e2mb6nkrsk2bbty3e4iuli) |
+
+---
+
 ## Histórico de Atualizações
 
 | Data | Mudança |
 |------|---------|
 | 18/03/2026 | Arquivo criado — regras iniciais do grupo Comercial |
 | 20/03/2026 | Adicionados erros críticos da semana 12-20/03 + IDs CRM + terminologia |
+| 20/03/2026 | Chaves API temporárias salvas (Brave Search + ClickUp) | Blocos REGRAS OPERACIONAIS adicionados ao MEMORY.md |
