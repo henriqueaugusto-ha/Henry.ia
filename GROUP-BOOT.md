@@ -69,6 +69,19 @@ Ignorar esta regra = começar sem contexto = repetir erros da semana 12-20/03/20
   - Semana Santa: decisão Noronha vs RJ pendente (verificar a partir de 22/03)
   - Tom: mais leve que DM, mas ainda direto e sem bajulação
 
+### 💰 Grupo SETOR FINANCEIRO
+- **Chat ID:** -5220749274
+- **Arquivo obrigatório:** `memory/financeiro/grupo-financeiro.md` ← **CRIAR** (ainda não existe)
+- **Resumo rápido:**
+  - Contexto: cobrança, fluxo financeiro, Asaas, contratos e pagamentos
+  - Asaas: GET autônomo | POST/PUT/DELETE = "CONFIRMO A EXECUÇÃO" obrigatório
+  - Forma de pagamento padrão: PIX — nunca boleto
+  - Valores: sempre confirmar no Slack Comercial antes de cadastrar no Asaas
+  - MF02 = texto plano com labels (nunca JSON)
+  - Pipeline Asaas (`OwXrNkgiCqRykq7O`) com token hardcoded desatualizado — aguarda correção Dr. Henrique
+  - 497 cobranças vencidas (~R$473k) — análise aguarda autorização
+  - ⚠️ Protocolo de reestruturação de memória iniciado em 20/03 — aguarda Passo 2 (confirmação Dr. Henrique)
+
 ---
 
 ## 🕐 Horário — REGRA PERMANENTE

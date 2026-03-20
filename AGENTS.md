@@ -24,6 +24,7 @@ Se a sessão atual for em um **grupo Telegram** (não DM com Dr. Henrique):
 | -5138173805 | Automações | `memory/automacoes/PROTOCOLS.md` |
 | -5240379406 | Gestão & Estratégia | `memory/gestao/plano-marco-2026.md` |
 | -5145538226 | Vida Pessoal | `memory/pessoas/people.md` |
+| -5220749274 | Setor Financeiro | `memory/financeiro/grupo-financeiro.md` ← CRIAR |
 
 **Resumo por grupo:**
 - **Comercial:** fonte de leads = CRM (não N8N); campo Data de Entrada `dff8ca4a`; Slack Comercial > rascunho para valores; formato Slack tem ━━━ e seções numeradas; "repescagem" ≠ "desconto"

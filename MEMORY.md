@@ -41,6 +41,14 @@
 - **Nunca ativar/editar workflow em produção sem autorização** — nível 4 ("CONFIRMO A EXECUÇÃO")
 - URL N8N: `https://n8n.srv1380728.hstgr.cloud` | API key: 1Password "N8N API - Henry.Ia" (UUID: `vv6rbyo6rhpauyurzc3jvopqwe`)
 
+## 🔴 REGRAS OPERACIONAIS — ADVBOX
+- **Acesso direto bloqueado:** API retorna 403 (Cloudflare bloqueia VPS) — sem chamada direta possível
+- **F14 usa Bearer hardcoded** — ⚠️ PENDENTE: salvar credencial no 1Password + atualizar workflow
+- **Credencial:** email `adv.henriqueaugusto@gmail.com` | senha `28051oabcebrasil` → 1Password item "ADVbox - Login Web" (cofre IA – OPERACIONAL) — **PENDENTE CRIAÇÃO**
+- **Estrutura Central do Cliente:** tarefa = ação judicial | subtarefa = AIT (ação administrativa) | múltiplos AITs = múltiplas subtarefas separadas
+- **Sequência obrigatória de onboarding:** F14 → F15 → F16 antes de qualquer cadastro no Asaas
+- Detalhes: `memory/juridico/clickup-estrutura.md`
+
 ---
 
 ## 🕐 HORÁRIO — REGRA PERMANENTE (20/03/2026)
@@ -61,7 +69,7 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 | Automações | -5138173805 | `memory/automacoes/PROTOCOLS.md` |
 | Gestão & Estratégia | -5240379406 | `memory/gestao/plano-marco-2026.md` |
 | Vida Pessoal | -5145538226 | `memory/gestao/decisions.md` |
-| Financeiro | -5220749274 | `memory/gestao/decisions.md` |
+| Financeiro | -5220749274 | `memory/financeiro/grupo-financeiro.md` ← **CRIAR** |
 
 **Regras rápidas por grupo:**
 - *Comercial:* leads = CRM (não N8N); Slack Comercial > rascunho para valores; "repescagem" ≠ "desconto"
