@@ -3,6 +3,15 @@
 
 ---
 
+## 🔴 CRM — REGRA OBRIGATÓRIA DE CONSULTA (20/03/2026)
+**ANTES de qualquer consulta ao CRM ClickUp: filtrar pelo campo `Data de Entrada`, NUNCA por `date_created`.**
+- Campo: `Data de Entrada` | ID: `dff8ca4a-8cbb-468f-92de-064ca8a950d3`
+- Lista CRM Março: `901113249319` | Incluir fechadas: `include_closed=true`
+- Implementação: iterar todas as páginas e filtrar client-side pelo campo customizado
+- Detalhes técnicos completos: `memory/lessons.md` → "Regra — Campo Correto para Contagem de Leads"
+
+---
+
 ## 🕐 HORÁRIO — REGRA PERMANENTE (20/03/2026)
 TODA referência de horário usa **BRT (UTC-3 / Fortaleza / São Paulo)**.
 Nunca usar UTC nas respostas ao Dr. Henrique. Conversão: hora UTC - 3 = BRT.
