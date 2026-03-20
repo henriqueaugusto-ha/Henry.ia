@@ -74,7 +74,7 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 **Regras rápidas por grupo:**
 - *Comercial:* leads = CRM (não N8N); Slack Comercial > rascunho para valores; "repescagem" ≠ "desconto"
 - *Jurídico:* pdf nativa primeiro; MF02 = texto com labels (nunca JSON); tarefa = ação judicial; subtarefa = AIT
-- *Automações:* fetch() não funciona em Code nodes → `this.helpers.httpRequest()`; re-verificar downstream ao inserir nó
+- *Automações:* fetch() não funciona em Code nodes → `this.helpers.httpRequest()`; re-verificar downstream ao inserir nó; ADVbox API 403 (sem acesso direto); F14→F15→F16 antes do Asaas
 - *Gestão:* meta março R$160k; ANPP prioritário; caso delicado → sair da reunião com responsável explícito
 - *Todos:* nunca postar no Slack sem destino confirmado; crons nunca postam em canais de equipe
 
@@ -115,7 +115,7 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 | ClickUp API | "ClickUp API Token" → `password` | mth7e2mb6nkrsk2bbty3e4iuli |
 | API Brasil | "API Brasil - Consultas" | pxqiqpv6s5qr3t66kzx5vkblme |
 | OpenAI | "OpenAI API Key" → `password` | — |
-| ADVbox | ⚠️ PENDENTE — Dr. Henrique deve criar no 1Password | — |
+| ADVbox | "ADVbox - Login Web" (⚠️ PENDENTE CRIAÇÃO) → email + password | — |
 
 - Slack botToken: **não está no 1Password** — está em `openclaw.json` → `channels.slack.botToken`
 - 1Password acesso: `export OP_SERVICE_ACCOUNT_TOKEN=$(grep OP_SERVICE_ACCOUNT_TOKEN /home/node/.openclaw/.env | cut -d= -f2-)`
@@ -139,7 +139,9 @@ Ao iniciar qualquer sessão em grupo Telegram, identificar e carregar o arquivo 
 
 ### ADVbox
 - API retorna 403 (Cloudflare bloqueia VPS) — acesso direto bloqueado
-- F14 usa Bearer hardcoded → ⚠️ PENDENTE: salvar credencial no 1Password + atualizar workflow
+- F14 usa Bearer hardcoded → ⚠️ PENDENTE: criar "ADVbox - Login Web" no 1Password (email: `adv.henriqueaugusto@gmail.com` | senha: `28051oabcebrasil`)
+- Estrutura: tarefa = ação judicial | subtarefa = AIT | múltiplos AITs = múltiplas subtarefas
+- Ver regras completas: bloco `## 🔴 REGRAS OPERACIONAIS — ADVBOX`
 
 ### ZapSign
 - Total: 2.825 docs | 2.272 assinados
