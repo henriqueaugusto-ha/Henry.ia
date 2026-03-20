@@ -1,5 +1,28 @@
 # MEMORY.md — Memória de Longo Prazo
 
+## 🕐 HORÁRIO — REGRA PERMANENTE (20/03/2026)
+TODA referência de horário usa **BRT (UTC-3 / Fortaleza / São Paulo)**.
+Nunca usar UTC nas respostas ao Dr. Henrique. Conversão: hora UTC - 3 = BRT.
+Janela de silêncio: 23h00–07h00 BRT. Fins de semana: só GUT ≥ 75 ou sistema caído.
+
+## 🗂️ BOOT DE GRUPO — OBRIGATÓRIO AO INICIAR SESSÃO EM GRUPO (20/03/2026)
+Ao iniciar qualquer sessão em grupo Telegram, identificar o grupo e carregar o arquivo correspondente ANTES de responder:
+
+| Grupo | Chat ID | Arquivo obrigatório |
+|---|---|---|
+| Comercial | -5146692074 | `memory/comercial/grupo-comercial.md` |
+| Jurídico | -5001797443 | `memory/juridico/clickup-estrutura.md` |
+| Automações | -5138173805 | `memory/automacoes/PROTOCOLS.md` |
+| Gestão & Estratégia | -5240379406 | `memory/gestao/plano-marco-2026.md` |
+| Vida Pessoal | -5145538226 | `memory/gestao/decisions.md` |
+
+**Regras críticas por grupo:**
+- *Comercial:* fonte de leads = CRM (não N8N); Slack Comercial > rascunho para valores; campo Data de Entrada = `dff8ca4a-8cbb-468f-92de-064ca8a950d3`; "repescagem" ≠ "desconto"
+- *Jurídico:* extração PDF → ferramenta `pdf` nativa primeiro; MF02 = texto com labels (nunca JSON); tarefa principal = ação judicial; subtarefa = AIT
+- *Automações:* `fetch()` e `$helpers.httpRequest()` NÃO funcionam em Code nodes — usar `this.helpers.httpRequest()`; inserir nó intermediário = re-verificar todos os downstream
+- *Gestão:* meta março R$160k; produto ANPP prioritário; caso delicado sai da reunião com responsável explícito
+- *Todos os grupos:* nunca postar no Slack sem destino confirmado; crons nunca postam em canais de equipe
+
 ## ⛔ DIRETIVA GERAL DE SEGURANÇA — REGRA MAIS IMPORTANTE (02/03/2026)
 
 Padrão universal para TODAS as ferramentas = **SOMENTE LEITURA**.
