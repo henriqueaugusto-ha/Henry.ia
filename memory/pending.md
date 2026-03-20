@@ -5,6 +5,24 @@
 
 ---
 
+## ATUALIZAÇÃO 20/03 02h02 UTC
+
+### 🔴 6 TASKS PENDENTES — Central do Cliente Março 2026 (list `901113203399`)
+Aguardam confirmação do Dr. Henrique para criação. ADVbox status:
+- ALAN QUESTER TORRES LEMES (`868huwt7e`) — ADVbox ⚠️ incerto (customer duplicado 14311233)
+- ANA KARINE DA SILVA SOUSA PINTO (`868hy9mdz`) — ADVbox ✅ cliente 14421551
+- FRANCISCO MARCIO FERREIRA LINO (`868hwjwbj`) — ADVbox ✅ cliente 14369225
+- GABRIEL LINHARES BARBOSA (`868hvjr0v`) — ADVbox ❌ NÃO cadastrado (fazer F14→F15→F16 primeiro)
+- JOSE NAIRTON FERNANDES FREITAS (`868hwt0tm`) — ADVbox ✅ cliente 14369227 (⚠️ DETRAN-PB placeholder)
+- JOSÉ ADAILDO PEREIRA (`868hwkm07`) — ADVbox ✅ cliente 14351422 (⚠️ customer duplo 14351397 a deletar)
+
+### 🔴 Asaas PENDENTE — 3 clientes aguardando "CONFIRMO A EXECUÇÃO"
+- ADAILDO: 3x R$1.299 (1ª parcela VENCIDA 16/03)
+- MARCIO LINO: parcelas R$1k/R$1k/R$500 (parcela 17/03 vencida)
+- NAIRTON: aguarda definição opção (à vista R$2.499 ou 3x R$1.099)
+
+---
+
 ## ATUALIZAÇÃO 19/03 20h58 UTC
 
 ### ✅ ANA KARINE — ONBOARDING CONCLUÍDO (19/03/2026)

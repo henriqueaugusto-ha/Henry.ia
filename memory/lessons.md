@@ -5,6 +5,41 @@
 
 ---
 
+## Lições — 20/03/2026
+
+### IDs das listas CRM 2026 — DEFINITIVOS (nunca assumir)
+- **CRM Janeiro:** `901112824742` | **CRM Fevereiro:** `901113201405` | **CRM Março:** `901113249319`
+- **Central Janeiro:** `901113203395` | **Central Fevereiro:** `901113203396` | **Central Março:** `901113203399`
+- **Regra:** Quando Dr. Henrique mencionar "X contratos de [mês]" → confirmar em qual lista está olhando antes de buscar. CRM ≠ Central do Cliente.
+
+### MF02 = texto com labels, NUNCA JSON
+- Pipeline Asaas (`OwXrNkgiCqRykq7O`) lê MF02 com regex: `CPF: xxx`, `Valor Total: xxx`, `Vencimento: xxx`
+- JSON salvo no campo → pipeline falha silenciosamente 2x
+- **Regra:** MF02 sempre em formato texto com labels. Jamais JSON estruturado.
+
+### Ferramenta `pdf` nativa = primeira opção para PDFs customizados
+- pdftotext / pypdf / pdf-parse (ESM) / Stirling PDF falham em PDFs com fontes embutidas
+- Ferramenta `pdf` nativa OpenClaw (visão de modelo) extrai corretamente
+- **Regra:** Usar `pdf` tool como primeira tentativa, não como último recurso.
+
+### Central do Cliente — estrutura obrigatória de task
+1. Pré-requisito: F14 + F15 + F16 ADVbox completos
+2. Task principal = ação judicial (se existir)
+3. Subtarefa = ação administrativa (AIT com número)
+4. Múltiplos AITs = múltiplas subtarefas
+5. Description segue formato padrão: Tipo de ação | CPF | Tel | Email | ADVbox IDs | Valor | Data contrato
+
+### Antes de buscar número mencionado: confirmar fonte
+- "20 contratos de Março" pode ser do CRM, da Central ou de outra lista
+- **Regra:** Ambiguidade de fonte = perguntar antes de buscar. Nunca assumir.
+
+### Pipeline Asaas com token CU hardcoded — bug ativo (20/03/2026)
+- Workflow `OwXrNkgiCqRykq7O` tem token `pk_60972410_2NEHDF941LOLSWCO14C4Q0L5MRMBEOYL` hardcoded em 2 nós
+- Qualquer disparo do pipeline vai falhar até o token ser atualizado no painel N8N
+- **Workaround:** cadastro direto via API Asaas v3 com token do 1Password "Asaas Pagamentos"
+
+---
+
 ## Lições — 20/03/2026 — FEEDBACK CRÍTICO DO DR. HENRIQUE (dirigindo, 00h43 UTC)
 
 ### Falha sistêmica de memória entre sessões — PRIORIDADE MÁXIMA
