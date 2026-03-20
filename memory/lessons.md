@@ -5,6 +5,29 @@
 
 ---
 
+## Lições — 20/03/2026 (Sessão 4 — Jurídico — Protocolo de Memória)
+
+### Grupo Jurídico não tem arquivo grupo-juridico.md — gap documentado (20/03)
+**O que foi identificado:** Auditoria formal revelou que `memory/juridico/grupo-juridico.md` não existe.
+GROUP-BOOT.md aponta para `memory/juridico/clickup-estrutura.md` como boot do grupo Jurídico, mas esse arquivo não contém regras de nível de segurança por sistema nem fluxo jurídico completo.
+**Impacto:** Boot do grupo Jurídico funciona parcialmente (estrutura ClickUp carregada) mas sem regras explícitas de ADVbox, ZapSign, níveis de operação.
+**Ação:** criar `memory/juridico/grupo-juridico.md` com regras completas após confirmação do Dr. Henrique (Passo 3 do protocolo de auditoria).
+
+### ADVbox e ZapSign sem nível de operação definido explicitamente no MEMORY.md (20/03)
+**O que foi identificado:** Asaas, ClickUp e N8N têm níveis documentados. ADVbox e ZapSign não.
+**ADVbox inferido:** GET autônomo (consultas) | POST/PUT implicitamente nível 3-4 (não documentado)
+**ZapSign inferido:** GET autônomo | envio de documento = nível 3-4 (não documentado)
+**Ação:** definir explicitamente no MEMORY.md após confirmação do Dr. Henrique.
+
+### Protocolo formal de memória definido por Dr. Henrique (20/03 — Jurídico)
+Critérios permanentes:
+- Entrada no MEMORY.md: erro repetido 2x no mesmo ponto
+- Só em lessons.md: detalhe técnico ou código
+- Antes de executar em sistema externo: verificar bloco `## 🔴 REGRAS OPERACIONAIS — [SISTEMA]`
+- Se bloco não existir: rodar `memory_search` com nome do sistema antes de começar
+
+---
+
 ## Lições — 20/03/2026
 
 ### Atualizar 1Password imediatamente ao renovar tokens (20/03 — sessão Comercial)

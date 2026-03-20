@@ -5,6 +5,22 @@
 
 ---
 
+## ATUALIZAÇÃO 20/03 18h02 UTC (Sessão 4 — Jurídico)
+
+### 🔴 PASSO 3 — Reestruturação MEMORY.md (protocolo memória — aguarda Dr. Henrique)
+- Dr. Henrique executou auditoria formal Passos 1-4 no grupo Jurídico
+- Passo 1 (estado atual) apresentado e aguardando confirmação
+- Passo 3 (reestruturação MEMORY.md) só avança com confirmação explícita
+- Itens a criar: bloco `## 🔴 REGRAS OPERACIONAIS — ADVBOX` | `memory/juridico/grupo-juridico.md` | níveis ADVbox/ZapSign explícitos
+
+### 🔴 GROUP-BOOT.md → openclaw.json (ainda pendente — confirmar com Dr. Henrique)
+- Arquivo criado em sessão 2 (20/03 22h BRT): `GROUP-BOOT.md` na raiz do workspace ✅
+- Injeção no openclaw.json ainda não confirmada por Dr. Henrique
+- Sem injeção: boot dos grupos continua sem garantia de carregar contexto correto
+- Ação: Dr. Henrique confirmar se GROUP-BOOT.md já está no workspaceFiles do openclaw.json
+
+---
+
 ## ATUALIZAÇÃO 20/03 13h49 UTC
 
 ### 🟡 ClickUp API Token — Atualizar 1PASSWORD (service account é read-only)
